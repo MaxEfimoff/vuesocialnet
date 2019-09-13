@@ -1,6 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import Friends from './views/Friends.vue'
+import Subscribers from './views/Subscribers.vue'
+import Messages from './views/Messages.vue'
+import Photos from './views/Photos.vue'
+import Groups from './views/Groups.vue'
+import Documents from './views/Documents.vue'
+import Notes from './views/Notes.vue'
 
 Vue.use(Router)
 
@@ -14,12 +21,39 @@ export default new Router({
       component: Home
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: '/friends',
+      name: 'friends',
+      component: Friends,
+    },
+    {
+      path: '/subscribers',
+      name: 'subscribers',
+      component: Subscribers,
+    },
+    {
+      path: '/messages',
+      name: 'messages',
+      component: Messages,
+    },
+    {
+      path: '/photos',
+      name: 'photos',
+      component: Photos,
+    },
+    {
+      path: '/groups',
+      name: 'groups',
+      component: Groups,
+    },
+    {
+      path: '/documents',
+      name: 'documents',
+      component: Documents,
+    },
+    {
+      path: '/notes',
+      name: 'notes',
+      component: Notes,
     }
   ]
 })

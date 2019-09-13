@@ -2,12 +2,9 @@
   <section class="section-left">
         <!-- Avatar -->
         <div class="section">
-          <!-- <img class="avatar-background" src="../assets/img/photos/unsplash_2.jpg" alt=""> -->
-          <div class="avatar-background">
-
-          </div>
+          <img class="avatar-background" src="../assets/img/photos/unsplash_2.jpg" alt="">
             <div class="avatar">
-              <img class="avatar" src="../assets/img/01.jpg" alt="">
+              <img class="avatar" :src=" require(`@/assets/img/01.jpg`) " alt="">
             </div>
             <div class="edit-profile">
               <h3>Max Efi</h3>
@@ -15,31 +12,31 @@
             </div>  
             <!-- Stats -->
             <div class="stats">
-              <a href="./friends.html" class="stat-counter">
+              <a href="/friends" class="stat-counter">
                 <div class="count">42</div>
                 <i class="fas fa-user"></i>
               </a>
-              <a href="./subscribers.html" class="stat-counter lefthalfpadding">
+              <a href="/subscribers" class="stat-counter lefthalfpadding">
                 <div class="count">93</div>
                 <i class="fas fa-user-plus"></i>
               </a>
-              <a href="./messages.html" class="stat-counter lefthalfpadding">
+              <a href="/messages" class="stat-counter lefthalfpadding">
                 <div class="count">2</div>
                 <i class="fas fa-envelope"></i>
               </a>
-              <a href="./photos.html" class="stat-counter lefthalfpadding">
+              <a href="/photos" class="stat-counter lefthalfpadding">
                 <div class="count">554</div>
                 <i class="fas fa-camera"></i>
               </a>
-              <a href="./groups.html" class="stat-counter lefthalfpadding">
+              <a href="/groups" class="stat-counter lefthalfpadding">
                 <div class="count">41</div>
                 <i class="fas fa-users"></i>
               </a>
-              <a href="./documents.html" class="stat-counter lefthalfpadding">
+              <a href="/documents" class="stat-counter lefthalfpadding">
                 <div class="count">13</div>
                 <i class="fas fa-file-alt"></i>
               </a>
-              <a href="./notes.html" class="stat-counter lefthalfpadding">
+              <a href="/notes" class="stat-counter lefthalfpadding">
                 <div class="count">11</div>
                 <i class="fas fa-sticky-note"></i>
               </a>
@@ -184,6 +181,8 @@
 export default {
 
 }
+
+
 </script>
 
 <style>

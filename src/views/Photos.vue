@@ -4,7 +4,16 @@
     <div class="main">
       <div class="container container-main">
         <LeftSection />
-        <PostsMain />
+        <section class="section-center">
+          <!-- Posts -->
+          <div class="section posts">
+            <div class="padding">
+              <div class="edit-profile">
+                <button>Upload new photo</button>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   </div>
@@ -14,14 +23,12 @@
 // @ is an alias to /src
 import Header from '@/components/Header.vue'
 import LeftSection from '@/components/LeftSection.vue'
-import PostsMain from '@/components/PostsMain.vue'
 
 export default {
   name: 'home',
   components: {
     Header,
     LeftSection,
-    PostsMain
   }
 }
 </script>

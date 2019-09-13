@@ -1,6 +1,5 @@
 <template>
-  <section class="section-center">
-    <div class="section posts">
+  <div class="section posts">
       <div class="friends-list padding">
         <ul  class="flex">
           <li v-for="item in topMenu" :key="item.name">
@@ -23,11 +22,12 @@
         </div>
       </div>
     </div>
-  </section>
 </template>
 
 <script>
 export default {
+  name: 'posts',
+  
   data() {
     return {
       topMenu: [
