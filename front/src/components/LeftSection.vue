@@ -112,25 +112,9 @@
         <div class="section groups">
           <span>Groups</span>
           <div class="groups-wrapper">
-            <div class="groups-photo">
-              <img class="groups-img" src="../assets/img/groups/01.jpg" alt="">
-              <span>Formula 1 </span>
-            </div> 
-            <div class="groups-photo">
-              <img class="groups-img" src="../assets/img/groups/02.jpg" alt="">
-              <span>Canyon bikes </span>
-            </div>
-            <div class="groups-photo">
-              <img class="groups-img" src="../assets/img/groups/03.jpg" alt="">
-              <span>Garden design </span>
-            </div>
-            <div class="groups-photo">
-              <img class="groups-img" src="../assets/img/groups/04.jpg" alt="">
-              <span>Cafe racer </span>
-            </div>
-            <div class="groups-photo">
-              <img class="groups-img" src="../assets/img/groups/05.jpg" alt="">
-              <span>Odlo </span>
+            <div class="groups-photo" v-for="group in groups" :key="group.id">
+              <img class="groups-img" src="../assets/img/groups/01.jpg"  alt="">
+              <span>{{ group.title }}</span>
             </div>  
           </div>
           <div class="show-more">
@@ -178,8 +162,25 @@
 </template>
 
 <script>
-export default {
+import { mapState, mapActions } from 'vuex';
 
+export default {
+  name: 'Main',
+  created() {
+    this.getGroups();
+  },
+  data() {
+    return {
+    };
+  },
+  methods: {
+    ...mapActions("groups",['getGroups'])
+  },
+  computed: {
+    ...mapState({
+      groups: state => state.groups.groups
+    })
+  },
 }
 
 
