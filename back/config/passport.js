@@ -1,18 +1,20 @@
-const JwtStrategy = require("passport-jwt").Strategy;
-const ExtractJwt = require("passport-jwt").ExtractJwt;
-const mongoose = require("mongoose");
-const User = mongoose.model("users");
-const keys = require("../config/keys");
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+const mongoose = require('mongoose');
+const User = mongoose.model('users');
+const keys = require('../config/keys');
 const mongopassword = 'WildBlood02021984+';
 
-
+// JWT options
 const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = keys.secretOrKey;
 
+// Exports JWT Strategy
 module.exports = passport => {
   passport.use(
     new JwtStrategy(opts, (jwt_payload, done) => {
+      // Serch for registered user
       User.findById(jwt_payload.id)
         .then(user => {
           if (user) {
