@@ -16,17 +16,9 @@ module.exports = function validateProfileInput(data) {
     errors.handle = "Profile handle is required";
   }
 
-  if (Validator.isEmpty(data.status)) {
-    errors.status = "Profile status is required";
-  }
-
-  if (Validator.isEmpty(data.skills)) {
-    errors.skills = "Skills is required";
-  }
-
-  if (!isEmpty(data.websyte)) {
-    if (!Validator.isURL(data.websyte)) {
-      errors.websyte = "Not a valid URL";
+  if (!isEmpty(data.website)) {
+    if (!Validator.isURL(data.website)) {
+      errors.website = "Not a valid URL";
     }
   }
 
@@ -57,6 +49,12 @@ module.exports = function validateProfileInput(data) {
   if (!isEmpty(data.instagram)) {
     if (!Validator.isURL(data.instagram)) {
       errors.instagram = "Not a valid URL";
+    }
+  }
+
+  if (!isEmpty(data.github)) {
+    if (!Validator.isURL(data.github)) {
+      errors.github = "Not a valid URL";
     }
   }
 
