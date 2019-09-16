@@ -1,4 +1,4 @@
-//Profile Schema
+// Profile Schema
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
@@ -114,7 +114,8 @@ const ProfileSchema = new Schema({
       type: String
     }
   },
-  //friends is an array of user IDs
+
+  // Friends is an array of user IDs
   friends: [
     {
       user: {
