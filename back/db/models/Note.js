@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const Note = new Schema({
+const NoteSchema = new Schema({
   // User is associated with the Todo
   user: {
     type: Schema.Types.ObjectId,

@@ -8,6 +8,8 @@ import Photos from './views/Photos.vue'
 import Groups from './views/Groups.vue'
 import Documents from './views/Documents.vue'
 import Notes from './views/Notes.vue'
+import Register from './views/Register.vue'
+import Login from './views/Login.vue'
 
 Vue.use(Router)
 
@@ -54,6 +56,16 @@ export default new Router({
       path: '/notes',
       name: 'notes',
       component: Notes,
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: Register,
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login,
     }
   ]
 })

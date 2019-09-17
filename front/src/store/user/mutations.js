@@ -6,7 +6,12 @@ function resetUser(state) {
   state.user = {};
 }
 
+function setErrors(state, errors) {
+  state.errors = errors;
+}
+
 export {
   setUser,
   resetUser,
+  setErrors,
 };

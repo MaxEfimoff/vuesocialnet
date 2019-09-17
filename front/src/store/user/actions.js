@@ -1,4 +1,4 @@
-import { axios } from 'axios';
+import axios from 'axios';
 import {
   registerUrl,
   loginUrl,
@@ -10,12 +10,15 @@ import {
 function register({ commit }, data) {
   return new Promise((resolve, reject) => {
     axios.post(registerUrl, data)
-      .then((response) => {
-        commit('setUser', response.data.data);
-
+    .then((response) => {
+        commit('setUser', response.data);
+        console.log(response.data);
         resolve();
       })
-      .catch(error => console.log(error));
+      .catch((error) => {
+        commit('setErrors', error.response.data);
+        console.log(error.response.data)
+      });
   });
 }
 
@@ -26,19 +29,19 @@ function resetPassword({ commit }, data) {
         commit('resetUser');
         resolve();
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error.response.data));
   });
 }
 
 function login({ commit }, data) {
   return new Promise((resolve, reject) => {
     axios.post(loginUrl, data)
-      .then((response) => {
-        commit('setUser', response.data.data);
-
+    .then((response) => {
+        commit('setUser', response.data);
+        console.log(response.data);
         resolve();
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error.response.data));
   });
 }
 

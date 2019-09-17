@@ -38,6 +38,14 @@ input[type='text'] {
   border-radius: 0.2rem;
 }
 
+input {
+  border: 1px solid var(--primary-color);
+  height: 2rem;
+  background-color: var(--primary-color);
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+}
+
 input:focus {
   outline: none;
 }
@@ -156,6 +164,10 @@ span, li, i {
 
 .search-input {
   padding-right: 2.2rem;
+}
+
+.register-input {
+  background-color: #fff;
 }
 
 .search-form .submit {
@@ -438,4 +450,8 @@ span, li, i {
   border-bottom: 1px solid #eee;
 }
 
+.register {
+  width: 500px;
+  margin: auto;
+}
 </style>

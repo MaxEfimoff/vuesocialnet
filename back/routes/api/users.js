@@ -141,4 +141,11 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
   });
 })
 
+// @route     GET api/users/all
+// @desc      Return all users
+// @access    Private
+router.get('/all', passport.authenticate('jwt', { session: false }), (req, res) => {
+  User.find().then(users => res.json(users));
+})
+
 module.exports = router;
