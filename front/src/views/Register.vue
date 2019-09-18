@@ -82,11 +82,10 @@ export default {
   methods: {
     submitForm() {
         this.$store.dispatch('auth/register', this.formData)
-          // .then(() => this.$router.push({ name: 'booking' }))
+          .then(() => this.$router.push({ name: 'dashboard' }))
           .catch((error) => {
             console.log(error)
           });
-      // }
     },
   },
   components: {

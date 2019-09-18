@@ -4,7 +4,6 @@ import jwt_decode from "jwt-decode";
 import {
   registerUrl,
   loginUrl,
-  logoutUrl,
   checkAuthUrl,
   resetPasswordUrl,
 } from '../urls';
@@ -42,13 +41,13 @@ function login({ commit }, data) {
   return new Promise((resolve, reject) => {
     axios.post(loginUrl, data)
     .then((response) => {
-        //Save token from 'response.data' to local storage
+        // Save token from 'response.data' to local storage
         const { token } = response.data;
-        //Set token to local storage. Local storage only stores strings.
+        // Set token to local storage. Local storage only stores strings.
         localStorage.setItem("jwtToken", token);
-        //Set token to Auth header
+        // Set token to Auth header
         setAuthToken(token);
-        //Decode token to get user data
+        // Decode token to get user data
         const decoded = jwt_decode(token);
         commit('setUser', decoded);
         console.log(decoded);
@@ -62,15 +61,15 @@ function login({ commit }, data) {
 }
 
 function logout({ commit }) {
-  return new Promise((resolve, reject) => {
-    axios.post(logoutUrl)
-      .then(() => {
-        commit('resetUser');
 
-        resolve();
-      })
-      .catch(error => console.log(error));
-  });
+  // Remove token from localStorage
+  localStorage.removeItem("jwtToken");
+
+  // Remove auth geader for future requests
+  setAuthToken(false);
+  
+  // Set currentUser to {} wich will set isAuthenticated to false
+  commit('resetUser');
 }
 
 function checkUser({ commit }) {

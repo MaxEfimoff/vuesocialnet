@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Dashboard from './views/Dashboard.vue'
 import Friends from './views/Friends.vue'
 import Subscribers from './views/Subscribers.vue'
 import Messages from './views/Messages.vue'
@@ -19,8 +19,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'dashboard',
+      component: Dashboard
     },
     {
       path: '/friends',

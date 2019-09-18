@@ -10,6 +10,40 @@
   </div>
 </template>
 
+<script>
+import { mapState } from "vuex";
+import jwt_decode from 'jwt-decode';
+import setAuthToken from './utils/setAuthToken';
+
+
+
+export default {
+  created() {
+  // Check for token in local storage
+  if (localStorage.jwtToken) {
+  // Set auth token header auth
+  setAuthToken(localStorage.jwtToken);
+  // Decode token and get user info and exp
+  const decoded = jwt_decode(localStorage.jwtToken);
+  // Set user and isAuthenticated
+  this.$store.commit('auth/setUser', decoded);
+
+  // Check for expired token
+  const currentTime = Date.now() / 1000;
+  if (decoded.exp < currentTime) {
+    // Logout user
+    // store.dispatch(logoutUser());
+    // Clear current Profile
+    // store.dispatch(clearCurrentProfile());
+    // Redirect to login
+    window.location.href = "/login";
+  }
+}
+  }
+  
+}
+</script>
+
 <style>
 :root {
   --primary-color: #eee;
@@ -77,7 +111,8 @@ button:focus {
 }
 
 span, li, i {
-  color: var(--secondary-color);;
+  color: var(--secondary-color);
+  font-size: 0.8rem;
 }
 
 .error-message {

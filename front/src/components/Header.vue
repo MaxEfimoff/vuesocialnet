@@ -1,8 +1,33 @@
 <template>
   <nav class="navbar">
     <div class="container">
-      <h1 class="logo">SocialNet</h1>
+      <h1 class="logo">
+        <router-link
+          :to="{ name: 'dashboard' }">
+          SocialNet
+        </router-link>
+      </h1>
       <div class="nav">
+        <div v-if="isAuthenticated">
+            <router-link
+              :to="{ name: 'dashboard' }">
+              <!-- <img :src=" require (`${user.avatar}`) " alt=""> -->
+              <span>Dashboard</span>
+            </router-link>
+            <a @click="logout">
+              <span class="padding">Logout</span>
+            </a>
+          </div>
+          <div v-else>
+            <router-link
+              :to="{ name: 'login' }">
+              <span>Login</span>
+            </router-link>
+            <router-link
+              :to="{ name: 'register' }">
+              <span class="padding">Registration</span>
+            </router-link>
+          </div>
         <form name="search-form" method="POST">
             <div class="search-form">
               <button type="submit" class="form-control submit">
@@ -19,8 +44,20 @@
 </template>
 
 <script>
-export default {
+import { mapState } from "vuex";
 
+export default {
+  computed: {
+    ...mapState('auth', ['isAuthenticated', 'user']),
+  },
+  methods: {
+    logout() {
+          this.$store.dispatch('auth/logout')
+          .then(() => this.$router.push({ name: 'login' }))
+          .catch((error) => {console.log(error)
+      })
+    },
+  }
 }
 </script>
 

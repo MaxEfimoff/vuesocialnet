@@ -7,7 +7,7 @@
               <img class="avatar" :src=" require(`@/assets/img/01.jpg`) " alt="">
             </div>
             <div class="edit-profile">
-              <h3>Max Efi</h3>
+              <h3>{{ user.name }}</h3>
               <span>Change status</span>
             </div>  
             <!-- Stats -->
@@ -179,7 +179,8 @@ export default {
   computed: {
     ...mapState({
       groups: state => state.groups.groups
-    })
+    }),
+    ...mapState('auth', [ 'user'])
   },
 }
 
