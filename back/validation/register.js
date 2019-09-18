@@ -21,14 +21,14 @@ module.exports = function validateRegisterInput(data) {
     errors.name = 'Name field is required';
   }
 
-  // Email shouldn't be empty
-  if (Validator.isEmpty(data.email)) {
-    errors.email = 'Email field is required';
-  }
-
   // Email should be in correct format
   if (!Validator.isEmail(data.email)) {
     errors.email = 'Email is invalid';
+  }
+
+  // Email shouldn't be empty
+  if (Validator.isEmpty(data.email)) {
+    errors.email = 'Email field is required';
   }
 
   // Password shouldn't be empty
