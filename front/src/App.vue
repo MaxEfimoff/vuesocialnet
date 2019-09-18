@@ -80,6 +80,17 @@ span, li, i {
   color: var(--secondary-color);;
 }
 
+.error-message {
+  color: red;
+  text-align: center;
+  font-size: 0.7rem;
+}
+
+.error {
+  border: 1px solid salmon;
+  background-color: salmon;
+}
+
 .padding {
   padding: 1rem;
 }
@@ -166,9 +177,9 @@ span, li, i {
   padding-right: 2.2rem;
 }
 
-.register-input {
+/* .register-input {
   background-color: #fff;
-}
+} */
 
 .search-form .submit {
   display: inline-block;

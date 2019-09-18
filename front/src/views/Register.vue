@@ -7,48 +7,51 @@
         <form @submit.prevent="submitForm" class="post-new-form">
           <div class="halfpadding">
             <input
-              required
               type="text"
-              class="register-input"
               v-model="formData.name"
               placeholder="Name"
               ref="name"
             />
           </div>
+          <div class="error-message">
+            {{this.errors.name}}
+          </div>
           <div class="halfpadding">
             <input
-              required
               type="text"
-              class="register-input"
               placeholder="Email Address"
               v-model="formData.email"
               id="email"
               ref="email"
             />
           </div>
-          <div class="halfpadding">
-            <input
-              required
-              type="text"
-              ref="password"
-              placeholder="Password"
-              class="register-input"
-              outlined
-              v-model="formData.password"
-            >
+          <div class="error-message">
+            {{this.errors.email}}
           </div>
           <div class="halfpadding">
             <input
-              required
+              type="text"
+              ref="password"
+              placeholder="Password"
+              v-model="formData.password"
+            >
+          </div>
+          <div class="error-message">
+            {{this.errors.password}}
+          </div>
+          <div class="halfpadding">
+            <input
               type="text"
               placeholder="Confirm Password"
-              class="register-input"
               ref="password2"
               v-model="formData.password2"
             >
           </div>
+          <div class="error-message">
+            {{this.errors.password2}}
+          </div>
           <div class="padding">
-            <input type="submit"/>
+            <button type="submit">Submit</button>
           </div>
         </form>
       </section>
@@ -57,12 +60,11 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import Header from '@/components/Header.vue'
-// import { emailValidationMixin } from '../components/helpers/mixins';
 
 export default {
   name: 'Register',
-  // mixins: [emailValidationMixin],
   data() {
     return {
       formData: {
@@ -74,22 +76,15 @@ export default {
       tab: 'Register',
     };
   },
+  computed: {
+    ...mapState('errors', ['errors']),
+  },
   methods: {
     submitForm() {
-      // this.$refs.email.validate();
-      // this.$refs.password.validate();
-      // this.$refs.password2.validate();
-      // this.$refs.name.validate();
-      // if (
-      //   !this.$refs.email.hasError
-      //   && !this.$refs.password.hasError
-      //   && !this.$refs.password2.hasError
-      //   && !this.$refs.name.hasError
-      //   && this.$refs.password.value === this.$refs.password2.value
-      // ) {
-        this.$store.dispatch('user/register', this.formData)
+        this.$store.dispatch('auth/register', this.formData)
           // .then(() => this.$router.push({ name: 'booking' }))
-          .catch((error) => {console.log(error)
+          .catch((error) => {
+            console.log(error)
           });
       // }
     },

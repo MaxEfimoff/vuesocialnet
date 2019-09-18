@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import user from './user';
+import auth from './auth';
 import groups from './groups';
 import errors from './errors';
 
@@ -11,7 +11,7 @@ export default function () {
 
   const Store = new Vuex.Store({
     modules: {
-      user,
+      auth,
       groups,
       errors
     },
