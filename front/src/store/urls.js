@@ -14,6 +14,8 @@ const loginUrl = `${serverUrl}/api/users/login/`;
 const registerUrl = `${serverUrl}/api/users/register/`;
 const profileUrl = `${serverUrl}/api/profile/`;
 const allGroupsUrl = `${serverUrl}/api/groups/`;
+const allPostsUrl = `${serverUrl}/api/posts/`;
+const allMessagesUrl = `${serverUrl}/api/messages/`;
 
 export {
   serverUrl,
@@ -27,5 +29,7 @@ export {
   getOnePageUrl,
   allGroupsUrl,
   oneGroupUrl,
-  profileUrl
+  profileUrl,
+  allPostsUrl,
+  allMessagesUrl
 };

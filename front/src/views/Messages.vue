@@ -15,8 +15,8 @@
               <div class="post" v-for="message in messages" :key="message.id">
                 <div class="post-author">
                   <div class="groups-photo">
-                    <img class="groups-img" :src=" require(`@/assets/img/friends/${message.url}`) " alt="">
-                    <a class="leftpadding">{{ message.name }}</a>
+                    <img class="groups-img" src="../assets/img/groups/02.jpg" alt="">
+                    <a class="leftpadding">{{ message.text }}</a>
                   </div>
                 </div>
               </div>
@@ -31,34 +31,23 @@
 // @ is an alias to /src
 import Header from '@/components/Header.vue'
 import LeftSection from '@/components/LeftSection.vue'
-
+import { mapState, mapActions } from 'vuex';
 export default {
-  name: 'messages',
+  name: 'Messages',
   data() {
     return {
-      messages: [
-            {
-              id: 1,
-              name: "Dan Newman",
-              url: "03.jpg",
-            },
-            {
-              id: 2,
-              name: "Max Miller",
-              url: "01.jpg",
-            },
-            {
-              id: 3,
-              name: "Zack New",
-              url: "02.jpg",
-            },
-            {
-              id: 4,
-              name: "John Williams",
-              url: "04.jpg",
-            },
-          ]
     }
+  },
+  created() {
+    this.getMessages();
+  },
+  computed: {
+    ...mapState('profile', [ 'profile']),
+    ...mapState('messages', [ 'messages']),
+    ...mapState('auth', [ 'user']),
+  },
+  methods: {
+    ...mapActions("messages",['getMessages']),
   },
   components: {
     Header,

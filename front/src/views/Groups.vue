@@ -46,7 +46,7 @@ import Header from '@/components/Header.vue'
 import LeftSection from '@/components/LeftSection.vue'
 
 export default {
-  name: 'groups',
+  name: 'Groups',
   data() {
     return {
     }

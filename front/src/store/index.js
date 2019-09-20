@@ -3,6 +3,8 @@ import Vuex from 'vuex'
 import auth from './auth';
 import profile from './profile';
 import groups from './groups';
+import posts from './posts';
+import messages from './messages';
 import errors from './errors';
 
 Vue.use(Vuex)
@@ -15,6 +17,8 @@ export default function () {
       auth,
       profile,
       groups,
+      posts,
+      messages,
       errors
     },
     strict: process.env.DEV

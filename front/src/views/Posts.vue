@@ -4,7 +4,45 @@
     <div class="main">
       <div class="container container-main" v-if="this.profile.handle">
         <LeftSection />
-        <PostsMain />
+        <!-- <PostsMain /> -->
+        <section class="section-center">
+          <!-- Posts -->
+          <div class="section posts">
+              <div class="friends-list padding">
+                  <ul  class="flex">
+                    <li>
+                      <a href="">All Posts</a>
+                    </li>
+                    <li>
+                      <a href="">My Posts</a>
+                    </li>
+                    <li>
+                      <a href="">Friends Posts</a>
+                    </li>
+                    <li>
+                      <a href="">Recommended</a>
+                    </li>
+                    <li>
+                      <a href="">Liked</a>
+                    </li>
+                  </ul>
+                  <button>New post</button>
+                  <form action="#" class="post-new-form">
+                    <input type="text" placeholder="Post search" />
+                  </form>
+                </div>
+            <div class="post-wrapper">
+              <div class="post" v-for="post in posts" :key="post.id">
+                <div class="post-author">
+                  <div class="groups-photo">
+                    <img class="groups-img" src="../assets/img/groups/01.jpg" alt="">
+                    <span>{{ post.text }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
       <div v-else class="register">
         <div class="section posts padding">
@@ -26,19 +64,26 @@
 // @ is an alias to /src
 import Header from '@/components/Header.vue'
 import LeftSection from '@/components/LeftSection.vue'
-import PostsMain from '@/components/PostsMain.vue'
-import { mapState } from 'vuex';
+// import PostsMain from '@/components/PostsMain.vue'
+import { mapState, mapActions } from 'vuex';
 
 export default {
-  name: 'home',
+  name: 'Posts',
+  created() {
+    this.getPosts();
+  },
   computed: {
     ...mapState('profile', [ 'profile']),
+    ...mapState('posts', [ 'posts']),
     ...mapState('auth', [ 'user']),
+  },
+  methods: {
+    ...mapActions("posts",['getPosts']),
   },
   components: {
     Header,
     LeftSection,
-    PostsMain
+    // PostsMain
   }
 }
 </script>

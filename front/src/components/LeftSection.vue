@@ -21,7 +21,7 @@
                 <i class="fas fa-user-plus"></i>
               </a>
               <a href="/messages" class="stat-counter lefthalfpadding">
-                <div class="count">2</div>
+                <div class="count">{{ messages.length }}</div>
                 <i class="fas fa-envelope"></i>
               </a>
               <a href="/photos" class="stat-counter lefthalfpadding">
@@ -170,6 +170,7 @@ export default {
   name: 'Main',
   created() {
     this.getGroups();
+    this.getMessages();
     this.exportCurrentProfile();
   },
   data() {
@@ -178,6 +179,7 @@ export default {
   },
   methods: {
     ...mapActions("groups",['getGroups']),
+    ...mapActions("messages",['getMessages']),
     ...mapActions("profile",['exportCurrentProfile']),
     showProfile() {
       if(this.$refs.slider.classList.contains("slideup")) {
@@ -195,6 +197,7 @@ export default {
   },
   computed: {
     ...mapState('groups', [ 'groups']),
+    ...mapState('messages', [ 'messages']),
     ...mapState('auth', [ 'user']),
     ...mapState('profile', [ 'profile'])
   },
