@@ -10,6 +10,7 @@ const profile = require('./routes/api/profile');
 const posts = require('./routes/api/posts');
 const notes = require('./routes/api/notes');
 const messages = require('./routes/api/messages');
+const groups = require('./routes/api/groups');
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.use('/api/profile', profile);
 app.use('/api/posts', posts);
 app.use('/api/notes', notes);
 app.use('/api/messages', messages);
+app.use('/api/groups', groups);
 
 // Heroku settings
 const PORT = process.env.PORT || 5000;

@@ -6,7 +6,7 @@ import {
 
 function getGroups({ commit }) {
   return new Promise((resolve, reject) => {
-    axios.get('http://jsonplaceholder.typicode.com/todos')  // Поменать на адрес получения массива групп
+    axios.get(allGroupsUrl)  // Поменать на адрес получения массива групп
       .then((response) => {
         commit('SET_GROUPS', response.data);
       })

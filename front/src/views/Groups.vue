@@ -25,8 +25,8 @@
               <div class="post" v-for="group in groups" :key="group.id">
                 <div class="post-author">
                   <div class="groups-photo">
-                    <img class="groups-img" :src=" require(`@/assets/img/groups/${group.url}`) " alt="">
-                    <span>{{ group.name }}</span>
+                    <img class="groups-img" src="../assets/img/groups/01.jpg" alt="">
+                    <span>{{ group.handle }}</span>
                   </div>
                 </div>
               </div>
@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
+
 // @ is an alias to /src
 import Header from '@/components/Header.vue'
 import LeftSection from '@/components/LeftSection.vue'
@@ -47,29 +49,16 @@ export default {
   name: 'groups',
   data() {
     return {
-      groups: [
-            {
-              id: 1,
-              name: "Formula 1",
-              url: "01.jpg",
-            },
-            {
-              id: 2,
-              name: "Canyon bikes",
-              url: "02.jpg",
-            },
-            {
-              id: 3,
-              name: "Garden design",
-              url: "03.jpg",
-            },
-            {
-              id: 4,
-              name: "Cafe racer",
-              url: "04.jpg",
-            },
-          ]
     }
+  },
+  created() {
+    this.getGroups();
+  },
+  computed: {
+    ...mapState("groups",['groups']),
+  },
+  methods: {
+    ...mapActions("groups",['getGroups']),
   },
   components: {
     Header,

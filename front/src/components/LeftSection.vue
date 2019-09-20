@@ -116,7 +116,7 @@
           <div class="groups-wrapper">
             <div class="groups-photo" v-for="group in groups" :key="group.id">
               <img class="groups-img" src="../assets/img/groups/01.jpg"  alt="">
-              <span>{{ group.title }}</span>
+              <span>{{ group.handle }}</span>
             </div>  
           </div>
           <div class="show-more">
@@ -194,9 +194,7 @@ export default {
     }
   },
   computed: {
-    ...mapState({
-      groups: state => state.groups.groups
-    }),
+    ...mapState('groups', [ 'groups']),
     ...mapState('auth', [ 'user']),
     ...mapState('profile', [ 'profile'])
   },
