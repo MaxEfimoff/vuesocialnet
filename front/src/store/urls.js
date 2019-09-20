@@ -13,6 +13,7 @@ const oneGroupUrl = `${serverUrl}/pages/getOneGroup`;
 
 const loginUrl = `${serverUrl}/api/users/login/`;
 const registerUrl = `${serverUrl}/api/users/register/`;
+const profileUrl = `${serverUrl}/api/profile/`;
 
 export {
   serverUrl,
@@ -26,4 +27,5 @@ export {
   getOnePageUrl,
   allGroupsUrl,
   oneGroupUrl,
+  profileUrl
 };

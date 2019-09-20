@@ -2,26 +2,100 @@
   <div>
     <Header />
     <div class="main">
-      <div class="container container-main">
+      <div class="container container-main" v-if="this.profile.handle">
         <LeftSection />
-        <PostsMain />
+        <section >
+          <div class="section posts">
+            <h3 class="padding">Welcome, {{ profile.handle }}</h3>
+            <div class="education padding">
+              <a>Handle</a>
+              <span>{{ profile.handle }}</span>
+            </div>
+            <div class="education padding">
+              <a>Website</a>
+              <span>{{ profile.website }}</span>
+            </div>
+            <div class="education padding">
+              <a>Location</a>
+              <span>{{ profile.location }}</span>
+            </div>
+            <div class="education padding">
+              <a>Bio</a>
+              <span>{{ profile.bio }}</span>
+            </div>
+            <div class="education padding">
+              <a>Company</a>
+              <span>{{ profile.company }}</span>
+            </div>
+            <div class="education padding">
+              <a>Status</a>
+              <span>{{ profile.status }}</span>
+            </div>
+            <div class="padding">
+              <router-link 
+                :to="{ name: 'editProfile' }">
+                  <span>Edit profile</span>
+              </router-link>
+            </div>
+          </div>
+        </section>
+        
       </div>
+      <div v-else class="register">
+          <div class="section posts padding">
+            <h4>Welcome, {{ user.name }}! Please setup your profile!</h4>
+            <div class="edit-profile padding">
+              <router-link
+                :to="{ name: 'createProfile' }">
+                <!-- <img :src=" require (`${user.avatar}`) " alt=""> -->
+                <span>Create profile</span>
+              </router-link>
+            </div>
+          </div>
+        </div>
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Header from '@/components/Header.vue'
-import LeftSection from '@/components/LeftSection.vue'
-import PostsMain from '@/components/PostsMain.vue'
+import Header from '@/components/Header.vue';
+import LeftSection from '@/components/LeftSection.vue';
+import { mapState, mapActions } from 'vuex';
 
 export default {
-  name: 'home',
+  name: 'dashboard',
+  data() {
+    return {
+      formData: {
+        email: '',
+        password: '',
+        password2: '',
+        name: this.$store.state.auth.user.name,
+      },
+      tab: 'Register',
+    };
+  },
+  computed: {
+    ...mapState('profile', [ 'profile']),
+    ...mapState('auth', [ 'user']),
+  },
+  created() {
+    this.exportCurrentProfile();
+  },
+  methods: {
+    ...mapActions("profile",['exportCurrentProfile']),
+    submitForm() {
+        this.$store.dispatch('auth/register', this.formData)
+          .then(() => this.$router.push({ name: 'dashboard' }))
+          .catch((error) => {
+            console.log(error)
+          });
+    },
+  },
   components: {
     Header,
     LeftSection,
-    PostsMain
   }
 }
 </script>

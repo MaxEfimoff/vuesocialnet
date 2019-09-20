@@ -32,7 +32,7 @@ export default {
   const currentTime = Date.now() / 1000;
   if (decoded.exp < currentTime) {
     // Logout user
-    // store.dispatch(logoutUser());
+    this.$store.dispatch('auth/logout');
     // Clear current Profile
     // store.dispatch(clearCurrentProfile());
     // Redirect to login
@@ -78,6 +78,7 @@ input {
   background-color: var(--primary-color);
   border-radius: 0.2rem;
   padding: 0.5rem;
+  text-align:right;
 }
 
 input:focus {
@@ -124,6 +125,10 @@ span, li, i {
 .error {
   border: 1px solid salmon;
   background-color: salmon;
+}
+
+.margin {
+  margin: 1rem;
 }
 
 .padding {

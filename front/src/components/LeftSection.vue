@@ -7,13 +7,13 @@
               <img class="avatar" :src=" require(`@/assets/img/01.jpg`) " alt="">
             </div>
             <div class="edit-profile">
-              <h3>{{ user.name }}</h3>
-              <span>Change status</span>
+              <h3>{{ profile.handle }}</h3>
+              <span>{{ profile.status }}</span>
             </div>  
             <!-- Stats -->
             <div class="stats">
               <a href="/friends" class="stat-counter">
-                <div class="count">42</div>
+                <div class="count">{{ profile.friends.length }}</div>
                 <i class="fas fa-user"></i>
               </a>
               <a href="/subscribers" class="stat-counter lefthalfpadding">
@@ -42,35 +42,37 @@
               </a>
             </div>
             <div class="edit-profile halfpadding">
-              <button>Edit profile</button>
+              <router-link :to="{ name: 'dashboard' }">Dashboard</router-link>
             </div>
             <div class="edit-profile">
                 <div class="personal-info">
                     <div class="education padding">
-                      <a>Education</a>
-                      <span>UDSU</span>
+                      <a>Company</a>
+                      <span>{{ profile.company }}</span>
                     </div>
                     <div class="show-more">
-                      <a><i href="#" class="fas fa-chevron-down" id="showMoreInfo"></i></a>
+                      <a @click="showProfile">
+                        <i
+                          href="#"
+                          class="fas fa-chevron-down"
+                          id="showMoreInfo"
+                          ref="showMoreInfo"
+                        ></i></a>
                     </div>
                     <!-- More info hidden -->
                     <div class="container-slider"> 
-                      <div id="slider" class="slideup">
+                      <div id="slider" ref="slider" class="slideup">
                         <div class="education padding">
-                          <a>Contacts</a>
-                          <span>8 111 111 1111</span>
+                          <a>Website</a>
+                          <span>{{ profile.website }}</span>
                         </div>
                         <div class="education padding">
-                          <a>Main info</a>
-                          <span>Russian</span>
+                          <a>Location </a>
+                          <span>{{ profile.location }}</span>
                         </div>
                         <div class="education padding">
-                          <a>Education</a>
-                          <span>Universidad de Granada</span>
-                        </div>
-                        <div class="education padding">
-                          <a>Personal info</a>
-                          <span>Russia</span>
+                          <a>Bio</a>
+                          <span>{{ profile.bio }}</span>
                         </div>
                       </div>
                     </div>
@@ -168,21 +170,57 @@ export default {
   name: 'Main',
   created() {
     this.getGroups();
+    this.exportCurrentProfile();
   },
   data() {
     return {
     };
   },
   methods: {
-    ...mapActions("groups",['getGroups'])
+    ...mapActions("groups",['getGroups']),
+    ...mapActions("profile",['exportCurrentProfile']),
+    showProfile() {
+      if(this.$refs.slider.classList.contains("slideup")) {
+        this.$refs.slider.classList.remove("slideup");
+        this.$refs.slider.classList.add("slidedown");
+        this.$refs.showMoreInfo.classList.remove("fa-chevron-down");
+        this.$refs.showMoreInfo.classList.add("fa-chevron-up");
+      } else {
+        this.$refs.slider.classList.remove("slidedown");
+        this.$refs.slider.classList.add("slideup");
+        this.$refs.showMoreInfo.classList.remove("fa-chevron-up");
+        this.$refs.showMoreInfo.classList.add("fa-chevron-down");
+      }
+    }
   },
   computed: {
     ...mapState({
       groups: state => state.groups.groups
     }),
-    ...mapState('auth', [ 'user'])
+    ...mapState('auth', [ 'user']),
+    ...mapState('profile', [ 'profile'])
   },
 }
+
+
+
+// const showMoreInfo = document.getElementById('showMoreInfo');
+// const slider = document.getElementById('slider');
+
+// showMoreInfo.addEventListener('click', () => {
+//   if (slider.classList.contains("slideup")) 
+//   {
+//     slider.classList.remove("slideup");
+//     slider.classList.add("slidedown");
+//     showMoreInfo.classList.remove("fa-chevron-down");
+//     showMoreInfo.classList.add("fa-chevron-up");
+//   } else {
+//     slider.classList.remove("slidedown");
+//     slider.classList.add("slideup");
+//     showMoreInfo.classList.remove("fa-chevron-up");
+//     showMoreInfo.classList.add("fa-chevron-down");
+//   } 
+// });
 
 
 </script>

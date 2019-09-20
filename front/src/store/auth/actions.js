@@ -50,12 +50,10 @@ function login({ commit }, data) {
         // Decode token to get user data
         const decoded = jwt_decode(token);
         commit('setUser', decoded);
-        console.log(decoded);
         resolve();
       })
       .catch((error) => {
         commit('errors/setErrors', error.response.data, { root: true });
-        console.log(error.response.data)
       });
   });
 }

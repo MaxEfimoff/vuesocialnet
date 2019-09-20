@@ -26,7 +26,8 @@ router.get('/', passport.authenticate('jwt', {session: false}), (req, res) => {
   Profile.findOne({ user: req.user.id })
     // Populate profile fields with data from users
     .populate('user', ['name', 'avatar'])
-    .then(profile => {
+    .then(
+      profile => {
       if(!profile) {
         errors.noprofile = 'There is no profile for this user';
         return res.status(404).json(errors);
@@ -120,27 +121,27 @@ router.post('/', passport.authenticate('jwt', {session: false}), (req, res) => {
   if (req.body.bio) profileFields.bio = req.body.bio;
   if (req.body.status) profileFields.status = req.body.status;
   // Skills - split into array
-  if (typeof req.body.skills !== "undefined") {
-      profileFields.skills = req.body.skills.split(",");
-    }
+  // if (typeof req.body.skills !== "undefined") {
+  //     profileFields.skills = req.body.skills.split(",");
+  //   }
   // Social
-  profileFields.social = {};
-  if (req.body.youtube) profileFields.social.youtube = req.body.youtube;
-  if (req.body.twitter) profileFields.social.twitter = req.body.twitter;
-  if (req.body.facebook) profileFields.social.facebook = req.body.facebook;
-  if (req.body.linkedin) profileFields.social.linkedin = req.body.linkedin;
-  if (req.body.instagram) profileFields.social.instagram = req.body.instagram;
-  if (req.body.github)
-      profileFields.github = req.body.github;
+  // profileFields.social = {};
+  // if (req.body.youtube) profileFields.social.youtube = req.body.youtube;
+  // if (req.body.twitter) profileFields.social.twitter = req.body.twitter;
+  // if (req.body.facebook) profileFields.social.facebook = req.body.facebook;
+  // if (req.body.linkedin) profileFields.social.linkedin = req.body.linkedin;
+  // if (req.body.instagram) profileFields.social.instagram = req.body.instagram;
+  // if (req.body.github)
+  //     profileFields.github = req.body.github;
 
   Profile.findOne({ user: req.user.id })
     .then(profile => {
       if(profile) {
         // Update profile
-        Profile.findByIdAndUpdate(
-          { user: req.user.id }, 
+        Profile.findOneAndUpdate(
+          { user: req.user.id },
           { $set: profileFields },
-          {new: true} 
+          { new: true }
         )
         .then(profile => res.json(profile));
       } else {
@@ -151,7 +152,7 @@ router.post('/', passport.authenticate('jwt', {session: false}), (req, res) => {
         Profile.findOne({ handle: profileFields.handle })
           .then(profile => {
             if(profile) {
-              errors.handle = 'That already in use';
+              errors.handle = 'That handle already in use';
               res.status(400).json(errors);
             }
 

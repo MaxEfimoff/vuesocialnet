@@ -3,7 +3,7 @@
     <div class="container">
       <h1 class="logo">
         <router-link
-          :to="{ name: 'dashboard' }">
+          to="/">
           SocialNet
         </router-link>
       </h1>
@@ -52,6 +52,7 @@ export default {
   },
   methods: {
     logout() {
+          this.$store.commit('profile/resetProfile')
           this.$store.dispatch('auth/logout')
           .then(() => this.$router.push({ name: 'login' }))
           .catch((error) => {console.log(error)
