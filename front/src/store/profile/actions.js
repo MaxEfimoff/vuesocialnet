@@ -9,7 +9,6 @@ function exportCurrentProfile({ commit }, data) {
     axios.get(profileUrl, data)
     .then((response) => {
         commit('getProfile', response.data);
-        console.log(response.data);
         resolve();
       })
       .catch((error) => {
@@ -24,7 +23,6 @@ function createProfile({ commit }, data) {
     axios.post(profileUrl, data)
     .then((response) => {
         commit('getProfile', response.data);
-        console.log(response.data);
         resolve();
       })
       .catch((error) => {

@@ -6,7 +6,7 @@
         <LeftSection />
         <PostsMain />
       </div>
-      <div v-else class="register ">
+      <div v-else class="register">
         <div class="section posts padding">
           <h4>Welcome, {{ user.name }}! Please setup your profile!</h4>
           <div class="edit-profile">

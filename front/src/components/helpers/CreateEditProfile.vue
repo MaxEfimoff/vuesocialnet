@@ -110,7 +110,6 @@ export default {
     onChange(prop, newValue) {
       const newData = Object.assign({}, this.formData);
       newData[prop] = prop === 'number' ? Number(newValue) : newValue;
-      // newData[prop] = newValue;
 
       this.$emit('change', newData);
     },

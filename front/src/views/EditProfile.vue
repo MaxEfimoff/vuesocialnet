@@ -51,7 +51,6 @@ export default {
         skills: undefined,
         
       });
-      console.log(profile);
       this.$store.dispatch('profile/createProfile', profile)
         .then(() => this.$router.push({ name: 'posts' }))
         .catch((error) => {
