@@ -73,17 +73,16 @@ export default {
     this.getPosts();
   },
   computed: {
-    ...mapState('profile', [ 'profile']),
-    ...mapState('posts', [ 'posts']),
-    ...mapState('auth', [ 'user']),
+    ...mapState('profile', ['profile']),
+    ...mapState('posts', ['posts']),
+    ...mapState('auth', ['user']),
   },
   methods: {
-    ...mapActions("posts",['getPosts']),
+    ...mapActions("posts", ['getPosts']),
   },
   components: {
     Header,
     LeftSection,
-    // PostsMain
   }
 }
 </script>

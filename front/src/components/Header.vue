@@ -9,6 +9,11 @@
       </h1>
       <div class="nav">
         <div v-if="isAuthenticated">
+            <router-link class="padding"
+              :to="{ name: 'profiles' }">
+              <!-- <img :src=" require (`${user.avatar}`) " alt=""> -->
+              <span>Users</span>
+            </router-link>
             <router-link
               :to="{ name: 'dashboard' }">
               <!-- <img :src=" require (`${user.avatar}`) " alt=""> -->

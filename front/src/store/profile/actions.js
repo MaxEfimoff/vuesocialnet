@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {
-  profileUrl
+  profileUrl, allProfilesUrl
 } from '../urls';
 
 // Get current profile
@@ -47,8 +47,19 @@ function editProfile({ commit }, data) {
   });
 }
 
+function getProfiles({ commit }) {
+  return new Promise((resolve, reject) => {
+    axios.get(allProfilesUrl)  
+      .then((response) => {
+        commit('SET_PROFILES', response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
 export {
   exportCurrentProfile,
   createProfile,
-  editProfile
+  editProfile,
+  getProfiles
 };

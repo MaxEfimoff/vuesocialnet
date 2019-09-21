@@ -10,8 +10,13 @@ function resetProfile(state) {
   state.profile = {};
 }
 
+function SET_PROFILES (state, profiles) {
+  state.profiles = profiles;
+}
+
 export {
   getProfile,
   resetProfile,
-  setProfile
+  setProfile,
+  SET_PROFILES,
 };
