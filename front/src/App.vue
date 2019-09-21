@@ -262,13 +262,14 @@ span, li, i {
   max-width: 234px;
 }
 .avatar-background {
-  max-width: 232px;
-  height: 181px;
+  max-width: 100%;
+  min-height: 181px;
   background-image: url("/assets/img/photos/unsplash_2.png");
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover;
 }
+
 .avatar {
   text-align: center;
   margin-top: -1.6rem;
@@ -281,6 +282,16 @@ span, li, i {
   height: 100px;
   width: 100px;
 
+}
+
+.avatar-wide{
+  text-align: center;
+  margin-top: -10rem;
+  max-width: 200px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  height: 100px;
+  width: 100px;
 }
 
 .edit-profile {
@@ -431,7 +442,7 @@ span, li, i {
 }
 
 .post-new-form input{
-  width: 20rem;
+  width: 10rem;
   padding-right: 1rem;
 }
 

@@ -15,12 +15,26 @@
         </form>
       </div>
       <div class="post-wrapper">
-        <div class="post" v-for="profile in profiles" :key="profile.id">
+        <div
+          class="post"
+          v-for="profile in profiles.slice(0, 10)"
+          :key="profile.id"
+        >
           <div class="post-author">
-            <div class="groups-photo">
-              <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
-              <span>{{ profile.handle }}</span>
-            </div>
+            <router-link
+              :to="`/profile/handle/${profile.handle}`"
+            >
+              <div class="groups-photo">
+                <img
+                  class="groups-img"
+                  src="../../assets/img/anon.jpg"
+                  alt=""
+                >
+                <span>
+                  {{ profile.handle }}
+                </span>
+              </div>
+            </router-link>
           </div>
         </div>
       </div>

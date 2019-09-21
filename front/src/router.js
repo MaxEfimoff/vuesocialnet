@@ -14,6 +14,7 @@ import Login from './views/Login.vue'
 import CreateProfile from './views/CreateProfile.vue'
 import EditProfile from './views/EditProfile.vue'
 import Profiles from './views/Profiles.vue'
+import Profile from './views/Profile.vue'
 
 Vue.use(Router)
 
@@ -90,6 +91,12 @@ export default new Router({
       path: '/profiles',
       name: 'profiles',
       component: Profiles,
+    },
+    {
+      path: '/profile/handle/:handle',
+      name: 'profile',
+      props: true,
+      component: Profile,
     },
   ]
 })

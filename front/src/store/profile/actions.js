@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {
-  profileUrl, allProfilesUrl
+  profileUrl, allProfilesUrl, profileByHandleUrl
 } from '../urls';
 
 // Get current profile
@@ -57,9 +57,21 @@ function getProfiles({ commit }) {
   });
 }
 
+function getProfileByHandle({ commit }, handle) {
+  return new Promise((resolve, reject) => {
+    axios.get(`http://localhost:5000/api/profile/handle/${handle}`)
+    .then((response) => {
+      commit('getAnotherUserProfile', response.data);
+      resolve();
+    })
+    .catch(error => console.log(error));
+  })
+};
+
 export {
   exportCurrentProfile,
   createProfile,
   editProfile,
-  getProfiles
+  getProfiles,
+  getProfileByHandle
 };

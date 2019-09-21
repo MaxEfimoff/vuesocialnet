@@ -17,6 +17,7 @@ const allGroupsUrl = `${serverUrl}/api/groups/`;
 const allPostsUrl = `${serverUrl}/api/posts/`;
 const allMessagesUrl = `${serverUrl}/api/messages/`;
 const allProfilesUrl = `${serverUrl}/api/profile/all`;
+// const profileByHandleUrl = `${serverUrl}/api/profile/handle/${handle}`;
 
 export {
   serverUrl,
@@ -33,5 +34,6 @@ export {
   profileUrl,
   allPostsUrl,
   allMessagesUrl,
-  allProfilesUrl
+  allProfilesUrl,
+  // profileByHandleUrl
 };

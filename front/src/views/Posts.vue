@@ -32,7 +32,7 @@
                   </form>
                 </div>
             <div class="post-wrapper">
-              <div class="post" v-for="post in posts" :key="post.id">
+              <div class="post" v-for="post in posts.slice(0, 10)" :key="post.id">
                 <div class="post-author">
                   <div class="groups-photo">
                     <img class="groups-img" src="../assets/img/groups/01.jpg" alt="">
