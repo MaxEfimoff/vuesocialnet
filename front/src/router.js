@@ -15,6 +15,7 @@ import CreateProfile from './views/CreateProfile.vue'
 import EditProfile from './views/EditProfile.vue'
 import Profiles from './views/Profiles.vue'
 import Profile from './views/Profile.vue'
+import Post from './views/Post.vue'
 
 Vue.use(Router)
 
@@ -97,6 +98,12 @@ export default new Router({
       name: 'profile',
       props: true,
       component: Profile,
+    },
+    {
+      path: '/posts/:id',
+      name: 'post',
+      props: true,
+      component: Post,
     },
   ]
 })

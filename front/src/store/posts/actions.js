@@ -26,7 +26,20 @@ function getPost({ commit }, index) {
   });
 }
 
+function getPostById({ commit }, id) {
+  return new Promise((resolve, reject) => {
+    axios.get(`http://localhost:5000/api/posts/${id}`)
+    .then((response) => {
+      console.log(response);
+      commit('SET_POST', response.data);
+      resolve();
+    })
+    .catch(error => console.log(error));
+  })
+};
+
 export {
   getPosts,
   getPost,
+  getPostById
 };

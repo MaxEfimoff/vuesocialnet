@@ -4,22 +4,22 @@
     <div class="main">
       <div class="container container-main">
         <LeftSection />
-        <Posts />
+        <Post />
       </div>
     </div>
-  </div> 
+  </div>  
 </template>
 
 <script>
 import Header from '@/components/Header.vue';
 import LeftSection from '@/components/LeftSection.vue';
-import Posts from '@/components/Posts/Posts.vue';
+import Post from '@/components/Post/Post.vue';
 
 export default {
   components: {
     Header,
     LeftSection,
-    Posts
+    Post
   }
 }
 </script>
