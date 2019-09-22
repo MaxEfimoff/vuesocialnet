@@ -5,7 +5,6 @@
       <div class="container container-main">
         <LeftSection />
         <section class="section-center">
-          <!-- Posts -->
           <div class="section posts">
             <div class="post-new noleftpadding">
               <form action="#" class="post-new-form">
@@ -34,17 +33,11 @@ import LeftSection from '@/components/LeftSection.vue'
 import { mapState, mapActions } from 'vuex';
 export default {
   name: 'Messages',
-  data() {
-    return {
-    }
-  },
   created() {
     this.getMessages();
   },
   computed: {
-    ...mapState('profile', [ 'profile']),
     ...mapState('messages', [ 'messages']),
-    ...mapState('auth', [ 'user']),
   },
   methods: {
     ...mapActions("messages",['getMessages']),

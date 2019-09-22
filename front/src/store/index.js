@@ -4,6 +4,7 @@ import auth from './auth';
 import profile from './profile';
 import groups from './groups';
 import posts from './posts';
+import notes from './notes';
 import messages from './messages';
 import errors from './errors';
 
@@ -18,6 +19,7 @@ export default function () {
       profile,
       groups,
       posts,
+      notes,
       messages,
       errors
     },

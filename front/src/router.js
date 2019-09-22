@@ -16,6 +16,7 @@ import EditProfile from './views/EditProfile.vue'
 import Profiles from './views/Profiles.vue'
 import Profile from './views/Profile.vue'
 import Post from './views/Post.vue'
+import Note from './views/Note.vue'
 
 Vue.use(Router)
 
@@ -27,6 +28,12 @@ export default new Router({
       path: '/',
       name: 'posts',
       component: Posts
+    },
+    {
+      path: '/posts/:id',
+      name: 'post',
+      props: true,
+      component: Post,
     },
     {
       path: '/friends',
@@ -64,6 +71,12 @@ export default new Router({
       component: Notes,
     },
     {
+      path: '/notes/:id',
+      name: 'note',
+      props: true,
+      component: Note,
+    },
+    {
       path: '/register',
       name: 'register',
       component: Register,
@@ -98,12 +111,6 @@ export default new Router({
       name: 'profile',
       props: true,
       component: Profile,
-    },
-    {
-      path: '/posts/:id',
-      name: 'post',
-      props: true,
-      component: Post,
     },
   ]
 })
