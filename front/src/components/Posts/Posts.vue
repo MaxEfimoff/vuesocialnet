@@ -58,8 +58,8 @@
 
 <script>
 // @ is an alias to /src
-import Header from '@/components/Header.vue'
-import LeftSection from '@/components/LeftSection.vue'
+// import Header from '@/components/Header.vue'
+// import LeftSection from '@/components/LeftSection.vue'
 // import PostsMain from '@/components/PostsMain.vue'
 import { mapState, mapActions } from 'vuex';
 

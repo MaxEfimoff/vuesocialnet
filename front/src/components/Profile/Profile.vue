@@ -11,7 +11,7 @@
             <!-- Stats -->
             <div class="stats">
               <a href="/friends" class="stat-counter">
-                <!-- <div class="count">{{ anotherUserProfile.friends.length }}</div> -->
+                <div class="count">{{ anotherUserProfile.friends.length }}</div>
                 <i class="fas fa-user"></i>
               </a>
               <a href="/subscribers" class="stat-counter lefthalfpadding">

@@ -27,8 +27,8 @@
 
 <script>
 // @ is an alias to /src
-import Header from '@/components/Header.vue'
-import LeftSection from '@/components/LeftSection.vue'
+// import Header from '@/components/Header.vue'
+// import LeftSection from '@/components/LeftSection.vue'
 import { mapState, mapActions } from 'vuex';
 
 export default {
@@ -42,10 +42,10 @@ export default {
   methods: {
     ...mapActions("notes", ['getNotes']),
   },
-  components: {
-    Header,
-    LeftSection
-  }
+  // components: {
+  //   Header,
+  //   LeftSection
+  // }
 }
 </script>
 
