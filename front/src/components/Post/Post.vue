@@ -1,6 +1,7 @@
 <template>
 <div>
   <h3>Post Item</h3>
+  <span>{{ post.name }}</span>
   <p>{{ post.text }}</p>
 
 </div>

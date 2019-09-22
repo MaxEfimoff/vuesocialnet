@@ -16,6 +16,7 @@ import EditProfile from './views/EditProfile.vue'
 import Profiles from './views/Profiles.vue'
 import Profile from './views/Profile.vue'
 import Post from './views/Post.vue'
+import PostForm from './views/PostForm.vue'
 import Note from './views/Note.vue'
 import Message from './views/Message.vue'
 
@@ -29,6 +30,11 @@ export default new Router({
       path: '/',
       name: 'posts',
       component: Posts
+    },
+    {
+      path: '/post-form',
+      name: 'postForm',
+      component: PostForm
     },
     {
       path: '/posts/:id',

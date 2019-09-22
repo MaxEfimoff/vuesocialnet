@@ -20,7 +20,11 @@
               <a href="">Liked</a>
             </li>
           </ul>
-          <button>New post</button>
+          <router-link
+            :to="{ name: 'postForm' }"
+          >
+            <button>New post</button>
+          </router-link>
           <form action="#" class="post-new-form">
             <input type="text" placeholder="Post search" />
           </form>
@@ -29,12 +33,13 @@
           <div class="post" v-for="post in posts.slice(0, 10)" :key="post.id">
             <div class="post-author">
               <router-link
-                    :to="`/posts/${post._id}`"
-                  >
+                :to="`/posts/${post._id}`"
+              >
               <div class="groups-photo">
-                <img class="groups-img" src="../../assets/img/groups/01.jpg" alt="">
+                <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
                 <span>{{ post.text }}</span>
               </div>
+                <small>{{ post.name }}</small>
               </router-link>
             </div>
           </div>
