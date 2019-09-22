@@ -1,4 +1,5 @@
 export default {
-  messages:[]
+  messages:[],
+  message: {}
 };
 

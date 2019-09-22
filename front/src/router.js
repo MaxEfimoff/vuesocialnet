@@ -17,6 +17,7 @@ import Profiles from './views/Profiles.vue'
 import Profile from './views/Profile.vue'
 import Post from './views/Post.vue'
 import Note from './views/Note.vue'
+import Message from './views/Message.vue'
 
 Vue.use(Router)
 
@@ -111,6 +112,12 @@ export default new Router({
       name: 'profile',
       props: true,
       component: Profile,
+    },
+    {
+      path: '/messages/:id',
+      name: 'message',
+      props: true,
+      component: Message,
     },
   ]
 })

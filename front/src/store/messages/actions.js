@@ -26,7 +26,20 @@ function getMessage({ commit }, index) {
   });
 }
 
+function getMessageById({ commit }, id) {
+  return new Promise((resolve, reject) => {
+    axios.get(`http://localhost:5000/api/messages/${id}`)
+    .then((response) => {
+      console.log(response);
+      commit('SET_MESSAGE', response.data);
+      resolve();
+    })
+    .catch(error => console.log(error));
+  })
+};
+
 export {
   getMessages,
   getMessage,
+  getMessageById
 };
