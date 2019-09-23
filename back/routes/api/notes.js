@@ -75,6 +75,7 @@ router.post(
     }
 
     const newNote = new Note({
+      title: req.body.title,
       text: req.body.text,
       name: req.body.name,
       avatar: req.body.avatar,

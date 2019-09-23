@@ -173,10 +173,6 @@ export default {
     this.getMessages();
     this.exportCurrentProfile();
   },
-  data() {
-    return {
-    };
-  },
   methods: {
     ...mapActions("groups",['getGroups']),
     ...mapActions("messages",['getMessages']),

@@ -2,7 +2,11 @@
   <section class="section-center">
     <div class="section posts">
       <div class="post-new padding">
-        <button>Add new note</button>
+        <router-link
+          :to="{ name: 'noteForm' }"
+        >
+          <button>Add new note</button>
+        </router-link>
         <form action="#" class="post-new-form">
           <input type="text" placeholder="Search" />
         </form>
@@ -11,11 +15,11 @@
         <div class="post"  v-for="note in notes" :key="note.id">
           <div class="post-author">
             <router-link
-                    :to="`/notes/${note._id}`"
-                  >
+              :to="`/notes/${note._id}`"
+            >
               <div class="groups-photo">
                 <i class="fas fa-sticky-note fa-2x"></i>
-                <a class="leftpadding">{{ note.name }}</a>
+                <a class="leftpadding">{{ note.title }}</a>
               </div>
             </router-link>
           </div>

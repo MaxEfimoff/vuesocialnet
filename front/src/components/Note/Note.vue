@@ -2,7 +2,7 @@
   <section class="section-center">
     <div class="section posts">
       <div class="post-new padding">
-        <h3>{{ note.name }}</h3>
+        <h3>{{ note.title }}</h3>
       </div>
       <div class="post-wrapper">
         <div class="post">
@@ -10,6 +10,8 @@
               <div class="groups-photo">
                 <p>{{ note.text }}</p>
               </div>
+              
+            <i class="fas fa-trash-alt" @click="deleteNote"></i>
           </div>
         </div>
       </div>
@@ -30,6 +32,12 @@ export default {
   },
   methods: {
     ...mapActions("notes", ['getNoteById']),
+    deleteNote() {
+      this.$store.dispatch('notes/deleteNote', this.$route.params.id)
+      .then(() => this.$router.push({ name: 'notes' }))
+      .catch((error) => {console.log(error)
+    })
+    }
   },
 }
 </script>

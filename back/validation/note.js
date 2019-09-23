@@ -7,7 +7,15 @@ module.exports = function validateTodoInput(data) {
   data.text = !isEmpty(data.text) ? data.text : "";
 
   if (!Validator.isLength(data.text, { min: 10, max: 1000 })) {
-    errors.text = "Todo must be between 10 and 1000 characters";
+    errors.text = "Note text must be between 10 and 1000 characters";
+  }
+
+  if (!Validator.isLength(data.title, { min: 3, max: 20 })) {
+    errors.title = "Note title must be between 3 and 20 characters";
+  }
+
+  if (Validator.isEmpty(data.title)) {
+    errors.text = "Title field is required";
   }
 
   if (Validator.isEmpty(data.text)) {

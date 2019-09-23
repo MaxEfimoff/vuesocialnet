@@ -1,11 +1,18 @@
 <template>
   <section class="section posts">
-    <h2 class="padding">Post Form</h2>
+    <h2 class="padding">Note Form</h2>
     <form @submit.prevent="submitForm" class="post-new-form">
       <div class="halfpadding">
         <input
           type="text"
-          placeholder="Write something!"
+          placeholder="Note title"
+          v-model="formData.title"
+        />
+      </div>
+      <div class="halfpadding"> 
+        <input
+          type="text"
+          placeholder="Note text!"
           v-model="formData.text"
         />
       </div>
@@ -26,8 +33,10 @@ export default {
   data() {
     return {
       formData: {
+        title: '',
         text: '',
         name: this.$store.state.profile.profile.handle,
+        iscompleted: false,
         // avatar: this.$store.state.profile.profile.avatar
       },
       tab: 'text',
@@ -43,8 +52,9 @@ export default {
   methods: {
     ...mapActions("profile", [ 'exportCurrentProfile' ]),
     submitForm() {
-      this.$store.dispatch('posts/addPost', this.formData)
-      .then(() => this.$router.push({ name: 'posts' }))
+      console.log(this.formData)
+      this.$store.dispatch('notes/addNote', this.formData)
+      .then(() => this.$router.push({ name: 'notes' }))
       .catch((error) => {console.log(error)
       })
     },

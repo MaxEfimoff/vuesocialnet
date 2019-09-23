@@ -20,6 +20,7 @@ const allMessagesUrl = `${serverUrl}/api/messages/`;
 const allFriendsUrl = `${serverUrl}/api/friends/`;
 const allProfilesUrl = `${serverUrl}/api/profile/all`;
 const addPostUrl = `${serverUrl}/api/posts`;
+const addNoteUrl = `${serverUrl}/api/notes`;
 // const profileByHandleUrl = `${serverUrl}/api/profile/handle/${handle}`;
 
 export {
@@ -40,6 +41,7 @@ export {
   allProfilesUrl,
   allNotesUrl,
   allFriendsUrl,
-  addPostUrl
+  addPostUrl,
+  addNoteUrl
   // profileByHandleUrl
 };

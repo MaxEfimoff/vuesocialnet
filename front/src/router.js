@@ -18,6 +18,7 @@ import Profile from './views/Profile.vue'
 import Post from './views/Post.vue'
 import PostForm from './views/PostForm.vue'
 import Note from './views/Note.vue'
+import NoteForm from './views/NoteForm.vue'
 import Message from './views/Message.vue'
 
 Vue.use(Router)
@@ -76,6 +77,11 @@ export default new Router({
       path: '/notes',
       name: 'notes',
       component: Notes,
+    },
+    {
+      path: '/note-form',
+      name: 'noteForm',
+      component: NoteForm
     },
     {
       path: '/notes/:id',
