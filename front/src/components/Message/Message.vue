@@ -13,12 +13,13 @@
               <div class="post" v-for="comment in message.comments" :key="comment.id">
                 <p>{{ comment.name }}</p><span>{{ comment.text }}</span>
               </div>
-              <form @submit.prevent="submitForm" class="post-new-form">
+              <form ref="text" @submit.prevent="submitForm" class="post-new-form">
                 <div class="halfpadding">
                   <input
                     type="text"
                     placeholder="Coment"
                     v-model="formData.text"
+                    
                   />
                 </div>
                 <div class="padding">
@@ -41,7 +42,7 @@ export default {
     return {
       formData: {
         text: '',
-        name: this.$store.state.profile.profile.handle,
+        name: this.$store.state.profile.profile.user.name,
         // avatar: this.$store.state.profile.profile.avatar
       },
       tab: 'text',
@@ -55,6 +56,19 @@ export default {
   },
   methods: {
     ...mapActions("messages", ['getMessageById']),
+    // reset() {
+    //   this.$refs.text.reset()
+    // },
+    submitForm() {
+      const payload = {
+        messageId: this.$route.params.id,
+        formData: this.formData
+      }
+      this.$store.dispatch('messages/addComment', payload)
+      // .then(this.reset())
+      .catch((error) => {console.log(error)
+      })
+    },
   },
 }
 </script>

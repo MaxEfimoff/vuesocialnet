@@ -52,9 +52,23 @@ function addMessage({ commit }, data) {
   });
 }
 
+function addComment({ commit }, payload) {
+  return new Promise((resolve, reject) => {
+    axios.post(`http://localhost:5000/api/messages/comment/${payload.messageId}`, payload.formData)
+      .then((response) => {
+        commit('SET_MESSAGE', response.data);
+        resolve();
+      })
+      .catch(error => {
+        console.log(error)
+      });
+  });
+}
+
 export {
   getMessages,
   getMessage,
   getMessageById,
-  addMessage
+  addMessage,
+  addComment
 };
