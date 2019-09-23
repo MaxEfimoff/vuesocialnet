@@ -2,6 +2,7 @@ import axios from 'axios';
 import {
   allMessagesUrl,
   oneMessageUrl,
+  addMessageUrl
 } from '../urls';
 
 function getMessages({ commit }) {
@@ -38,8 +39,22 @@ function getMessageById({ commit }, id) {
   })
 };
 
+function addMessage({ commit }, data) {
+  return new Promise((resolve, reject) => {
+    axios.post(addMessageUrl, data)
+      .then((response) => {
+        commit('SET_MESSAGE', response.data);
+        resolve();
+      })
+      .catch(error => {
+        console.log(error)
+      });
+  });
+}
+
 export {
   getMessages,
   getMessage,
-  getMessageById
+  getMessageById,
+  addMessage
 };
