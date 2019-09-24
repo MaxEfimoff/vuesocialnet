@@ -57,10 +57,9 @@ export default {
   },
   methods: {
     submitForm() {
-          this.$store.dispatch('auth/login', this.formData)
-          .then(() => this.$router.push({ name: 'posts' }))
-          .catch((error) => {console.log(error)
-          // });
+      this.$store.dispatch('auth/login', this.formData)
+        .then(() => this.$router.push({ name: 'posts' }))
+        .catch((error) => {console.log(error)
       })
     },
   },

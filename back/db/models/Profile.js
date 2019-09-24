@@ -115,15 +115,18 @@ const ProfileSchema = new Schema({
     }
   },
 
-  // Friends is an array of user IDs
+  // Friends is an array of user handles
   friends: [
     {
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: 'users'
+      handle: {
+        // type: Schema.Types.ObjectId,
+        // ref: 'users',
+        type: String,
+        required: true
       }
     }
   ],
+
   date: {
     type: Date,
     default: Date.now

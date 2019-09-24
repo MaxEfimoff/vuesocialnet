@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {
-  profileUrl, allProfilesUrl, profileByHandleUrl
+  profileUrl, allProfilesUrl, profileByHandleUrl,
+  addToFriendsUrl
 } from '../urls';
 
 // Get current profile
@@ -68,10 +69,26 @@ function getProfileByHandle({ commit }, handle) {
   })
 };
 
+function addToFriends({ commit }, handle) {
+  return new Promise((resolve, reject) => {
+    axios.post(addToFriendsUrl, handle)
+    .then((response) => {
+        commit('getProfile', response.data);
+        console.log(respose.data);
+        resolve();
+      })
+      .catch((error) => {
+        commit('errors/setErrors', error.response.data, { root: true });
+        console.log(error.response.data)
+      });
+  });
+}
+
 export {
   exportCurrentProfile,
   createProfile,
   editProfile,
   getProfiles,
-  getProfileByHandle
+  getProfileByHandle,
+  addToFriends
 };

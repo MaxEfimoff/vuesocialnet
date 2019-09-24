@@ -35,7 +35,13 @@
           <i class="fas fa-sticky-note"></i>
         </a>
       </div>
-      <form @submit.prevent="submitForm" class="post-new-form">
+      <div class="padding">
+        <button type="submit" @click="addToFriends">Add to friends</button>
+      </div>
+      <div class="error-message">
+        {{ this.errors.alreadyfriend }}
+      </div>
+      <!-- <form @submit.prevent="submitForm" class="post-new-form">
         <div class="halfpadding"> 
           <input
             type="text"
@@ -46,7 +52,7 @@
         <div class="padding">
           <button type="submit">Submit</button>
         </div>
-      </form>
+      </form> -->
   </div>
 </template>
 
@@ -55,6 +61,12 @@ import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'Profile',
+  mounted() {
+    this.getProfileByHandle(this.$route.params.handle);
+    this.getGroups();
+    this.getMessages();
+    this.exportCurrentProfile();
+  },
   data() {
     return {
       formData: {
@@ -63,31 +75,30 @@ export default {
         recipient: this.$store.state.profile.anotherUserProfile.user.name,
         // avatar: this.$store.state.profile.profile.avatar
       },
-      tab: 'text',
     };
-  },
-  created() {
-    this.getProfileByHandle(this.$route.params.handle);
-    this.getGroups();
-    this.getMessages();
-    this.exportCurrentProfile();
   },
   computed: {
     ...mapState('profile', ['profiles','anotherUserProfile','profile' ]),
-    // ...mapState('profile', ['profile']),
-    // ...mapState('profile', ['anotherUserProfile']),
+    ...mapState('errors', ['errors']),
   },
   methods: {
-    ...mapActions("profile", ['getProfileByHandle']),
+    ...mapActions("profile", ['getProfileByHandle', 'exportCurrentProfile']),
     ...mapActions("groups",['getGroups']),
     ...mapActions("messages",['getMessages']),
-    submitForm() {
-      console.log(this.formData)
-      this.$store.dispatch('messages/addMessage', this.formData)
-      // .then(() => this.$router.push({ name: 'notes' }))
-      .catch((error) => {console.log(error)
-      })
-    },
+    // submitForm() {
+    //   console.log(this.formData)
+    //   this.$store.dispatch('messages/addMessage', this.formData)
+    //   // .then(() => this.$router.push({ name: 'notes' }))
+    //   .catch((error) => {console.log(error)
+    //   })
+    // },
+    addToFriends() {
+      const handle = {
+        handle: this.$store.state.profile.anotherUserProfile.handle
+      };
+      this.$store.dispatch('profile/addToFriends', handle)
+      .catch((error) => console.log(error))
+    }
   },
 }
 </script>

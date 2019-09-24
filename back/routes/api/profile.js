@@ -326,4 +326,63 @@ router.delete(
   }
 );
 
+//@route      GET api/profile/friends/all
+//@desc       Get all friends
+//@access     Public
+router.get(
+  "/friends/all",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const errors = {};
+
+    Profile.findOne({ user: req.user.id });
+    Profile.find()
+      .populate("user", ["name", "avatar"])
+      .then(profiles => {
+        /* if (!profiles) {
+          errors.noprofile = "There are no friends";
+          return res.status(404).json(errors);
+        } */
+        res.json(profiles);
+      })
+      .catch(err => res.status(404).json({ profile: "There are no profiles" }));
+  }
+);
+
+//@route      POST api/profile/friend/
+//@desc       Att user to friends
+//@access     Private
+router.post(
+  "/friends",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => { 
+     Profile.findOne({ user: req.user.id }).then(profile => {
+      // const keys = Object.keys(req.body);
+      // const valueId = keys[0];
+      const newFriend = {
+        handle: req.body.handle
+      }
+      
+        if (
+        profile.friends.filter(
+          friend => friend.handle.toString() === newFriend.handle
+        ).length > 0
+      ) {
+        return res
+          .status(400)
+          .json({ alreadyfriend: "User already added this friend" });
+      }  
+          
+      profile.friends.unshift(newFriend);
+      profile.save().then(profile => res.json(profile));
+          
+         
+       // })
+        // .catch(err =>
+        //   res.status(404).json({ friendnotfound: "No friend found" })
+        // );
+    }); 
+  }
+);
+
 module.exports = router;
