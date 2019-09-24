@@ -277,8 +277,6 @@ router.delete(
 
       // Save
       profile.save().then(profile => res.json(profile));
-
-      profile.save().then(profile => res.json(profile));
     })
     .catch(err => res.status(404).json(err));
   }
@@ -304,7 +302,26 @@ router.delete(
 
       // Save
       profile.save().then(profile => res.json(profile));
+    })
+    .catch(err => res.status(404).json(err));
+  }
+);
 
+//@route      DELETE api/profile/friends/:handle
+//@desc       Delete profile from friends
+//@access     Private
+router.delete(
+  "/friends/:handle",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      // Get remove index
+      const removeIndex = profile.friends.findIndex(x => x.handle === `${req.params.handle}`);
+
+      // Splice out of array
+      profile.friends.splice(removeIndex, 1);
+
+      // Save
       profile.save().then(profile => res.json(profile));
     })
     .catch(err => res.status(404).json(err));

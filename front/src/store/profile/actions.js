@@ -84,11 +84,27 @@ function addToFriends({ commit }, handle) {
   });
 }
 
+function deleteFromFriends({ commit }, handle) {
+  return new Promise((resolve, reject) => {
+    axios.delete(`http://localhost:5000/api/profile/friends/${handle}`)
+    .then((response) => {
+        commit('getProfile', response.data);
+        console.log(respose.data);
+        resolve();
+      })
+      .catch((error) => {
+        commit('errors/setErrors', error.response.data, { root: true });
+        console.log(error.response.data)
+      });
+  });
+}
+
 export {
   exportCurrentProfile,
   createProfile,
   editProfile,
   getProfiles,
   getProfileByHandle,
-  addToFriends
+  addToFriends,
+  deleteFromFriends
 };

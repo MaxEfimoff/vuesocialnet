@@ -36,7 +36,20 @@
         </a>
       </div>
       <div class="padding">
-        <button type="submit" @click="addToFriends">Add to friends</button>
+        <button 
+          type="submit"
+          @click="addToFriends"
+        >
+          Add to friends
+        </button>
+      </div>
+      <div class="padding">
+        <button 
+          type="submit"
+          @click="deleteFromFriends"
+        >
+          Delete from friends
+        </button>
       </div>
       <div class="error-message">
         {{ this.errors.alreadyfriend }}
@@ -97,6 +110,11 @@ export default {
         handle: this.$store.state.profile.anotherUserProfile.handle
       };
       this.$store.dispatch('profile/addToFriends', handle)
+      .catch((error) => console.log(error))
+    },
+    deleteFromFriends() {
+      const handle = this.$store.state.profile.anotherUserProfile.handle;
+      this.$store.dispatch('profile/deleteFromFriends', handle)
       .catch((error) => console.log(error))
     }
   },
