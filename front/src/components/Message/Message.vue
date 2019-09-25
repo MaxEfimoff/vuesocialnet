@@ -15,11 +15,10 @@
               </div>
               <form ref="text" @submit.prevent="submitForm" class="post-new-form">
                 <div class="halfpadding">
-                  <input
-                    type="text"
+                  <textarea
+                    class="textarea"
                     placeholder="Coment"
                     v-model="formData.text"
-                    
                   />
                 </div>
                 <div class="padding">

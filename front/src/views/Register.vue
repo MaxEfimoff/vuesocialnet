@@ -30,7 +30,7 @@
           </div>
           <div class="halfpadding">
             <input
-              type="text"
+              type="password"
               ref="password"
               placeholder="Password"
               v-model="formData.password"
@@ -41,7 +41,7 @@
           </div>
           <div class="halfpadding">
             <input
-              type="text"
+              type="password"
               placeholder="Confirm Password"
               ref="password2"
               v-model="formData.password2"
@@ -82,7 +82,7 @@ export default {
   methods: {
     submitForm() {
         this.$store.dispatch('auth/register', this.formData)
-          .then(() => this.$router.push({ name: 'dashboard' }))
+          .then(() => this.$router.push({ name: 'login' }))
           .catch((error) => {
             console.log(error)
           });

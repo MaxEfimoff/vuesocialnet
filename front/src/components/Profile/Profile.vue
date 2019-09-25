@@ -54,6 +54,11 @@
       <div class="error-message">
         {{ this.errors.alreadyfriend }}
       </div>
+      <SendMessage
+        :formData="formData"
+        :onSubmit="submitForm"
+        @change="onChange"
+      />
       <!-- <form @submit.prevent="submitForm" class="post-new-form">
         <div class="halfpadding"> 
           <input
@@ -71,6 +76,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import SendMessage from'@/components/helpers/SendMessage.vue'
 
 export default {
   name: 'Profile',
@@ -80,16 +86,7 @@ export default {
     this.getMessages();
     this.exportCurrentProfile();
   },
-  data() {
-    return {
-      formData: {
-        text: '',
-        name: this.$store.state.profile.profile.handle,
-        recipient: this.$store.state.profile.anotherUserProfile.user.name,
-        // avatar: this.$store.state.profile.profile.avatar
-      },
-    };
-  },
+  
   computed: {
     ...mapState('profile', ['profiles','anotherUserProfile','profile' ]),
     ...mapState('errors', ['errors']),
@@ -98,13 +95,18 @@ export default {
     ...mapActions("profile", ['getProfileByHandle', 'exportCurrentProfile']),
     ...mapActions("groups",['getGroups']),
     ...mapActions("messages",['getMessages']),
-    // submitForm() {
-    //   console.log(this.formData)
-    //   this.$store.dispatch('messages/addMessage', this.formData)
-    //   // .then(() => this.$router.push({ name: 'notes' }))
-    //   .catch((error) => {console.log(error)
-    //   })
-    // },
+    onChange(newFormData) {
+      this.$store.commit('messages/SET_MESSAGE', newFormData);
+    },
+    submitForm() {
+      const newData = Object.assign({}, this.formData);
+
+      this.$store.dispatch('messages/addMessage', newData)
+        .then(() => this.$router.push({ name: 'posts' }))
+        .catch((error) => {
+          console.log(error)
+        });
+    },
     addToFriends() {
       const handle = {
         handle: this.$store.state.profile.anotherUserProfile.handle
@@ -117,6 +119,19 @@ export default {
       this.$store.dispatch('profile/deleteFromFriends', handle)
       .catch((error) => console.log(error))
     }
+  },
+  components: {
+    SendMessage
+  },
+  data() {
+    return {
+      formData: {
+        text: '',
+        name: this.$store.state.profile.profile.handle,
+        recipient: this.$store.state.profile.anotherUserProfile.user.name,
+        // avatar: this.$store.state.profile.profile.avatar
+      },
+    };
   },
 }
 </script>

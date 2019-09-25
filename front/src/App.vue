@@ -72,6 +72,20 @@ input[type='text'] {
   border-radius: 0.2rem;
 }
 
+.textarea {
+  text-align:right;
+  border: 1px solid var(--primary-color);
+  height: 10rem;
+  min-width: 20rem;
+  padding: 0.5rem;
+  background-color: var(--primary-color);
+  border-radius: 0.2rem;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  font-size: 0.8rem;
+}
+
 input {
   border: 1px solid var(--primary-color);
   height: 2rem;
@@ -82,6 +96,10 @@ input {
 }
 
 input:focus {
+  outline: none;
+}
+
+textarea:focus {
   outline: none;
 }
 
@@ -442,7 +460,7 @@ span, li, i {
 }
 
 .post-new-form input{
-  width: 10rem;
+  width: 20rem;
   padding-right: 1rem;
 }
 

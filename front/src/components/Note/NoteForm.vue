@@ -10,8 +10,8 @@
         />
       </div>
       <div class="halfpadding"> 
-        <input
-          type="text"
+        <textarea
+          class="textarea"
           placeholder="Note text!"
           v-model="formData.text"
         />

@@ -14,14 +14,14 @@
           <input type="text" placeholder="Friends search" />
         </form>
       </div>
-      <div class="post" v-for="friend in profile.friends" :key="friend.id">
+      <div class="post" v-for="profile in profile.friends" :key="profile.id">
         <div class="post-author">
             <div class="groups-photo lefthalfpadding">
               <img class="groups-img" src="../../assets/img/groups/03.jpg" alt="">
               <router-link
-                :to="`/profile/handle/${friend.handle}`">
+                :to="`/profile/handle/${profile.handle}`">
                 <div class="leftpadding">
-                  <div><a>{{ friend.handle }}</a></div>
+                  <div><a>{{ profile.handle }}</a></div>
                 </div>
               </router-link>
             </div>
