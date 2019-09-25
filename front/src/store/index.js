@@ -6,6 +6,7 @@ import groups from './groups';
 import posts from './posts';
 import notes from './notes';
 import messages from './messages';
+import friends from './friends';
 import errors from './errors';
 
 Vue.use(Vuex)
@@ -21,7 +22,8 @@ export default function () {
       posts,
       notes,
       messages,
-      errors
+      errors,
+      friends
     },
     strict: process.env.DEV
   })

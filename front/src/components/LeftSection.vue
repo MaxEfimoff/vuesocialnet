@@ -16,10 +16,10 @@
                 <div class="count">{{ profile.friends.length }}</div>
                 <i class="fas fa-user"></i>
               </a>
-              <a href="/subscribers" class="stat-counter lefthalfpadding">
+              <!-- <a href="/subscribers" class="stat-counter lefthalfpadding">
                 <div class="count">93</div>
-                <i class="fas fa-user-plus"></i>
-              </a>
+                <i class="fas fa-user-plus"></i> 
+              </a>-->
               <a href="/messages" class="stat-counter lefthalfpadding">
                 <div class="count">{{ messages.length }}</div>
                 <i class="fas fa-envelope"></i>
@@ -29,7 +29,7 @@
                 <i class="fas fa-camera"></i>
               </a>
               <a href="/groups" class="stat-counter lefthalfpadding">
-                <div class="count">41</div>
+                <div class="count">{{ groups.length }}</div>
                 <i class="fas fa-users"></i>
               </a>
               <a href="/documents" class="stat-counter lefthalfpadding">
@@ -37,7 +37,7 @@
                 <i class="fas fa-file-alt"></i>
               </a>
               <a href="/notes" class="stat-counter lefthalfpadding">
-                <div class="count">11</div>
+                <div class="count">{{ notes.length }}</div>
                 <i class="fas fa-sticky-note"></i>
               </a>
             </div>
@@ -84,16 +84,18 @@
         <div class="section friends">
           <span>Friends online</span>  
           <div>
-            <img class="friends-photo" src="../assets/img/friends/01.jpg" alt="">
-            <img class="friends-photo" src="../assets/img/friends/02.jpg" alt="">
-            <img class="friends-photo" src="../assets/img/friends/03.jpg" alt="">
-            <img class="friends-photo" src="../assets/img/friends/04.jpg" alt="">
-            <img class="friends-photo" src="../assets/img/friends/05.jpg" alt="">
-            <img class="friends-photo" src="../assets/img/friends/06.jpg" alt="">
-            <img class="friends-photo" src="../assets/img/friends/07.jpg" alt="">
-            <img class="friends-photo" src="../assets/img/friends/08.jpg" alt="">
-            <img class="friends-photo" src="../assets/img/friends/09.jpg" alt="">
-            <img class="friends-photo" src="../assets/img/friends/10.jpg" alt="">
+            <router-link
+              v-for="profile in profile.friends"
+              :key="profile.id"
+              :to="`/profile/handle/${profile.handle}`"
+            >
+              <img
+                class="friends-photo"
+                src="../assets/img/anon.jpg"
+                alt=""
+                :title='profile.handle'
+              >
+            </router-link>
           </div>
           <div class="show-more">
             <a><i href="#" class="fas fa-chevron-down" id="friends-showMore-info"></i></a>
@@ -171,11 +173,13 @@ export default {
   created() {
     this.getGroups();
     this.getMessages();
+    this.getNotes();
     this.exportCurrentProfile();
   },
   methods: {
     ...mapActions("groups",['getGroups']),
     ...mapActions("messages",['getMessages']),
+    ...mapActions("notes",['getNotes']),
     ...mapActions("profile",['exportCurrentProfile']),
     showProfile() {
       if(this.$refs.slider.classList.contains("slideup")) {
@@ -194,8 +198,9 @@ export default {
   computed: {
     ...mapState('groups', [ 'groups']),
     ...mapState('messages', [ 'messages']),
+    ...mapState('notes', [ 'notes']),
     ...mapState('auth', [ 'user']),
-    ...mapState('profile', [ 'profile'])
+    ...mapState('profile', [ 'profile']),
   },
 }
 
