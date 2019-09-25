@@ -18,6 +18,7 @@ import Profile from './views/Profile.vue'
 import Post from './views/Post.vue'
 import PostForm from './views/PostForm.vue'
 import Note from './views/Note.vue'
+import Group from './views/Group.vue'
 import NoteForm from './views/NoteForm.vue'
 import Message from './views/Message.vue'
 
@@ -67,6 +68,12 @@ export default new Router({
       path: '/groups',
       name: 'groups',
       component: Groups,
+    },
+    {
+      path: '/groups/:id',
+      name: 'group',
+      props: true,
+      component: Group,
     },
     {
       path: '/documents',

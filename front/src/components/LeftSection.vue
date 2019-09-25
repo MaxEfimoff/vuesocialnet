@@ -115,11 +115,13 @@
         <!-- Groups -->
         <div class="section groups">
           <span>Groups</span>
-          <div class="groups-wrapper">
-            <div class="groups-photo" v-for="group in groups" :key="group.id">
-              <img class="groups-img" src="../assets/img/groups/01.jpg"  alt="">
-              <span>{{ group.handle }}</span>
-            </div>  
+          <div class="groups-wrapper" v-for="group in groups" :key="group.id">
+            <router-link :to="`/groups/${group._id}`">
+              <div class="groups-photo">
+                <img class="groups-img" src="../assets/img/groups/01.jpg"  alt="">
+                <span>{{ group.handle }}</span>
+              </div>  
+            </router-link>
           </div>
           <div class="show-more">
             <a><i href="#" class="fas fa-chevron-down" id="groups-showMore-info"></i></a>

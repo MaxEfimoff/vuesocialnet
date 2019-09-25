@@ -14,12 +14,11 @@ function getGroups({ commit }) {
   });
 }
 
-function getGroup({ commit }, index) {
+function getGroup({ commit }, id) {
   return new Promise((resolve, reject) => {
-    axios.get(oneGroupUrl, { id: index })
+    axios.get(`http://localhost:5000/api/groups/${id}`)
       .then((response) => {
-        commit('setGroup', response.data.data);
-
+        commit('SET_GROUP', response.data);
         resolve();
       })
       .catch(error => console.log(error));

@@ -4,25 +4,26 @@
     <div class="main">
       <div class="container container-main">
         <LeftSection />
-        <Groups />
+        <Group />
       </div>
     </div>
-  </div>
+  </div>  
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
-
-// @ is an alias to /src
 import Header from '@/components/Header.vue';
 import LeftSection from '@/components/LeftSection.vue';
-import Groups from '@/components/Groups/Groups.vue';
+import Group from '@/components/Group/Group.vue';
 
 export default {
   components: {
     Header,
     LeftSection,
-    Groups
+    Group
   }
 }
 </script>
+
+<style>
+
+</style>
