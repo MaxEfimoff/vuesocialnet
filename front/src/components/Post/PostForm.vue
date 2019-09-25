@@ -3,7 +3,8 @@
     <h2 class="padding">Post Form</h2>
     <form @submit.prevent="submitForm" class="post-new-form">
       <div class="halfpadding">
-        <input
+        <textarea
+          class="textarea"
           type="text"
           placeholder="Write something!"
           v-model="formData.text"

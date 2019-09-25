@@ -1,42 +1,45 @@
 <template>
   <div class="section">
-    <img class="avatar-background" src="../../assets/img/photos/unsplash_2.jpg" alt="">
+    <img class="profile-background" src="../../assets/img/photos/unsplash_2.jpg" alt="">
+    <div class="profile">
       <div class="avatar">
-        <img class="avatar-wide" :src=" require(`@/assets/img/anon.jpg`) " alt="">
+        <img :src=" require(`@/assets/img/anon.jpg`) " alt="">
       </div>
        <div class="edit-profile">
-        <h3>{{ anotherUserProfile.handle }}</h3>
-        <span>{{ anotherUserProfile.status }}</span>
+        <h3 class="white-font">{{ anotherUserProfile.handle }}</h3>
+        <span class="white-font">{{ anotherUserProfile.status }}</span>
       </div>  
       <!-- Stats -->
       <div class="stats">
         <a href="/friends" class="stat-counter">
-          <div class="count">{{ anotherUserProfile.friends.length }}</div>
-          <i class="fas fa-user"></i>
+          <div class="count">
+            <div class="white-font">{{ anotherUserProfile.friends.length }}</div>
+          </div>
+          <i class="fas fa-user white-font"></i>
         </a>
-        <a href="/subscribers" class="stat-counter lefthalfpadding">
+        <!-- <a href="/subscribers" class="stat-counter lefthalfpadding">
           <div class="count">93</div>
           <i class="fas fa-user-plus"></i>
-        </a>
+        </a> -->
         <a href="/photos" class="stat-counter lefthalfpadding">
-          <div class="count">554</div>
-          <i class="fas fa-camera"></i>
+          <div class="count">
+            <div class="white-font">
+              554
+            </div>
+          </div>
+          <i class="fas fa-camera white-font"></i>
         </a>
         <a href="/groups" class="stat-counter lefthalfpadding">
-          <div class="count">41</div>
-          <i class="fas fa-users"></i>
-        </a>
-        <a href="/documents" class="stat-counter lefthalfpadding">
-          <div class="count">13</div>
-          <i class="fas fa-file-alt"></i>
-        </a>
-        <a href="/notes" class="stat-counter lefthalfpadding">
-          <div class="count">11</div>
-          <i class="fas fa-sticky-note"></i>
+          <div class="count">
+            <div class="white-font">
+              41
+            </div>
+          </div>
+          <i class="fas fa-users white-font"></i>
         </a>
       </div>
       <div class="flex">
-        <div class="padding">
+        <div class="padding" v-if="!this.alreadyFriend">
           <button 
             type="submit"
             @click="addToFriends"
@@ -44,7 +47,7 @@
             Add to friends
           </button>
         </div>
-        <div class="padding">
+        <div class="padding" v-else>
           <button 
             type="submit"
             @click="deleteFromFriends"
@@ -56,23 +59,12 @@
           {{ this.errors.alreadyfriend }}
         </div>
       </div>
+    </div>
       <SendMessage
         :formData="formData"
         :onSubmit="submitForm"
         @change="onChange"
       />
-      <!-- <form @submit.prevent="submitForm" class="post-new-form">
-        <div class="halfpadding"> 
-          <input
-            type="text"
-            placeholder="Send a message"
-            v-model="formData.text"
-          />
-        </div>
-        <div class="padding">
-          <button type="submit">Submit</button>
-        </div>
-      </form> -->
   </div>
 </template>
 
@@ -92,6 +84,12 @@ export default {
   computed: {
     ...mapState('profile', ['profiles','anotherUserProfile','profile' ]),
     ...mapState('errors', ['errors']),
+    alreadyFriend() {
+      const friends = this.$store.state.profile.profile.friends;
+      if (friends.some(e => e.handle === this.$store.state.profile.anotherUserProfile.handle)) {
+        return true;
+      }
+    }
   },
   methods: {
     ...mapActions("profile", ['getProfileByHandle', 'exportCurrentProfile']),

@@ -102,7 +102,7 @@ ul {
 a {
   text-decoration: none;
   cursor: pointer;
-  color: var(--secondary-color);;
+  color: var(--secondary-color);
 }
 
 button {
@@ -135,6 +135,11 @@ span, li, i {
   line-height: 1.6;
   color: #333;
   font-size: 0.8rem;
+}
+
+.white-font {
+  color: #fff;
+  text-shadow: 1px 1px 2px #333;
 }
 
 .error-message {
@@ -278,13 +283,25 @@ span, li, i {
   border-radius: 0.2rem;
   margin-bottom: 1rem;
   background-color: #fff;
+  position: relative;
 }
 
 .section-left {
   max-width: 234px;
 }
+
 .avatar-background {
   max-width: 100%;
+  min-height: 181px;
+  background-image: url("/assets/img/photos/unsplash_2.png");
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+}
+
+.profile-background {
+  width: 100%;
+  max-height: 484px;
   min-height: 181px;
   background-image: url("/assets/img/photos/unsplash_2.png");
   background-position: center; /* Center the image */
@@ -319,6 +336,15 @@ span, li, i {
 .edit-profile {
   margin-top: 0.3rem;
   text-align: center;
+}
+
+.profile {
+  position: absolute;
+  top: 10rem;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
 }
 
 /* Friends */
@@ -460,7 +486,7 @@ span, li, i {
 }
 
 .post-new-form {
-  margin: 0 1rem 0 1rem;
+  margin: 0.7rem 1rem 0 1rem;
 }
 
 .post-new-form input{

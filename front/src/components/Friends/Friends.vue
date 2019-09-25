@@ -17,7 +17,7 @@
       <div class="post" v-for="profile in profile.friends" :key="profile.id">
         <div class="post-author">
             <div class="groups-photo lefthalfpadding">
-              <img class="groups-img" src="../../assets/img/groups/03.jpg" alt="">
+              <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
               <router-link
                 :to="`/profile/handle/${profile.handle}`">
                 <div class="leftpadding">
