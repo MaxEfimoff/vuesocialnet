@@ -89,7 +89,7 @@ router.post(
       text: req.body.text,
       name: req.body.name,
       recipient: req.body.recipient,
-      avatar: req.body.avatar,
+      // avatar: req.body.avatar,
       user: req.user.id
     });
     newMessage.save().then(message => res.json(message));

@@ -72,19 +72,7 @@ input[type='text'] {
   border-radius: 0.2rem;
 }
 
-.textarea {
-  text-align:right;
-  border: 1px solid var(--primary-color);
-  height: 10rem;
-  min-width: 20rem;
-  padding: 0.5rem;
-  background-color: var(--primary-color);
-  border-radius: 0.2rem;
-  font-family: 'Roboto', sans-serif;
-  line-height: 1.6;
-  color: #333;
-  font-size: 0.8rem;
-}
+
 
 input {
   border: 1px solid var(--primary-color);
@@ -134,6 +122,21 @@ span, li, i {
   font-size: 0.8rem;
 }
 
+.textarea {
+  text-align:right;
+  border: 1px solid var(--primary-color);
+  height: 10rem;
+  width: 100%;
+  min-width: 10rem;
+  padding: 0.5rem;
+  background-color: var(--primary-color);
+  border-radius: 0.2rem;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  font-size: 0.8rem;
+}
+
 .error-message {
   color: red;
   text-align: center;
@@ -172,6 +175,7 @@ span, li, i {
 .flex {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .navbar {
@@ -456,7 +460,7 @@ span, li, i {
 }
 
 .post-new-form {
-  margin-left: 1rem;
+  margin: 0 1rem 0 1rem;
 }
 
 .post-new-form input{

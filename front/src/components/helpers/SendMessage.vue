@@ -1,28 +1,18 @@
 <template>
   <div>
     <form @submit.prevent="onSubmit" class="post-new-form">
-        <div class="halfpadding"> 
-          <input
-            type="text"
+        <div> 
+          <textarea
+            class="textarea"
             placeholder="Send a message"
             :value="formData.text"
             @change="onChange('text', $event.target.value)"
           />
-          <input
-            type="text"
-            :value="this.$store.state.profile.profile.handle"
-            @change="onChange('text', $event.target.value)"
-          />
-          <input
-            type="text"
-            :value="this.$store.state.profile.anotherUserProfile.user.name"
-            @change="onChange('text', $event.target.value)"
-          />
+          <div class="error-message">
+            {{this.errors.text}}
+          </div>
         </div>
-        <div class="error-message">
-          {{this.errors.text}}
-        </div>
-        <div class="padding">
+        <div class="noleftpadding">
           <button type="submit">Submit</button>
         </div>
       </form>

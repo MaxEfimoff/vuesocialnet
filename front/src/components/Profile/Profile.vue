@@ -35,24 +35,26 @@
           <i class="fas fa-sticky-note"></i>
         </a>
       </div>
-      <div class="padding">
-        <button 
-          type="submit"
-          @click="addToFriends"
-        >
-          Add to friends
-        </button>
-      </div>
-      <div class="padding">
-        <button 
-          type="submit"
-          @click="deleteFromFriends"
-        >
-          Delete from friends
-        </button>
-      </div>
-      <div class="error-message">
-        {{ this.errors.alreadyfriend }}
+      <div class="flex">
+        <div class="padding">
+          <button 
+            type="submit"
+            @click="addToFriends"
+          >
+            Add to friends
+          </button>
+        </div>
+        <div class="padding">
+          <button 
+            type="submit"
+            @click="deleteFromFriends"
+          >
+            Delete from friends
+          </button>
+        </div>
+        <div class="error-message">
+          {{ this.errors.alreadyfriend }}
+        </div>
       </div>
       <SendMessage
         :formData="formData"
@@ -96,13 +98,13 @@ export default {
     ...mapActions("groups",['getGroups']),
     ...mapActions("messages",['getMessages']),
     onChange(newFormData) {
-      this.$store.commit('messages/SET_MESSAGE', newFormData);
+      this.formData = newFormData;
     },
     submitForm() {
       const newData = Object.assign({}, this.formData);
 
       this.$store.dispatch('messages/addMessage', newData)
-        .then(() => this.$router.push({ name: 'posts' }))
+        .then(() => this.$router.push({ name: 'messages' }))
         .catch((error) => {
           console.log(error)
         });
@@ -129,7 +131,8 @@ export default {
         text: '',
         name: this.$store.state.profile.profile.handle,
         recipient: this.$store.state.profile.anotherUserProfile.user.name,
-        // avatar: this.$store.state.profile.profile.avatar
+        // avatar: this.$store.state.auth.user.avatar,
+        user: this.$store.state.auth.user.id
       },
     };
   },
