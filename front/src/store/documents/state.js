@@ -1,0 +1,5 @@
+export default {
+  documents:[],
+  document: {}
+};
+

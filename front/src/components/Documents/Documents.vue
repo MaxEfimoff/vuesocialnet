@@ -3,23 +3,23 @@
     <div class="section posts">
       <div class="post-new padding">
         <router-link
-          :to="{ name: 'noteForm' }"
+          :to="{ name: 'documentForm' }"
         >
-          <button>Add new note</button>
+          <button>Add a new document</button>
         </router-link>
         <form action="#" class="post-new-form">
           <input type="text" placeholder="Search" />
         </form>
       </div>
       <div class="post-wrapper">
-        <div class="post"  v-for="note in notes" :key="note.id">
+        <div class="post"  v-for="document in documents" :key="document.id">
           <div class="post-author">
             <router-link
-              :to="`/notes/${note._id}`"
+              :to="`/documents/${document._id}`"
             >
               <div class="groups-photo">
                 <i class="fas fa-sticky-note fa-2x"></i>
-                <a class="leftpadding">{{ note.title }}</a>
+                <a class="leftpadding">{{ document.filename }}</a>
               </div>
             </router-link>
           </div>
@@ -33,15 +33,15 @@
 import { mapState, mapActions } from 'vuex';
 
 export default {
-  name: 'notes',
+  name: 'documents',
   created() {
-    this.getNotes();
+    this.getDocuments();
   },
   computed: {
-    ...mapState('notes', ['notes']),
+    ...mapState('documents', ['documents']),
   },
   methods: {
-    ...mapActions("notes", ['getNotes']),
+    ...mapActions("documents", ['getDocuments']),
   },
 }
 </script>

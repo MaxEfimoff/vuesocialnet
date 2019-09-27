@@ -4,22 +4,26 @@
     <div class="main">
       <div class="container container-main">
         <LeftSection />
-        <Documents />
+        <DocumentForm />
       </div>
     </div>
-  </div>
+  </div>  
 </template>
 
 <script>
 import Header from '@/components/Header.vue';
 import LeftSection from '@/components/LeftSection.vue';
-import Documents from '@/components/Documents/Documents.vue';
+import DocumentForm from '@/components/Document/DocumentForm.vue';
 
 export default {
   components: {
     Header,
     LeftSection,
-    Documents
+    DocumentForm
   }
 }
 </script>
+
+<style>
+
+</style>

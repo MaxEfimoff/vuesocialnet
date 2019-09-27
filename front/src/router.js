@@ -1,26 +1,36 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Dashboard from './views/Dashboard.vue'
-import Posts from './views/Posts.vue'
-import Friends from './views/Friends.vue'
-import Subscribers from './views/Subscribers.vue'
-import Messages from './views/Messages.vue'
-import Photos from './views/Photos.vue'
-import Groups from './views/Groups.vue'
-import Documents from './views/Documents.vue'
-import Notes from './views/Notes.vue'
-import Register from './views/Register.vue'
-import Login from './views/Login.vue'
-import CreateProfile from './views/CreateProfile.vue'
-import EditProfile from './views/EditProfile.vue'
-import Profiles from './views/Profiles.vue'
-import Profile from './views/Profile.vue'
-import Post from './views/Post.vue'
-import PostForm from './views/PostForm.vue'
-import Note from './views/Note.vue'
-import Group from './views/Group.vue'
-import NoteForm from './views/NoteForm.vue'
-import Message from './views/Message.vue'
+import Vue from 'vue';
+import Router from 'vue-router';
+// Auth
+import Login from './views/Login.vue';
+import Register from './views/Register.vue';
+import Dashboard from './views/Dashboard.vue';
+// Posts
+import Post from './views/Post.vue';
+import Posts from './views/Posts.vue';
+import PostForm from './views/PostForm.vue';
+// Messages
+import Message from './views/Message.vue';
+import Messages from './views/Messages.vue';
+// Notes
+import Note from './views/Note.vue';
+import Notes from './views/Notes.vue';
+import NoteForm from './views/NoteForm.vue';
+// Profiles
+import Profile from './views/Profile.vue';
+import Profiles from './views/Profiles.vue';
+import CreateProfile from './views/CreateProfile.vue';
+import EditProfile from './views/EditProfile.vue';
+// Groups
+import Group from './views/Group.vue';
+import Groups from './views/Groups.vue';
+// Documents
+import Documents from './views/Documents.vue';
+import DocumentForm from './views/DocumentForm.vue';
+// Photos
+import Photos from './views/Photos.vue';
+// Friends
+import Friends from './views/Friends.vue';
+import Subscribers from './views/Subscribers.vue';
 
 Vue.use(Router)
 
@@ -28,6 +38,23 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+    // Auth
+    {
+      path: '/login',
+      name: 'login',
+      component: Login,
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: Register,
+    },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: Dashboard,
+    },
+    // Posts
     {
       path: '/',
       name: 'posts',
@@ -44,42 +71,19 @@ export default new Router({
       props: true,
       component: Post,
     },
-    {
-      path: '/friends',
-      name: 'friends',
-      component: Friends,
-    },
-    {
-      path: '/subscribers',
-      name: 'subscribers',
-      component: Subscribers,
-    },
+    // Messages
     {
       path: '/messages',
       name: 'messages',
       component: Messages,
     },
     {
-      path: '/photos',
-      name: 'photos',
-      component: Photos,
-    },
-    {
-      path: '/groups',
-      name: 'groups',
-      component: Groups,
-    },
-    {
-      path: '/groups/:id',
-      name: 'group',
+      path: '/messages/:id',
+      name: 'message',
       props: true,
-      component: Group,
+      component: Message,
     },
-    {
-      path: '/documents',
-      name: 'documents',
-      component: Documents,
-    },
+    // Notes 
     {
       path: '/notes',
       name: 'notes',
@@ -96,21 +100,7 @@ export default new Router({
       props: true,
       component: Note,
     },
-    {
-      path: '/register',
-      name: 'register',
-      component: Register,
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: Login,
-    },
-    {
-      path: '/dashboard',
-      name: 'dashboard',
-      component: Dashboard,
-    },
+    // Profiles
     {
       path: '/create-profile',
       name: 'createProfile',
@@ -132,11 +122,47 @@ export default new Router({
       props: true,
       component: Profile,
     },
+    // Groups
     {
-      path: '/messages/:id',
-      name: 'message',
-      props: true,
-      component: Message,
+      path: '/groups',
+      name: 'groups',
+      component: Groups,
     },
+    {
+      path: '/groups/:id',
+      name: 'group',
+      props: true,
+      
+      component: Group,
+    },
+    // Documents
+    {
+      path: '/documents',
+      name: 'documents',
+      component: Documents,
+    },
+    {
+      path: '/document-form',
+      name: 'documentForm',
+      component: DocumentForm
+    },
+    // Photos 
+    {
+      path: '/photos',
+      name: 'photos',
+      component: Photos,
+    },
+    // Friends
+    {
+      path: '/friends',
+      name: 'friends',
+      component: Friends,
+    },
+    {
+      path: '/subscribers',
+      name: 'subscribers',
+      component: Subscribers,
+    },
+    
   ]
 })

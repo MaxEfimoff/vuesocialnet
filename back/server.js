@@ -3,12 +3,18 @@ const cors = require('cors')
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const fs = require('fs');
+const path = require('path');
+const methodOverride = require('method-override');
+
+
 
 // Routes
 const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
 const posts = require('./routes/api/posts');
 const notes = require('./routes/api/notes');
+const documents = require('./routes/api/documents');
 const messages = require('./routes/api/messages');
 const groups = require('./routes/api/groups');
 
@@ -17,19 +23,20 @@ const app = express();
 // Body parser middleware
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(methodOverride('_method'));
+
 
 // DB config
 const db = require("./config/keys").mongoURI;
 
 // Connect to Mongodb
-mongoose.connect(db)
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.log(err));
+mongoose.connect(db);
 
 // Passport middleware
 app.use(passport.initialize());
 
 app.use(cors());
+app.use('/static',express.static(path.join(__dirname, 'static')));
 
 // Passport Config
 require('./config/passport')(passport);
@@ -39,6 +46,7 @@ app.use('/api/users', users);
 app.use('/api/profile', profile);
 app.use('/api/posts', posts);
 app.use('/api/notes', notes);
+app.use('/api/documents', documents);
 app.use('/api/messages', messages);
 app.use('/api/groups', groups);
 

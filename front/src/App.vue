@@ -137,6 +137,18 @@ span, li, i {
   font-size: 0.8rem;
 }
 
+.input-file {
+    opacity: 0;
+    width: 100%;
+    height: 10rem;
+    position: absolute;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+  }
+
 .white-font {
   color: #fff;
   text-shadow: 1px 1px 2px #333;
