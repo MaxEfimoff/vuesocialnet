@@ -15,7 +15,7 @@ function getDocuments({ commit }) {
 
 function getDocumentById({ commit }, id) {
   return new Promise((resolve, reject) => {
-    axios.get(`http://localhost:5000/api/Documents/${id}`)
+    axios.get(`http://localhost:5000/api/documents/${id}`)
     .then((response) => {
       commit('SET_DOCUMENT', response.data);
       resolve();
@@ -40,7 +40,7 @@ function addDocument({ commit }, formData) {
 function deleteDocument({ commit }, id) {
   axios.delete(`http://localhost:5000/api/Documents/${id}`)
     .then((response) => {
-      commit('DELETE_Document', id);
+      commit('DELETE_DOCUMENT', id);
     })
     .catch(error => console.log(error)
     );

@@ -5,6 +5,7 @@ import profile from './profile';
 import groups from './groups';
 import posts from './posts';
 import notes from './notes';
+import photos from './photos';
 import documents from './documents';
 import messages from './messages';
 import friends from './friends';
@@ -25,7 +26,8 @@ export default function () {
       messages,
       errors,
       friends,
-      documents
+      documents,
+      photos
     },
     strict: process.env.DEV
   })

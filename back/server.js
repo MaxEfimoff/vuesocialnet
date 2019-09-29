@@ -14,6 +14,7 @@ const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
 const posts = require('./routes/api/posts');
 const notes = require('./routes/api/notes');
+const photos = require('./routes/api/photos');
 const documents = require('./routes/api/documents');
 const messages = require('./routes/api/messages');
 const groups = require('./routes/api/groups');
@@ -47,6 +48,7 @@ app.use('/api/profile', profile);
 app.use('/api/posts', posts);
 app.use('/api/notes', notes);
 app.use('/api/documents', documents);
+app.use('/api/photos', photos);
 app.use('/api/messages', messages);
 app.use('/api/groups', groups);
 

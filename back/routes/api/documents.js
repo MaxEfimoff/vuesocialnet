@@ -11,7 +11,7 @@ const Grid = require('gridfs-stream');
 // Profile model
 const Profile = require("../../db/models/Profile");
 
-// Note model
+// Document model
 const Document = require('../../db/models/Document');
 
 // Validation
@@ -103,30 +103,41 @@ router.get(
   }
 );
 
-//@route      GET api/notes/:id
-//@desc       Get note by id
+//@route      GET api/documents/:id
+//@desc       Get document by id
 //@access     Private
 
 router.get(
   "/:id",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Profile.findOne({ user: req.user.id }).then(profile => {
-      Document.findById(req.params.id)
-        .then(document => {
-          // Check for document owner
-          if (document.user.toString() !== req.user.id) {
-            return res
-              .status(401)
-              .json({ notauthorized: "User not authorized" });
-          }
+    // Profile.findOne({ user: req.user.id }).then(profile => {
+      gfs.files.findOne({id: req.params._id}, (err, file) => {
+        if(!file || file.length === 0) {
+          return res.status(404).json({
+            err: 'No file exists'
+          });
+        }
+        // Files exist
+        const readstream = gfs.createReadStream({
+          _id: req.param('id')
+      });
+        readstream.pipe(res);
+      })
+        // .then(document => {
+        //   // Check for document owner
+        //   if (document.user.toString() !== req.user.id) {
+        //     return res
+        //       .status(401)
+        //       .json({ notauthorized: "User not authorized" });
+        //   }
           
-          res.json(document);
-        })
-        .catch(err =>
-          res.status(404).json({ nodocumentfound: "No document found with this id" })
-        );
-    });
+        //   res.json(document);
+        // })
+        // .catch(err =>
+        //   res.status(404).json({ nodocumentfound: "No document found with this id" })
+        // );
+    // });
   }
 );
 

@@ -195,6 +195,15 @@ span, li, i {
   justify-content: center;
 }
 
+.flex-left {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.display-image {
+	height: 250px;
+}
+
 .navbar {
   background-color: #b1b1b1;
   height: 50px;

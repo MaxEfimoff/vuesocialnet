@@ -24,10 +24,13 @@ import EditProfile from './views/EditProfile.vue';
 import Group from './views/Group.vue';
 import Groups from './views/Groups.vue';
 // Documents
+import Document from './views/Document.vue';
 import Documents from './views/Documents.vue';
 import DocumentForm from './views/DocumentForm.vue';
 // Photos
+import Photo from './views/Photo.vue';
 import Photos from './views/Photos.vue';
+import PhotoForm from './views/PhotoForm.vue';
 // Friends
 import Friends from './views/Friends.vue';
 import Subscribers from './views/Subscribers.vue';
@@ -137,6 +140,12 @@ export default new Router({
     },
     // Documents
     {
+      path: '/documents/:id',
+      name: 'document',
+      props: true,
+      component: Document,
+    },
+    {
       path: '/documents',
       name: 'documents',
       component: Documents,
@@ -148,9 +157,20 @@ export default new Router({
     },
     // Photos 
     {
+      path: '/photos/:id',
+      name: 'photo',
+      props: true,
+      component: Photo,
+    },
+    {
       path: '/photos',
       name: 'photos',
       component: Photos,
+    },
+    {
+      path: '/photo-form',
+      name: 'photoForm',
+      component: PhotoForm
     },
     // Friends
     {

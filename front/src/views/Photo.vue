@@ -4,22 +4,26 @@
     <div class="main">
       <div class="container container-main">
         <LeftSection />
-        <Photos />
+        <Photo />
       </div>
     </div>
-  </div>
+  </div>  
 </template>
 
 <script>
 import Header from '@/components/Header.vue';
 import LeftSection from '@/components/LeftSection.vue';
-import Photos from '@/components/Photos/Photos.vue';
+import Photo from '@/components/Photo/Photo.vue';
 
 export default {
   components: {
     Header,
     LeftSection,
-    Photos
+    Photo
   }
 }
 </script>
+
+<style>
+
+</style>
