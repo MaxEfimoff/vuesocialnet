@@ -47,6 +47,33 @@ router.get('/', passport.authenticate('jwt', { session: false}), (req, res) => {
   }
 );
 
+//@route      GET api/photos/:id
+//@desc       Get photo by id
+//@access     Private
+
+router.get(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      Image.findById(req.params.id)
+        .then(image => {
+          // Check for image owner
+          if (image.user.toString() !== req.user.id) {
+            return res
+              .status(401)
+              .json({ notauthorized: "User not authorized" });
+          }
+          
+          res.json(image);
+        })
+        .catch(err =>
+          res.status(404).json({ nophotofound: "No photo found with this id" })
+        );
+    });
+  }
+);
+
 //@route      POST api/image
 //@desc       Upload image
 //@access     Private
@@ -73,20 +100,23 @@ router.post("/", passport.authenticate('jwt', { session: false}), (req, res) => 
 //@route      DELETE api/image
 //@desc       Delete image
 //@access     Private
-router.delete("/:id", (req,res) => {
-  const query= { image: req.params.id };
-  Image.remove(query, (err) => {
-    if(err){
-      console.log(err);
-    } else {
-      let $filePath= "./uploads/" + req.params.id
-      fs.unlinkSync($filePath, (err) => {
-        if(err){
-          console.log("couldnt delete " + req.params.id + " image");
-        }              
-      });
+router.delete("/:id", passport.authenticate("jwt", { session: false }), (req,res) => {
+  Profile.findOne({ user: req.user.id }).then(profile => {
+    Image.findById(req.params.id)
+    .then(image => {
+      // Check for image owner
+      if (image.user.toString() !== req.user.id) {
+        return res
+          .status(401)
+          .json({ notauthorized: "User not authorized" });
+      }
+      // Delete
+      image.remove();
+      // const filePath = `../../uploads/${req.params.id}`;
+      // fs.unlink(filePath);
       res.send("The image was deleted...");
-    }
+    })
+    .catch(err => res.status(404).json({ photonotfound: "No photo found" }));
   });
 });
 

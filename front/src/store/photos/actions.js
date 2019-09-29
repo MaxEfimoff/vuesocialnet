@@ -13,7 +13,7 @@ function getPhotos({ commit }) {
   });
 }
 
-function getPhotoById({ commit }, id) {
+function getPhoto({ commit }, id) {
   return new Promise((resolve, reject) => {
     axios.get(`http://localhost:5000/api/photos/${id}`)
     .then((response) => {
@@ -52,7 +52,7 @@ function deletePhoto({ commit }, id) {
 
 export {
   getPhotos,
-  getPhotoById,
+  getPhoto,
   addPhoto,
   deletePhoto
 };

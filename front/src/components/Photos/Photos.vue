@@ -5,17 +5,17 @@
         <router-link
           :to="{ name: 'photoForm' }"
         >
-          <button>Add a new photo</button>
+          <button>Add a photo</button>
         </router-link>
         <form action="#" class="post-new-form">
           <input type="text" placeholder="Search" />
         </form>
       </div>
       <div class="post-wrapper flex-left">
-        <div class="post"  v-for="photo in photos" :key="photo.id">
+        <div class="photo-small"  v-for="photo in photos" :key="photo.id">
           <div>
             <router-link
-              :to="`/photos/${photo.image}`"
+              :to="`/photos/${photo._id}`"
             >
               <div class="groups-photo">
                 <img class="display-image" :src=" require(`../../../../back/uploads/${photo.image}`) " alt="">
@@ -33,7 +33,7 @@ import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'photos',
-  created() {
+  mounted() {
     this.getPhotos();
   },
   computed: {

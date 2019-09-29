@@ -25,7 +25,7 @@
                 <i class="fas fa-envelope"></i>
               </a>
               <a href="/photos" class="stat-counter lefthalfpadding">
-                <div class="count">554</div>
+                <div class="count">{{ photos.length }}</div>
                 <i class="fas fa-camera"></i>
               </a>
               <a href="/groups" class="stat-counter lefthalfpadding">
@@ -33,7 +33,7 @@
                 <i class="fas fa-users"></i>
               </a>
               <a href="/documents" class="stat-counter lefthalfpadding">
-                <div class="count">13</div>
+                <div class="count">{{ documents.length }}</div>
                 <i class="fas fa-file-alt"></i>
               </a>
               <a href="/notes" class="stat-counter lefthalfpadding">
@@ -176,12 +176,16 @@ export default {
     this.getGroups();
     this.getMessages();
     this.getNotes();
+    this.getPhotos();
+    this.getDocuments();
     this.exportCurrentProfile();
   },
   methods: {
     ...mapActions("groups",['getGroups']),
     ...mapActions("messages",['getMessages']),
     ...mapActions("notes",['getNotes']),
+    ...mapActions("photos",['getPhotos']),
+    ...mapActions("documents",['getDocuments']),
     ...mapActions("profile",['exportCurrentProfile']),
     showProfile() {
       if(this.$refs.slider.classList.contains("slideup")) {
@@ -201,6 +205,8 @@ export default {
     ...mapState('groups', [ 'groups']),
     ...mapState('messages', [ 'messages']),
     ...mapState('notes', [ 'notes']),
+    ...mapState('photos', [ 'photos']),
+    ...mapState('documents', [ 'documents']),
     ...mapState('auth', [ 'user']),
     ...mapState('profile', [ 'profile']),
   },

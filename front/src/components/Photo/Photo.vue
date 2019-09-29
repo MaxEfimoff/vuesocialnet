@@ -1,20 +1,10 @@
 <template>
   <section class="section-center">
     <div class="section posts">
-      <div class="post-new padding">
-        <h3>{{ note.title }}</h3>
-      </div>
-      <div class="post-wrapper">
-        <div class="post">
-          <div class="post-author">
-              <div class="groups-photo">
-                <p>{{ note.text }}</p>
-              </div>
-              
-            <i class="fas fa-trash-alt" @click="deleteNote"></i>
+          <div class="rel">
+            <img class="display-image-large padding" :src=" require(`../../../../back/uploads/${photo.image}`) " alt="">
+            <i class="fas fa-trash-alt abs delete-photo white-font" @click="deletePhoto"></i>
           </div>
-        </div>
-      </div>
     </div>
   </section>
 </template>
@@ -23,18 +13,18 @@
 import { mapState, mapActions } from 'vuex';
 
 export default {
-  name: 'note',
+  name: 'photo',
   created() {
-    this.getNoteById(this.$route.params.id);
+    this.getPhoto(this.$route.params.id);
   },
   computed: {
-    ...mapState('notes', ['note']),
+    ...mapState('photos', ['photo']),
   },
   methods: {
-    ...mapActions("notes", ['getNoteById']),
-    deleteNote() {
-      this.$store.dispatch('notes/deleteNote', this.$route.params.id)
-      .then(() => this.$router.push({ name: 'notes' }))
+    ...mapActions("photos", ['getPhoto', 'deletePhoto']),
+    deletePhoto() {
+      this.$store.dispatch('photos/deletePhoto', this.$route.params.id)
+      // .then(() => this.$router.push({ name: 'photos' }))
       .catch((error) => {console.log(error)
     })
     }

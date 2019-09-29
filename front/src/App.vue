@@ -165,6 +165,14 @@ span, li, i {
   background-color: salmon;
 }
 
+.abs {
+  position: absolute;
+}
+
+.rel {
+  position: relative;
+}
+
 .margin {
   margin: 1rem;
 }
@@ -202,6 +210,10 @@ span, li, i {
 
 .display-image {
 	height: 250px;
+}
+
+.display-image-large{
+  width: 100%;
 }
 
 .navbar {
@@ -433,6 +445,16 @@ span, li, i {
   left: 0;
 }
 
+.delete-photo {
+  top: 2rem;
+  right: 2rem;
+}
+
+.photo-small {
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  text-align: left;
+}
+
 /* Section center */
 .section.section-center {
   padding: 0;
@@ -507,7 +529,7 @@ span, li, i {
 }
 
 .post-new-form {
-  margin: 0.7rem 1rem 0 1rem;
+  margin: 0 1rem 0 1rem;
 }
 
 .post-new-form input{
