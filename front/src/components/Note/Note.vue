@@ -7,10 +7,9 @@
       <div class="post-wrapper">
         <div class="post">
           <div class="post-author">
-              <div class="groups-photo">
-                <p>{{ note.text }}</p>
-              </div>
-              
+            <div class="groups-photo">
+              <p>{{ note.text }}</p>
+            </div>
             <i class="fas fa-trash-alt" @click="deleteNote"></i>
           </div>
         </div>

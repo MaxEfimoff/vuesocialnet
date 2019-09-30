@@ -177,6 +177,10 @@ span, li, i {
   margin: 1rem;
 }
 
+.leftmargin {
+  margin-left: 1rem;
+}
+
 .padding {
   padding: 1rem;
 }
@@ -195,6 +199,10 @@ span, li, i {
 
 .lefthalfpadding {
   padding-left: 0.5rem;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .flex {

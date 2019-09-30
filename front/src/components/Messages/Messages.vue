@@ -6,17 +6,24 @@
           <input type="text" placeholder="Search" />
         </form>
       </div>
+      <div class="post-wrapper">
         <div class="post" v-for="message in messages" :key="message.id">
-          <div class="post-author">
+          <div class="flex-left">
+              <div>
+                <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
+                <div class='text-center'>
+                  <span>{{ message.recipient }}</span>
+                </div>
+              </div>
             <router-link
-                    :to="`/messages/${message._id}`">
+              :to="`/messages/${message._id}`">
               <div class="groups-photo">
-                <img class="groups-img" src="../../assets/img/groups/02.jpg" alt="">
                 <a class="leftpadding">{{ message.text }}</a>
               </div>
             </router-link>  
           </div>
         </div>
+      </div>
     </div>
   </section>
 </template>

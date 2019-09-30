@@ -31,15 +31,22 @@
         </div>
         <div class="post-wrapper">
           <div class="post" v-for="post in posts.slice(0, 10)" :key="post.id">
-            <div class="post-author">
+            <div class="post-author flex">
+              <router-link
+                :to="`/profile/handle/${post.name}`">
+                <div>
+                  <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
+                  <div class='text-center'>
+                    <span>{{ post.name }}</span>
+                  </div>
+                </div>
+              </router-link>
               <router-link
                 :to="`/posts/${post._id}`"
               >
-              <div class="groups-photo">
-                <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
+              <div class="leftmargin">
                 <span>{{ post.text }}</span>
               </div>
-                <small>{{ post.name }}</small>
               </router-link>
             </div>
           </div>

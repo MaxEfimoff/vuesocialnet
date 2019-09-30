@@ -16,15 +16,15 @@
       </div>
       <div class="post" v-for="profile in profile.friends" :key="profile.id">
         <div class="post-author">
-            <div class="groups-photo lefthalfpadding">
+          <div class="groups-photo lefthalfpadding">
+            <router-link
+              :to="`/profile/handle/${profile.handle}`">
               <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
-              <router-link
-                :to="`/profile/handle/${profile.handle}`">
-                <div class="leftpadding">
-                  <div><a>{{ profile.handle }}</a></div>
-                </div>
-              </router-link>
-            </div>
+              <div class="text-center">
+                <div><a>{{ profile.handle }}</a></div>
+              </div>
+            </router-link>
+          </div>
         </div>
       </div>
     </div>

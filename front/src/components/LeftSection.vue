@@ -85,7 +85,7 @@
           <span>Friends online</span>  
           <div>
             <router-link
-              v-for="profile in profile.friends"
+              v-for="profile in profile.friends.slice(0, 6)"
               :key="profile.id"
               :to="`/profile/handle/${profile.handle}`"
             >
@@ -96,20 +96,6 @@
                 :title='profile.handle'
               >
             </router-link>
-          </div>
-          <div class="show-more">
-            <a><i href="#" class="fas fa-chevron-down" id="friends-showMore-info"></i></a>
-          </div> 
-          <!-- More info hidden -->
-          <div class="friends-container-slider"> 
-            <div id="friends-slider" class="friends-slideup">
-              <div>
-                <img class="friends-photo" src="../assets/img/friends/01.jpg" alt="">
-                <img class="friends-photo" src="../assets/img/friends/02.jpg" alt="">
-                <img class="friends-photo" src="../assets/img/friends/03.jpg" alt="">
-                <img class="friends-photo" src="../assets/img/friends/04.jpg" alt="">
-              </div>
-            </div>
           </div>
         </div>
         <!-- Groups -->
@@ -123,26 +109,11 @@
               </div>  
             </router-link>
           </div>
-          <div class="show-more">
-            <a><i href="#" class="fas fa-chevron-down" id="groups-showMore-info"></i></a>
-          </div>
-          <div class="groups-container-slider"> 
-            <div id="groups-slider" class="groups-slideup">
-              <div class="groups-photo">
-                <img class="groups-img" src="../assets/img/groups/03.jpg" alt="">
-                <span>Garden design </span>
-              </div>
-              <div class="groups-photo">
-                <img class="groups-img" src="../assets/img/groups/04.jpg" alt="">
-                <span>Cafe racer </span>
-              </div>
-            </div>
-          </div>
         </div>
         <!-- Photos -->
-        <div class="section photos">
+        <div class="section photos" v-if="photos.length > 0">
           <span>Photos</span>
-          <div class="photos-wrapper" v-for="photo in photos" :key="photo.id">
+          <div class="photos-wrapper" v-for="photo in photos.slice(0, 2)" :key="photo.id">
             <router-link
               :to="`/photos/${photo._id}`"
             >

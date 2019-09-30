@@ -1,10 +1,26 @@
 <template>
-<div>
-  <h3>Post Item</h3>
-  <span>{{ post.name }}</span>
-  <p>{{ post.text }}</p>
-
-</div>
+  <section class="section-center">
+    <div class="section posts">
+      <div class="post-new padding">
+        <router-link
+          :to="`/profile/handle/${post.name}`">
+          <div>
+            <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
+          </div>
+          <span>{{ post.name }}</span>
+        </router-link>
+      </div>
+      <div class="post-wrapper">
+        <div class="post">
+          <div class="post-author">
+            <div class="groups-photo">
+              <p>{{ post.text }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
