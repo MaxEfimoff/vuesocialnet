@@ -17,6 +17,8 @@ import Notes from './views/Notes.vue';
 import NoteForm from './views/NoteForm.vue';
 // Profiles
 import Profile from './views/Profile.vue';
+import ProfileFriends from './views/ProfileFriends.vue';
+import ProfilePhotos from './views/ProfilePhotos.vue';
 import Profiles from './views/Profiles.vue';
 import CreateProfile from './views/CreateProfile.vue';
 import EditProfile from './views/EditProfile.vue';
@@ -124,6 +126,16 @@ export default new Router({
       name: 'profile',
       props: true,
       component: Profile,
+    },
+    {
+      path: '/profile/handle/:handle/friends',
+      name: 'profilefriends',
+      component: ProfileFriends,
+    },
+    {
+      path: '/profile/handle/:handle/photos',
+      name: 'profilephotos',
+      component: ProfilePhotos,
     },
     // Groups
     {

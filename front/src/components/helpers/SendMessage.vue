@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit.prevent="onSubmit" class="post-new-form">
+    <form @submit.prevent="onSubmit" class="message-new-form">
         <div> 
           <textarea
             class="textarea"

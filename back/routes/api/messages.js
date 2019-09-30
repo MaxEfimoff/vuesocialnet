@@ -212,7 +212,7 @@ router.post(
           user: req.user.id
         };
         // Add to comments array
-        message.comments.unshift(newComment);
+        message.comments.push(newComment);
 
         // Save
         message.save().then(message => res.json(message));

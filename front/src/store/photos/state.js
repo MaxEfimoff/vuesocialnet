@@ -1,5 +1,5 @@
 export default {
   photos:[],
-  photo: {}
+  photo: {},
 };
 

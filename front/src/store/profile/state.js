@@ -1,6 +1,7 @@
 export default {
   profile: {},
-  profiles: [],
   anotherUserProfile: {},
+  profiles: [],
+  profilePhotos: []
 };
 

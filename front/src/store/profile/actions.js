@@ -69,6 +69,7 @@ function getProfileByHandle({ commit }, handle) {
   })
 };
 
+
 function addToFriends({ commit }, handle) {
   return new Promise((resolve, reject) => {
     axios.post(addToFriendsUrl, handle)
@@ -99,6 +100,17 @@ function deleteFromFriends({ commit }, handle) {
   });
 }
 
+function getProfilePhotos({ commit }, handle) {
+  return new Promise((resolve, reject) => {
+    axios.get(`http://localhost:5000/api/photos/handle/${handle}`)
+    .then((response) => {
+      commit('SET_PROFILE_PHOTOS', response.data);
+      resolve();
+    })
+    .catch(error => console.log(error));
+  })
+};
+
 export {
   exportCurrentProfile,
   createProfile,
@@ -106,5 +118,6 @@ export {
   getProfiles,
   getProfileByHandle,
   addToFriends,
-  deleteFromFriends
+  deleteFromFriends,
+  getProfilePhotos
 };

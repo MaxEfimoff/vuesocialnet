@@ -11,32 +11,45 @@
       </div>  
       <!-- Stats -->
       <div class="stats">
-        <a href="/friends" class="stat-counter">
+        <router-link
+          class="stat-counter"
+          :to="`${anotherUserProfile.handle}/friends/`"
+        >
           <div class="count">
-            <div class="white-font">{{ anotherUserProfile.friends.length }}</div>
+            <div v-if="anotherUserProfile.friends.length" class="white-font">{{ anotherUserProfile.friends.length }}</div>
+            <div v-else class="white-font">0</div>
           </div>
           <i class="fas fa-user white-font"></i>
-        </a>
+        </router-link>
         <!-- <a href="/subscribers" class="stat-counter lefthalfpadding">
           <div class="count">93</div>
           <i class="fas fa-user-plus"></i>
         </a> -->
-        <a href="/photos" class="stat-counter lefthalfpadding">
+        <router-link
+          class="stat-counter lefthalfpadding"
+          :to="`${anotherUserProfile.handle}/photos/`"
+        >
           <div class="count">
-            <div class="white-font">
-              554
+            <div v-if="profilePhotos.length" class="white-font">
+              {{ profilePhotos.length }}
+            </div>
+            <div v-else class="white-font">
+              0
             </div>
           </div>
           <i class="fas fa-camera white-font"></i>
-        </a>
-        <a href="/groups" class="stat-counter lefthalfpadding">
+        </router-link>
+        <router-link
+          class="stat-counter lefthalfpadding"
+          :to="`${anotherUserProfile.handle}/groups/`"
+        >
           <div class="count">
             <div class="white-font">
               41
             </div>
           </div>
           <i class="fas fa-users white-font"></i>
-        </a>
+        </router-link>
       </div>
       <div class="flex">
         <div class="padding" v-if="!this.alreadyFriend">
@@ -75,6 +88,7 @@ import SendMessage from'@/components/helpers/SendMessage.vue'
 export default {
   name: 'Profile',
   mounted() {
+    this.getProfilePhotos(this.$route.params.handle);
     this.getProfileByHandle(this.$route.params.handle);
     this.getGroups();
     this.getMessages();
@@ -82,7 +96,7 @@ export default {
   },
   
   computed: {
-    ...mapState('profile', ['profiles','anotherUserProfile','profile' ]),
+    ...mapState('profile', ['profiles','anotherUserProfile','profile', 'profilePhotos' ]),
     ...mapState('errors', ['errors']),
     alreadyFriend() {
       const friends = this.$store.state.profile.profile.friends;
@@ -92,7 +106,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions("profile", ['getProfileByHandle', 'exportCurrentProfile']),
+    ...mapActions("profile", ['getProfileByHandle', 'exportCurrentProfile', 'getProfilePhotos']),
     ...mapActions("groups",['getGroups']),
     ...mapActions("messages",['getMessages']),
     onChange(newFormData) {

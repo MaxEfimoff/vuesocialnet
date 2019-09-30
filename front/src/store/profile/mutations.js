@@ -18,10 +18,15 @@ function getAnotherUserProfile(state, anotherUserProfile) {
   state.anotherUserProfile = anotherUserProfile;
 }
 
+function SET_PROFILE_PHOTOS (state, photos) {
+  state.profilePhotos = photos;
+}
+
 export {
   getProfile,
   resetProfile,
   setProfile,
   SET_PROFILES,
-  getAnotherUserProfile
+  getAnotherUserProfile,
+  SET_PROFILE_PHOTOS
 };

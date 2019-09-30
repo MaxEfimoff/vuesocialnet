@@ -532,6 +532,10 @@ span, li, i {
   margin: 0 1rem 0 1rem;
 }
 
+.message-new-form {
+  margin: 0.8rem 1rem 0 1rem;
+}
+
 .post-new-form input{
   width: 20rem;
   padding-right: 1rem;

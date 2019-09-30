@@ -64,7 +64,7 @@ export default {
         formData: this.formData
       }
       this.$store.dispatch('messages/addComment', payload)
-      // .then(this.reset())
+      .then(this.formData = {})
       .catch((error) => {console.log(error)
       })
     },

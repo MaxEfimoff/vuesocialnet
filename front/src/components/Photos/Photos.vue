@@ -5,7 +5,7 @@
         <router-link
           :to="{ name: 'photoForm' }"
         >
-          <button>Add a photo</button>
+          <button>Add new photo</button>
         </router-link>
         <form action="#" class="post-new-form">
           <input type="text" placeholder="Search" />

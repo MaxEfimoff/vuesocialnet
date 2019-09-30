@@ -50,7 +50,6 @@ router.get('/', passport.authenticate('jwt', { session: false}), (req, res) => {
 //@route      GET api/photos/:id
 //@desc       Get photo by id
 //@access     Private
-
 router.get(
   "/:id",
   passport.authenticate("jwt", { session: false }),
@@ -58,18 +57,30 @@ router.get(
     Profile.findOne({ user: req.user.id }).then(profile => {
       Image.findById(req.params.id)
         .then(image => {
-          // Check for image owner
-          if (image.user.toString() !== req.user.id) {
-            return res
-              .status(401)
-              .json({ notauthorized: "User not authorized" });
-          }
-          
           res.json(image);
         })
         .catch(err =>
           res.status(404).json({ nophotofound: "No photo found with this id" })
         );
+    });
+  }
+);
+
+//@route      GET api/photos
+//@desc       Show photos
+//@access     Private
+router.get('/handle/:handle/', passport.authenticate('jwt', { session: false}), (req, res) => {
+  Profile.findOne({ handle: req.params.handle })
+    .populate("user", ["name", "avatar"])
+    .then(profile => {
+    Image.find()
+      .sort({ date: -1 })
+      .then(images =>
+        res.json(images.filter(image => image.user.toString() === profile.user._id.toString()))
+      )
+      .catch(err =>
+        res.status(404).json({ nophotofound: "No photos found" })
+      );
     });
   }
 );
