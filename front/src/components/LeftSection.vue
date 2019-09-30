@@ -142,27 +142,16 @@
         <!-- Photos -->
         <div class="section photos">
           <span>Photos</span>
-          <div class="photos-wrapper">
-            <div class="photos-photo">
-              <img class="photo-img" src="../assets/../assets/img/photos/01.jpg" alt="">
-              <span>Formula 1 </span>
-            </div> 
-            <div class="photos-photo">
-              <img class="photo-img" src="../assets/img/photos/02.jpg" alt="">
-              <span>Canyon bikes </span>
-            </div>
-          </div>
-          <div class="show-more">
-            <a><i href="#" class="fas fa-chevron-down" id="photos-showMore-info"></i></a>
-          </div>
-          <div class="photos-container-slider"> 
-            <div id="photos-slider" class="photos-slideup">
+          <div class="photos-wrapper" v-for="photo in photos" :key="photo.id">
+            <router-link
+              :to="`/photos/${photo._id}`"
+            >
               <div class="photos-photo">
-                <img class="photo-img" src="../assets/img/photos/01.jpg" alt="">
-                <span>Formula 1 </span>
-              </div> 
-            </div>
-          </div> 
+                <img class="photo-img" :src=" require(`../../../back/uploads/${photo.image}`) " alt="">
+                <span>TODO: Photo description</span>
+              </div>
+            </router-link>
+          </div>
         </div>
       </section>
 </template>

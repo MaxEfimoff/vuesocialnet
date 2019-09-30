@@ -12,7 +12,7 @@
         </form>
       </div>
       <div class="post-wrapper flex-left">
-        <div class="photo-small"  v-for="photo in photos" :key="photo.id">
+        <div class="photo-small" v-for="photo in photos" :key="photo.id">
           <div>
             <router-link
               :to="`/photos/${photo._id}`"
