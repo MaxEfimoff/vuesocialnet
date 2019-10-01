@@ -1,10 +1,10 @@
-// Note Schema
+// Document Schema
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
 const DocumentSchema = new Schema({
-  // User is associated with the Todo
+  // User is associated with the document
   user: {
     type: Schema.Types.ObjectId,
     ref: "users"
@@ -13,7 +13,6 @@ const DocumentSchema = new Schema({
     type: String,
     required: true
   },
-
   // Docunemt date
   date: {
     type: Date,

@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
 const passport = require("passport");
 const fs = require('fs');
 const path= require("path");
@@ -11,8 +10,6 @@ const Profile = require("../../db/models/Profile");
 
 // Image model
 const Image = require('../../db/models/Image');
-
-const db = require("../../config/keys").mongoURI;
 
 // Storage management for the file
 // that will be uploaded

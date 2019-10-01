@@ -22,7 +22,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import axios from 'axios'
+import axios from 'axios';
 
 export default {
   data() {
@@ -45,13 +45,11 @@ export default {
       const formData = new FormData();
       formData.append('file', file);
 
-      console.log(file);
       axios.post(`http://localhost:5000/api/photos`, formData, {
 				params: {
 					user: this.$store.state.profile.profile.user._id
 				}
 			})
-      // this.$store.dispatch('photos/addPhoto', formData)
       .then(() => this.$router.push({ name: 'photos' }))
       .catch((error) => {console.log(error)
       })

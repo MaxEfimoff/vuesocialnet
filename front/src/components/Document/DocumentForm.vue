@@ -22,6 +22,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import axios from 'axios';
 
 export default {
   data() {
@@ -44,11 +45,18 @@ export default {
       const formData = new FormData();
       formData.append('file', file);
 
-      console.log(file);
-      this.$store.dispatch('documents/addDocument', formData)
+      axios.post(`http://localhost:5000/api/documents`, formData, {
+				params: {
+					user: this.$store.state.profile.profile.user._id
+				}
+			})
       .then(() => this.$router.push({ name: 'documents' }))
       .catch((error) => {console.log(error)
       })
+      // this.$store.dispatch('documents/addDocument', formData)
+      // .then(() => this.$router.push({ name: 'documents' }))
+      // .catch((error) => {console.log(error)
+      // })
     },
   },
 }
