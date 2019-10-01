@@ -1,20 +1,23 @@
 <template>
   <section class="section-center">
     <div class="section posts">
-      <div class="post-new padding">
-        <router-link
-          :to="`/profile/handle/${post.name}`">
-          <div>
-            <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
-          </div>
-          <span>{{ post.name }}</span>
-        </router-link>
-      </div>
+      <PostHeader />
       <div class="post-wrapper">
-        <div class="post">
-          <div class="post-author">
-            <div class="groups-photo">
-              <p>{{ post.text }}</p>
+        <div class="post-new padding">
+          <router-link
+            :to="`/profile/handle/${post.name}`">
+            <div>
+              <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
+            </div>
+            <span>{{ post.name }}</span>
+          </router-link>
+        </div>
+        <div class="post-wrapper">
+          <div class="post">
+            <div class="post-author">
+              <div class="groups-photo">
+                <p>{{ post.text }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -25,6 +28,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import PostHeader from '../helpers/PostsHeader';
 
 export default {
   name: 'Post',
@@ -37,6 +41,9 @@ export default {
   methods: {
     ...mapActions("posts", ['getPostById']),
   },
+  components: {
+    PostHeader
+  }
 }
 </script>
 
