@@ -1,30 +1,56 @@
 <template>
   <section class="section-center">
     <div class="section posts">
-      <div class="post-new padding">
-        <h3>{{ message.recipient }}</h3>
+      <!-- Message header -->
+      <div class="message-header padding text-center">
+        <h4>{{ message.recipient }}</h4>
       </div>
+      <!-- Message and comments -->
       <div class="post-wrapper">
         <div class="post">
           <div class="post-author">
+            <div class="flex-left">
+              <div>
+                <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
+                <div class='text-center'>
+                  <span>{{ message.name }}</span>
+                </div>
+              </div>
               <div class="groups-photo">
-                <p>{{ message.text }}</p>
+                <a class="leftpadding">{{ message.text }}</a>
               </div>
-              <div class="post" v-for="comment in message.comments" :key="comment.id">
-                <p>{{ comment.name }}</p><span>{{ comment.text }}</span>
+            </div>
+            <!-- Comments -->
+            <div
+              class="message"
+              v-for="comment in message.comments"
+              :key="comment.id"
+            >
+              <div class="flex-left-nowrap">
+                <div>
+                  <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
+                  <div class='text-center'>
+                    <span>{{ comment.name }}</span>
+                  </div>
+                </div>
+                <div class="groups-photo">
+                  <a class="leftpadding">{{ comment.text }}</a>
+                </div>
               </div>
-              <form ref="text" @submit.prevent="submitForm" class="post-new-form">
-                <div class="halfpadding">
-                  <textarea
-                    class="textarea"
-                    placeholder="Coment"
-                    v-model="formData.text"
-                  />
-                </div>
-                <div class="padding">
-                  <button type="submit">Submit</button>
-                </div>
-              </form>
+            </div>
+            <!-- Comments form -->
+            <form ref="text" @submit.prevent="submitForm" class="post-new-form">
+              <div class="halfpadding">
+                <textarea
+                  class="textarea"
+                  placeholder="Coment"
+                  v-model="formData.text"
+                />
+              </div>
+              <div class="padding">
+                <button type="submit">Submit</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>

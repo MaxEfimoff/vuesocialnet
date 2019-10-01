@@ -2,7 +2,8 @@ import axios from 'axios';
 import {
   allPostsUrl,
   onePostUrl,
-  addPostUrl
+  addPostUrl,
+  myPostsUrl
 } from '../urls';
 
 function getPosts({ commit }) {
@@ -10,6 +11,16 @@ function getPosts({ commit }) {
     axios.get(allPostsUrl)  
       .then((response) => {
         commit('SET_POSTS', response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+function getMyPosts({ commit }) {
+  return new Promise((resolve, reject) => {
+    axios.get(myPostsUrl)  
+      .then((response) => {
+        commit('SET_MY_POSTS', response.data);
       })
       .catch(error => console.log(error));
   });
@@ -55,5 +66,6 @@ export {
   getPosts,
   getPost,
   getPostById,
-  addPost
+  addPost,
+  getMyPosts
 };

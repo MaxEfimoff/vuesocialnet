@@ -25,6 +25,19 @@ router.get('/', passport.authenticate("jwt", { session: false }), (req, res) => 
     .catch(err => res.status(404).json({nopostsfound: 'No posts found'}));
 })
 
+//@route      GET api/my-posts/
+//@desc       Get my posts
+//@access     Private
+router.get('/my-posts', passport.authenticate("jwt", { session: false }), (req, res) => {
+  Post
+    .find()
+    .sort({date: -1})
+    .then(posts =>
+      res.json(posts.filter(post => post.user.toString() === req.user.id))
+    )
+    .catch(err => res.status(404).json({nopostsfound: 'No posts found'}));
+})
+
 //@route      GET api/posts/:id
 //@desc       Get post by id
 //@access     Private

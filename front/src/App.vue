@@ -216,6 +216,11 @@ span, li, i {
   flex-wrap: wrap;
 }
 
+.flex-left-nowrap {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
 .display-image {
 	height: 250px;
 }
@@ -571,6 +576,18 @@ span, li, i {
 
 .post-text {
   margin-top: 0.5rem;
+}
+
+/* Messages */
+.message-header {
+  width: 100%;
+  border-bottom: 1px solid #eee;
+}
+
+.message {
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 1rem 0.5rem 1rem;
 }
 
 /* Transitions */

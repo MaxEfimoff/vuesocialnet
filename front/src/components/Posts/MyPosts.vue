@@ -30,7 +30,7 @@
           </form>
         </div>
         <div class="post-wrapper">
-          <div class="post" v-for="post in posts.slice(0, 10)" :key="post.id">
+          <div class="post" v-for="post in myposts.slice(0, 10)" :key="post.id">
             <div class="post-author flex">
               <router-link
                 :to="`/profile/handle/${post.name}`">
@@ -74,15 +74,15 @@ import { mapState, mapActions } from 'vuex';
 export default {
   name: 'Posts',
   created() {
-    this.getPosts();
+    this.getMyPosts();
   },
   computed: {
     ...mapState('profile', ['profile']),
-    ...mapState('posts', ['posts']),
+    ...mapState('posts', ['myposts']),
     ...mapState('auth', ['user']),
   },
   methods: {
-    ...mapActions("posts", ['getPosts']),
+    ...mapActions("posts", ['getMyPosts']),
   },
 }
 </script>
