@@ -19,6 +19,7 @@ const allProfilesUrl = `${serverUrl}/api/profile/all`;
 const addPostUrl = `${serverUrl}/api/posts`;
 const allPostsUrl = `${serverUrl}/api/posts/`;
 const myPostsUrl = `${serverUrl}/api/posts/my-posts`;
+const friendsPostsUrl = `${serverUrl}/api/posts/friends-posts`;
 // Notes
 const addNoteUrl = `${serverUrl}/api/notes`;
 const allNotesUrl = `${serverUrl}/api/notes/`;
@@ -64,6 +65,7 @@ export {
   allDocumentsUrl,
   addPhotoUrl,
   allPhotosUrl,
-  myPostsUrl
+  myPostsUrl,
+  friendsPostsUrl
   // profileByHandleUrl
 };

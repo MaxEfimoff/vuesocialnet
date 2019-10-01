@@ -8,6 +8,7 @@ import Dashboard from './views/Dashboard.vue';
 import Post from './views/Post.vue';
 import Posts from './views/Posts.vue';
 import MyPosts from './views/MyPosts.vue';
+import FriendsPosts from './views/FriendsPosts.vue';
 import PostForm from './views/PostForm.vue';
 // Messages
 import Message from './views/Message.vue';
@@ -70,6 +71,11 @@ export default new Router({
       path: '/my-posts',
       name: 'my-posts',
       component: MyPosts
+    },
+    {
+      path: '/friends-posts',
+      name: 'friends-posts',
+      component: FriendsPosts
     },
     {
       path: '/post-form',

@@ -8,7 +8,7 @@
               <router-link to="/my-posts">My Posts</router-link>
             </li>
             <li>
-              <a href="">Friends Posts</a>
+              <router-link to="/friends-posts">Friends Posts</router-link>
             </li>
             <li>
               <a href="">Recommended</a>

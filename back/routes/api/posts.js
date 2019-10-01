@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 const passport = require('passport');
 
 // Post model
@@ -33,9 +32,37 @@ router.get('/my-posts', passport.authenticate("jwt", { session: false }), (req, 
     .find()
     .sort({date: -1})
     .then(posts =>
-      res.json(posts.filter(post => post.user.toString() === req.user.id))
+      res.json(posts.filter(post => 
+        post.user.toString() === req.user.id
+      ))
     )
     .catch(err => res.status(404).json({nopostsfound: 'No posts found'}));
+})
+
+//@route      GET api/friends-posts/
+//@desc       Get friends posts
+//@access     Private
+router.get('/friends-posts', passport.authenticate("jwt", { session: false }), (req, res) => {
+  Profile.findOne({ user: req.user.id })
+    .then(profile => {
+      Post
+        .find()
+        .sort({date: -1})
+        .then(posts =>
+          res.json(posts.filter(post => 
+            profile.friends.map(a => a.handle).includes(post.name))
+            // Array of user's friends handles
+            // let handles = profile.friends.map(a => a.handle);
+
+            // Check if author of the post is in this array
+            // Then if author of the post is user's friend
+            // Show this post
+            // handles.includes(post.name);
+            // console.log(handles.includes(post.name))
+          )
+        )
+        .catch(err => res.status(404).json({nopostsfound: 'No posts found'}));
+  })
 })
 
 //@route      GET api/posts/:id

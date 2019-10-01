@@ -3,7 +3,8 @@ import {
   allPostsUrl,
   onePostUrl,
   addPostUrl,
-  myPostsUrl
+  myPostsUrl,
+  friendsPostsUrl
 } from '../urls';
 
 function getPosts({ commit }) {
@@ -21,6 +22,16 @@ function getMyPosts({ commit }) {
     axios.get(myPostsUrl)  
       .then((response) => {
         commit('SET_MY_POSTS', response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+function getFriendsPosts({ commit }) {
+  return new Promise((resolve, reject) => {
+    axios.get(friendsPostsUrl)  
+      .then((response) => {
+        commit('SET_FRIENDS_POSTS', response.data);
       })
       .catch(error => console.log(error));
   });
@@ -67,5 +78,6 @@ export {
   getPost,
   getPostById,
   addPost,
-  getMyPosts
+  getMyPosts,
+  getFriendsPosts
 };
