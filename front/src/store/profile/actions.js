@@ -111,6 +111,17 @@ function getProfilePhotos({ commit }, handle) {
   })
 };
 
+function getProfilePosts({ commit }, handle) {
+  return new Promise((resolve, reject) => {
+    axios.get(`http://localhost:5000/api/posts/handle/${handle}`)
+    .then((response) => {
+      commit('SET_PROFILE_POSTS', response.data);
+      resolve();
+    })
+    .catch(error => console.log(error));
+  })
+};
+
 export {
   exportCurrentProfile,
   createProfile,
@@ -119,5 +130,6 @@ export {
   getProfileByHandle,
   addToFriends,
   deleteFromFriends,
-  getProfilePhotos
+  getProfilePhotos,
+  getProfilePosts
 };

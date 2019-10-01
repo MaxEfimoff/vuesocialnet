@@ -78,6 +78,29 @@
         :onSubmit="submitForm"
         @change="onChange"
       />
+      <div class="post-wrapper">
+        <div class="post" v-for="post in profilePosts.slice(0, 10)" :key="post.id">
+          <div class="post-author flex">
+            <router-link
+              :to="`/profile/handle/${post.name}`"
+            >
+              <div>
+                <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
+                <div class='text-center'>
+                  <span>{{ post.name }}</span>
+                </div>
+              </div>
+            </router-link>
+            <router-link
+              :to="`/posts/${post._id}`"
+            >
+              <div class="leftmargin">
+                <span>{{ post.text }}</span>
+              </div>
+            </router-link>
+          </div>
+        </div>
+      </div>
   </div>
 </template>
 
@@ -89,6 +112,7 @@ export default {
   name: 'Profile',
   mounted() {
     this.getProfilePhotos(this.$route.params.handle);
+    this.getProfilePosts(this.$route.params.handle);
     this.getProfileByHandle(this.$route.params.handle);
     this.getGroups();
     this.getMessages();
@@ -96,7 +120,7 @@ export default {
   },
   
   computed: {
-    ...mapState('profile', ['profiles','anotherUserProfile','profile', 'profilePhotos' ]),
+    ...mapState('profile', ['profiles','anotherUserProfile','profile', 'profilePhotos', 'profilePosts' ]),
     ...mapState('errors', ['errors']),
     alreadyFriend() {
       const friends = this.$store.state.profile.profile.friends;
@@ -106,7 +130,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions("profile", ['getProfileByHandle', 'exportCurrentProfile', 'getProfilePhotos']),
+    ...mapActions("profile", ['getProfileByHandle', 'exportCurrentProfile', 'getProfilePhotos', 'getProfilePosts']),
     ...mapActions("groups",['getGroups']),
     ...mapActions("messages",['getMessages']),
     onChange(newFormData) {

@@ -2,6 +2,7 @@ export default {
   profile: {},
   anotherUserProfile: {},
   profiles: [],
-  profilePhotos: []
+  profilePhotos: [],
+  profilePosts: []
 };
 

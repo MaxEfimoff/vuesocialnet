@@ -12,34 +12,48 @@
             </div>  
             <!-- Stats -->
             <div class="stats">
-              <a href="/friends" class="stat-counter">
+              <router-link
+                class="stat-counter"
+                :to="`/friends`"
+              >
                 <div class="count">{{ profile.friends.length }}</div>
                 <i class="fas fa-user"></i>
-              </a>
-              <!-- <a href="/subscribers" class="stat-counter lefthalfpadding">
-                <div class="count">93</div>
-                <i class="fas fa-user-plus"></i> 
-              </a>-->
-              <a href="/messages" class="stat-counter lefthalfpadding">
+              </router-link> 
+              <router-link
+                class="stat-counter lefthalfpadding"
+                :to="`/messages`"
+              >
                 <div class="count">{{ messages.length }}</div>
                 <i class="fas fa-envelope"></i>
-              </a>
-              <a href="/photos" class="stat-counter lefthalfpadding">
+              </router-link> 
+              <router-link
+                class="stat-counter lefthalfpadding"
+                :to="`/photos`"
+              >
                 <div class="count">{{ photos.length }}</div>
                 <i class="fas fa-camera"></i>
-              </a>
-              <a href="/groups" class="stat-counter lefthalfpadding">
+              </router-link> 
+              <router-link
+                class="stat-counter lefthalfpadding"
+                :to="`/groups`"
+              >
                 <div class="count">{{ groups.length }}</div>
                 <i class="fas fa-users"></i>
-              </a>
-              <a href="/documents" class="stat-counter lefthalfpadding">
+              </router-link> 
+              <router-link
+                class="stat-counter lefthalfpadding"
+                :to="`/documents`"
+              >
                 <div class="count">{{ documents.length }}</div>
                 <i class="fas fa-file-alt"></i>
-              </a>
-              <a href="/notes" class="stat-counter lefthalfpadding">
+              </router-link> 
+              <router-link
+                class="stat-counter lefthalfpadding"
+                :to="`/notes`"
+              >
                 <div class="count">{{ notes.length }}</div>
                 <i class="fas fa-sticky-note"></i>
-              </a>
+              </router-link> 
             </div>
             <div class="edit-profile halfpadding">
               <router-link :to="{ name: 'dashboard' }">Dashboard</router-link>
@@ -82,7 +96,11 @@
         </div>
         <!-- Friends -->
         <div class="section friends">
-          <span>Friends online</span>  
+          <router-link
+            :to="`/friends`"
+          >
+            <span>Friends</span>
+          </router-link> 
           <div>
             <router-link
               v-for="profile in profile.friends.slice(0, 6)"
@@ -100,7 +118,11 @@
         </div>
         <!-- Groups -->
         <div class="section groups">
-          <span>Groups</span>
+          <router-link
+            :to="`/groups`"
+          >
+            <span>Groups</span>
+          </router-link>
           <div class="groups-wrapper" v-for="group in groups" :key="group.id">
             <router-link :to="`/groups/${group._id}`">
               <div class="groups-photo">
@@ -112,7 +134,11 @@
         </div>
         <!-- Photos -->
         <div class="section photos" v-if="photos.length > 0">
-          <span>Photos</span>
+          <router-link
+            :to="`/photos`"
+          >
+            <span>Photos</span>
+          </router-link>
           <div class="photos-wrapper" v-for="photo in photos.slice(0, 2)" :key="photo.id">
             <router-link
               :to="`/photos/${photo._id}`"

@@ -22,11 +22,16 @@ function SET_PROFILE_PHOTOS (state, photos) {
   state.profilePhotos = photos;
 }
 
+function SET_PROFILE_POSTS (state, posts) {
+  state.profilePosts = posts;
+}
+
 export {
   getProfile,
   resetProfile,
   setProfile,
   SET_PROFILES,
   getAnotherUserProfile,
-  SET_PROFILE_PHOTOS
+  SET_PROFILE_PHOTOS,
+  SET_PROFILE_POSTS
 };

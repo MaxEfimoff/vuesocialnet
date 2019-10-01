@@ -197,4 +197,23 @@ router.delete(
   }
 );
 
+//@route      GET api/posts
+//@desc       Show user's posts
+//@access     Private
+router.get('/handle/:handle/', passport.authenticate('jwt', { session: false}), (req, res) => {
+  Profile.findOne({ handle: req.params.handle })
+    .populate("user", ["name", "avatar"])
+    .then(profile => {
+    Post.find()
+      .sort({ date: -1 })
+      .then(posts =>
+        res.json(posts.filter(post => post.user.toString() === profile.user._id.toString()))
+      )
+      .catch(err =>
+        res.status(404).json({ nophotofound: "No posts found" })
+      );
+    });
+  }
+);
+
 module.exports = router;
