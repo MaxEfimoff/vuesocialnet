@@ -19,6 +19,10 @@
                 <p>{{ post.text }}</p>
               </div>
             </div>
+            <i class="fas fa-thumbs-up" @click="addLike"></i>{{' '}}<span>{{ post.likes.length }}</span>
+            <div class="error-message">
+              {{this.errors.alreadyliked}}
+            </div>
           </div>
         </div>
         <!-- Comments -->
@@ -78,9 +82,14 @@ export default {
   },
   computed: {
     ...mapState('posts', ['post']),
+    ...mapState('errors', ['errors']),
   },
   methods: {
     ...mapActions("posts", ['getPostById']),
+    addLike() {
+      this.$store.dispatch('posts/addLike', this.$route.params.id)
+      .catch((error) => {console.log(error)})
+    },
     submitForm() {
       const payload = {
         postId: this.$route.params.id,
@@ -88,8 +97,7 @@ export default {
       }
       this.$store.dispatch('posts/addComment', payload)
       .then(this.formData = {})
-      .catch((error) => {console.log(error)
-      })
+      .catch((error) => {console.log(error)})
     },
   },
   components: {

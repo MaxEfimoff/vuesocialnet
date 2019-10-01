@@ -70,12 +70,25 @@ function getPostById({ commit }, id) {
       resolve();
     })
     .catch(error => console.log(error));
-  })
-};
+  });
+}
 
 function addComment({ commit }, payload) {
   return new Promise((resolve, reject) => {
     axios.post(`http://localhost:5000/api/posts/comment/${payload.postId}`, payload.formData)
+      .then((response) => {
+        commit('SET_POST', response.data);
+        resolve();
+      })
+      .catch(error => {
+        console.log(error)
+      });
+  });
+}
+
+function addLike({ commit }, id) {
+  return new Promise((resolve, reject) => {
+    axios.post(`http://localhost:5000/api/posts/like/${id}`)
       .then((response) => {
         commit('SET_POST', response.data);
         resolve();
@@ -93,5 +106,6 @@ export {
   addPost,
   getMyPosts,
   getFriendsPosts,
-  addComment
+  addComment,
+  addLike
 };
