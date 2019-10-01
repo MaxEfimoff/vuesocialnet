@@ -73,11 +73,25 @@ function getPostById({ commit }, id) {
   })
 };
 
+function addComment({ commit }, payload) {
+  return new Promise((resolve, reject) => {
+    axios.post(`http://localhost:5000/api/posts/comment/${payload.postId}`, payload.formData)
+      .then((response) => {
+        commit('SET_POST', response.data);
+        resolve();
+      })
+      .catch(error => {
+        console.log(error)
+      });
+  });
+}
+
 export {
   getPosts,
   getPost,
   getPostById,
   addPost,
   getMyPosts,
-  getFriendsPosts
+  getFriendsPosts,
+  addComment
 };

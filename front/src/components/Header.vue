@@ -18,9 +18,9 @@
               </span>
             </router-link>
             <router-link
-              :to="{ name: 'dashboard' }">
+              :to="{ name: 'posts' }">
               <!-- <img :src=" require (`${user.avatar}`) " alt=""> -->
-              <span>Dashboard</span>
+              <span>Posts</span>
             </router-link>
             <a @click="logout">
               <span class="padding">Logout</span>

@@ -11,9 +11,6 @@
               <router-link to="/friends-posts">Friends Posts</router-link>
             </li>
             <li>
-              <a href="">Recommended</a>
-            </li>
-            <li>
               <a href="">Liked</a>
             </li>
           </ul>

@@ -21,6 +21,37 @@
             </div>
           </div>
         </div>
+        <!-- Comments -->
+            <div
+              class="message"
+              v-for="comment in post.comments"
+              :key="comment.id"
+            >
+              <div class="flex-left-nowrap">
+                <div>
+                  <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
+                  <div class='text-center'>
+                    <span>{{ comment.name }}</span>
+                  </div>
+                </div>
+                <div class="groups-photo">
+                  <a class="leftpadding">{{ comment.text }}</a>
+                </div>
+              </div>
+            </div>
+            <!-- Comments form -->
+            <form ref="text" @submit.prevent="submitForm" class="post-new-form">
+              <div class="halfpadding">
+                <textarea
+                  class="textarea"
+                  placeholder="Coment"
+                  v-model="formData.text"
+                />
+              </div>
+              <div class="padding">
+                <button type="submit">Submit</button>
+              </div>
+            </form>
       </div>
     </div>
   </section>
@@ -32,6 +63,16 @@ import PostHeader from '../helpers/PostsHeader';
 
 export default {
   name: 'Post',
+  data() {
+    return {
+      formData: {
+        text: '',
+        name: this.$store.state.profile.profile.user.name,
+        // avatar: this.$store.state.profile.profile.avatar
+      },
+      tab: 'text',
+    };
+  },
   created() {
     this.getPostById(this.$route.params.id);
   },
@@ -40,6 +81,16 @@ export default {
   },
   methods: {
     ...mapActions("posts", ['getPostById']),
+    submitForm() {
+      const payload = {
+        postId: this.$route.params.id,
+        formData: this.formData
+      }
+      this.$store.dispatch('posts/addComment', payload)
+      .then(this.formData = {})
+      .catch((error) => {console.log(error)
+      })
+    },
   },
   components: {
     PostHeader
