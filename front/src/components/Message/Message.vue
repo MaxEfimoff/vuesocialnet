@@ -81,9 +81,6 @@ export default {
   },
   methods: {
     ...mapActions("messages", ['getMessageById']),
-    // reset() {
-    //   this.$refs.text.reset()
-    // },
     submitForm() {
       const payload = {
         messageId: this.$route.params.id,

@@ -128,4 +128,38 @@ router.delete("/:id", passport.authenticate("jwt", { session: false }), (req,res
   });
 });
 
+//@route      POST api/photos/comment/:id
+//@desc       Add a comment
+//@access     Private
+router.post(
+  "/comment/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    // const { errors, isValid } = validatePostInput(req.body);
+
+    // // Check validation
+    // if (!isValid) {
+    //   // If any errors, send 400 with errors object
+    //   return res.status(400).json(errors);
+    // }
+
+    Image.findById(req.params.id)
+      .then(image => {
+        const newComment = {
+          text: req.body.text,
+          name: req.body.name,
+          avatar: req.body.avatar,
+          user: req.user.id
+        };
+
+        // Add to comments array
+        image.comments.push(newComment);
+
+        // Save
+        image.save().then(image => res.json(image));
+      })
+      .catch(err => res.status(404).json({ imagenotfound: "No image found" }));
+  }
+);
+
 module.exports = router;

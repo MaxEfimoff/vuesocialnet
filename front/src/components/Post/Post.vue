@@ -22,36 +22,36 @@
           </div>
         </div>
         <!-- Comments -->
-            <div
-              class="message"
-              v-for="comment in post.comments"
-              :key="comment.id"
-            >
-              <div class="flex-left-nowrap">
-                <div>
-                  <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
-                  <div class='text-center'>
-                    <span>{{ comment.name }}</span>
-                  </div>
-                </div>
-                <div class="groups-photo">
-                  <a class="leftpadding">{{ comment.text }}</a>
-                </div>
+        <div
+          class="message"
+          v-for="comment in post.comments"
+          :key="comment.id"
+        >
+          <div class="flex-left-nowrap">
+             <div>
+              <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
+              <div class='text-center'>
+                <span>{{ comment.name }}</span>
               </div>
             </div>
-            <!-- Comments form -->
-            <form ref="text" @submit.prevent="submitForm" class="post-new-form">
-              <div class="halfpadding">
-                <textarea
-                  class="textarea"
-                  placeholder="Coment"
-                  v-model="formData.text"
-                />
-              </div>
-              <div class="padding">
-                <button type="submit">Submit</button>
-              </div>
-            </form>
+            <div class="groups-photo">
+              <a class="leftpadding">{{ comment.text }}</a>
+            </div>
+          </div>
+        </div>
+        <!-- Comments form -->
+        <form ref="text" @submit.prevent="submitForm" class="post-new-form">
+          <div class="halfpadding">
+            <textarea
+              class="textarea"
+              placeholder="Coment"
+              v-model="formData.text"
+            />
+          </div>
+          <div class="padding">
+            <button type="submit">Submit</button>
+          </div>
+        </form>
       </div>
     </div>
   </section>

@@ -50,9 +50,23 @@ function deletePhoto({ commit }, id) {
     );
 };
 
+function addComment({ commit }, payload) {
+  return new Promise((resolve, reject) => {
+    axios.post(`http://localhost:5000/api/photos/comment/${payload.photoId}`, payload.formData)
+      .then((response) => {
+        commit('SET_PHOTO', response.data);
+        resolve();
+      })
+      .catch(error => {
+        console.log(error)
+      });
+  });
+}
+
 export {
   getPhotos,
   getPhoto,
   addPhoto,
-  deletePhoto
+  deletePhoto,
+  addComment
 };
