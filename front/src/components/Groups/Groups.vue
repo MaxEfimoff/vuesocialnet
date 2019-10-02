@@ -10,7 +10,11 @@
                 <a href="">Group online</a>
               </li>
             </ul>
-            <button>Create new group</button>
+            <router-link
+              :to="`/groups/create-group`"
+            >
+              <button>Create new group</button>
+            </router-link>
             <form action="#" class="post-new-form">
               <input type="text" placeholder="Group search" />
             </form>

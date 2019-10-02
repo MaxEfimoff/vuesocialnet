@@ -2,6 +2,7 @@ import axios from 'axios';
 import {
   allGroupsUrl,
   oneGroupUrl,
+  createGroupUrl
 } from '../urls';
 
 function getGroups({ commit }) {
@@ -22,6 +23,20 @@ function getGroup({ commit }, id) {
         resolve();
       })
       .catch(error => console.log(error));
+  });
+}
+
+function createGroup({ commit }, data) {
+  return new Promise((resolve, reject) => {
+    axios.post(createGroupUrl, data)
+      .then((response) => {
+        commit('SET_GROUP', response.data);
+        resolve();
+      })
+      .catch(error => {
+        commit('errors/setErrors', error.response.data, { root: true });
+        console.log(error)
+      });
   });
 }
 
@@ -67,5 +82,6 @@ export {
   getGroup,
   getGroupPost,
   addGroupPostLike,
-  addPostComment
+  addPostComment,
+  createGroup
 };
