@@ -41,7 +41,7 @@ function getPost({ commit }, index) {
   return new Promise((resolve, reject) => {
     axios.get(onePostUrl, { id: index })
       .then((response) => {
-        commit('setPost', response.data.data);
+        commit('SET_POST', response.data.data);
         resolve();
       })
       .catch(error => console.log(error));

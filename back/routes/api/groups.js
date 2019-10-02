@@ -235,7 +235,7 @@ router.get(
     );
 });
 
-//@route      POST api/groups/:id/like/:like_id
+//@route      POST api/groups/:id/like/:post_id
 //@desc       Like post
 //@access     Private
 router.post('/:id/posts/:post_id', 
@@ -261,7 +261,38 @@ router.post('/:id/posts/:post_id',
           grouppost.likes.unshift({ user: req.user.id });
 
           group.save()
-            .then(grouppost => res.json(grouppost));
+            .then(group => res.json(grouppost));
+          
+        }).catch(err => res.status(404).json({ grouppostnotfound: 'Post not found' }));
+  //  })
+});
+
+//@route      POST api/groups/:id/Comments/:post_id
+//@desc       Comment post
+//@access     Private
+router.post('/:id/comments/:post_id', 
+  passport.authenticate("jwt", { session: false }), (req, res) => {
+  // Profile.findOne({ user: req.user.id })
+  //   .then(profile => {
+      Group.findById(req.params.id)
+        .then(group => {
+          const postIndex = group.posts
+          .map(item => item._id.toString())
+          .indexOf(req.params.post_id);
+
+          const grouppost = group.posts[postIndex];
+
+          const newComment = {
+            text: req.body.text,
+            name: req.body.name,
+            avatar: req.body.avatar,
+            user: req.user.id
+          };
+          
+          grouppost.comments.push(newComment);
+
+          group.save()
+            .then(group => res.json(grouppost));
           
         }).catch(err => res.status(404).json({ grouppostnotfound: 'Post not found' }));
   //  })

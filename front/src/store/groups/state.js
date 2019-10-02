@@ -1,7 +1,7 @@
 export default {
   groups:[],
   group: {},
-  groupposts: [],
-  grouppost: {}
+  grouppost: {},
+  groupposts: []
 };
 

@@ -25,9 +25,9 @@
           </div>
         </div>
         <!-- Comments -->
-        <!-- <div
+        <div
           class="message"
-          v-for="comment in post.comments"
+          v-for="comment in grouppost.comments"
           :key="comment.id"
         >
           <div class="flex-left-nowrap">
@@ -41,9 +41,9 @@
               <a class="leftpadding">{{ comment.text }}</a>
             </div>
           </div>
-        </div> -->
+        </div>
         <!-- Comments form -->
-        <!-- <form ref="text" @submit.prevent="submitForm" class="post-new-form">
+        <form ref="text" @submit.prevent="submitForm" class="post-new-form">
           <div class="halfpadding">
             <textarea
               class="textarea"
@@ -54,7 +54,7 @@
           <div class="padding">
             <button type="submit">Submit</button>
           </div>
-        </form> -->
+        </form>
       </div>
     </div>
   </section>
@@ -87,21 +87,22 @@ export default {
     ...mapState('errors', ['errors']),
   },
   methods: {
-    ...mapActions("groups", ['getGroupPost']),
+    ...mapActions("groups", ['getGroupPost', 'getGroup']),
     addLike() {
       const payload = {
-      post_id: this.$route.params.id,
-      id: this.$store.state.groups.group._id
-    }
+        post_id: this.$route.params.id,
+        id: this.$store.state.groups.group._id
+      }
       this.$store.dispatch('groups/addGroupPostLike', payload)
       .catch((error) => {console.log(error)})
     },
     submitForm() {
       const payload = {
-        postId: this.$route.params.id,
+        post_id: this.$route.params.id,
+        id: this.$store.state.groups.group._id,
         formData: this.formData
       }
-      this.$store.dispatch('posts/addComment', payload)
+      this.$store.dispatch('groups/addPostComment', payload)
       .then(this.formData = {})
       .catch((error) => {console.log(error)})
     },

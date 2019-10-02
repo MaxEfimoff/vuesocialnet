@@ -49,9 +49,23 @@ function addGroupPostLike({ commit }, payload) {
   });
 }
 
+function addPostComment({ commit }, payload) {
+  return new Promise((resolve, reject) => {
+    axios.post(`http://localhost:5000/api/groups/${payload.id}/comments/${payload.post_id}`, payload.formData)
+      .then((response) => {
+        commit('SET_GROUP_POST', response.data);
+        resolve();
+      })
+      .catch(error => {
+        console.log(error)
+      });
+  });
+}
+
 export {
   getGroups,
   getGroup,
   getGroupPost,
-  addGroupPostLike
+  addGroupPostLike,
+  addPostComment
 };

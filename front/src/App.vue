@@ -123,7 +123,7 @@ span, li, i {
 }
 
 .textarea {
-  text-align:right;
+  text-align:left;
   border: 1px solid var(--primary-color);
   height: 10rem;
   width: 100%;
