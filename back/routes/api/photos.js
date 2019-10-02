@@ -162,4 +162,29 @@ router.post(
   }
 );
 
+//@route      POST api/photos/like/:id
+//@desc       Like photo
+//@access     Private
+router.post('/like/:id', passport.authenticate("jwt", { session: false }), (req, res) => {
+  Profile.findOne({ user: req.user.id })
+    .then(profile => {
+      Image.findById(req.params.id)
+        .then(image => {
+          // Check if user already liked this image
+          // Loops through likes array and checks if user id is there
+          // If req.params.id is in the image.likes array, filtered array length will be > 0
+          if(image.likes.filter(like => like.user.toString() === req.user.id).length > 0) {
+            return res.status(400).json({ alreadyliked: 'User already liked this image' })
+          }
+
+          // Add user id to likes array
+          image.likes.unshift({ user: req.user.id });
+
+          image.save()
+            .then(image => res.json(image));
+          
+        }).catch(err => res.status(404).json({ imagenotfound: 'image not found' }));
+   })
+});
+
 module.exports = router;

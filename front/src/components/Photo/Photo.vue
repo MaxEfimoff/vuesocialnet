@@ -5,6 +5,13 @@
         <img class="display-image-large padding" :src=" require(`../../../../back/uploads/${photo.image}`) " alt="">
         <i class="fas fa-trash-alt abs delete-photo white-font" @click="deletePhoto"></i>
       </div>
+      <div class="message">
+        <i class="fas fa-thumbs-up" @click="addLike"></i>
+        {{' '}}<span>{{ photo.likes.length }}</span>
+        <div class="error-message">
+          {{this.errors.alreadyliked}}
+        </div>
+      </div>
       <!-- Comments -->
       <div
         class="message"
@@ -60,9 +67,14 @@ export default {
   },
   computed: {
     ...mapState('photos', ['photo']),
+    ...mapState('errors', ['errors']),
   },
   methods: {
     ...mapActions("photos", ['getPhoto', 'deletePhoto']),
+    addLike() {
+      this.$store.dispatch('photos/addLike', this.$route.params.id)
+      .catch((error) => {console.log(error)})
+    },
     submitForm() {
       const payload = {
         photoId: this.$route.params.id,

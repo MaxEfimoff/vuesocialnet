@@ -63,10 +63,24 @@ function addComment({ commit }, payload) {
   });
 }
 
+function addLike({ commit }, id) {
+  return new Promise((resolve, reject) => {
+    axios.post(`http://localhost:5000/api/photos/like/${id}`)
+      .then((response) => {
+        commit('SET_PHOTO', response.data);
+        resolve();
+      })
+      .catch(error => {
+        console.log(error)
+      });
+  });
+}
+
 export {
   getPhotos,
   getPhoto,
   addPhoto,
   deletePhoto,
-  addComment
+  addComment,
+  addLike
 };
