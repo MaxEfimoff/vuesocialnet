@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
 const passport = require("passport");
 
 //Group model
@@ -11,26 +10,33 @@ const Profile = require("../../db/models/Profile");
 
 //Validation
 const validateGroupInput = require("../../validation/group");
+const validatePostInput = require("../../validation/post");
 
-//route GET api/group/test
-//desc  Tests Message route
-//access Public
+//route       GET api/groups/test
+//desc        Tests Message route
+//access      Public
 router.get("/test", (req, res) => res.json({ msg: "Groups work" }));
 
-//route GET api/Groups
-//desc  Get Group
-//access Public
-router.get("/", (req, res) => {
+//route       GET api/groups
+//desc        Get Group
+//access      Private
+router.get(
+  "/", 
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
   Group.find()
     .sort({ date: -1 })
     .then(groups => res.json(groups))
     .catch(err => res.status(404).json({ nogroupfound: "No groups found" }));
 });
 
-//route GET api/groups/:id
-//desc  Get group by id
-//access Public
-router.get("/:id", (req, res) => {
+//route       GET api/groups/:id
+//desc        Get group by id
+//access      Private
+router.get(
+  "/:id", 
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
   Group.findById(req.params.id)
     .then(group => res.json(group))
     .catch(err =>
@@ -38,18 +44,17 @@ router.get("/:id", (req, res) => {
     );
 });
 
-//route POST api/group
-//desc  Create or edit  group
-//access Private
+//route       POST api/groups
+//desc        Create or edit  group
+//access      Private
 router.post(
   "/create-group",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { errors, isValid } = validateGroupInput(req.body);
 
-    //check validation
+    // Check validation
     if (!isValid) {
-      //return any errors with 400 status
       return res.status(400).json(errors);
     }
 
@@ -59,24 +64,23 @@ router.post(
     if (req.body.handle) groupFields.handle = req.body.handle;
     if (req.body.status) groupFields.status = req.body.status;
     if (req.body.info) groupFields.info = req.body.info;
-    if (req.body.location) groupFields.location = req.body.location;
 
-    //check  if handle exists
+    // Check  if handle exists
     Group.findOne({ handle: groupFields.handle }).then(group => {
       if (group) {
         errors.handle = "That handle already exists";
         res.status(400).json(errors);
       }
 
-      //save group
+      // Save group
       new Group(groupFields).save().then(group => res.json(group));
     });
   }
 );
 
-//route DELETE api/groups/:id
-//desc  Delete group by id
-//access Private
+//route       DELETE api/groups/:id
+//desc        Delete group by id
+//access      Private
 router.delete(
   "/:id",
   passport.authenticate("jwt", { session: false }),
@@ -84,13 +88,13 @@ router.delete(
     Profile.findOne({ user: req.user.id }).then(profile => {
       Group.findById(req.params.id)
         .then(group => {
-          //Check for group owner
+          //  Check for group owner
           if (group.user.toString() !== req.user.id) {
             return res
               .status(401)
               .json({ notauthorized: "User not authorized" });
           }
-          //Delete group
+          //  Delete group
           group.remove().then(() => res.json({ success: true }));
         })
         .catch(err =>
@@ -100,9 +104,9 @@ router.delete(
   }
 );
 
-//route group api/groups/subscribe/:id
-//desc  subscribe group
-//access Private
+//route       POST api/groups/subscribe/:id
+//desc        Subscribe to group
+//access      Private
 router.post(
   "/subscribe/:id",
   passport.authenticate("jwt", { session: false }),
@@ -119,7 +123,7 @@ router.post(
               alreadysubscribed: "User is already subscribed to this group"
             });
           }
-          //Add user ID to subscribes array
+          // Add user ID to subscribers array
           group.subscribes.unshift({ user: req.user.id });
           group.save().then(group => res.json(group));
         })
@@ -130,9 +134,9 @@ router.post(
   }
 );
 
-//route group api/groups/unsubscribe/:id
-//desc  Unsubscribe group
-//access Private
+//route       POST api/groups/unsubscribe/:id
+//desc        Unsubscribe group
+//access      Private
 router.post(
   "/unsubscribe/:id",
   passport.authenticate("jwt", { session: false }),
@@ -149,15 +153,15 @@ router.post(
               notsubscribed: "You have not yet subscribed this group"
             });
           }
-          //Get the remove index
+          //  Get the remove index
           const removeindex = group.subscribes
             .map(item => item.user.toString())
             .indexOf(req.user.id);
 
-          //Splice out of array
+          //  Splice out of array
           group.subscribes.splice(removeindex, 1);
 
-          //Save
+          //  Save
           group.save().then(group => res.json(group));
         })
         .catch(err =>
@@ -167,14 +171,14 @@ router.post(
   }
 );
 
-//route group api/groups/comment/:id
-//desc  Add a comment group
-//access Private
+//route       POST api/groups/post/:id
+//desc        Create post
+//access      Private
 router.post(
-  "/comment/:id",
+  "/post/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { errors, isValid } = validateGroupInput(req.body);
+    const { errors, isValid } = validatePostInput(req.body);
 
     // Check validation
     if (!isValid) {
@@ -183,14 +187,14 @@ router.post(
     }
     Group.findById(req.params.id)
       .then(group => {
-        const newComment = {
+        const newPost = {
           text: req.body.text,
           name: req.body.name,
           avatar: req.body.avatar,
           user: req.user.id
         };
-        //Add to comments array
-        group.comments.unshift(newComment);
+        //Add to posts array
+        group.posts.unshift(newPost);
 
         //Save
         group.save().then(group => res.json(group));
@@ -199,9 +203,73 @@ router.post(
   }
 );
 
-//route DELETE api/groups/comment/:id/:comment_id
-//desc  Delete a comment from group
-//access Private
+//route       GET api/groups/:id
+//desc        Get group post by id
+//access      Private
+router.get(
+  "/:id/posts/:post_id", 
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+  Group.findById(req.params.id)
+    .then(group => 
+      {
+        // Check to see if the post exists
+        if (
+          group.posts.filter(
+            post => post._id.toString() === req.params.post_id
+          ).length === 0
+        ) {
+          return res
+            .status(404)
+            .json({ postnotexists: "Post does not exist" });
+        }
+        // Get post index
+        const postIndex = group.posts
+          .map(item => item._id.toString())
+          .indexOf(req.params.post_id);
+
+        res.json(group.posts[postIndex]);
+      })
+    .catch(err =>
+      res.status(404).json({ nogroupfound: "No group found with this id" })
+    );
+});
+
+//@route      POST api/groups/:id/like/:like_id
+//@desc       Like post
+//@access     Private
+router.post('/:id/posts/:post_id', 
+  passport.authenticate("jwt", { session: false }), (req, res) => {
+  // Profile.findOne({ user: req.user.id })
+  //   .then(profile => {
+      Group.findById(req.params.id)
+        .then(group => {
+          const postIndex = group.posts
+          .map(item => item._id.toString())
+          .indexOf(req.params.post_id);
+
+          const grouppost = group.posts[postIndex];
+
+          // Check if user already liked this group post
+          // Loops through likes array and checks if user id is there
+          // If req.params.id is in the grouppost.likes array, filtered array length will be > 0
+          if(grouppost.likes.filter(like => like.user.toString() === req.user.id).length > 0) {
+            return res.status(400).json({ alreadyliked: 'User already liked this grouppost' })
+          }
+
+          // Add user id to likes array
+          grouppost.likes.unshift({ user: req.user.id });
+
+          group.save()
+            .then(grouppost => res.json(grouppost));
+          
+        }).catch(err => res.status(404).json({ grouppostnotfound: 'Post not found' }));
+  //  })
+});
+
+//route       DELETE api/groups/comment/:id/:comment_id
+//desc        Delete a comment from group
+//access      Private
 router.delete(
   "/comment/:id/:comment_id",
   passport.authenticate("jwt", { session: false }),
@@ -230,5 +298,7 @@ router.delete(
       .catch(err => res.status(404).json({ groupnotfound: "No group found" }));
   }
 );
+
+
 
 module.exports = router;

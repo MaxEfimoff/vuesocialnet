@@ -27,6 +27,7 @@ import EditProfile from './views/EditProfile.vue';
 // Groups
 import Group from './views/Group.vue';
 import Groups from './views/Groups.vue';
+import GroupPost from './views/GroupPost.vue';
 // Documents
 import Document from './views/Document.vue';
 import Documents from './views/Documents.vue';
@@ -159,8 +160,13 @@ export default new Router({
       path: '/groups/:id',
       name: 'group',
       props: true,
-      
       component: Group,
+    },
+    {
+      path: '/groups/:id/posts/:id',
+      name: 'grouppost',
+      props: true,
+      component: GroupPost,
     },
     // Documents
     {

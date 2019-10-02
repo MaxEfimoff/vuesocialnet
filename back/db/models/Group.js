@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const GroupSchema = new Schema({
-  //User who created a group
+  // Group creator
   user: {
     type: Schema.Types.ObjectId,
     ref: "users"
@@ -25,7 +25,7 @@ const GroupSchema = new Schema({
   avatar: {
     type: String
   },
-  //subscribers is an array of user IDs  //kind of likes
+  // Subscribers is an array of user IDs  //kind of likes
   subscribes: [
     {
       user: {
@@ -34,25 +34,16 @@ const GroupSchema = new Schema({
       }
     }
   ],
-  //Posts in group
+  // Posts in group
   posts: [
     {
       user: {
         type: Schema.Types.ObjectId,
-        ref: "users"
-      }
-    }
-  ],
-  //comments is an array of objects with user IDs, texts, names, avatars and dates
-  comments: [
-    {
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: "users"
+        ref: 'users'
       },
       text: {
         type: String,
-        require: true
+        required: true
       },
       name: {
         type: String
@@ -60,13 +51,43 @@ const GroupSchema = new Schema({
       avatar: {
         type: String
       },
+      likes: [
+        {
+          user: {
+            type: Schema.Types.ObjectId,
+            ref: 'users'
+          }
+        }
+      ],
+      comments: [
+        {
+          user: {
+            type: Schema.Types.ObjectId,
+            ref: 'users'
+          },
+          text: {
+            type: String,
+            required: true
+          },
+          name: {
+            type: String
+          },
+          avatar: {
+            type: String
+          },
+          date: {
+            type: Date,
+            default: Date.now
+          }
+        }
+      ],
       date: {
         type: Date,
         default: Date.now
       }
     }
   ],
-  //group creation date
+  // Group creation date
   date: {
     type: Date,
     default: Date.now

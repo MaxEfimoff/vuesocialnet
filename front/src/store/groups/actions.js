@@ -25,7 +25,33 @@ function getGroup({ commit }, id) {
   });
 }
 
+function getGroupPost({ commit }, payload) {
+  return new Promise((resolve, reject) => {
+    axios.get(`http://localhost:5000/api/groups/${payload.id}/posts/${payload.post_id}`)
+      .then((response) => {
+        commit('SET_GROUP_POST', response.data);
+        resolve();
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+function addGroupPostLike({ commit }, payload) {
+  return new Promise((resolve, reject) => {
+    axios.post(`http://localhost:5000/api/groups/${payload.id}/posts/${payload.post_id}`)
+      .then((response) => {
+        commit('SET_GROUP_POST', response.data);
+        resolve();
+      })
+      .catch(error => {
+        console.log(error)
+      });
+  });
+}
+
 export {
   getGroups,
   getGroup,
+  getGroupPost,
+  addGroupPostLike
 };
