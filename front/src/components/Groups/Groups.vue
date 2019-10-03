@@ -4,10 +4,13 @@
         <div class="friends-list padding">
             <ul  class="flex">
               <li>
-                <a href="">Group</a>
+                <a href="">All Groups</a>
               </li>
               <li>
-                <a href="">Group online</a>
+                <a href="">My Groups</a>
+              </li>
+              <li>
+                <a href="">Manage Groups</a>
               </li>
             </ul>
             <router-link
@@ -24,10 +27,15 @@
           <div class="post-author">
             <router-link
               :to="`/groups/${group._id}`"
+              class=" flex-left"
             >
-              <div class="groups-photo">
+              <div class="text-center"> 
                 <img class="groups-img" src="../../assets/img/groups/01.jpg" alt="">
-                <span>{{ group.handle }}</span>
+                <div><span>{{ group.subscribes.length }} Subscribers</span></div>
+              </div>
+              <div class="leftpadding">
+                <div><span>{{ group.handle }}</span></div>
+                <div><span>{{ group.info }}</span></div>
               </div>
             </router-link>
           </div>

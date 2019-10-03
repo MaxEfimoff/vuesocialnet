@@ -38,6 +38,7 @@ const allFriendsUrl = `${serverUrl}/api/friends/`;
 // Groups
 const allGroupsUrl = `${serverUrl}/api/groups/`;
 const createGroupUrl = `${serverUrl}/api/groups/create-group`;
+// const subscribeGroupUrl = `${serverUrl}/api/groups/subscribe/`;
 // const profileByHandleUrl = `${serverUrl}/api/profile/handle/${handle}`;
 
 export {

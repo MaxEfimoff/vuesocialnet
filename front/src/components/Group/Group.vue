@@ -8,6 +8,27 @@
         <h4>{{ group.status }}</h4>
         <span>{{ group.info }}</span>
       </div>
+      <div class="flex">
+        <div class="padding" v-if="!this.alreadySubscribed">
+          <button 
+            type="submit"
+            @click="subscribe"
+          >
+            Subscribe
+          </button>
+        </div>
+        <div class="padding" v-else>
+            <button 
+              type="submit"
+              @click="unsubscribe"
+            >
+              Unsubscribe
+            </button>
+          </div>
+          <div class="error-message">
+            {{ this.errors.alreadysubscribed }}
+          </div>
+        </div>
         <!-- Posts -->
         <div class="post-wrapper">
           <div class="post" v-for="post in group.posts.slice(0, 10)" :key="post.id">
@@ -44,9 +65,26 @@ export default {
   },
   computed: {
     ...mapState('groups', ['group']),
+    ...mapState('errors', ['errors']),
+    alreadySubscribed() {
+      const subscribers = this.$store.state.groups.group.subscribes;
+      if (subscribers.some(e => e.user === this.$store.state.auth.user.id)) {
+        return true;
+      }
+    }
   },
   methods: {
     ...mapActions("groups", ['getGroup']),
+    subscribe() {
+      const id = this.$store.state.groups.group._id;
+      this.$store.dispatch('groups/subscribe', id)
+      .catch((error) => console.log(error))
+    },
+    unsubscribe() {
+      const id = this.$store.state.groups.group._id;
+      this.$store.dispatch('groups/unsubscribe', id)
+      .catch((error) => console.log(error))
+    },
   },
 }
 </script>

@@ -2,7 +2,8 @@ import axios from 'axios';
 import {
   allGroupsUrl,
   oneGroupUrl,
-  createGroupUrl
+  createGroupUrl,
+  subscribeGroupUrl
 } from '../urls';
 
 function getGroups({ commit }) {
@@ -29,6 +30,34 @@ function getGroup({ commit }, id) {
 function createGroup({ commit }, data) {
   return new Promise((resolve, reject) => {
     axios.post(createGroupUrl, data)
+      .then((response) => {
+        commit('SET_GROUP', response.data);
+        resolve();
+      })
+      .catch(error => {
+        commit('errors/setErrors', error.response.data, { root: true });
+        console.log(error)
+      });
+  });
+}
+
+function subscribe({ commit }, id) {
+  return new Promise((resolve, reject) => {
+    axios.post(`http://localhost:5000/api/groups/subscribe/${id}`, id)
+      .then((response) => {
+        commit('SET_GROUP', response.data);
+        resolve();
+      })
+      .catch(error => {
+        commit('errors/setErrors', error.response.data, { root: true });
+        console.log(error)
+      });
+  });
+}
+
+function unsubscribe({ commit }, id) {
+  return new Promise((resolve, reject) => {
+    axios.post(`http://localhost:5000/api/groups/unsubscribe/${id}`, id)
       .then((response) => {
         commit('SET_GROUP', response.data);
         resolve();
@@ -83,5 +112,7 @@ export {
   getGroupPost,
   addGroupPostLike,
   addPostComment,
-  createGroup
+  createGroup,
+  subscribe,
+  unsubscribe
 };
