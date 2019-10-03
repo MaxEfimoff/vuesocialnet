@@ -4,21 +4,21 @@
         <div class="friends-list padding">
             <ul  class="flex">
               <li>
-                <a href="">All Groups</a>
+                <router-link
+                  to="/groups"
+                >
+                  All Groups
+                </router-link>
               </li>
               <li>
                 <router-link
-                  :to="`/groups/my-groups`"
+                  to="/groups/my-groups"
                 >
                   My Groups
                 </router-link>
               </li>
               <li>
-                <router-link
-                  :to="`/groups/manage-groups`"
-                >
-                  Manage Groups
-                </router-link>
+                <a href="">Manage Groups</a>
               </li>
             </ul>
             <router-link
@@ -31,7 +31,7 @@
             </form>
           </div>
       <div class="post-wrapper">
-        <div class="post" v-for="group in groups" :key="group.id">
+        <div class="post" v-for="group in managegroups" :key="group.id">
           <div class="post-author">
             <router-link
               :to="`/groups/${group._id}`"
@@ -57,15 +57,15 @@
 import { mapState, mapActions } from 'vuex';
 
 export default {
-  name: 'Groups',
+  name: 'ManageGroups',
   created() {
-    this.getGroups();
+    this.getManageGroups();
   },
   computed: {
-    ...mapState("groups",['groups']),
+    ...mapState("groups",['managegroups']),
   },
   methods: {
-    ...mapActions("groups",['getGroups']),
+    ...mapActions("groups",['getManageGroups']),
   },
 }
 </script>

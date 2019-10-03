@@ -3,7 +3,9 @@ import {
   allGroupsUrl,
   oneGroupUrl,
   createGroupUrl,
-  subscribeGroupUrl
+  subscribeGroupUrl,
+  manageGroupsUrl,
+  myGroupsUrl
 } from '../urls';
 
 function getGroups({ commit }) {
@@ -22,6 +24,26 @@ function getGroup({ commit }, id) {
       .then((response) => {
         commit('SET_GROUP', response.data);
         resolve();
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+function getManageGroups({ commit }) {
+  return new Promise((resolve, reject) => {
+    axios.get(manageGroupsUrl)  
+      .then((response) => {
+        commit('SET_MANAGE_GROUPS', response.data);
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+function getMyGroups({ commit }) {
+  return new Promise((resolve, reject) => {
+    axios.get(myGroupsUrl)  
+      .then((response) => {
+        commit('SET_MY_GROUPS', response.data);
       })
       .catch(error => console.log(error));
   });
@@ -130,5 +152,7 @@ export {
   createGroup,
   subscribe,
   unsubscribe,
-  createGroupPost
+  createGroupPost,
+  getManageGroups,
+  getMyGroups
 };

@@ -37,7 +37,7 @@
                 class="stat-counter lefthalfpadding"
                 :to="`/groups`"
               >
-                <div class="count">{{ groups.length }}</div>
+                <div class="count">{{ mygroups.length }}</div>
                 <i class="fas fa-users"></i>
               </router-link> 
               <router-link
@@ -123,7 +123,7 @@
           >
             <span>Groups</span>
           </router-link>
-          <div class="groups-wrapper" v-for="group in groups" :key="group.id">
+          <div class="groups-wrapper" v-for="group in mygroups.slice(0, 4)" :key="group.id">
             <router-link :to="`/groups/${group._id}`">
               <div class="groups-photo">
                 <img class="groups-img" src="../assets/img/groups/01.jpg"  alt="">
@@ -159,7 +159,7 @@ import { mapState, mapActions } from 'vuex';
 export default {
   name: 'Main',
   created() {
-    this.getGroups();
+    this.getMyGroups();
     this.getMessages();
     this.getNotes();
     this.getPhotos();
@@ -167,7 +167,7 @@ export default {
     this.exportCurrentProfile();
   },
   methods: {
-    ...mapActions("groups",['getGroups']),
+    ...mapActions("groups",['getMyGroups']),
     ...mapActions("messages",['getMessages']),
     ...mapActions("notes",['getNotes']),
     ...mapActions("photos",['getPhotos']),
@@ -188,7 +188,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('groups', [ 'groups']),
+    ...mapState('groups', [ 'mygroups']),
     ...mapState('messages', [ 'messages']),
     ...mapState('notes', [ 'notes']),
     ...mapState('photos', [ 'photos']),

@@ -30,6 +30,36 @@ router.get(
     .catch(err => res.status(404).json({ nogroupfound: "No groups found" }));
 });
 
+//@route      GET api/my-groups/
+//@desc       Get my groups
+//@access     Private
+router.get('/my-groups', passport.authenticate("jwt", { session: false }), (req, res) => {
+  Group
+    .find()
+    .sort({date: -1})
+    .then(groups =>
+      res.json(groups.filter(group => 
+        group.subscribes.map(a => a.user).includes(req.user.id)
+      ))
+    )
+    .catch(err => res.status(404).json({nogroupsfound: 'No groups found'}));
+})
+
+//@route      GET api/manage-groups/
+//@desc       Get manage groups
+//@access     Private
+router.get('/manage-groups', passport.authenticate("jwt", { session: false }), (req, res) => {
+  Group
+    .find()
+    .sort({date: -1})
+    .then(groups =>
+      res.json(groups.filter(group => 
+        group.user.toString() === req.user.id
+      ))
+    )
+    .catch(err => res.status(404).json({nogroupsfound: 'No groups found'}));
+})
+
 //route       GET api/groups/:id
 //desc        Get group by id
 //access      Private

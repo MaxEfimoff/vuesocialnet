@@ -28,6 +28,8 @@ import EditProfile from './views/EditProfile.vue';
 // Groups
 import Group from './views/Group.vue';
 import Groups from './views/Groups.vue';
+import ManageGroups from './views/ManageGroups.vue';
+import MyGroups from './views/MyGroups.vue';
 import GroupPost from './views/GroupPost.vue';
 import GroupForm from './views/GroupForm.vue';
 // Documents
@@ -157,6 +159,16 @@ export default new Router({
       path: '/groups',
       name: 'groups',
       component: Groups,
+    },
+    {
+      path: '/groups/manage-groups',
+      name: 'managegroups',
+      component: ManageGroups,
+    },
+    {
+      path: '/groups/my-groups',
+      name: 'mygroups',
+      component: MyGroups,
     },
     {
       path: '/groups/create-group',
