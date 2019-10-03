@@ -41,6 +41,31 @@ function createGroup({ commit }, data) {
   });
 }
 
+function getGroupPost({ commit }, payload) {
+  return new Promise((resolve, reject) => {
+    axios.get(`http://localhost:5000/api/groups/${payload.id}/posts/${payload.post_id}`)
+      .then((response) => {
+        commit('SET_GROUP_POST', response.data);
+        resolve();
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+function createGroupPost({ commit }, payload) {
+  return new Promise((resolve, reject) => {
+    axios.post(`http://localhost:5000/api/groups/${payload.id}/post`, payload.formData)
+      .then((response) => {
+        commit('SET_GROUP', response.data);
+        resolve();
+      })
+      .catch(error => {
+        commit('errors/setErrors', error.response.data, { root: true });
+        console.log(error)
+      });
+  });
+}
+
 function subscribe({ commit }, id) {
   return new Promise((resolve, reject) => {
     axios.post(`http://localhost:5000/api/groups/subscribe/${id}`, id)
@@ -69,16 +94,6 @@ function unsubscribe({ commit }, id) {
   });
 }
 
-function getGroupPost({ commit }, payload) {
-  return new Promise((resolve, reject) => {
-    axios.get(`http://localhost:5000/api/groups/${payload.id}/posts/${payload.post_id}`)
-      .then((response) => {
-        commit('SET_GROUP_POST', response.data);
-        resolve();
-      })
-      .catch(error => console.log(error));
-  });
-}
 
 function addGroupPostLike({ commit }, payload) {
   return new Promise((resolve, reject) => {
@@ -114,5 +129,6 @@ export {
   addPostComment,
   createGroup,
   subscribe,
-  unsubscribe
+  unsubscribe,
+  createGroupPost
 };

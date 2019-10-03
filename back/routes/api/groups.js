@@ -172,10 +172,10 @@ router.post(
 );
 
 //route       POST api/groups/post/:id
-//desc        Create post
+//desc        Create new post
 //access      Private
 router.post(
-  "/post/:id",
+  "/:id/post",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { errors, isValid } = validatePostInput(req.body);
@@ -235,7 +235,7 @@ router.get(
     );
 });
 
-//@route      POST api/groups/:id/like/:post_id
+//@route      POST api/groups/:id/post/:post_id
 //@desc       Like post
 //@access     Private
 router.post('/:id/posts/:post_id', 

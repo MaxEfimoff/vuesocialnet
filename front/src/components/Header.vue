@@ -12,15 +12,18 @@
             <router-link
               class="padding"
               :to="{ name: 'profiles' }">
-              <!-- <img :src=" require (`${user.avatar}`) " alt=""> -->
               <span>
                 Users
               </span>
             </router-link>
             <router-link
               :to="{ name: 'posts' }">
-              <!-- <img :src=" require (`${user.avatar}`) " alt=""> -->
               <span>Posts</span>
+            </router-link>
+            <router-link
+              class="leftpadding"
+              :to="{ name: 'groups' }">
+              <span>Groups</span>
             </router-link>
             <a @click="logout">
               <span class="padding">Logout</span>

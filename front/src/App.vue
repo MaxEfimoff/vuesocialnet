@@ -238,7 +238,8 @@ span, li, i {
 
 .navbar .container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 4fr;
+  grid-gap: 1rem;
 }
 
 .navbar .nav {

@@ -1,6 +1,13 @@
 <template>
   <section class="section-center">
     <div class="section posts">
+      <div class="post-new padding">
+        <h3>{{ group.handle }}</h3>
+      </div>
+      <div class="post-new padding">
+        <h4>{{ group.status }}</h4>
+        <span>{{ group.info }}</span>
+      </div>
       <div class="post-wrapper">
         <div class="post-new padding">
           <router-link

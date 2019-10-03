@@ -9,7 +9,7 @@
         <span>{{ group.info }}</span>
       </div>
       <div class="flex">
-        <div class="padding" v-if="!this.alreadySubscribed">
+        <div class="padding" v-if="!this.alreadySubscribed && !this.groupAdministrator">
           <button 
             type="submit"
             @click="subscribe"
@@ -18,16 +18,20 @@
           </button>
         </div>
         <div class="padding" v-else>
-            <button 
-              type="submit"
-              @click="unsubscribe"
-            >
-              Unsubscribe
+          <button 
+            type="submit"
+            @click="unsubscribe"
+          >
+            Unsubscribe
+          </button>
+        </div>
+        <div v-if="this.groupAdministrator">
+          <router-link :to="`/groups/${group._id}/post`">
+            <button>
+              New Post
             </button>
-          </div>
-          <div class="error-message">
-            {{ this.errors.alreadysubscribed }}
-          </div>
+          </router-link>
+        </div>
         </div>
         <!-- Posts -->
         <div class="post-wrapper">
@@ -69,6 +73,11 @@ export default {
     alreadySubscribed() {
       const subscribers = this.$store.state.groups.group.subscribes;
       if (subscribers.some(e => e.user === this.$store.state.auth.user.id)) {
+        return true;
+      }
+    },
+    groupAdministrator() {
+      if (this.$store.state.groups.group.user === this.$store.state.auth.user.id) {
         return true;
       }
     }

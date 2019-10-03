@@ -1,26 +1,12 @@
 <template>
   <section class="section posts">
-    <h2 class="padding">Group Form</h2>
+    <h2 class="padding">Group Post Form</h2>
     <form @submit.prevent="submitForm" class="post-new-form">
       <div class="halfpadding">
-        <input
-          type="text"
-          placeholder="Group handle"
-          v-model="formData.handle"
-        />
-      </div>
-      <div class="halfpadding">
-        <input
-          type="text"
-          placeholder="Group status"
-          v-model="formData.status"
-        />
-      </div>
-      <div class="halfpadding">
-        <input
-          type="text"
-          placeholder="Group info"
-          v-model="formData.info"
+        <textarea
+          class="textarea"
+          placeholder="Post text"
+          v-model="formData.text"
         />
       </div>
       <div class="error-message">
@@ -40,9 +26,7 @@ export default {
   data() {
     return {
       formData: {
-        handle: '',
-        status: '',
-        info: '',
+        text: '',
         name: this.$store.state.profile.profile.handle,
         // avatar: this.$store.state.profile.profile.avatar
       },
@@ -58,7 +42,11 @@ export default {
   methods: {
     ...mapActions("profile", [ 'exportCurrentProfile' ]),
     submitForm() {
-      this.$store.dispatch('groups/createGroup', this.formData)
+      const payload = {
+        id: this.$store.state.groups.group._id,
+        formData: this.formData
+      }
+      this.$store.dispatch('groups/createGroupPost', payload)
       .then(() => this.$router.push({ name: 'groups' }))
       .catch((error) => {console.log(error)
       })

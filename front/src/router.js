@@ -10,6 +10,7 @@ import Posts from './views/Posts.vue';
 import MyPosts from './views/MyPosts.vue';
 import FriendsPosts from './views/FriendsPosts.vue';
 import PostForm from './views/PostForm.vue';
+import GroupPostForm from './views/GroupPostForm.vue';
 // Messages
 import Message from './views/Message.vue';
 import Messages from './views/Messages.vue';
@@ -167,6 +168,12 @@ export default new Router({
       name: 'group',
       props: true,
       component: Group,
+    },
+    {
+      path: '/groups/:id/post',
+      name: 'grouppostform',
+      props: true,
+      component: GroupPostForm,
     },
     {
       path: '/groups/:id/posts/:id',
