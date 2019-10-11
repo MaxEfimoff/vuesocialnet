@@ -169,6 +169,10 @@ span, li, i {
   position: absolute;
 }
 
+.is-active {
+  font-weight: bold;
+}
+
 .rel {
   position: relative;
 }
@@ -333,7 +337,7 @@ span, li, i {
   position: relative;
 }
 
-.section-left {
+.section-left, .section-right {
   max-width: 234px;
 }
 
@@ -431,6 +435,12 @@ span, li, i {
 
 .groups-photo span {
   margin-left: 1rem;
+}
+
+.group-template {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  grid-gap: 1rem;
 }
 
 /* Photos */

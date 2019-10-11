@@ -69,6 +69,17 @@ function getProfileByHandle({ commit }, handle) {
   })
 };
 
+function getProfileById({ commit }, user) {
+  return new Promise((resolve, reject) => {
+    axios.get(`http://localhost:5000/api/profile/user/${user}`)
+    .then((response) => {
+      commit('getAnotherUserProfile', response.data);
+      resolve();
+    })
+    .catch(error => console.log(error));
+  })
+};
+
 
 function addToFriends({ commit }, handle) {
   return new Promise((resolve, reject) => {
@@ -131,5 +142,6 @@ export {
   addToFriends,
   deleteFromFriends,
   getProfilePhotos,
-  getProfilePosts
+  getProfilePosts,
+  getProfileById
 };

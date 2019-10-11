@@ -1,28 +1,25 @@
 <template>
   <div>
     <section class="section-center" v-if="this.profile.handle">
-      <div class="section posts">
-        <PostHeader />
-        <div class="post-wrapper">
-          <div class="post" v-for="post in friendsposts.slice(0, 10)" :key="post.id">
-            <div class="post-author flex">
-              <router-link
-                :to="`/profile/handle/${post.name}`">
-                <div>
-                  <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
-                  <div class='text-center'>
-                    <span>{{ post.name }}</span>
-                  </div>
+      <div class="post-wrapper">
+        <div class="post" v-for="post in friendsposts.slice(0, 10)" :key="post.id">
+          <div class="post-author flex">
+            <router-link
+              :to="`/profile/handle/${post.name}`">
+              <div>
+                <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
+                <div class='text-center'>
+                  <span>{{ post.name }}</span>
                 </div>
-              </router-link>
-              <router-link
-                :to="`/posts/${post._id}`"
-              >
-              <div class="leftmargin">
-                <span>{{ post.text }}</span>
               </div>
-              </router-link>
+            </router-link>
+            <router-link
+              :to="`/posts/${post._id}`"
+            >
+            <div class="leftmargin">
+              <span>{{ post.text }}</span>
             </div>
+            </router-link>
           </div>
         </div>
       </div>

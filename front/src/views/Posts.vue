@@ -13,7 +13,7 @@
 <script>
 import Header from '@/components/Header.vue';
 import LeftSection from '@/components/LeftSection.vue';
-import Posts from '@/components/Posts/Posts.vue';
+import Posts from '@/components/Posts/PostsMain.vue';
 
 export default {
   components: {
