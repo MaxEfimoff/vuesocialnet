@@ -8,7 +8,7 @@
       <!-- Message and comments -->
       <div class="post-wrapper">
         <div class="post">
-          <div class="post-author">
+          <div class="">
             <div class="flex-left">
               <div>
                 <img class="groups-img" src="../../assets/img/anon.jpg" alt="">

@@ -2,11 +2,7 @@
   <section class="section-center">
     <div class="section posts">
       <div class="post-new padding">
-        <router-link
-          :to="{ name: 'noteForm' }"
-        >
-          <button>Add new note</button>
-        </router-link>
+        <ModalNote/>
         <form action="#" class="post-new-form">
           <input type="text" placeholder="Search" />
         </form>
@@ -26,11 +22,13 @@
         </div>
       </div>
     </div>
+  
   </section>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import ModalNote from './ModalNote.vue';
 
 export default {
   name: 'notes',
@@ -42,7 +40,11 @@ export default {
   },
   methods: {
     ...mapActions("notes", ['getNotes']),
+    
   },
+  components: {
+    ModalNote
+  }
 }
 </script>
 

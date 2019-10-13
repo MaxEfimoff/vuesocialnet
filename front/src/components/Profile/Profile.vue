@@ -68,16 +68,19 @@
             Delete from friends
           </button>
         </div>
+        <ModalProfile/>
         <div class="error-message">
           {{ this.errors.alreadyfriend }}
         </div>
       </div>
+      
     </div>
-      <SendMessage
+      
+      <!-- <SendMessage
         :formData="formData"
         :onSubmit="submitForm"
         @change="onChange"
-      />
+      /> -->
       <div class="post-wrapper">
         <div class="post" v-for="post in profilePosts.slice(0, 10)" :key="post.id">
           <div class="post-author flex">
@@ -106,7 +109,8 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import SendMessage from'@/components/helpers/SendMessage.vue'
+import SendMessage from'@/components/helpers/SendMessage.vue';
+import ModalProfile from './ModalProfile.vue';
 
 export default {
   name: 'Profile',
@@ -159,7 +163,8 @@ export default {
     }
   },
   components: {
-    SendMessage
+    // SendMessage,
+    ModalProfile
   },
   data() {
     return {

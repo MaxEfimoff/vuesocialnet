@@ -1,7 +1,8 @@
 <template>
   <div>
     <form @submit.prevent="onSubmit" class="message-new-form">
-        <div> 
+        <div class="posts"> 
+          <h2 class="padding">Send message</h2>
           <textarea
             class="textarea"
             placeholder="Send a message"
@@ -11,9 +12,9 @@
           <div class="error-message">
             {{this.errors.text}}
           </div>
-        </div>
-        <div class="noleftpadding">
-          <button type="submit">Submit</button>
+          <div class="padding">
+            <button type="submit">Submit</button>
+          </div>
         </div>
       </form>
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <section class="section posts">
+  <section class="posts">
     <h2 class="padding">Note Form</h2>
     <form @submit.prevent="submitForm" class="post-new-form">
       <div class="halfpadding">
@@ -52,7 +52,6 @@ export default {
   methods: {
     ...mapActions("profile", [ 'exportCurrentProfile' ]),
     submitForm() {
-      console.log(this.formData)
       this.$store.dispatch('notes/addNote', this.formData)
       .then(() => this.$router.push({ name: 'notes' }))
       .catch((error) => {console.log(error)

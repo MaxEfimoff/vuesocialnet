@@ -25,11 +25,7 @@
             <a href="">Liked</a>
           </li>
         </ul>
-        <a
-          :to="{ name: 'postForm' }"
-        >
-          <button>New post</button>
-        </a>
+        <ModalPost/>
         <form action="#" class="post-new-form">
           <input type="text" placeholder="Post search" />
         </form>
@@ -47,6 +43,7 @@
 import Posts from'./Posts';
 import MyPosts from'./MyPosts';
 import FriendsPosts from'./FriendsPosts';
+import ModalPost from './ModalPost.vue';
 
 export default {
   methods: {
@@ -68,14 +65,15 @@ export default {
       steps: [
         Posts,
         MyPosts,
-        FriendsPosts
+        FriendsPosts,
       ]
     }
   },
   components: {
     Posts,
     MyPosts,
-    FriendsPosts
+    FriendsPosts,
+    ModalPost
   }
 }
 </script>

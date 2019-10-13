@@ -125,7 +125,7 @@ span, li, i {
 .textarea {
   text-align:left;
   border: 1px solid var(--primary-color);
-  height: 10rem;
+  height: 7rem;
   width: 100%;
   min-width: 10rem;
   padding: 0.5rem;
@@ -542,6 +542,11 @@ span, li, i {
   border-radius: 50%;
   height: 30px;
   width: 30px;
+}
+
+.post-author{
+  display: flex;
+  align-items: center;
 }
 
 .post-new {
