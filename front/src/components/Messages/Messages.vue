@@ -2,7 +2,7 @@
   <section class="section-center">
     <div class="section posts">
       <div class="post-new noleftpadding">
-        <form action="#" class="post-new-form">
+        <form action="#" class="search-form">
           <input type="text" placeholder="Search" />
         </form>
       </div>

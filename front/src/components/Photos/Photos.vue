@@ -7,7 +7,7 @@
         >
           <button>Add new photo</button>
         </router-link>
-        <form action="#" class="post-new-form">
+        <form action="#" class="search-form">
           <input type="text" placeholder="Search" />
         </form>
       </div>

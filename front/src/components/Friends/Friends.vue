@@ -10,7 +10,7 @@
             <a href="">Friends online</a>
           </li>
         </ul>
-        <form action="#" class="post-new-form">
+        <form action="#" class="search-form">
           <input type="text" placeholder="Friends search" />
         </form>
       </div>

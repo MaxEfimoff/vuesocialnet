@@ -9,26 +9,26 @@
       </h1>
       <div class="nav">
         <div v-if="isAuthenticated">
-            <router-link
-              class="padding"
-              :to="{ name: 'profiles' }">
-              <span>
-                Users
-              </span>
-            </router-link>
-            <router-link
-              :to="{ name: 'posts' }">
-              <span>Posts</span>
-            </router-link>
-            <router-link
-              class="leftpadding"
-              :to="{ name: 'groups' }">
-              <span>Groups</span>
-            </router-link>
-            <a @click="logout">
-              <span class="padding">Logout</span>
-            </a>
-          </div>
+          <router-link
+            class="padding"
+            :to="{ name: 'profiles' }">
+            <span>
+              Users
+            </span>
+          </router-link>
+          <router-link
+            :to="{ name: 'posts' }">
+            <span>Posts</span>
+          </router-link>
+          <router-link
+            class="leftpadding"
+            :to="{ name: 'groups' }">
+            <span>Groups</span>
+          </router-link>
+          <a @click="logout">
+            <span class="padding">Logout</span>
+          </a>
+        </div>
           <div v-else>
             <router-link
               :to="{ name: 'login' }">
@@ -39,16 +39,6 @@
               <span class="padding">Registration</span>
             </router-link>
           </div>
-        <form name="search-form" method="POST">
-            <div class="search-form">
-              <button type="submit" class="form-control submit">
-                <i class="fas fa-search"></i>
-              </button>
-              <span class="search-wrap">
-                <input type="text" name="search" class="search-input" placeholder="Search">
-              </span>
-            </div>
-          </form>
       </div>
     </div>
   </nav>

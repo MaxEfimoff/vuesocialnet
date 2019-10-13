@@ -26,7 +26,7 @@
           </li>
         </ul>
         <ModalPost/>
-        <form action="#" class="post-new-form">
+        <form action="#" class="search-form leftmargin">
           <input type="text" placeholder="Post search" />
         </form>
       </div>

@@ -26,7 +26,7 @@
             >
               <button>Create new group</button>
             </router-link>
-            <form action="#" class="post-new-form">
+            <form action="#" class="search-form">
               <input type="text" placeholder="Group search" />
             </form>
           </div>

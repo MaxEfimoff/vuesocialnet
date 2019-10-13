@@ -274,11 +274,11 @@ span, li, i {
 }
 
 .search-form {
-  width: 100%;
   max-width: 15rem;
   display: inline-block;
   position: relative;
   line-height: 0;
+  margin-left: auto;
 }
 
 .search-form .form-control {

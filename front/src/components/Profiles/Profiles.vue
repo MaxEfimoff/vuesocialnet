@@ -10,7 +10,7 @@
             <a href="">Users online</a>
           </li>
         </ul>
-        <form action="#" class="post-new-form">
+        <form action="#" class="search-form leftmargin">
           <input type="text" placeholder="Users search" />
         </form>
       </div>
