@@ -35,7 +35,7 @@
         </router-link> 
         <router-link
           class="stat-counter lefthalfpadding"
-          :to="{ name: 'mygroups' }"
+          :to="{ name: 'groups' }"
         >
           <div class="count">{{ mygroups.length }}</div>
           <i class="fas fa-users"></i>

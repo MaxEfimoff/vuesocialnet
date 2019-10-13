@@ -1,5 +1,5 @@
 <template>
-  <section class="section posts">
+  <section class="posts">
     <h2 class="padding">Photo Form</h2>
     <form @submit.prevent="sendFile" class="padding" enctype="multipart/form-data">
       <div class="halfpadding dropzone">

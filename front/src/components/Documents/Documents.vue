@@ -2,11 +2,7 @@
   <section class="section-center">
     <div class="section posts">
       <div class="post-new padding">
-        <router-link
-          :to="{ name: 'documentForm' }"
-        >
-          <button>Add new document</button>
-        </router-link>
+        <ModalDocument />
         <form action="#" class="search-form">
           <input type="text" placeholder="Search" />
         </form>
@@ -14,9 +10,6 @@
       <div class="post-wrapper">
         <div class="post"  v-for="document in documents" :key="document.id">
           <div class="post-author">
-            <!-- <router-link
-              :to="`/documents/${document._id}`"
-            > -->
               <div class="groups-photo">
                 <i class="fas fa-sticky-note fa-2x"></i>
                 <a
@@ -27,7 +20,6 @@
                   {{ document.document }}
                 </a>
               </div>
-            <!-- </router-link> -->
           </div>
         </div>
       </div>
@@ -37,6 +29,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import ModalDocument from './ModalDocument.vue';
 
 export default {
   name: 'documents',
@@ -49,6 +42,9 @@ export default {
   methods: {
     ...mapActions("documents", ['getDocuments']),
   },
+  components: {
+    ModalDocument
+  }
 }
 </script>
 

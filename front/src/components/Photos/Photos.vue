@@ -2,11 +2,7 @@
   <section class="section-center">
     <div class="section posts">
       <div class="post-new padding">
-        <router-link
-          :to="{ name: 'photoForm' }"
-        >
-          <button>Add new photo</button>
-        </router-link>
+        <ModalPhoto />
         <form action="#" class="search-form">
           <input type="text" placeholder="Search" />
         </form>
@@ -30,6 +26,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import ModalPhoto from './ModalPhoto.vue';
 
 export default {
   name: 'photos',
@@ -42,6 +39,9 @@ export default {
   methods: {
     ...mapActions("photos", ['getPhotos']),
   },
+  components: {
+    ModalPhoto
+  }
 }
 </script>
 

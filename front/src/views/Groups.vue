@@ -16,7 +16,7 @@ import { mapState, mapActions } from 'vuex';
 // @ is an alias to /src
 import Header from '@/components/Header.vue';
 import LeftSection from '@/components/LeftSection.vue';
-import Groups from '@/components/Groups/Groups.vue';
+import Groups from '@/components/Groups/GroupsMain.vue';
 
 export default {
   components: {

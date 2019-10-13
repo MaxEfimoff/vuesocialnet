@@ -1,5 +1,5 @@
 <template>
-  <section class="section posts">
+  <section class="posts">
     <h2 class="padding">Group Form</h2>
     <form @submit.prevent="submitForm" class="post-new-form">
       <div class="halfpadding">
