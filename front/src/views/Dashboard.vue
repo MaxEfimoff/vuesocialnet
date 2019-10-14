@@ -34,7 +34,7 @@
             <div class="padding">
               <router-link 
                 :to="{ name: 'editProfile' }">
-                  <span>Edit profile</span>
+                  <button>Edit profile</button>
               </router-link>
             </div>
           </div>
@@ -42,17 +42,17 @@
         
       </div>
       <div v-else class="register">
-          <div class="section posts padding">
-            <h4>Welcome, {{ user.name }}! Please setup your profile!</h4>
-            <div class="edit-profile padding">
-              <router-link
-                :to="{ name: 'createProfile' }">
-                <!-- <img :src=" require (`${user.avatar}`) " alt=""> -->
-                <span>Create profile</span>
-              </router-link>
-            </div>
+        <div class="section posts padding">
+          <h4>Welcome, {{ user.name }}! Please setup your profile!</h4>
+          <div class="edit-profile padding">
+            <router-link
+              :to="{ name: 'createProfile' }">
+              <!-- <img :src=" require (`${user.avatar}`) " alt=""> -->
+              <button>Create profile</button>
+            </router-link>
           </div>
         </div>
+      </div>
     </div>
   </div>
 </template>

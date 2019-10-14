@@ -24,18 +24,6 @@
           </div>
         </div>
     </section>
-    <section v-else class="register">
-      <div class="section posts padding">
-        <h4>Welcome, {{ user.name }}! Please setup your profile!</h4>
-        <div class="edit-profile">
-          <router-link
-            :to="{ name: 'createProfile' }">
-            <!-- <img :src=" require (`${user.avatar}`) " alt=""> -->
-            <span>Create profile</span>
-          </router-link>
-        </div>
-      </div>
-    </section>
   </div>
 </template>
 

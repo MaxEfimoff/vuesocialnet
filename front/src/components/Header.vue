@@ -10,6 +10,7 @@
       <div class="nav">
         <div v-if="isAuthenticated">
           <router-link
+            v-if="this.profile.handle"
             class="padding"
             :to="{ name: 'profiles' }">
             <span>
@@ -17,13 +18,20 @@
             </span>
           </router-link>
           <router-link
+            v-if="this.profile.handle"
             :to="{ name: 'posts' }">
             <span>Posts</span>
           </router-link>
           <router-link
+            v-if="this.profile.handle"
             class="leftpadding"
             :to="{ name: 'groups' }">
             <span>Groups</span>
+          </router-link>
+          <router-link
+            class="leftpadding"
+            :to="{ name: 'dashboard' }">
+            <span>Dashboard</span>
           </router-link>
           <a @click="logout">
             <span class="padding">Logout</span>
@@ -50,6 +58,7 @@ import { mapState } from "vuex";
 export default {
   computed: {
     ...mapState('auth', ['isAuthenticated', 'user']),
+    ...mapState('profile', ['profile']),
   },
   methods: {
     logout() {

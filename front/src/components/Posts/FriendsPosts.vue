@@ -3,7 +3,7 @@
     <section class="section-center" v-if="this.profile.handle">
       <div class="post-wrapper">
         <div class="post" v-for="post in friendsposts.slice(0, 10)" :key="post.id">
-          <div class="post-author flex">
+          <div class="post-author">
             <router-link
               :to="`/profile/handle/${post.name}`">
               <div>

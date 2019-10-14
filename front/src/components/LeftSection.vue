@@ -2,7 +2,9 @@
   <section class="section-left">
     <!-- Avatar -->
     <div class="section">
-      <img class="avatar-background" src="../assets/img/photos/unsplash_2.jpg" alt="">
+      <div class="avatar-font" :style="{ backgroundImage: 'url(' + backgroundImage + ')' }">
+        <!-- <img class="avatar-background" src="../assets/img/photos/unsplash_2.jpg" alt=""> -->
+      </div>
       <div class="avatar">
         <img class="avatar" :src=" require(`@/assets/img/01.jpg`) " alt="">
       </div>
@@ -56,7 +58,7 @@
         </router-link> 
       </div>
       <div class="edit-profile halfpadding">
-        <router-link :to="{ name: 'dashboard' }">Dashboard</router-link>
+        <router-link :to="{ name: 'dashboard' }"><button>Dashboard</button></router-link>
       </div>
       <div class="edit-profile">
         <div class="personal-info">
@@ -195,6 +197,11 @@ export default {
     ...mapState('auth', [ 'user']),
     ...mapState('profile', [ 'profile']),
   },
+  data() {
+    return {
+      backgroundImage: 'https://occ-0-1068-92.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABceL_FxRrEg1Jm2LyiYugCJwBkJ2v4GmCBWQ_JNLBXCu1tpO1CMoOxGk9R74PCzrCR0FLIrjdgZlyIHnZEuiHArY6C9G.jpg?r=a82' 
+    }
+  }
 }
 
 

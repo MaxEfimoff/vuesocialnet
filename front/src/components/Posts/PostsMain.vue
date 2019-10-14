@@ -1,5 +1,5 @@
 <template>
-  <section class="section-center">
+  <section class="section-center" v-if="this.profile.handle">
     <div class="section posts">
       <div class="friends-list padding">
         <ul  class="flex">
@@ -45,6 +45,8 @@ import MyPosts from'./MyPosts';
 import FriendsPosts from'./FriendsPosts';
 import ModalPost from './ModalPost.vue';
 
+import { mapState } from 'vuex';
+
 export default {
   methods: {
     navigateTo(step) {
@@ -55,6 +57,7 @@ export default {
     }
   },
   computed: {
+    ...mapState('profile', ['profile']),
     activeComponent() {
       return this.steps[this.activeStep - 1]
     }

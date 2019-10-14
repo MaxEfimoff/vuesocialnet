@@ -77,6 +77,7 @@ input[type='text'] {
 input {
   border: 1px solid var(--primary-color);
   height: 2rem;
+  width: 100%;
   background-color: var(--primary-color);
   border-radius: 0.2rem;
   padding: 0.5rem;
@@ -234,10 +235,11 @@ span, li, i {
 }
 
 .navbar {
-  background-color: #b1b1b1;
+  background-color: rgb(252, 252, 252);
   height: 50px;
   font-size: 1.2rem;
   padding: 0.3rem 0 0.3rem 0;
+  border-bottom: 1px solid rgba(var(--b6a,219,219,219),1);
 }
 
 .navbar .container {
@@ -330,11 +332,13 @@ span, li, i {
 }
 
 .section {
-  border: 1px solid rgb(230, 230, 230);
-  border-radius: 0.2rem;
+  border-color:#fff;
+  border-radius: 0.3rem;
   margin-bottom: 1rem;
   background-color: #fff;
   position: relative;
+  box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 4px 0px;
+  z-index: 999;
 }
 
 .section-left, .section-right {
@@ -353,11 +357,12 @@ span, li, i {
 .profile-background {
   width: 100%;
   max-height: 484px;
-  min-height: 181px;
+  min-height: 420px;
   background-image: url("/assets/img/photos/unsplash_2.png");
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover;
+  background-size: 100% 100%;
+  border-radius: 0.3rem 0.3rem 0 0;
 }
 
 .avatar {
@@ -368,10 +373,9 @@ span, li, i {
 .avatar img {
   max-width: 200px;
   border-radius: 50%;
-  border: 3px solid #fff;
   height: 100px;
   width: 100px;
-
+  box-shadow: 0 7px 8px -4px rgba(0,0,0,.2),0 12px 17px 2px rgba(0,0,0,.14),0 5px 22px 4px rgba(0,0,0,.12)!important;
 }
 
 .avatar-wide{
@@ -566,7 +570,6 @@ span, li, i {
 }
 
 .post-new-form input{
-  width: 20rem;
   padding-right: 1rem;
 }
 
@@ -650,6 +653,16 @@ span, li, i {
 
 .register {
   width: 500px;
-  margin: auto;
+  min-height: 250px;
+  margin: 5rem auto;
+}
+.avatar-font {
+  height: 180px;
+  background-size: 100% 100%;
+  border-radius: 0.3rem 0.3rem 0 0;
+}
+
+.container-slider {
+  transition: opacity 0.2s;
 }
 </style>

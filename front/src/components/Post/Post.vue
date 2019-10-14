@@ -1,7 +1,6 @@
 <template>
   <section class="section-center">
     <div class="section posts">
-      <PostHeader />
       <div class="post-wrapper">
         <div class="post-new padding">
           <router-link
