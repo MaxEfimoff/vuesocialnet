@@ -67,17 +67,18 @@
             <span>{{ profile.company }}</span>
           </div>
           <div class="show-more">
-            <a @click="showProfile">
+            <a >
               <i
+                @click="toggleVisibility"
                 href="#"
-                class="fas fa-chevron-down"
+                :class="[visible ? 'fas fa-chevron-up': 'fas fa-chevron-down']"
                 id="showMoreInfo"
                 ref="showMoreInfo"
               ></i></a>
           </div>
           <!-- More info hidden -->
-          <div class="container-slider"> 
-            <div id="slider" ref="slider" class="slideup">
+          <transition name="dropdown-fade">
+            <div v-if="visible"> 
               <div class="education padding">
                 <a>Website</a>
                 <span>{{ profile.website }}</span>
@@ -91,7 +92,7 @@
                 <span>{{ profile.bio }}</span>
               </div>
             </div>
-          </div>
+          </transition>
         </div>
       </div>
     </div>
@@ -159,7 +160,7 @@ import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'Main',
-  created() {
+  mounted() {
     this.getMyGroups();
     this.getMessages();
     this.getNotes();
@@ -174,18 +175,8 @@ export default {
     ...mapActions("photos",['getPhotos']),
     ...mapActions("documents",['getDocuments']),
     ...mapActions("profile",['exportCurrentProfile']),
-    showProfile() {
-      if(this.$refs.slider.classList.contains("slideup")) {
-        this.$refs.slider.classList.remove("slideup");
-        this.$refs.slider.classList.add("slidedown");
-        this.$refs.showMoreInfo.classList.remove("fa-chevron-down");
-        this.$refs.showMoreInfo.classList.add("fa-chevron-up");
-      } else {
-        this.$refs.slider.classList.remove("slidedown");
-        this.$refs.slider.classList.add("slideup");
-        this.$refs.showMoreInfo.classList.remove("fa-chevron-up");
-        this.$refs.showMoreInfo.classList.add("fa-chevron-down");
-      }
+    toggleVisibility() {
+      this.visible =!this.visible;
     }
   },
   computed: {
@@ -199,34 +190,20 @@ export default {
   },
   data() {
     return {
-      backgroundImage: 'https://occ-0-1068-92.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABceL_FxRrEg1Jm2LyiYugCJwBkJ2v4GmCBWQ_JNLBXCu1tpO1CMoOxGk9R74PCzrCR0FLIrjdgZlyIHnZEuiHArY6C9G.jpg?r=a82' 
+      backgroundImage: 'https://occ-0-1068-92.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABceL_FxRrEg1Jm2LyiYugCJwBkJ2v4GmCBWQ_JNLBXCu1tpO1CMoOxGk9R74PCzrCR0FLIrjdgZlyIHnZEuiHArY6C9G.jpg?r=a82',
+      visible: false
     }
   }
 }
 
-
-
-// const showMoreInfo = document.getElementById('showMoreInfo');
-// const slider = document.getElementById('slider');
-
-// showMoreInfo.addEventListener('click', () => {
-//   if (slider.classList.contains("slideup")) 
-//   {
-//     slider.classList.remove("slideup");
-//     slider.classList.add("slidedown");
-//     showMoreInfo.classList.remove("fa-chevron-down");
-//     showMoreInfo.classList.add("fa-chevron-up");
-//   } else {
-//     slider.classList.remove("slidedown");
-//     slider.classList.add("slideup");
-//     showMoreInfo.classList.remove("fa-chevron-up");
-//     showMoreInfo.classList.add("fa-chevron-down");
-//   } 
-// });
-
-
 </script>
 
-<style>
-
+<style scoped>
+.dropdown-fade-enter-active, .dropdown-fade-leave-active {
+    transition: all .2s ease-in-out;
+  }
+  .dropdown-fade-enter, .dropdown-fade-leave-to {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
 </style>

@@ -118,6 +118,11 @@ button:focus {
   outline: none;
 }
 
+button:hover {
+  background: rgb(228, 228, 228);
+  color: var(--secondary-color);
+}
+
 span, li, i {
   color: var(--secondary-color);
   font-size: 0.8rem;
@@ -506,12 +511,13 @@ span, li, i {
 }
 
 .education span {
-  margin-left: 2rem;
+  margin-left: auto;
 }
 
 .show-more {
   text-align: center;
 }
+
 
 /* Stats */
 .stats {
@@ -613,7 +619,6 @@ span, li, i {
 .slideup, .slidedown {
   max-height: 0;            
   overflow-y: hidden;
-  transition: transform 1.5s ease-in-out;
 }
 .slidedown {            
   max-height: 260px ;                    
