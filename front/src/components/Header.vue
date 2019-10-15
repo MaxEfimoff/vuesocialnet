@@ -40,11 +40,7 @@
           <div v-else>
             <router-link
               :to="{ name: 'login' }">
-              <span>Login</span>
-            </router-link>
-            <router-link
-              :to="{ name: 'register' }">
-              <span class="padding">Registration</span>
+              <span>Login/Register</span>
             </router-link>
           </div>
       </div>
