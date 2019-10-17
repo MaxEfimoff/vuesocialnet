@@ -28,14 +28,17 @@ router.get('/', passport.authenticate("jwt", { session: false }), (req, res) => 
 //@desc       Get my posts
 //@access     Private
 router.get('/my-posts', passport.authenticate("jwt", { session: false }), (req, res) => {
-  Post
+  Profile.findOne({ user: req.user.id })
+  .then(profile => {
+    Post
     .find()
     .sort({date: -1})
     .then(posts =>
       res.json(posts.filter(post => 
-        post.user.toString() === req.user.id
+        post.name.toString() === profile.handle
       ))
     )
+  })
     .catch(err => res.status(404).json({nopostsfound: 'No posts found'}));
 })
 
@@ -90,8 +93,8 @@ router.post('/', passport.authenticate("jwt", { session: false }), (req, res) =>
   const newPost = new Post({
     text: req.body.text,
     name: req.body.name,
-    avatar: req.body.avatar,
-    user: req.user.id
+    profile: req.body.profile,
+    avatar: req.body.avatar
   });
 
   newPost.save()
@@ -189,8 +192,8 @@ router.post(
         const newComment = {
           text: req.body.text,
           name: req.body.name,
-          avatar: req.body.avatar,
-          user: req.user.id
+          profile: req.body.profile,
+          avatar: req.body.avatar
         };
 
         // Add to comments array
@@ -242,12 +245,11 @@ router.delete(
 //@access     Private
 router.get('/handle/:handle/', passport.authenticate('jwt', { session: false}), (req, res) => {
   Profile.findOne({ handle: req.params.handle })
-    .populate("user", ["name", "avatar"])
     .then(profile => {
     Post.find()
       .sort({ date: -1 })
       .then(posts =>
-        res.json(posts.filter(post => post.user.toString() === profile.user._id.toString()))
+        res.json(posts.filter(post => post.name.toString() === profile.handle.toString()))
       )
       .catch(err =>
         res.status(404).json({ nophotofound: "No posts found" })

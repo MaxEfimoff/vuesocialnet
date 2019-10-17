@@ -4,9 +4,17 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
-  user: {
+  // user: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'users'
+  // },
+  profile: {
     type: Schema.Types.ObjectId,
-    ref: 'users'
+    ref: 'profile'
+  },
+  avatar: {
+    type: String,
+    required: true
   },
   text: {
     type: String,
@@ -15,31 +23,37 @@ const PostSchema = new Schema({
   name: {
     type: String
   },
-  avatar: {
-    type: String
-  },
   likes: [
+    // {
+    //   user: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'users'
+    //   }
+    // }
     {
-      user: {
+      profile: {
         type: Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'profile'
       }
     }
   ],
   comments: [
     {
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: 'users'
+      // user: {
+      //   type: Schema.Types.ObjectId,
+      //   ref: 'users'
+      // },
+      profile: {
+        type: String,
       },
       text: {
         type: String,
         required: true
       },
-      name: {
-        type: String
-      },
       avatar: {
+        type: String,
+      },
+      name: {
         type: String
       },
       date: {

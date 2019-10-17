@@ -142,9 +142,20 @@ router.post('/', passport.authenticate('jwt', {session: false}), (req, res) => {
   if (req.body.status) {
     profileFields.status = req.body.status
   } else {
-    profileFields.location = undefined
+    profileFields.status = undefined
   }
-    
+  
+  if (req.body.avatar) {
+    profileFields.avatar = req.body.avatar
+  } else {
+    profileFields.avatar = undefined
+  }
+
+  if (req.body.background) {
+    profileFields.background = req.body.background
+  } else {
+    profileFields.background = undefined
+  }
   // Skills - split into array
   // if (typeof req.body.skills !== "undefined") {
   //     profileFields.skills = req.body.skills.split(",");
