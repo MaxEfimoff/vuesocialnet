@@ -7,7 +7,7 @@
             <router-link
               :to="`/profile/handle/${post.name}`">
               <div>
-                <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
+                <img class="groups-img" :src="post.avatar" alt="">
                 <div class='text-center'>
                   <span>{{ post.name }}</span>
                 </div>

@@ -29,7 +29,8 @@ export default {
       formData: {
         text: '',
         name: this.$store.state.profile.profile.handle,
-        // avatar: this.$store.state.profile.profile.avatar
+        profile: this.$store.state.profile.profile._id,
+        avatar: this.$store.state.profile.profile.avatar
       },
       tab: 'text',
     };

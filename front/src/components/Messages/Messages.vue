@@ -9,10 +9,16 @@
       <div class="post-wrapper">
         <div class="post" v-for="message in messages" :key="message.id">
           <div class="flex-left">
-              <div>
-                <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
+              <div v-if="profile.handle != message.recipient">
+                <img class="groups-img" :src="message.recipientAvatar" alt="">
                 <div class='text-center'>
                   <span>{{ message.recipient }}</span>
+                </div>
+              </div>
+              <div v-else>
+                <img class="groups-img" :src="message.nameAvatar" alt="">
+                <div class='text-center'>
+                  <span>{{ message.name }}</span>
                 </div>
               </div>
             <router-link
@@ -35,12 +41,15 @@ export default {
   name: 'Messages',
   created() {
     this.getMessages();
+    this.exportCurrentProfile();
   },
   computed: {
     ...mapState('messages', [ 'messages']),
+    ...mapState('profile', [ 'profile']),
   },
   methods: {
     ...mapActions("messages",['getMessages']),
+    ...mapActions("profile",['exportCurrentProfile']),
   },
 }
 </script>

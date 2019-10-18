@@ -2,12 +2,17 @@
   <section class="section-left">
     <!-- Avatar -->
     <div class="section">
-      <div class="avatar-font" :style="{ backgroundImage: 'url(' + backgroundImage + ')' }">
-        <!-- <img class="avatar-background" src="../assets/img/photos/unsplash_2.jpg" alt=""> -->
+      <div class="avatar-font" :style="{ backgroundImage: 'url(' + `${profile.background}` + ')' }">
       </div>
-      <div class="avatar">
-        <img class="avatar" :src=" require(`@/assets/img/01.jpg`) " alt="">
-      </div>
+      <router-link
+        class="stat-counter"
+        :to="`/profile/handle/${profile.handle}`"
+      >
+        <div class="avatar">
+          <!-- <img class="avatar" :src=" require(`@/assets/img/01.jpg`) " alt=""> -->
+          <img :src="profile.avatar" alt="">
+        </div>
+      </router-link>
       <div class="edit-profile">
         <h3>{{ profile.handle }}</h3>
         <span>{{ profile.status }}</span>
@@ -111,7 +116,7 @@
         >
           <img
             class="friends-photo"
-            src="../assets/img/anon.jpg"
+            :src='profile.avatar'
             alt=""
             :title='profile.handle'
           >
@@ -190,7 +195,6 @@ export default {
   },
   data() {
     return {
-      backgroundImage: 'https://occ-0-1068-92.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABceL_FxRrEg1Jm2LyiYugCJwBkJ2v4GmCBWQ_JNLBXCu1tpO1CMoOxGk9R74PCzrCR0FLIrjdgZlyIHnZEuiHArY6C9G.jpg?r=a82',
       visible: false
     }
   }

@@ -2,7 +2,12 @@
   <section class="section-center">
     <div class="section posts">
       <!-- Message header -->
-      <div class="message-header padding text-center">
+      <div v-if="profile.handle === message.recipient" class="message-header padding text-center">
+        <img class="groups-img" :src="message.nameAvatar" alt="">
+        <h4>{{ message.name }}</h4>
+      </div>
+      <div v-if="profile.handle === message.name" class="message-header padding text-center">
+        <img class="groups-img" :src="message.recipientAvatar" alt="">
         <h4>{{ message.recipient }}</h4>
       </div>
       <!-- Message and comments -->
@@ -11,7 +16,7 @@
           <div class="">
             <div class="flex-left">
               <div>
-                <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
+                <img class="groups-img" :src="message.nameAvatar" alt="">
                 <div class='text-center'>
                   <span>{{ message.name }}</span>
                 </div>
@@ -28,7 +33,7 @@
             >
               <div class="flex-left-nowrap">
                 <div>
-                  <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
+                  <img class="groups-img" :src="comment.avatar" alt="">
                   <div class='text-center'>
                     <span>{{ comment.name }}</span>
                   </div>
@@ -67,20 +72,24 @@ export default {
     return {
       formData: {
         text: '',
-        name: this.$store.state.profile.profile.user.name,
-        // avatar: this.$store.state.profile.profile.avatar
+        name: this.$store.state.profile.profile.handle,
+        avatar: this.$store.state.profile.profile.avatar,
+        handle: this.$store.state.profile.profile.handle
       },
       tab: 'text',
     };
   },
   created() {
     this.getMessageById(this.$route.params.id);
+    this.exportCurrentProfile();
   },
   computed: {
     ...mapState('messages', ['message']),
+    ...mapState('profile', [ 'profile']),
   },
   methods: {
     ...mapActions("messages", ['getMessageById']),
+    ...mapActions("profile",['exportCurrentProfile']),
     submitForm() {
       const payload = {
         messageId: this.$route.params.id,

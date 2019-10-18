@@ -129,6 +129,9 @@ const ProfileSchema = new Schema({
         // ref: 'users',
         type: String,
         required: true
+      },
+      avatar: {
+        type: String,
       }
     }
   ],

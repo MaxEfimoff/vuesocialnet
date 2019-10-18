@@ -41,9 +41,9 @@ export default {
       formData: {
         text: '',
         name: this.$store.state.profile.profile.handle,
-        recipient: this.$store.state.profile.anotherUserProfile.user.name,
-        // avatar: this.$store.state.auth.user.avatar,
-        user: this.$store.state.auth.user.id
+        nameAvatar: this.$store.state.profile.profile.avatar,
+        recipient: this.$store.state.profile.anotherUserProfile.handle,
+        recipientAvatar: this.$store.state.profile.anotherUserProfile.avatar,
       },
     };
   },

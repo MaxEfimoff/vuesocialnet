@@ -81,9 +81,9 @@ function getProfileById({ commit }, user) {
 };
 
 
-function addToFriends({ commit }, handle) {
+function addToFriends({ commit }, payload) {
   return new Promise((resolve, reject) => {
-    axios.post(addToFriendsUrl, handle)
+    axios.post(addToFriendsUrl, payload)
     .then((response) => {
         commit('getProfile', response.data);
         console.log(respose.data);

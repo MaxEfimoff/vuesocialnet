@@ -31,6 +31,14 @@
               <a>Status</a>
               <span>{{ profile.status }}</span>
             </div>
+            <div class="education padding">
+              <a>Avatar</a>
+              <span>{{ profile.avatar }}</span>
+            </div>
+            <div class="education padding">
+              <a>Background</a>
+              <span>{{ profile.background }}</span>
+            </div>
             <div class="padding">
               <router-link 
                 :to="{ name: 'editProfile' }">

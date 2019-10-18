@@ -1,9 +1,9 @@
 <template>
   <div class="section">
-    <img class="profile-background" src="../../assets/img/photos/unsplash_2.jpg" alt="">
+    <img class="profile-background" :src="anotherUserProfile.background" alt="">
     <div class="profile">
       <div class="avatar">
-        <img :src=" require(`@/assets/img/anon.jpg`) " alt="">
+        <img :src="anotherUserProfile.avatar" alt="">
       </div>
        <div class="edit-profile">
         <h3 class="white-font">{{ anotherUserProfile.handle }}</h3>
@@ -51,7 +51,7 @@
           <i class="fas fa-users white-font"></i>
         </router-link>
       </div>
-      <div class="flex">
+      <div class="flex" v-if="this.$store.state.profile.anotherUserProfile.user._id != this.$store.state.auth.user.id">
         <div class="padding" v-if="!this.alreadyFriend">
           <button 
             type="submit"
@@ -73,14 +73,14 @@
           {{ this.errors.alreadyfriend }}
         </div>
       </div>
-      
+      <div class="padding flex" v-else>
+        <router-link 
+          :to="{ name: 'editProfile' }">
+            <button>Edit profile</button>
+        </router-link>
+      </div>
+
     </div>
-      
-      <!-- <SendMessage
-        :formData="formData"
-        :onSubmit="submitForm"
-        @change="onChange"
-      /> -->
       <div class="post-wrapper">
         <div class="post" v-for="post in profilePosts.slice(0, 10)" :key="post.id">
           <div class="post-author">
@@ -88,7 +88,7 @@
               :to="`/profile/handle/${post.name}`"
             >
               <div>
-                <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
+                <img class="groups-img" :src="post.avatar" alt="">
                 <div class='text-center'>
                   <span>{{ post.name }}</span>
                 </div>
@@ -137,23 +137,12 @@ export default {
     ...mapActions("profile", ['getProfileByHandle', 'exportCurrentProfile', 'getProfilePhotos', 'getProfilePosts']),
     ...mapActions("groups",['getGroups']),
     ...mapActions("messages",['getMessages']),
-    onChange(newFormData) {
-      this.formData = newFormData;
-    },
-    submitForm() {
-      const newData = Object.assign({}, this.formData);
-
-      this.$store.dispatch('messages/addMessage', newData)
-        .then(() => this.$router.push({ name: 'messages' }))
-        .catch((error) => {
-          console.log(error)
-        });
-    },
     addToFriends() {
-      const handle = {
-        handle: this.$store.state.profile.anotherUserProfile.handle
+      const payload = {
+        handle: this.$store.state.profile.anotherUserProfile.handle,
+        avatar: this.$store.state.profile.anotherUserProfile.avatar
       };
-      this.$store.dispatch('profile/addToFriends', handle)
+      this.$store.dispatch('profile/addToFriends', payload)
       .catch((error) => console.log(error))
     },
     deleteFromFriends() {
@@ -165,17 +154,6 @@ export default {
   components: {
     // SendMessage,
     ModalProfile
-  },
-  data() {
-    return {
-      formData: {
-        text: '',
-        name: this.$store.state.profile.profile.handle,
-        recipient: this.$store.state.profile.anotherUserProfile.user.name,
-        // avatar: this.$store.state.auth.user.avatar,
-        user: this.$store.state.auth.user.id
-      },
-    };
   },
 }
 </script>

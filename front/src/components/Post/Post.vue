@@ -6,7 +6,7 @@
           <router-link
             :to="`/profile/handle/${post.name}`">
             <div>
-              <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
+              <img class="groups-img" :src="post.avatar" alt="">
             </div>
             <span>{{ post.name }}</span>
           </router-link>
@@ -32,10 +32,13 @@
         >
           <div class="flex-left-nowrap">
              <div>
-              <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
-              <div class='text-center'>
-                <span>{{ comment.name }}</span>
-              </div>
+              <router-link
+                :to="`/profile/handle/${comment.name}`">
+                <img class="groups-img" :src="comment.avatar" alt="">
+                <div class='text-center'>
+                  <span>{{ comment.name }}</span>
+                </div>
+              </router-link>
             </div>
             <div class="groups-photo">
               <a class="leftpadding">{{ comment.text }}</a>
@@ -70,21 +73,24 @@ export default {
     return {
       formData: {
         text: '',
-        name: this.$store.state.profile.profile.user.name,
-        // avatar: this.$store.state.profile.profile.avatar
+        name: this.$store.state.profile.profile.handle,
+        avatar: this.$store.state.profile.profile.avatar
       },
       tab: 'text',
     };
   },
   created() {
     this.getPostById(this.$route.params.id);
+    this.exportCurrentProfile();
   },
   computed: {
     ...mapState('posts', ['post']),
     ...mapState('errors', ['errors']),
+    ...mapState('profile', [ 'profile' ])
   },
   methods: {
     ...mapActions("posts", ['getPostById']),
+    ...mapActions("profile", [ 'exportCurrentProfile' ]),
     addLike() {
       this.$store.dispatch('posts/addLike', this.$route.params.id)
       .catch((error) => {console.log(error)})
@@ -94,6 +100,7 @@ export default {
         postId: this.$route.params.id,
         formData: this.formData
       }
+      console.log(payload)
       this.$store.dispatch('posts/addComment', payload)
       .then(this.formData = {})
       .catch((error) => {console.log(error)})

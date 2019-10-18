@@ -78,6 +78,24 @@
     <div class="error-message">
       {{this.errors.bio}}
     </div>
+    <div class="halfpadding">
+      <input
+        type="text"
+        placeholder="Avatar"
+        ref="avatar"
+        :value="formData.avatar"
+        @change="onChange('avatar', $event.target.value)"
+      >
+    </div>
+    <div class="halfpadding">
+      <input
+        type="text"
+        placeholder="Background"
+        ref="background"
+        :value="formData.background"
+        @change="onChange('background', $event.target.value)"
+      >
+    </div>
     <div class="padding">
       <button type="submit">Submit</button>
     </div> 

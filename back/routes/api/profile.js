@@ -365,7 +365,7 @@ router.get(
 
     Profile.findOne({ user: req.user.id });
     Profile.find()
-      .populate("user", ["name", "avatar"])
+      // .populate("user", ["name", "avatar"])
       .then(profiles => {
         /* if (!profiles) {
           errors.noprofile = "There are no friends";
@@ -388,7 +388,8 @@ router.post(
       // const keys = Object.keys(req.body);
       // const valueId = keys[0];
       const newFriend = {
-        handle: req.body.handle
+        handle: req.body.handle,
+        avatar: req.body.avatar
       }
       
         if (

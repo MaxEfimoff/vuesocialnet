@@ -27,7 +27,7 @@
               <div class="groups-photo">
                 <img
                   class="groups-img"
-                  src="../../assets/img/anon.jpg"
+                  :src='profile.avatar'
                   alt=""
                 >
                 <span>

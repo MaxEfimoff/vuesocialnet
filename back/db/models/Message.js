@@ -20,7 +20,10 @@ const MessageSchema = new Schema({
     type: String,
     required: true
   },
-  avatar: {
+  nameAvatar: {
+    type: String
+  },
+  recipientAvatar: {
     type: String
   },
 

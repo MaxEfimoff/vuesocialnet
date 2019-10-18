@@ -25,8 +25,8 @@ router.get(
           res.json(
             messages.filter(
               message =>
-                message.user.toString() === req.user.id ||
-                message.recipient.toString() === req.user.name
+                message.name.toString() === profile.handle||
+                message.recipient.toString() === profile.handle
             )
           )
         )
@@ -44,14 +44,14 @@ router.get(
   "/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Profile.findOne({ user: req.user.id, recipient: req.user.name }).then(
+    Profile.findOne({ user: req.user.id }).then(
       profile => {
         Message.findById(req.params.id)
           .then(message => {
             //  Check for message owner or recipient
             if (
-              message.user.toString() === req.user.id ||
-              message.recipient.toString() === req.user.name
+              message.name.toString() === profile.handle||
+              message.recipient.toString() === profile.handle
             ) {
               res.json(message);
             }
@@ -88,8 +88,8 @@ router.post(
       text: req.body.text,
       name: req.body.name,
       recipient: req.body.recipient,
-      // avatar: req.body.avatar,
-      user: req.user.id
+      nameAvatar: req.body.nameAvatar,
+      recipientAvatar: req.body.recipientAvatar,
     });
     newMessage.save().then(message => res.json(message));
   }
@@ -208,7 +208,8 @@ router.post(
           name: req.body.name,
           recipient: req.body.recipient,
           avatar: req.body.avatar,
-          user: req.user.id
+          user: req.user.id,
+          handle: req.body.handle,
         };
         // Add to comments array
         message.comments.push(newComment);
