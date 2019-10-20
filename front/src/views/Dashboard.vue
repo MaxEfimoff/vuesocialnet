@@ -47,19 +47,9 @@
             </div>
           </div>
         </section>
-        
       </div>
       <div v-else class="register">
-        <div class="section posts padding">
-          <h4>Welcome, {{ user.name }}! Please setup your profile!</h4>
-          <div class="edit-profile padding">
-            <router-link
-              :to="{ name: 'createProfile' }">
-              <!-- <img :src=" require (`${user.avatar}`) " alt=""> -->
-              <button>Create profile</button>
-            </router-link>
-          </div>
-        </div>
+        <NoProfileMessage />
       </div>
     </div>
   </div>
@@ -69,6 +59,8 @@
 // @ is an alias to /src
 import Header from '@/components/Header.vue';
 import LeftSection from '@/components/LeftSection.vue';
+import NoProfileMessage from '@/components/helpers/NoProfileMessage';
+
 import { mapState, mapActions } from 'vuex';
 
 export default {
@@ -104,6 +96,7 @@ export default {
   components: {
     Header,
     LeftSection,
+    NoProfileMessage
   }
 }
 </script>

@@ -1,5 +1,6 @@
 <template>
-  <section class="section-center">
+<div>
+  <section class="section-center" v-if="this.profile.handle">
     <div class="section posts">
       <div class="friends-list padding">
         <ul  class="flex">
@@ -15,25 +16,21 @@
         </form>
       </div>
       <div class="post" v-for="profile in profile.friends" :key="profile.id">
-        <div class="post-author">
-          <div class="groups-photo lefthalfpadding">
-            <router-link
-              :to="`/profile/handle/${profile.handle}`">
-              <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
-              <div class="text-center">
-                <div><a>{{ profile.handle }}</a></div>
-              </div>
-            </router-link>
-          </div>
-        </div>
+        <ProfileCard 
+          :profile="profile"/>
       </div>
     </div>
   </section>
+  <section v-else class="register">
+    <NoProfileMessage />
+  </section>
+</div>
 </template>
 
 <script>
-// @ is an alias to /src
 import { mapState, mapActions } from 'vuex';
+import NoProfileMessage from '@/components/helpers/NoProfileMessage';
+import ProfileCard from '@/components/Profile/ProfileCard';
 
 export default {
   created() {
@@ -45,6 +42,10 @@ export default {
   methods: {
     ...mapActions("profile",['exportCurrentProfile']),
   },
+  components: {
+    ProfileCard,
+    NoProfileMessage
+  }
 }
 </script>
 

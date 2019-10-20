@@ -1,6 +1,6 @@
 <template>
   <div class="section posts padding">
-    <h4>Welcome, {{ user.name }}! Please setup your profile!</h4>
+    <h4>Welcome! Please setup your profile!</h4>
     <div class="edit-profile">
       <router-link
         :to="{ name: 'createProfile' }">
