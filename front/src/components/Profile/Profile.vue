@@ -1,5 +1,6 @@
 <template>
-  <div class="section">
+<div>
+  <div class="section" v-if="this.profile.handle">
     <img class="profile-background" :src="anotherUserProfile.background" alt="">
     <div class="profile">
       <div class="avatar">
@@ -83,34 +84,22 @@
     </div>
       <div class="post-wrapper">
         <div class="post" v-for="post in profilePosts.slice(0, 10)" :key="post.id">
-          <div class="post-author">
-            <router-link
-              :to="`/profile/handle/${post.name}`"
-            >
-              <div>
-                <img class="groups-img" :src="post.avatar" alt="">
-                <div class='text-center'>
-                  <span>{{ post.name }}</span>
-                </div>
-              </div>
-            </router-link>
-            <router-link
-              :to="`/posts/${post._id}`"
-            >
-              <div class="leftmargin">
-                <span>{{ post.text }}</span>
-              </div>
-            </router-link>
-          </div>
+          <PostCard 
+          :post="post"/>
         </div>
       </div>
   </div>
+  <section v-else class="register">
+    <NoProfileMessage />
+  </section>
+</div>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import SendMessage from'@/components/helpers/SendMessage.vue';
 import ModalProfile from './ModalProfile.vue';
+import PostCard from '@/components/Post/PostCard';
+import NoProfileMessage from '@/components/helpers/NoProfileMessage';
 
 export default {
   name: 'Profile',
@@ -152,8 +141,8 @@ export default {
     }
   },
   components: {
-    // SendMessage,
-    ModalProfile
+    ModalProfile,
+    PostCard
   },
 }
 </script>
