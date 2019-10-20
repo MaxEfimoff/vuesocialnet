@@ -22,6 +22,10 @@ function SET_PROFILE_PHOTOS (state, photos) {
   state.profilePhotos = photos;
 }
 
+function SET_PROFILE_GROUPS (state, groups) {
+  state.profileGroups = groups;
+}
+
 function SET_PROFILE_POSTS (state, posts) {
   state.profilePosts = posts;
 }
@@ -33,5 +37,6 @@ export {
   SET_PROFILES,
   getAnotherUserProfile,
   SET_PROFILE_PHOTOS,
-  SET_PROFILE_POSTS
+  SET_PROFILE_POSTS,
+  SET_PROFILE_GROUPS
 };

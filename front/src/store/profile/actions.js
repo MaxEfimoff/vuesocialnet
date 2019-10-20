@@ -122,6 +122,18 @@ function getProfilePhotos({ commit }, handle) {
   })
 };
 
+function getProfileGroups({ commit }, handle) {
+  return new Promise((resolve, reject) => {
+    axios.get(`http://localhost:5000/api/groups/handle/${handle}`)
+    .then((response) => {
+      console.log(response)
+      commit('SET_PROFILE_GROUPS', response.data);
+      resolve();
+    })
+    .catch(error => console.log(error));
+  })
+};
+
 function getProfilePosts({ commit }, handle) {
   return new Promise((resolve, reject) => {
     axios.get(`http://localhost:5000/api/posts/handle/${handle}`)
@@ -143,5 +155,6 @@ export {
   deleteFromFriends,
   getProfilePhotos,
   getProfilePosts,
-  getProfileById
+  getProfileById,
+  getProfileGroups
 };

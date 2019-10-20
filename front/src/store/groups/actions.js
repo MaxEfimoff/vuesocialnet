@@ -10,7 +10,7 @@ import {
 
 function getGroups({ commit }) {
   return new Promise((resolve, reject) => {
-    axios.get(allGroupsUrl)  // Поменать на адрес получения массива групп
+    axios.get(allGroupsUrl)
       .then((response) => {
         commit('SET_GROUPS', response.data);
       })

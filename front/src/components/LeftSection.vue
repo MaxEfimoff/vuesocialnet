@@ -16,7 +16,7 @@
       <div class="edit-profile">
         <h3>{{ profile.handle }}</h3>
         <span>{{ profile.status }}</span>
-      </div>  
+      </div>
       <!-- Stats -->
       <div class="stats">
         <router-link

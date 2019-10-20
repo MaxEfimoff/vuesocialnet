@@ -360,6 +360,23 @@ router.delete(
   }
 );
 
-
+//@route      GET api/groups
+//@desc       Show user's groups
+//@access     Private
+router.get('/handle/:handle/', passport.authenticate('jwt', { session: false}), (req, res) => {
+  Profile.findOne({ handle: req.params.handle })
+    .then(profile => {
+    Group.find()
+      .sort({ date: -1 })
+      .then(groups =>
+        res.json(groups.filter(group => 
+          group.subscribes.map(a => a.user).includes(profile.handle).toString()))
+      )
+      .catch(err =>
+        res.status(404).json({ nophotofound: "No groups found" })
+      );
+    });
+  }
+);
 
 module.exports = router;
