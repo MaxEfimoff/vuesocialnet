@@ -94,8 +94,10 @@ router.post(
     if (req.body.handle) groupFields.handle = req.body.handle;
     if (req.body.status) groupFields.status = req.body.status;
     if (req.body.info) groupFields.info = req.body.info;
+    if (req.body.avatar) groupFields.avatar = req.body.avatar;
+    if (req.body.background) groupFields.background = req.body.background;
 
-    // Check  if handle exists
+    // Check if handle exists
     Group.findOne({ handle: groupFields.handle }).then(group => {
       if (group) {
         errors.handle = "That handle already exists";

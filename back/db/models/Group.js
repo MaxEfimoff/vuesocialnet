@@ -22,7 +22,10 @@ const GroupSchema = new Schema({
   avatar: {
     type: String
   },
-  // Subscribers is an array of user IDs  //kind of likes
+  background: {
+    type: String
+  },
+  // Subscribers is an array of user IDs\
   subscribes: [
     {
       user: {

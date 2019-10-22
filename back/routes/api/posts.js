@@ -31,13 +31,9 @@ router.get('/my-posts', passport.authenticate("jwt", { session: false }), (req, 
   Profile.findOne({ user: req.user.id })
   .then(profile => {
     Post
-    .find()
+    .find({name: profile.handle})
     .sort({date: -1})
-    .then(posts =>
-      res.json(posts.filter(post => 
-        post.name.toString() === profile.handle
-      ))
-    )
+    .then(posts => res.json(posts))
   })
     .catch(err => res.status(404).json({nopostsfound: 'No posts found'}));
 })
@@ -49,20 +45,20 @@ router.get('/friends-posts', passport.authenticate("jwt", { session: false }), (
   Profile.findOne({ user: req.user.id })
     .then(profile => {
       Post
-        .find()
+        .find({name: { $in: profile.friends.map(a => a.handle) }})
         .sort({date: -1})
-        .then(posts =>
-          res.json(posts.filter(post => 
-            profile.friends.map(a => a.handle).includes(post.name))
-            // Array of user's friends handles
-            // let handles = profile.friends.map(a => a.handle);
+        .then(posts => res.json(posts)
+          // res.json(posts.filter(post => 
+          //   profile.friends.map(a => a.handle).includes(post.name))
+          //   // Array of user's friends handles
+          //   // let handles = profile.friends.map(a => a.handle);
 
-            // Check if author of the post is in this array
-            // Then if author of the post is user's friend
-            // Show this post
-            // handles.includes(post.name);
-            // console.log(handles.includes(post.name))
-          )
+          //   // Check if author of the post is in this array
+          //   // Then if author of the post is user's friend
+          //   // Show this post
+          //   // handles.includes(post.name);
+          //   // console.log(handles.includes(post.name))
+          // )
         )
         .catch(err => res.status(404).json({nopostsfound: 'No posts found'}));
   })
@@ -246,11 +242,10 @@ router.delete(
 router.get('/handle/:handle/', passport.authenticate('jwt', { session: false}), (req, res) => {
   Profile.findOne({ handle: req.params.handle })
     .then(profile => {
-    Post.find()
+    Post.find({name: profile.handle})
       .sort({ date: -1 })
       .then(posts =>
-        res.json(posts.filter(post => post.name.toString() === profile.handle.toString()))
-      )
+        res.json(posts))
       .catch(err =>
         res.status(404).json({ nophotofound: "No posts found" })
       );
