@@ -36,6 +36,11 @@
                 New Post
               </button>
             </router-link>
+            <router-link class="padding" :to="`/groups/${group._id}/edit-group`">
+              <button>
+                Edit group
+              </button>
+            </router-link>
           </div>
           </div>
           <!-- Posts -->

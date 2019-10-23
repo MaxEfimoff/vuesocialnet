@@ -1,9 +1,7 @@
 import axios from 'axios';
 import {
   allGroupsUrl,
-  oneGroupUrl,
   createGroupUrl,
-  subscribeGroupUrl,
   manageGroupsUrl,
   myGroupsUrl
 } from '../urls';
@@ -52,6 +50,21 @@ function getMyGroups({ commit }) {
 function createGroup({ commit }, data) {
   return new Promise((resolve, reject) => {
     axios.post(createGroupUrl, data)
+      .then((response) => {
+        commit('SET_GROUP', response.data);
+        resolve();
+      })
+      .catch(error => {
+        commit('errors/setErrors', error.response.data, { root: true });
+        console.log(error)
+      });
+  });
+}
+
+function updateGroup({ commit, state }) {
+  const group = state.group
+  return new Promise((resolve, reject) => {
+    axios.patch(`http://localhost:5000/api/groups/${group._id}/update-group`, group)
       .then((response) => {
         commit('SET_GROUP', response.data);
         resolve();
@@ -154,5 +167,6 @@ export {
   unsubscribe,
   createGroupPost,
   getManageGroups,
-  getMyGroups
+  getMyGroups,
+  updateGroup
 };

@@ -32,6 +32,7 @@ import ManageGroups from './views/ManageGroups.vue';
 import MyGroups from './views/MyGroups.vue';
 import GroupPost from './views/GroupPost.vue';
 import GroupForm from './views/GroupForm.vue';
+import EditGroup from './views/EditGroup.vue';
 // Documents
 import Document from './views/Document.vue';
 import Documents from './views/Documents.vue';
@@ -174,6 +175,11 @@ export default new Router({
       path: '/groups/create-group',
       name: 'groupform',
       component: GroupForm,
+    },
+    {
+      path: '/groups/:id/edit-group',
+      name: 'editGroup',
+      component: EditGroup,
     },
     {
       path: '/groups/:id',

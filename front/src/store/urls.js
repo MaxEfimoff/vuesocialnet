@@ -73,6 +73,6 @@ export {
   friendsPostsUrl,
   createGroupUrl,
   manageGroupsUrl,
-  myGroupsUrl
+  myGroupsUrl,
   // profileByHandleUrl
 };

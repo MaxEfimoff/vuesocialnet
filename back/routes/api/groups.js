@@ -81,7 +81,7 @@ router.get(
 });
 
 //route       POST api/groups
-//desc        Create or edit  group
+//desc        Create group
 //access      Private
 router.post(
   "/create-group",
@@ -117,6 +117,57 @@ router.post(
     });
   }
 );
+
+//route       PATCH api/groups
+//desc        Update group
+//access      Private
+router.patch(
+  "/:id/update-group",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateGroupInput(req.body);
+
+    // Check validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    // Get fields
+    const groupFields = {};
+    if (req.body.name) groupFields.name = req.body.name;
+    if (req.body.handle) groupFields.handle = req.body.handle;
+    if (req.body.status) groupFields.status = req.body.status;
+    if (req.body.info) groupFields.info = req.body.info;
+    if (req.body.avatar) groupFields.avatar = req.body.avatar;
+    if (req.body.creatorAvatar) groupFields.creatorAvatar = req.body.creatorAvatar;
+    if (req.body.profile) groupFields.profile = req.body.profile;
+    if (req.body.background) groupFields.background = req.body.background;
+
+    Group.findOne({ group: req.params._id })
+    .then(group => {
+      if(group) {
+        // Find group by id and update
+        Group.findOneAndUpdate(
+          { group: req.params._id },
+          { $set: groupFields },
+          { new: true }
+        )
+        .then(group => res.json(group));
+      } else {
+
+    // Check if handle exists
+    Group.findOne({ group: req.params._id }).then(group => {
+      if (group) {
+        errors.handle = "That handle already exists";
+        res.status(400).json(errors);
+      }
+
+      // Save group
+      new Group(groupFields).save().then(group => res.json(group));
+    });
+  }
+  })
+});
 
 //route       DELETE api/groups/:id
 //desc        Delete group by id
