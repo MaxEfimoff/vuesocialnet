@@ -133,7 +133,7 @@
       <div class="groups-wrapper" v-for="group in mygroups.slice(0, 4)" :key="group.id">
         <router-link :to="`/groups/${group._id}`">
           <div class="groups-photo">
-            <img class="groups-img" src="../assets/img/groups/01.jpg"  alt="">
+            <img class="groups-img" :src="group.avatar"  alt="">
             <span>{{ group.handle }}</span>
           </div>  
         </router-link>

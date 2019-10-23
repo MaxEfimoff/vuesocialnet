@@ -23,6 +23,20 @@
           v-model="formData.info"
         />
       </div>
+      <div class="halfpadding">
+        <input
+          type="text"
+          placeholder="Group avatar"
+          v-model="formData.avatar"
+        />
+      </div>
+      <div class="halfpadding">
+        <input
+          type="text"
+          placeholder="Group background"
+          v-model="formData.background"
+        />
+      </div>
       <div class="error-message">
         {{ this.errors.text }}
       </div>
@@ -44,7 +58,7 @@ export default {
         status: '',
         info: '',
         name: this.$store.state.profile.profile.handle,
-        // avatar: this.$store.state.profile.profile.avatar
+        creatorAvatar: this.$store.state.profile.profile.avatar
       },
     };
   },

@@ -8,7 +8,7 @@
             class=" flex-left"
           >
             <div class="text-center"> 
-              <img class="groups-img" src="../../assets/img/groups/01.jpg" alt="">
+              <img class="groups-img" :src="group.avatar" alt="">
               <div><span>{{ group.subscribes.length }} Subscribers</span></div>
             </div>
             <div class="leftpadding">

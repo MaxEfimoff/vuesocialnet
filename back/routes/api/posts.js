@@ -48,17 +48,6 @@ router.get('/friends-posts', passport.authenticate("jwt", { session: false }), (
         .find({name: { $in: profile.friends.map(a => a.handle) }})
         .sort({date: -1})
         .then(posts => res.json(posts)
-          // res.json(posts.filter(post => 
-          //   profile.friends.map(a => a.handle).includes(post.name))
-          //   // Array of user's friends handles
-          //   // let handles = profile.friends.map(a => a.handle);
-
-          //   // Check if author of the post is in this array
-          //   // Then if author of the post is user's friend
-          //   // Show this post
-          //   // handles.includes(post.name);
-          //   // console.log(handles.includes(post.name))
-          // )
         )
         .catch(err => res.status(404).json({nopostsfound: 'No posts found'}));
   })

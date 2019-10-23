@@ -4,9 +4,13 @@ const Schema = mongoose.Schema;
 
 const GroupSchema = new Schema({
   // Group creator
-  user: {
+  // user: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: "users"
+  // },
+  profile: {
     type: Schema.Types.ObjectId,
-    ref: "users"
+    ref: 'profile'
   },
   handle: {
     type: String,
@@ -19,27 +23,42 @@ const GroupSchema = new Schema({
   info: {
     type: String
   },
+  name: {
+    type: String
+  },
   avatar: {
     type: String
   },
   background: {
     type: String
   },
+  creatorAvatar: {
+    type: String
+  },
   // Subscribers is an array of user IDs\
   subscribes: [
     {
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: "users"
-      }
+      // profile: {
+      //   type: Schema.Types.ObjectId,
+      //   ref: 'profile'
+      // }
+      handle: {
+        type: String
+      },
+      avatar: {
+        type: String
+      },
     }
   ],
   // Posts in group
   posts: [
     {
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: 'users'
+      // user: {
+      //   type: Schema.Types.ObjectId,
+      //   ref: 'users'
+      // },
+      profile: {
+        type: String,
       },
       text: {
         type: String,
@@ -61,16 +80,16 @@ const GroupSchema = new Schema({
       ],
       comments: [
         {
-          user: {
-            type: Schema.Types.ObjectId,
-            ref: 'users'
+          // user: {
+          //   type: Schema.Types.ObjectId,
+          //   ref: 'users'
+          // },
+          profile: {
+            type: String,
           },
           text: {
             type: String,
             required: true
-          },
-          name: {
-            type: String
           },
           avatar: {
             type: String

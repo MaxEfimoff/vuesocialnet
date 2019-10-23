@@ -11,9 +11,9 @@
       <div class="post-wrapper">
         <div class="post-new padding">
           <router-link
-            :to="`/profile/handle/${grouppost.name}`">
+            :to="`/profile/handle/${grouppost.profile}`">
             <div>
-              <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
+              <img class="groups-img" :src="grouppost.avatar" alt="">
             </div>
             <span>{{ grouppost.name }}</span>
           </router-link>
@@ -39,7 +39,7 @@
         >
           <div class="flex-left-nowrap">
              <div>
-              <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
+              <img class="groups-img" :src="comment.avatar" alt="">
               <div class='text-center'>
                 <span>{{ comment.name }}</span>
               </div>

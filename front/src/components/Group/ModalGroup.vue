@@ -1,7 +1,7 @@
 <template>
   <div>
     <button href="" @click.prevent="show">Create new Group</button>
-    <modal name="ModalGroup">
+    <modal name="ModalGroup" height="auto">
       <GroupForm />
     </modal>
   </div>

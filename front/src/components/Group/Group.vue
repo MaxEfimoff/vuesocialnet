@@ -2,18 +2,18 @@
   <div class="group-template">
     <section class="section-center">
       <div class="section posts">
+        <div class="group-background" :style="{ backgroundImage: 'url(' + `${group.background}` + ')' }">
+        </div>
+          <div class="avatar">
+            <!-- <img class="avatar" :src=" require(`@/assets/img/01.jpg`) " alt=""> -->
+            <img :src="group.avatar" alt="">
+          </div>
         <div>
-          <img src="../../../../back/uploads/groups-background.jpg" alt="">
-        </div>
-        <div class="post-new padding">
-          <h3>{{ group.handle }}</h3>
-        </div>
-        <div class="post-new padding">
-          <h4>{{ group.status }}</h4>
-          <span>{{ group.info }}</span>
+          <h3 class="halfpadding">{{ group.handle }}</h3>
+          <span>{{ group.status }}</span>
         </div>
         <div class="flex">
-          <div class="padding" v-if="!this.alreadySubscribed && !this.groupAdministrator">
+          <div class="padding" v-if="!this.alreadySubscribed">
             <button 
               type="submit"
               @click="subscribe"
@@ -28,6 +28,7 @@
             >
               Unsubscribe
             </button>
+            
           </div>
           <div v-if="this.groupAdministrator">
             <router-link :to="`/groups/${group._id}/post`">
@@ -44,7 +45,7 @@
                 <router-link
                   :to="`/profile/handle/${post.name}`">
                   <div>
-                    <img class="groups-img" src="../../assets/img/anon.jpg" alt="">
+                    <img class="groups-img" :src="post.avatar" alt="">
                     <div class='text-center'>
                       <span>{{ post.name }}</span>
                     </div>
@@ -60,6 +61,7 @@
               </div>
             </div>
           </div>
+          <!-- Posts -->
       </div>
     </section>
     <section class="section-right">
@@ -73,7 +75,7 @@
         >
           <img
             class="friends-photo"
-            src="../../assets/img/anon.jpg"
+            :src="profile.avatar"
             alt=""
             :title='profile.handle'
           >
@@ -84,11 +86,11 @@
         <span>Administrators</span>
       <div>
         <router-link
-          :to="`/profile/handle/${group.user}`"
+          :to="`/profile/handle/${group.name}`"
         >
           <img
             class="friends-photo"
-            src="../../assets/img/anon.jpg"
+            :src="group.creatorAvatar"
             alt=""
             :title='group.user'
           >
@@ -111,12 +113,12 @@ export default {
     ...mapState('errors', ['errors']),
     alreadySubscribed() {
       const subscribers = this.$store.state.groups.group.subscribes;
-      if (subscribers.some(e => e.user === this.$store.state.auth.user.id)) {
+      if (subscribers.some(e => e.handle === this.$store.state.profile.profile.handle)) {
         return true;
       }
     },
     groupAdministrator() {
-      if (this.$store.state.groups.group.user === this.$store.state.auth.user.id) {
+      if (this.$store.state.groups.group.name === this.$store.state.profile.profile.handle) {
         return true;
       }
     }

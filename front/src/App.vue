@@ -452,6 +452,12 @@ span, li, i {
   grid-gap: 1rem;
 }
 
+.group-background {
+  height: 300px;
+  background-size: 100% 100%;
+  border-radius: 0.3rem 0.3rem 0 0;
+}
+
 /* Photos */
 .photos {
   padding: 0.5rem 1rem 0.5rem 1rem;
@@ -661,6 +667,7 @@ span, li, i {
   min-height: 250px;
   margin: 5rem auto;
 }
+
 .avatar-font {
   height: 180px;
   background-size: 100% 100%;

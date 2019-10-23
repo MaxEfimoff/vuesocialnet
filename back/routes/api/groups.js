@@ -34,30 +34,36 @@ router.get(
 //@desc       Get my groups
 //@access     Private
 router.get('/my-groups', passport.authenticate("jwt", { session: false }), (req, res) => {
-  Group
-    .find()
-    .sort({date: -1})
-    .then(groups =>
-      res.json(groups.filter(group => 
-        group.subscribes.map(a => a.user).includes(req.user.id)
-      ))
-    )
-    .catch(err => res.status(404).json({nogroupsfound: 'No groups found'}));
+  Profile.findOne({ user: req.user.id }).then(profile => {
+    Group
+      .find()
+      .sort({date: -1})
+      .then(groups =>
+        res.json(groups.filter(group => 
+          group.subscribes
+          .map(a => a.handle)
+          .includes(profile.handle)
+        ))
+      )
+      .catch(err => res.status(404).json({nogroupsfound: 'No groups found'}));
+  });
 })
 
 //@route      GET api/manage-groups/
 //@desc       Get manage groups
 //@access     Private
 router.get('/manage-groups', passport.authenticate("jwt", { session: false }), (req, res) => {
+  Profile.findOne({ user: req.user.id }).then(profile => {
   Group
     .find()
     .sort({date: -1})
     .then(groups =>
       res.json(groups.filter(group => 
-        group.user.toString() === req.user.id
+        group.name.toString() === profile.handle
       ))
     )
     .catch(err => res.status(404).json({nogroupsfound: 'No groups found'}));
+  });
 })
 
 //route       GET api/groups/:id
@@ -90,11 +96,13 @@ router.post(
 
     // Get fields
     const groupFields = {};
-    groupFields.user = req.user.id;
+    if (req.body.name) groupFields.name = req.body.name;
     if (req.body.handle) groupFields.handle = req.body.handle;
     if (req.body.status) groupFields.status = req.body.status;
     if (req.body.info) groupFields.info = req.body.info;
     if (req.body.avatar) groupFields.avatar = req.body.avatar;
+    if (req.body.creatorAvatar) groupFields.creatorAvatar = req.body.creatorAvatar;
+    if (req.body.profile) groupFields.profile = req.body.profile;
     if (req.body.background) groupFields.background = req.body.background;
 
     // Check if handle exists
@@ -121,7 +129,7 @@ router.delete(
       Group.findById(req.params.id)
         .then(group => {
           //  Check for group owner
-          if (group.user.toString() !== req.user.id) {
+          if (group.user.toString() !== req.profile.handle) {
             return res
               .status(401)
               .json({ notauthorized: "User not authorized" });
@@ -148,7 +156,7 @@ router.post(
         .then(group => {
           if (
             group.subscribes.filter(
-              subscribe => subscribe.user.toString() === req.user.id
+              subscribe => subscribe.handle.toString() === profile.handle
             ).length > 0
           ) {
             return res.status(400).json({
@@ -156,7 +164,11 @@ router.post(
             });
           }
           // Add user ID to subscribers array
-          group.subscribes.unshift({ user: req.user.id });
+          group.subscribes.unshift({ 
+            // profile: profile._id
+            handle: profile.handle,
+            avatar: profile.avatar
+          });
           group.save().then(group => res.json(group));
         })
         .catch(err =>
@@ -178,7 +190,7 @@ router.post(
         .then(group => {
           if (
             group.subscribes.filter(
-              subscribe => subscribe.user.toString() === req.user.id
+              subscribe => subscribe.handle.toString() === profile.handle
             ).length === 0
           ) {
             return res.status(400).json({
@@ -187,13 +199,13 @@ router.post(
           }
           //  Get the remove index
           const removeindex = group.subscribes
-            .map(item => item.user.toString())
-            .indexOf(req.user.id);
+            .map(item => item.handle.toString())
+            .indexOf(profile.handle);
 
           //  Splice out of array
           group.subscribes.splice(removeindex, 1);
 
-          //  Save
+          // //  Save
           group.save().then(group => res.json(group));
         })
         .catch(err =>
@@ -210,6 +222,7 @@ router.post(
   "/:id/post",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    Profile.findOne({ user: req.user.id }).then(profile => {
     const { errors, isValid } = validatePostInput(req.body);
 
     // Check validation
@@ -218,20 +231,21 @@ router.post(
       return res.status(400).json(errors);
     }
     Group.findById(req.params.id)
-      .then(group => {
+    .then(group => {
         const newPost = {
           text: req.body.text,
-          name: req.body.name,
-          avatar: req.body.avatar,
-          user: req.user.id
+          avatar: profile.avatar,
+          profile: profile.handle
         };
-        //Add to posts array
+
+        // Add to posts array
         group.posts.unshift(newPost);
 
         //Save
         group.save().then(group => res.json(group));
       })
       .catch(err => res.status(404).json({ groupnotfound: "No group found" }));
+    });
   }
 );
 
@@ -304,8 +318,8 @@ router.post('/:id/posts/:post_id',
 //@access     Private
 router.post('/:id/comments/:post_id', 
   passport.authenticate("jwt", { session: false }), (req, res) => {
-  // Profile.findOne({ user: req.user.id })
-  //   .then(profile => {
+  Profile.findOne({ user: req.user.id })
+    .then(profile => {
       Group.findById(req.params.id)
         .then(group => {
           const postIndex = group.posts
@@ -316,9 +330,8 @@ router.post('/:id/comments/:post_id',
 
           const newComment = {
             text: req.body.text,
-            name: req.body.name,
-            avatar: req.body.avatar,
-            user: req.user.id
+            avatar: profile.avatar,
+            profile: profile.handle
           };
           
           grouppost.comments.push(newComment);
@@ -327,7 +340,7 @@ router.post('/:id/comments/:post_id',
             .then(group => res.json(grouppost));
           
         }).catch(err => res.status(404).json({ grouppostnotfound: 'Post not found' }));
-  //  })
+   })
 });
 
 //route       DELETE api/groups/comment/:id/:comment_id
