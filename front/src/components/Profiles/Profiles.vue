@@ -20,22 +20,14 @@
           v-for="profile in profiles.slice(0, 10)"
           :key="profile.id"
         >
-          <div class="post-author">
-            <router-link
-              :to="`/profile/handle/${profile.handle}`"
-            >
-              <div class="groups-photo">
-                <img
-                  class="groups-img"
-                  :src='profile.avatar'
-                  alt=""
-                >
-                <span>
-                  {{ profile.handle }}
-                </span>
-              </div>
-            </router-link>
+        <div class="post-author">
+          <ProfileCard 
+            :profile="profile"/>
+          <div class="leftpadding">
+            <div><span>{{ profile.status }}</span></div>
           </div>
+
+        </div>
         </div>
       </div>
     </div>
@@ -45,6 +37,7 @@
 <script>
 // @ is an alias to /src
 import { mapState, mapActions } from 'vuex';
+import ProfileCard from '@/components/Profile/ProfileCard';
 
 export default {
   name: 'Profiles',
@@ -57,5 +50,8 @@ export default {
   methods: {
     ...mapActions("profile", ['getProfiles']),
   },
+  components: {
+    ProfileCard
+  }
 }
 </script>

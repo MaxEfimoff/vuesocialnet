@@ -19,6 +19,9 @@
               </div>
             </div>
             <i class="fas fa-thumbs-up" @click="addLike"></i>{{' '}}<span>{{ post.likes.length }}</span>
+            <router-link class="padding" :to="`/posts/${post._id}/edit-post`">
+              <span v-if="this.postAuthor" class="halfpadding">Edit post</span>
+            </router-link>
             <div class="error-message">
               {{this.errors.alreadyliked}}
             </div>
@@ -58,6 +61,7 @@
             <button type="submit">Submit</button>
           </div>
         </form>
+        <!-- Comments form -->
       </div>
     </div>
   </section>
@@ -86,7 +90,10 @@ export default {
   computed: {
     ...mapState('posts', ['post']),
     ...mapState('errors', ['errors']),
-    ...mapState('profile', [ 'profile' ])
+    ...mapState('profile', [ 'profile' ]),
+    postAuthor() {
+      return this.$store.state.posts.post.name === this.$store.state.profile.profile.handle;
+    }
   },
   methods: {
     ...mapActions("posts", ['getPostById']),
@@ -100,7 +107,6 @@ export default {
         postId: this.$route.params.id,
         formData: this.formData
       }
-      console.log(payload)
       this.$store.dispatch('posts/addComment', payload)
       .then(this.formData = {})
       .catch((error) => {console.log(error)})

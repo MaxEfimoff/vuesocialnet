@@ -26,7 +26,7 @@ import LeftSection from '@/components/LeftSection.vue';
 import CreateEditProfile from'@/components/helpers/CreateEditProfile.vue'
 
 export default {
-  name: 'EditGroup',
+  name: 'EditPost',
   computed: {
     ...mapState('errors', ['errors']),
     ...mapState('profile', [ 'profile']),

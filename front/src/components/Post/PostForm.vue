@@ -1,27 +1,17 @@
 <template>
   <section class="posts">
     <h2 class="padding">Post Form</h2>
-    <form @submit.prevent="submitForm" class="post-new-form">
-      <div class="halfpadding">
-        <textarea
-          class="textarea"
-          type="text"
-          placeholder="Write something!"
-          v-model="formData.text"
-        />
-      </div>
-      <div class="error-message">
-        {{ this.errors.text }}
-      </div>
-      <div class="padding">
-        <button type="submit">Submit</button>
-      </div>
-    </form>
+    <CreateEditPost
+      :formData="formData"
+      :onSubmit="createPost"
+      @change="onChange"
+    />
   </section>
 </template>
 
 <script>
 import { mapState, mapActions } from "vuex";
+import CreateEditPost from'@/components/helpers/CreateEditPost.vue';
 
 export default {
   data() {
@@ -32,7 +22,6 @@ export default {
         profile: this.$store.state.profile.profile._id,
         avatar: this.$store.state.profile.profile.avatar
       },
-      tab: 'text',
     };
   },
   created() {
@@ -44,13 +33,19 @@ export default {
   },
   methods: {
     ...mapActions("profile", [ 'exportCurrentProfile' ]),
-    submitForm() {
+    createPost() {
       this.$store.dispatch('posts/addPost', this.formData)
       .then(() => this.$router.push({ name: 'posts' }))
       .catch((error) => {console.log(error)
       })
     },
+    onChange(newFormData) {
+      this.formData = newFormData;
+    },
   },
+  components: {
+    CreateEditPost
+  }
 }
 </script>
 

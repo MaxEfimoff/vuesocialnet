@@ -86,6 +86,54 @@ router.post('/', passport.authenticate("jwt", { session: false }), (req, res) =>
     .then(post => res.json(post));
 });
 
+//@route      PATCH api/posts/
+//@desc       Update post
+//@access     Private
+router.patch('/:id/update-post', passport.authenticate("jwt", { session: false }), (req, res) => {
+  const {errors, isValid} = validatePostInput(req.body);
+
+  // Check Validation
+  if(!isValid) {
+    // If any errors, send 400 with errors object
+    return res.status(400).json(errors);
+  }
+
+  // Get fields
+  const postFields = {};
+  if (req.body.text) postFields.text = req.body.text;
+  if (req.body.name) postFields.name = req.body.name;
+  if (req.body.avatar) postFields.avatar = req.body.avatar;
+  if (req.body.profile) postFields.profile = req.body.profile;
+
+  Post.findOne({ post: req.params._id })
+    .then(post => {
+      if(post) {
+        
+        // Find post by id and update
+        Post.findOneAndUpdate(
+          { post: req.params._id },
+          { $set: postFields },
+          { new: true }
+        )
+        .then(post => 
+          res.json(post)
+          );
+      } else {
+      // Save post
+      new Post(postFields).save().then(post => res.json(post));
+    }
+  })
+  // const newPost = new Post({
+  //   text: req.body.text,
+  //   name: req.body.name,
+  //   profile: req.body.profile,
+  //   avatar: req.body.avatar
+  // });
+
+  // newPost.save()
+  //   .then(post => res.json(post));
+});
+
 //@route      DELETE api/posts/:id
 //@desc       Delete post by id
 //@access     Private

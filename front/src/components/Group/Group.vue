@@ -123,9 +123,7 @@ export default {
       }
     },
     groupAdministrator() {
-      if (this.$store.state.groups.group.name === this.$store.state.profile.profile.handle) {
-        return true;
-      }
+      return this.$store.state.groups.group.name === this.$store.state.profile.profile.handle
     }
   },
   methods: {

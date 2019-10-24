@@ -6,10 +6,10 @@
         <LeftSection />
         <div class="section-center">
           <section class="section posts">
-            <h3 class="padding">Edit Group</h3>
-              <CreateEditGroup
-                :formData="formData"
-                :onSubmit="createGroup"
+            <h3 class="padding">Edit Post</h3>
+              <CreateEditPost
+                :formData="currentPost"
+                :onSubmit="editPost"
                 @change="onChange"
               />
           </section>
@@ -20,29 +20,33 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import Header from '@/components/Header.vue'
 import LeftSection from '@/components/LeftSection.vue';
-import CreateEditProfile from'@/components/helpers/CreateEditProfile.vue'
+import CreateEditPost from'@/components/helpers/CreateEditPost.vue'
 
 export default {
-  name: 'EditGroup',
+  name: 'EditPost',
+  mounted() {
+    this.getPostById(this.$route.params.id);
+  },
   computed: {
     ...mapState('errors', ['errors']),
-    ...mapState('profile', [ 'profile']),
-    currentProfile() {
-      return this.profile;
+    ...mapState('posts', ['post']),
+    currentPost() {
+      return this.post;
     },
   },
   methods: {
+    ...mapActions("posts", ['getPostById']),
     onChange(newFormData) {
-      this.$store.commit('groups/SET_GROUP', newFormData);
+      this.$store.commit('posts/SET_POST', newFormData);
     },
-    editPage() {
-      const profile = Object.assign({}, this.profile, {
+    editPost() {
+      const post = Object.assign({}, this.post, {
       });
-      this.$store.dispatch('groups/updateGroup', profile)
-        .then(() => this.$router.push({ name: 'groups' }))
+      this.$store.dispatch('posts/updatePost', post)
+        .then(() => this.$router.push({ name: 'posts' }))
         .catch((error) => {
           console.log(error)
         });
@@ -50,7 +54,7 @@ export default {
   },
   components: {
     Header,
-    CreateEditGroup,
+    CreateEditPost,
     LeftSection
   }
 };

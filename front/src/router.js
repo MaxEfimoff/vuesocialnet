@@ -10,6 +10,7 @@ import Posts from './views/Posts.vue';
 import MyPosts from './views/MyPosts.vue';
 import FriendsPosts from './views/FriendsPosts.vue';
 import PostForm from './views/PostForm.vue';
+import EditPost from './views/EditPost.vue';
 import GroupPostForm from './views/GroupPostForm.vue';
 // Messages
 import Message from './views/Message.vue';
@@ -87,6 +88,11 @@ export default new Router({
       path: '/post-form',
       name: 'postForm',
       component: PostForm
+    },
+    {
+      path: '/posts/:id/edit-post',
+      name: 'editPost',
+      component: EditPost,
     },
     {
       path: '/posts/:id',

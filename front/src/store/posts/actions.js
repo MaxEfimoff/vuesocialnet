@@ -62,6 +62,21 @@ function addPost({ commit }, data) {
   });
 }
 
+function updatePost({ commit, state }) {
+  const post = state.post
+  return new Promise((resolve, reject) => {
+    axios.patch(`http://localhost:5000/api/posts/${post._id}/update-post`, post)
+      .then((response) => {
+        commit('SET_POST', response.data);
+        resolve();
+      })
+      .catch(error => {
+        commit('errors/setErrors', error.response.data, { root: true });
+        console.log(error)
+      });
+  });
+}
+
 function getPostById({ commit }, id) {
   return new Promise((resolve, reject) => {
     axios.get(`http://localhost:5000/api/posts/${id}`)
@@ -108,5 +123,6 @@ export {
   getMyPosts,
   getFriendsPosts,
   addComment,
-  addLike
+  addLike,
+  updatePost
 };
