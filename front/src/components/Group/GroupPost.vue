@@ -1,17 +1,18 @@
 <template>
   <section class="section-center">
     <div class="section posts">
-      <div class="post-new padding">
-        <h3>{{ group.handle }}</h3>
+      <div>
+        <img :src="group.avatar" alt="" class="group-avatar">
       </div>
-      <div class="post-new padding">
+      <div class="halfpadding">
+        <h3>{{ group.handle }}</h3>
         <h4>{{ group.status }}</h4>
         <span>{{ group.info }}</span>
       </div>
       <div class="post-wrapper">
         <div class="post-new padding">
           <router-link
-            :to="`/profile/handle/${grouppost.profile}`">
+            :to="`/profile/handle/${grouppost.name}`">
             <div>
               <img class="groups-img" :src="grouppost.avatar" alt="">
             </div>
@@ -26,6 +27,9 @@
               </div>
             </div>
             <i class="fas fa-thumbs-up" @click="addLike"></i>{{' '}}<span>{{ grouppost.likes.length }}</span>
+            <router-link  v-if="this.postAuthor" class="padding" :to="`${grouppost._id}/edit-post`">
+              <span class="halfpadding">Edit post</span>
+            </router-link>
             <div class="error-message">
               {{this.errors.alreadyliked}}
             </div>
@@ -76,8 +80,8 @@ export default {
     return {
       formData: {
         text: '',
-        name: this.$store.state.profile.profile.user.name,
-        // avatar: this.$store.state.profile.profile.avatar
+        name: this.$store.state.profile.profile.handle,
+        avatar: this.$store.state.profile.profile.avatar
       },
       tab: 'text',
     };
@@ -92,6 +96,9 @@ export default {
   computed: {
     ...mapState('groups', ['grouppost', 'group']),
     ...mapState('errors', ['errors']),
+    postAuthor() {
+      return this.$store.state.groups.grouppost.name === this.$store.state.profile.profile.handle;
+    }
   },
   methods: {
     ...mapActions("groups", ['getGroupPost', 'getGroup']),

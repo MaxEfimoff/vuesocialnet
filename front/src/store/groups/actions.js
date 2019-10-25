@@ -101,6 +101,22 @@ function createGroupPost({ commit }, payload) {
   });
 }
 
+function updateGroupPost({ commit, state }) {
+  const grouppost = state.grouppost
+  const group = state.group
+  return new Promise((resolve, reject) => {
+    axios.patch(`http://localhost:5000/api/groups/${group._id}/post/${grouppost._id}`,grouppost)
+      .then((response) => {
+        commit('SET_GROUP_POST', response.data);
+        resolve();
+      })
+      .catch(error => {
+        commit('errors/setErrors', error.response.data, { root: true });
+        console.log(error)
+      });
+  });
+}
+
 function subscribe({ commit }, id) {
   return new Promise((resolve, reject) => {
     axios.post(`http://localhost:5000/api/groups/subscribe/${id}`, id)
@@ -168,5 +184,6 @@ export {
   createGroupPost,
   getManageGroups,
   getMyGroups,
-  updateGroup
+  updateGroup,
+  updateGroupPost
 };

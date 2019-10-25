@@ -1,19 +1,19 @@
 <template>
   <div class="post-author">
     <router-link
-      :to="`/profile/handle/${post.name}`">
+      :to="`/profile/handle/${name}`">
       <div>
-        <img class="groups-img" :src="post.avatar" alt="">
+        <img class="groups-img" :src="avatar" alt="">
         <div class='text-center'>
-          <span>{{ post.name }}</span>
+          <span>{{ name }}</span>
         </div>
       </div>
     </router-link>
     <router-link
-      :to="`/posts/${post._id}`"
+      :to="address"
     >
     <div class="leftmargin">
-      <span>{{ post.text }}</span>
+      <span>{{ text }}</span>
     </div>
     </router-link>
   </div>
@@ -22,9 +22,21 @@
 <script>
 export default {
   props: {
-    post: {
+    name: {
       required: true,
-      type: Object
+      type: String
+    },
+    avatar: {
+      required: true,
+      type: String
+    },
+    address: {
+      required: true,
+      type: String
+    },
+    text: {
+      required: true,
+      type: String
     }
   }
 }

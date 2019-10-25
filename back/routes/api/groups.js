@@ -286,7 +286,7 @@ router.post(
         const newPost = {
           text: req.body.text,
           avatar: profile.avatar,
-          profile: profile.handle
+          name: profile.handle
         };
 
         // Add to posts array
@@ -299,6 +299,30 @@ router.post(
     });
   }
 );
+
+//route       PATCH api/groups/:id/post/:id
+//desc        Update post
+//access      Private
+router.patch(
+  "/:groupid/post/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+
+    let newText = req.body.text;
+
+    Group.findOne({ group: req.params._groupid })
+    .then(group => {
+       let mappedPost = group.posts.findIndex(a => 
+        a._id == req.params.id
+      )
+      group.posts[mappedPost].text = newText;
+
+      group.save().then(group => res.json(group));
+      })
+      .catch(err => res.status(404).json({ groupnotfound: "No group found" }));
+  }
+);
+
 
 //route       GET api/groups/:id
 //desc        Get group post by id

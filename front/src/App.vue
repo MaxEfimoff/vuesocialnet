@@ -458,6 +458,14 @@ span, li, i {
   border-radius: 0.3rem 0.3rem 0 0;
 }
 
+.group-avatar {
+  margin-top: 2rem;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  box-shadow: 0 7px 8px -4px rgba(0,0,0,.2),0 12px 17px 2px rgba(0,0,0,.14),0 5px 22px 4px rgba(0,0,0,.12)!important;
+}
+
 /* Photos */
 .photos {
   padding: 0.5rem 1rem 0.5rem 1rem;

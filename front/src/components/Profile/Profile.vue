@@ -43,7 +43,10 @@
       <div class="post-wrapper">
         <div class="post" v-for="post in profilePosts.slice(0, 10)" :key="post.id">
           <PostCard 
-          :post="post"/>
+            :name="post.name"
+            :avatar="post.avatar"
+            :address="`/posts/${post._id}`"
+            :text="post.text"/>
         </div>
       </div>
     </div>

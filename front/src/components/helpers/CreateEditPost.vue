@@ -27,7 +27,7 @@
 import { mapState } from 'vuex';
 
 export default {
-  name: 'CreateEditProfileForm',
+  name: 'CreateEditPostForm',
   props: {
     formData: {
       type: Object,

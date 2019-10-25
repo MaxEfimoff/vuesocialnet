@@ -1,26 +1,17 @@
 <template>
   <section class="section posts">
     <h2 class="padding">Group Post Form</h2>
-    <form @submit.prevent="submitForm" class="post-new-form">
-      <div class="halfpadding">
-        <textarea
-          class="textarea"
-          placeholder="Post text"
-          v-model="formData.text"
-        />
-      </div>
-      <div class="error-message">
-        {{ this.errors.text }}
-      </div>
-      <div class="padding">
-        <button type="submit">Submit</button>
-      </div>
-    </form>
+    <CreateEditPost
+      :formData="formData"
+      :onSubmit="createPost"
+      @change="onChange"
+    />
   </section>
 </template>
 
 <script>
 import { mapState, mapActions } from "vuex";
+import CreateEditPost from'@/components/helpers/CreateEditPost.vue';
 
 export default {
   data() {
@@ -28,7 +19,8 @@ export default {
       formData: {
         text: '',
         name: this.$store.state.profile.profile.handle,
-        // avatar: this.$store.state.profile.profile.avatar
+        profile: this.$store.state.profile.profile._id,
+        avatar: this.$store.state.profile.profile.avatar
       },
     };
   },
@@ -41,7 +33,10 @@ export default {
   },
   methods: {
     ...mapActions("profile", [ 'exportCurrentProfile' ]),
-    submitForm() {
+    onChange(newFormData) {
+      this.formData = newFormData;
+    },
+    createPost() {
       const payload = {
         id: this.$store.state.groups.group._id,
         formData: this.formData
@@ -52,6 +47,9 @@ export default {
       })
     },
   },
+  components: {
+    CreateEditPost
+  }
 }
 </script>
 
