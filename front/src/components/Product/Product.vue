@@ -2,15 +2,16 @@
   <section class="section-center">
     <div class="section posts">
       <div class="post-wrapper">
+        <router-link
+          :to="`/profile/handle/${product.name}`">
+          <div class="padding">
+            <img class="product-photo" :src="product.avatar" alt="">
+            <p>{{ product.name }}</p>
+          </div>
+        </router-link>
         <div class="posts">
           <div class="product-image" :style="{ backgroundImage: 'url(' + `${product.image}` + ')' }">
         </div>
-        <router-link
-          :to="`/profile/handle/${product.name}`">
-          <div class="avatar">
-            <img :src="product.avatar" alt="">
-          </div>
-        </router-link>
         </div>
         <div class="post-wrapper">
           <div class="post">

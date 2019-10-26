@@ -1,19 +1,12 @@
 <template>
-  <div>
-    <section class="section-center" v-if="this.profile.handle">
-      <div class="post-wrapper">
-        <div class="post" v-for="product in products.slice(0, 10)" :key="product.id">
-          <ProductCard
-            :name="product.name"
-            :avatar="product.avatar"
-            :address="`/products/${product._id}`"
-            :text="product.text"/>
-        </div>
-      </div>
-    </section>
-    <section v-else class="register">
-      <NoProfileMessage />
-    </section>
+  <div class="flex">
+    <div v-for="product in products.slice(0, 10)" :key="product.id">
+      <ProductCard
+        :name="product.name"
+        :image="product.image"
+        :address="`/products/${product._id}`"
+        :text="product.text"/>
+    </div>
   </div>
 </template>
 

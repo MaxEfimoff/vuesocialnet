@@ -1,21 +1,20 @@
 <template>
-  <div class="post-author">
-    <router-link
-      :to="`/profile/handle/${name}`">
-      <div>
-        <img class="groups-img" :src="avatar" alt="">
-        <div class='text-center'>
-          <span>{{ name }}</span>
-        </div>
-      </div>
-    </router-link>
+  <div class="halfpadding product-card">
     <router-link
       :to="address"
     >
-    <div class="leftmargin">
-      <span>{{ text }}</span>
-    </div>
+      <img class="product-card-image" :src="image" alt="">
+      <div>
+        <span>{{ text }}</span>
+      </div>
     </router-link>
+    <router-link
+      :to="`/profile/handle/${name}`">
+      <div class='text-center'>
+        <span>{{ name }}</span>
+      </div>
+    </router-link>
+    
   </div>
 </template>
 
@@ -36,6 +35,9 @@ export default {
     },
     text: {
       required: true,
+      type: String
+    },
+    image: {
       type: String
     }
   }

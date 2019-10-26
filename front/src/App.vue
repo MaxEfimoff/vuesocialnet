@@ -219,6 +219,7 @@ span, li, i {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .flex-left {
@@ -361,6 +362,7 @@ span, li, i {
 
 .profile-background {
   width: 100%;
+  object-fit: cover;
   max-height: 484px;
   min-height: 420px;
   background-image: url("/assets/img/photos/unsplash_2.png");
@@ -454,8 +456,9 @@ span, li, i {
 
 .group-background {
   height: 300px;
-  background-size: 100% 100%;
+  background-size: 100% auto;
   border-radius: 0.3rem 0.3rem 0 0;
+  background-repeat: no-repeat;
 }
 
 .group-avatar {
@@ -624,6 +627,24 @@ span, li, i {
   background-repeat: no-repeat;
   background-position: center center;
   border-radius: 0.3rem 0.3rem 0 0;
+}
+.product-card {
+  height: 300 px;
+  width: 200px;
+}
+
+.product-card-image {
+  height: 200px;
+  max-width: 184px;
+  border-radius: 0.3rem;
+  text-align: center;
+  object-fit: cover;
+}
+
+.product-photo {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
 }
 
 /* Messages */
