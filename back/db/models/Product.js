@@ -1,14 +1,17 @@
-// Posts Schema
+// Products Schema
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const PostSchema = new Schema({
+const ProductSchema = new Schema({
   profile: {
     type: Schema.Types.ObjectId,
     ref: 'profile'
   },
   avatar: {
+    type: String,
+  },
+  image: {
     type: String,
     required: true
   },
@@ -17,6 +20,9 @@ const PostSchema = new Schema({
     required: true
   },
   name: {
+    type: String
+  },
+  category: {
     type: String
   },
   likes: [
@@ -54,4 +60,4 @@ const PostSchema = new Schema({
   }
 });
 
-module.exports = Post = mongoose.model('post', PostSchema);
+module.exports = Product = mongoose.model('product', ProductSchema);
