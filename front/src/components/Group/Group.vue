@@ -4,10 +4,10 @@
       <div class="section posts">
         <div class="group-background" :style="{ backgroundImage: 'url(' + `${group.background}` + ')' }">
         </div>
-          <div class="avatar">
-            <!-- <img class="avatar" :src=" require(`@/assets/img/01.jpg`) " alt=""> -->
-            <img :src="group.avatar" alt="">
-          </div>
+        <div class="avatar">
+          <!-- <img class="avatar" :src=" require(`@/assets/img/01.jpg`) " alt=""> -->
+          <img :src="group.avatar" alt="">
+        </div>
         <div>
           <h3 class="halfpadding">{{ group.handle }}</h3>
           <span>{{ group.status }}</span>

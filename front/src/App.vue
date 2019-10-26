@@ -617,6 +617,15 @@ span, li, i {
   margin-top: 0.5rem;
 }
 
+/* Products */
+.product-image {
+  height: 300px;
+  background-size: auto 300px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border-radius: 0.3rem 0.3rem 0 0;
+}
+
 /* Messages */
 .message-header {
   width: 100%;

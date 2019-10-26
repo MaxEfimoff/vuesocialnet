@@ -20,6 +20,11 @@ const addPostUrl = `${serverUrl}/api/posts`;
 const allPostsUrl = `${serverUrl}/api/posts/`;
 const myPostsUrl = `${serverUrl}/api/posts/my-posts`;
 const friendsPostsUrl = `${serverUrl}/api/posts/friends-posts`;
+// Products
+const addProductUrl = `${serverUrl}/api/products`;
+const allProductsUrl = `${serverUrl}/api/products/`;
+const myProductsUrl = `${serverUrl}/api/products/my-products`;
+const friendsProductsUrl = `${serverUrl}/api/products/friends-products`;
 // Notes
 const addNoteUrl = `${serverUrl}/api/notes`;
 const allNotesUrl = `${serverUrl}/api/notes/`;
@@ -74,5 +79,9 @@ export {
   createGroupUrl,
   manageGroupsUrl,
   myGroupsUrl,
+  addProductUrl,
+  allProductsUrl,
+  myProductsUrl,
+  friendsProductsUrl
   // profileByHandleUrl
 };

@@ -12,6 +12,13 @@ import FriendsPosts from './views/FriendsPosts.vue';
 import PostForm from './views/PostForm.vue';
 import EditPost from './views/EditPost.vue';
 import GroupPostForm from './views/GroupPostForm.vue';
+// Products
+import Product from './views/Product.vue';
+import Products from './views/Products.vue';
+import MyProducts from './views/MyProducts.vue';
+import FriendsProducts from './views/FriendsProducts.vue';
+import ProductForm from './views/ProductForm.vue';
+import EditProduct from './views/EditProduct.vue';
 // Messages
 import Message from './views/Message.vue';
 import Messages from './views/Messages.vue';
@@ -100,6 +107,38 @@ export default new Router({
       name: 'post',
       props: true,
       component: Post,
+    },
+    // Products
+    {
+      path: '/products',
+      name: 'products',
+      component: Products
+    },
+    {
+      path: '/my-products',
+      name: 'my-products',
+      component: MyProducts
+    },
+    {
+      path: '/friends-products',
+      name: 'friends-products',
+      component: FriendsProducts
+    },
+    {
+      path: '/product-form',
+      name: 'productForm',
+      component: ProductForm
+    },
+    {
+      path: '/products/:id/edit-product',
+      name: 'editProduct',
+      component: EditProduct,
+    },
+    {
+      path: '/products/:id',
+      name: 'product',
+      props: true,
+      component: Product,
     },
     // Messages
     {

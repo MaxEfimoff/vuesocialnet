@@ -69,7 +69,6 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import PostHeader from '../helpers/PostsHeader';
 
 export default {
   name: 'Post',
@@ -112,9 +111,6 @@ export default {
       .catch((error) => {console.log(error)})
     },
   },
-  components: {
-    PostHeader
-  }
 }
 </script>
 

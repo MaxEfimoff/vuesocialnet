@@ -60,8 +60,16 @@
         >
           <div class="count">{{ notes.length }}</div>
           <i class="fas fa-sticky-note"></i>
+        </router-link>
+        <router-link
+          class="stat-counter lefthalfpadding"
+          :to="{ name: 'products' }"
+        >
+          <div class="count">{{ notes.length }}</div>
+          <i class="fas fa-shopping-cart"></i>
         </router-link> 
       </div>
+      <!-- Stats -->
       <div class="edit-profile halfpadding">
         <router-link :to="{ name: 'dashboard' }"><button>Dashboard</button></router-link>
       </div>

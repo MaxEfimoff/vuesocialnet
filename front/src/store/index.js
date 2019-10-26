@@ -4,6 +4,7 @@ import auth from './auth';
 import profile from './profile';
 import groups from './groups';
 import posts from './posts';
+import products from './products';
 import notes from './notes';
 import photos from './photos';
 import documents from './documents';
@@ -22,6 +23,7 @@ export default function () {
       profile,
       groups,
       posts,
+      products,
       notes,
       messages,
       errors,

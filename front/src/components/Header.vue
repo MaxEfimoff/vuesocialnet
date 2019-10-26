@@ -29,6 +29,12 @@
             <span>Groups</span>
           </router-link>
           <router-link
+            v-if="this.profile.handle"
+            class="leftpadding"
+            :to="{ name: 'products' }">
+            <span>Products</span>
+          </router-link>
+          <router-link
             class="leftpadding"
             :to="{ name: 'dashboard' }">
             <span>Dashboard</span>
