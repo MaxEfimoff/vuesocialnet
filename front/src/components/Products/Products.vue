@@ -5,7 +5,8 @@
         :name="product.name"
         :image="product.image"
         :address="`/products/${product._id}`"
-        :text="product.text"/>
+        :text="product.text"
+        :date="product.date"/>
     </div>
   </div>
 </template>
@@ -13,7 +14,6 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import ProductCard from '@/components/Product/ProductCard';
-import NoProfileMessage from '@/components/helpers/NoProfileMessage';
 
 export default {
   name: 'Products',
@@ -29,7 +29,6 @@ export default {
   },
   components: {
     ProductCard,
-    NoProfileMessage
   }
 }
 </script>

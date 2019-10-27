@@ -9,6 +9,15 @@ const filters = () => {
     return moment(value).format(formatType);
   })
 
+  Vue.filter('shortenText', (text, maxLength = 200) => {
+    if(text && typeof text === 'string') {
+      const finalChar = text.length > maxLength ? '...' : '';
+      return text.substr(0, maxLength) + finalChar;
+    }
+  
+    return ''
+  })
+
   Vue.filter('fromNow', function (value) {
     if (!value) return '';
 

@@ -5,13 +5,14 @@
     >
       <img class="product-card-image" :src="image" alt="">
       <div>
-        <span>{{ text }}</span>
+        <span>{{ text | shortenText(24) }}</span>
       </div>
     </router-link>
     <router-link
       :to="`/profile/handle/${name}`">
       <div class='text-center'>
         <span>{{ name }}</span>
+        <span class="lefthalfpadding">{{ date | formatDate }}</span>
       </div>
     </router-link>
     
@@ -34,6 +35,10 @@ export default {
       type: String
     },
     text: {
+      required: true,
+      type: String
+    },
+    date: {
       required: true,
       type: String
     },

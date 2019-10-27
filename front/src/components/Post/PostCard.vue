@@ -16,7 +16,7 @@
       <span>{{ date | formatDate }}</span>
     </div>
     <div class="leftmargin">
-      <span>{{ text }}</span>
+      <span>{{ text | shortenText }}</span>
     </div>
     </router-link>
   </div>
