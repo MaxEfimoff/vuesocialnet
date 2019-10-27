@@ -105,33 +105,14 @@ router.patch('/:id/update-post', passport.authenticate("jwt", { session: false }
   if (req.body.avatar) postFields.avatar = req.body.avatar;
   if (req.body.profile) postFields.profile = req.body.profile;
 
-  Post.findOne({ post: req.params._id })
+  Post.findById(req.params.id)
     .then(post => {
-      if(post) {
-        
-        // Find post by id and update
-        Post.findOneAndUpdate(
-          { post: req.params._id },
-          { $set: postFields },
-          { new: true }
-        )
-        .then(post => 
-          res.json(post)
-          );
-      } else {
-      // Save post
-      new Post(postFields).save().then(post => res.json(post));
-    }
-  })
-  // const newPost = new Post({
-  //   text: req.body.text,
-  //   name: req.body.name,
-  //   profile: req.body.profile,
-  //   avatar: req.body.avatar
-  // });
-
-  // newPost.save()
-  //   .then(post => res.json(post));
+      post.set(postFields)
+      post.save()
+      .then(post => 
+        res.json(post)
+        );
+    })
 });
 
 //@route      DELETE api/posts/:id

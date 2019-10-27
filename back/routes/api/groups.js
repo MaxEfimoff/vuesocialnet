@@ -143,30 +143,14 @@ router.patch(
     if (req.body.profile) groupFields.profile = req.body.profile;
     if (req.body.background) groupFields.background = req.body.background;
 
-    Group.findOne({ group: req.params._id })
+    Group.findById(req.params.id)
     .then(group => {
-      if(group) {
-        // Find group by id and update
-        Group.findOneAndUpdate(
-          { group: req.params._id },
-          { $set: groupFields },
-          { new: true }
-        )
-        .then(group => res.json(group));
-      } else {
-
-    // Check if handle exists
-    Group.findOne({ group: req.params._id }).then(group => {
-      if (group) {
-        errors.handle = "That handle already exists";
-        res.status(400).json(errors);
-      }
-
-      // Save group
-      new Group(groupFields).save().then(group => res.json(group));
-    });
-  }
-  })
+      group.set(groupFields)
+      group.save()
+      .then(group => 
+        res.json(group)
+        );
+    })
 });
 
 //route       DELETE api/groups/:id

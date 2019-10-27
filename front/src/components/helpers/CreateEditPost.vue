@@ -40,7 +40,7 @@ export default {
   },
   computed: {
     ...mapState('errors', ['errors']),
-    ...mapState('profile', [ 'profile']),
+    ...mapState('posts', [ 'post']),
   },
   methods: {
     onChange(prop, newValue) {

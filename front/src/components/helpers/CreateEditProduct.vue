@@ -2,6 +2,32 @@
 <div>
   <form @submit.prevent="onSubmit" class="post-new-form">
     <div class="halfpadding">
+      <input
+        type="text"
+        placeholder="Product image"
+        ref="image"
+        :value="formData.image"
+        @change="onChange('image', $event.target.value)"
+      />
+    </div>
+    <div class="error-message">
+      {{this.errors.image}}
+    </div>
+
+    <div class="halfpadding">
+      <input
+        type="text"
+        placeholder="Product category"
+        ref="category"
+        :value="formData.category"
+        @change="onChange('category', $event.target.value)"
+      />
+    </div>
+    <div class="error-message">
+      {{this.errors.category}}
+    </div>
+
+    <div class="halfpadding">
       <textarea
         class="textarea"
         type="text"
@@ -27,7 +53,7 @@
 import { mapState } from 'vuex';
 
 export default {
-  name: 'CreateEditPostForm',
+  name: 'CreateEditProductForm',
   props: {
     formData: {
       type: Object,

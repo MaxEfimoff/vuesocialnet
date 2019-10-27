@@ -108,24 +108,14 @@ router.patch('/:id/update-product', passport.authenticate("jwt", { session: fals
   if (req.body.text) productFields.text = req.body.text;
   if (req.body.category) productFields.category = req.body.category;
 
-  Product.findOne({ product: req.params._id })
+  Product.findById(req.params.id)
     .then(product => {
-      if(product) {
-        
-        // Find product by id and update
-        Product.findOneAndUpdate(
-          { product: req.params._id },
-          { $set: productFields },
-          { new: true }
-        )
-        .then(product => 
-          res.json(product)
-          );
-      } else {
-      // Save product
-      new Product(productFields).save().then(product => res.json(product));
-    }
-  })
+      product.set(productFields)
+      product.save()
+      .then(product => 
+        res.json(product)
+        );
+    })
 });
 
 //@route      DELETE api/products/:id

@@ -43,9 +43,11 @@ export default {
       this.$store.commit('posts/SET_POST', newFormData);
     },
     editPost() {
-      const post = Object.assign({}, this.post, {
-      });
-      this.$store.dispatch('posts/updatePost', post)
+      const payload = {
+        id: this.$route.params.id,
+        newFormData: this.post
+      }
+      this.$store.dispatch('posts/updatePost', payload)
         .then(() => this.$router.push({ name: 'posts' }))
         .catch((error) => {
           console.log(error)

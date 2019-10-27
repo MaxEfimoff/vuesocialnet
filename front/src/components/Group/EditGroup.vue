@@ -23,7 +23,7 @@
 import { mapState } from 'vuex';
 import Header from '@/components/Header.vue'
 import LeftSection from '@/components/LeftSection.vue';
-import CreateEditProfile from'@/components/helpers/CreateEditProfile.vue'
+import CreateEditGroup from'@/components/helpers/CreateEditGroup.vue'
 
 export default {
   name: 'EditGroup',

@@ -78,7 +78,7 @@
 import { mapState } from 'vuex';
 
 export default {
-  name: 'CreateEditProfileForm',
+  name: 'CreateEditGroupForm',
   props: {
     formData: {
       type: Object,

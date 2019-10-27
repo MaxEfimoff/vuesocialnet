@@ -6,8 +6,8 @@
         <LeftSection />
         <div class="section-center">
           <section class="section posts">
-            <h3 class="padding">Edit Group</h3>
-              <CreateEditGroup
+            <h3 class="padding">Edit Product</h3>
+              <CreateEditProduct
                 :formData="formData"
                 :onSubmit="createGroup"
                 @change="onChange"
@@ -23,7 +23,7 @@
 import { mapState } from 'vuex';
 import Header from '@/components/Header.vue'
 import LeftSection from '@/components/LeftSection.vue';
-import CreateEditProfile from'@/components/helpers/CreateEditProfile.vue'
+import CreateEditProduct from'@/components/helpers/CreateEditProduct.vue'
 
 export default {
   name: 'EditPost',
@@ -36,13 +36,13 @@ export default {
   },
   methods: {
     onChange(newFormData) {
-      this.$store.commit('groups/SET_GROUP', newFormData);
+      this.$store.commit('products/SET_PRODUCT', newFormData);
     },
     editPage() {
       const profile = Object.assign({}, this.profile, {
       });
-      this.$store.dispatch('groups/updateGroup', profile)
-        .then(() => this.$router.push({ name: 'groups' }))
+      this.$store.dispatch('products/updateProduct', profile)
+        .then(() => this.$router.push({ name: 'products' }))
         .catch((error) => {
           console.log(error)
         });
@@ -50,7 +50,7 @@ export default {
   },
   components: {
     Header,
-    CreateEditGroup,
+    CreateEditProduct,
     LeftSection
   }
 };

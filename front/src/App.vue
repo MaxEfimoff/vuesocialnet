@@ -715,4 +715,16 @@ span, li, i {
 .container-slider {
   transition: opacity 0.2s;
 }
+
+/* Media queries */
+@media(max-width: 800px) {
+  .container-main {
+    display: grid;
+    grid-template-columns: 4fr;
+  }
+
+  .section-left {
+    display: none;
+  }
+}
 </style>
