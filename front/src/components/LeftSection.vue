@@ -65,7 +65,7 @@
           class="stat-counter lefthalfpadding"
           :to="{ name: 'products' }"
         >
-          <div class="count">{{ products.length }}</div>
+          <div class="count">{{ myproducts.length }}</div>
           <i class="fas fa-shopping-cart"></i>
         </router-link> 
       </div>
@@ -177,7 +177,7 @@ export default {
     this.getMyGroups();
     this.getMessages();
     this.getNotes();
-    this.getProducts();
+    this.getMyProducts();
     this.getPhotos();
     this.getDocuments();
     this.exportCurrentProfile();
@@ -186,7 +186,7 @@ export default {
     ...mapActions("groups",['getMyGroups']),
     ...mapActions("messages",['getMessages']),
     ...mapActions("notes",['getNotes']),
-    ...mapActions("products",['getProducts']),
+    ...mapActions("products",['getMyProducts']),
     ...mapActions("photos",['getPhotos']),
     ...mapActions("documents",['getDocuments']),
     ...mapActions("profile",['exportCurrentProfile']),
@@ -198,7 +198,7 @@ export default {
     ...mapState('groups', [ 'mygroups']),
     ...mapState('messages', [ 'messages']),
     ...mapState('notes', [ 'notes']),
-    ...mapState('products', [ 'products']),
+    ...mapState('products', [ 'myproducts']),
     ...mapState('photos', [ 'photos']),
     ...mapState('documents', [ 'documents']),
     ...mapState('auth', [ 'user']),

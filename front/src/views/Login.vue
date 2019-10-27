@@ -12,44 +12,93 @@
             <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
           </div>
           <span>or register with your email</span>
+          <!-- Name -->
           <input
-            type="text"
             v-model="formRegisterData.name"
+            @blur="$v.formRegisterData.name.$touch()"
+            type="text"
             placeholder="Name"
             ref="name"
           />
+          <div
+            v-if="$v.formRegisterData.name.$error"
+            class="form-error">
+            <span
+              v-if="!$v.formRegisterData.name.required"
+              class="is-danger">
+              Name is required
+            </span>
+            <span
+              v-if="!$v.formRegisterData.name.minLength"
+              class="is-danger">
+              Name minimum length is 6 characters
+            </span>
+          </div>
           <div class="error-message">
             {{this.errors.name}}
           </div>
+          <!-- E-mail -->
           <input
-            type="text"
+            v-model.trim="formRegisterData.email"
+            @blur="$v.formRegisterData.email.$touch()"
+            type="email"
             placeholder="Email Address"
-            v-model="formRegisterData.email"
             id="email"
             ref="email"
             />
+          <div v-if="$v.formRegisterData.email.$error" class="form-error">
+            <span v-if="!$v.formRegisterData.email.required" class="is-danger">Email is required</span>
+            <span v-if="!$v.formRegisterData.email.email" class="is-danger">Email address is not valid</span>
+          </div>
           <div class="error-message">
             {{this.errors.email}}
           </div>
+          <!-- Password -->
           <input
+            v-model.trim="formRegisterData.password"
+            @blur="$v.formRegisterData.password.$touch()"
             type="password"
             ref="password"
-            placeholder="Password"
-            v-model="formRegisterData.password"
-          >
+            placeholder="Your Password"
+          />
+          <div v-if="$v.formRegisterData.password.$error" class="form-error">
+            <span v-if="!$v.formRegisterData.password.required" class="is-danger">Password is required
+            </span>
+            <span
+              v-if="!$v.formRegisterData.password.minLength"
+              class="is-danger">Password minimum length is 6 characters
+            </span>
+          </div>
           <div class="error-message">
             {{this.errors.password}}
           </div>
+          <!-- Password2 -->
           <input
+            v-model.trim="formRegisterData.password2"
+            @blur="$v.formRegisterData.password2.$touch()"
             type="password"
             placeholder="Confirm Password"
             ref="password2"
-            v-model="formRegisterData.password2"
-          >
+            autocomplete="off"
+          />
+          <div
+            v-if="$v.formRegisterData.password2.$error"
+            class="form-error">
+            <span
+              v-if="!$v.formRegisterData.password2.required"
+              class="is-danger">Password Confirmation is required</span>
+            <span
+              v-if="!$v.formRegisterData.password2.sameAs"
+              class="is-danger">Password confirmation should be the same as password</span>
+          </div>
           <div class="error-message">
             {{this.errors.password2}}
           </div>
-          <button type="submit">Register</button>
+          <button
+            type="submit"
+            :disabled="$v.formRegisterData.$invalid">
+            Register
+          </button>
         </form>
       </div>
       <div class="form-container sign-in-container">
@@ -62,26 +111,44 @@
           </div>
           <span>or use your account</span>
           <input
-            type="text"
-            placeholder="Email Address"
-            v-model="formData.email"
+            v-model.trim="formData.email"
+            @blur="$v.formData.email.$touch()"
+            type="email"
+            placeholder="Your Email Address"
             ref="email"
           />
+          <div v-if="$v.formData.email.$error" class="form-error">
+            <span v-if="!$v.formData.email.required" class="is-danger">Email is required</span>
+            <span v-if="!$v.formData.email.email" class="is-danger">Email address is not valid</span>
+          </div>
           <div class="error-message">
-            {{this.errors.email}}
+            {{this.errors.userNotFound}}
           </div>
           <input
+            v-model.trim="formData.password"
+            @blur="$v.formData.password.$touch()"
             type="password"
             ref="password"
-            placeholder="Password"
+            placeholder="Your Password"
             outlined
-            v-model="formData.password"
+            autocomplete="current-password"
           />
+          <div v-if="$v.formData.password.$error" class="form-error">
+            <span v-if="!$v.formData.password.required" class="help is-danger">Password is required</span>
+            <span
+              v-if="!$v.formData.password.minLength"
+              class="is-danger">Password minimum length is 6 characters
+            </span>
+          </div>
           <div class="error-message">
             {{this.errors.password}}
           </div>
           <a href="#">Forgot your password?</a>
-          <button type="submit">Log in</button>
+          <button
+            type="submit"
+            :disabled="$v.formData.$invalid">
+            Log in
+          </button>
         </form>
       </div>
       <div class="overlay-container">
@@ -106,7 +173,9 @@
 
 <script>
 import { mapState } from "vuex";
-import Header from '@/components/Header.vue'
+import { email, required, minLength, sameAs } from 'vuelidate/lib/validators';
+
+import Header from '@/components/Header.vue';
 
 export default {
   name: 'Login',
@@ -124,6 +193,38 @@ export default {
       },
       rightPanelActive: false
     };
+  },
+  validations: {
+    formData: {
+      email: {
+        email,
+        required
+      },
+      password: {
+        required,
+        minLength: minLength(6)
+      }
+    },
+    formRegisterData: {
+      name: {
+        required,
+        minLength: minLength(6)
+      },
+      email: {
+        email,
+        required,
+        minLength: minLength(6)
+      },
+      password: {
+        required,
+        minLength: minLength(6)
+      },
+      password2: {
+        required,
+        minLength: minLength(6),
+        sameAs: sameAs('password')
+      }
+    }
   },
   computed: {
     ...mapState('errors', ['errors']),
@@ -348,6 +449,10 @@ a {
 
 .form-container input:focus {
   outline: none;
+}
+
+.is-danger {
+  color: red;
 }
 
 /* Animation */

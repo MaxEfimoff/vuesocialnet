@@ -21,8 +21,8 @@
               </div>
             </div>
             <i class="fas fa-thumbs-up" @click="addLike"></i>{{' '}}<span>{{ product.likes.length }}</span>
-            <router-link class="padding" :to="`/products/${product._id}/edit-product`">
-              <span v-if="this.productAuthor" class="halfpadding">Edit product</span>
+            <router-link v-if="this.productAuthor" class="padding" :to="`/products/${product._id}/edit-product`">
+              <span class="halfpadding">Edit product</span>
             </router-link>
             <div class="error-message">
               {{this.errors.alreadyliked}}
