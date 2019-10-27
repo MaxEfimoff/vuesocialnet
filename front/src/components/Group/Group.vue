@@ -51,6 +51,7 @@
                 :avatar="post.avatar"
                 :address="`${group._id}/posts/${post._id}`"
                 :text="post.text"
+                :date="post.date"
                 />
             </div>
           </div>

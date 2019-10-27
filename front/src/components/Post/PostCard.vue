@@ -13,6 +13,9 @@
       :to="address"
     >
     <div class="leftmargin">
+      <span>{{ date | formatDate }}</span>
+    </div>
+    <div class="leftmargin">
       <span>{{ text }}</span>
     </div>
     </router-link>
@@ -35,6 +38,10 @@ export default {
       type: String
     },
     text: {
+      required: true,
+      type: String
+    },
+    date: {
       required: true,
       type: String
     }

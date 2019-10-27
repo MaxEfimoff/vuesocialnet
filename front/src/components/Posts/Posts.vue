@@ -7,7 +7,8 @@
             :name="post.name"
             :avatar="post.avatar"
             :address="`/posts/${post._id}`"
-            :text="post.text"/>
+            :text="post.text"
+            :date="post.date"/>
         </div>
       </div>
     </section>

@@ -12,11 +12,17 @@
       <div class="post-wrapper">
         <div class="post-new padding">
           <router-link
-            :to="`/profile/handle/${grouppost.name}`">
+            :to="`/profile/handle/${grouppost.name}`"
+            class="flex">
             <div>
               <img class="groups-img" :src="grouppost.avatar" alt="">
             </div>
-            <span>{{ grouppost.name }}</span>
+            <div class="leftpadding">
+              <span>{{ grouppost.name }}</span>
+            <div>
+              <span>{{ grouppost.date | formatDate }}</span>
+            </div>
+            </div>
           </router-link>
         </div>
         <div class="post-wrapper">
