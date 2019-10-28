@@ -65,13 +65,18 @@ import ProfileStats from '@/components/Profile/ProfileStats';
 
 export default {
   name: 'Profile',
-  mounted() {
-    this.getProfilePhotos(this.$route.params.handle);
-    this.getProfilePosts(this.$route.params.handle);
-    this.getProfileByHandle(this.$route.params.handle);
-    this.getProfileGroups(this.$route.params.handle);
-    this.getMessages();
-    this.exportCurrentProfile();
+  watch: {
+    '$route.params.handle'(newHandle, oldHandle) {
+      this.getProfileByHandle(newHandle)
+    }
+  },
+  async mounted() {
+    await this.getProfilePhotos(this.$route.params.handle);
+    await this.getProfilePosts(this.$route.params.handle);
+    await this.getProfileByHandle(this.$route.params.handle);
+    await this.getProfileGroups(this.$route.params.handle);
+    await this.getMessages();
+    await this.exportCurrentProfile();
   },
   
   computed: {

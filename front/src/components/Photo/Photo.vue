@@ -62,8 +62,13 @@ export default {
       tab: 'text',
     };
   },
-  created() {
-    this.getPhoto(this.$route.params.id);
+  watch: {
+    '$route.params.id'(newId, oldId) {
+      this.getPhoto(newId)
+    }
+  },
+  async mounted() {
+    await this.getPhoto(this.$route.params.id);
   },
   computed: {
     ...mapState('photos', ['photo']),

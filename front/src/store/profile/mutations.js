@@ -14,6 +14,10 @@ function SET_PROFILES (state, profiles) {
   state.profiles = profiles;
 }
 
+function CLEAR_ANOTHER_USER_PROFILE (state) {
+  state.anotherUserProfile = {};
+}
+
 function getAnotherUserProfile(state, anotherUserProfile) {
   state.anotherUserProfile = anotherUserProfile;
 }
@@ -38,5 +42,6 @@ export {
   getAnotherUserProfile,
   SET_PROFILE_PHOTOS,
   SET_PROFILE_POSTS,
-  SET_PROFILE_GROUPS
+  SET_PROFILE_GROUPS,
+  CLEAR_ANOTHER_USER_PROFILE
 };

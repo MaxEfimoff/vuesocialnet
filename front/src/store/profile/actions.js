@@ -60,6 +60,8 @@ function getProfiles({ commit }) {
 
 function getProfileByHandle({ commit }, handle) {
   return new Promise((resolve, reject) => {
+    console.log('working')
+    commit('CLEAR_ANOTHER_USER_PROFILE');
     axios.get(`http://localhost:5000/api/profile/handle/${handle}`)
     .then((response) => {
       commit('getAnotherUserProfile', response.data);
