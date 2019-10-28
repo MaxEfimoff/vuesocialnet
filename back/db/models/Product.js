@@ -8,6 +8,9 @@ const ProductSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'profile'
   },
+  category: { 
+    type: Schema.Types.ObjectId,
+    ref: 'category' },
   avatar: {
     type: String,
   },
@@ -19,11 +22,24 @@ const ProductSchema = new Schema({
     type: String,
     required: true
   },
+  price: {
+    type: Number,
+    required: true
+  },
+  discountedPrice: {
+    type: Number,
+    required: true
+  },
   name: {
     type: String
   },
   category: {
     type: String
+  },
+  status: {
+    type: String,
+    enum: ['active', 'inactive', 'deleted', 'published'],
+    default: 'active'
   },
   likes: [
     {
