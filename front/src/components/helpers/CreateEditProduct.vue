@@ -28,6 +28,32 @@
     </div>
 
     <div class="halfpadding">
+      <input
+        type="text"
+        placeholder="Product price"
+        ref="price"
+        :value="formData.price"
+        @change="onChange('price', $event.target.value)"
+      />
+    </div>
+    <div class="error-message">
+      {{this.errors.category}}
+    </div>
+
+    <div class="halfpadding">
+      <input
+        type="text"
+        placeholder="Product discounted price"
+        ref="discountedPrice"
+        :value="formData.discountedPrice"
+        @change="onChange('discountedPrice', $event.target.value)"
+      />
+    </div>
+    <div class="error-message">
+      {{this.errors.category}}
+    </div>
+
+    <div class="halfpadding">
       <textarea
         class="textarea"
         type="text"

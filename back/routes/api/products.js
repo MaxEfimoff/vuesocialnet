@@ -81,6 +81,8 @@ router.post('/', passport.authenticate("jwt", { session: false }), (req, res) =>
     name: req.body.name,
     image: req.body.image,
     text: req.body.text,
+    price: req.body.price,
+    discountedPrice: req.body.discountedPrice,
     category: req.body.category,
   });
 
@@ -106,6 +108,8 @@ router.patch('/:id/update-product', passport.authenticate("jwt", { session: fals
   if (req.body.avatar) productFields.avatar = req.body.avatar;
   if (req.body.image) productFields.image = req.body.image;
   if (req.body.text) productFields.text = req.body.text;
+  if (req.body.price) productFields.price = req.body.price;
+  if (req.body.discountedPrice) productFields.discountedPrice = req.body.discountedPrice;
   if (req.body.category) productFields.category = req.body.category;
 
   Product.findById(req.params.id)

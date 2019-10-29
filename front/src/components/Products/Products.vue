@@ -6,6 +6,8 @@
         :image="product.image"
         :address="`/products/${product._id}`"
         :text="product.text"
+        :price="product.price"
+        :discountedPrice="product.discountedPrice"
         :date="product.date"/>
     </div>
   </div>

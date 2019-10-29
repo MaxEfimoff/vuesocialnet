@@ -13,6 +13,7 @@
       <div class='text-center'>
         <span>{{ name }}</span>
         <span class="lefthalfpadding">{{ date | formatDate }}</span>
+        <span v-if="price" class="lefthalfpadding">{{ price }} руб.</span>
       </div>
     </router-link>
     
@@ -23,10 +24,6 @@
 export default {
   props: {
     name: {
-      required: true,
-      type: String
-    },
-    avatar: {
       required: true,
       type: String
     },
@@ -43,6 +40,12 @@ export default {
       type: String
     },
     image: {
+      type: String
+    },
+    price: {
+      type: Number
+    },
+    discountedPrice: {
       type: String
     }
   }

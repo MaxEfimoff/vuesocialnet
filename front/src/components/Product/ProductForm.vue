@@ -1,26 +1,31 @@
 <template>
   <section class="posts">
-    <h2 class="padding">Post Form</h2>
-    <CreateEditPost
-      :formData="formData"
-      :onSubmit="createPost"
-      @change="onChange"
-    />
+    <div class="section posts">
+      <h2 class="padding">Product Form</h2>
+      <CreateEditProduct
+        :formData="formData"
+        :onSubmit="createProduct"
+        @change="onChange"
+      />
+    </div>
   </section>
 </template>
 
 <script>
 import { mapState, mapActions } from "vuex";
-import CreateEditPost from'@/components/helpers/CreateEditPost.vue';
+import CreateEditProduct from'@/components/helpers/CreateEditProduct.vue';
 
 export default {
   data() {
     return {
       formData: {
         text: '',
+        category: null,
+        price: null,
+        discountedPrice: null,
+        image: '',
         name: this.$store.state.profile.profile.handle,
         profile: this.$store.state.profile.profile._id,
-        avatar: this.$store.state.profile.profile.avatar
       },
     };
   },
@@ -33,9 +38,9 @@ export default {
   },
   methods: {
     ...mapActions("profile", [ 'exportCurrentProfile' ]),
-    createPost() {
-      this.$store.dispatch('posts/addPost', this.formData)
-      .then(() => this.$router.push({ name: 'posts' }))
+    createProduct() {
+      this.$store.dispatch('products/addProduct', this.formData)
+      .then(() => this.$router.push({ name: 'products' }))
       .catch((error) => {console.log(error)
       })
     },
@@ -44,7 +49,7 @@ export default {
     },
   },
   components: {
-    CreateEditPost
+    CreateEditProduct
   }
 }
 </script>

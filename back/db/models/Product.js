@@ -8,12 +8,9 @@ const ProductSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'profile'
   },
-  category: { 
-    type: Schema.Types.ObjectId,
-    ref: 'category' },
-  avatar: {
-    type: String,
-  },
+  // category: { 
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'category' },
   image: {
     type: String,
     required: true
