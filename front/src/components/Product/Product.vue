@@ -3,10 +3,10 @@
     <div class="section posts">
       <div class="post-wrapper">
         <router-link
-          :to="`/profile/handle/${product.name}`">
+          :to="`/profile/handle/${product.profile.handle}`">
           <div class="padding">
-            <img class="product-photo" :src="product.avatar" alt="">
-            <p>{{ product.name }}</p>
+            <img class="product-photo" :src="product.profile.avatar" alt="">
+            <p>{{ product.profile.handle }}</p>
           </div>
         </router-link>
         <div class="posts">
@@ -15,6 +15,7 @@
         </div>
         <div class="post-wrapper">
           <div class="post">
+            <span>{{ product.category.name }}</span>
             <div class="post-author">
               <div class="groups-photo">
                 <p>{{ product.text }}</p>
@@ -92,7 +93,7 @@ export default {
     ...mapState('errors', ['errors']),
     ...mapState('profile', [ 'profile' ]),
     productAuthor() {
-      return this.$store.state.products.product.name === this.$store.state.profile.profile.handle;
+      return this.$store.state.products.product.profile.handle === this.$store.state.profile.profile.handle;
     }
   },
   methods: {

@@ -6,6 +6,7 @@ import groups from './groups';
 import posts from './posts';
 import products from './products';
 import notes from './notes';
+import categories from './categories';
 import photos from './photos';
 import documents from './documents';
 import messages from './messages';
@@ -29,7 +30,8 @@ export default function () {
       errors,
       friends,
       documents,
-      photos
+      photos,
+      categories
     },
     strict: process.env.DEV
   })

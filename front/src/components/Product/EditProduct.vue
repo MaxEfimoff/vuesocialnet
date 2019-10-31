@@ -9,7 +9,7 @@
             <h3 class="padding">Edit Product</h3>
               <CreateEditProduct
                 :formData="formData"
-                :onSubmit="createGroup"
+                :onSubmit="editPage"
                 @change="onChange"
               />
           </section>

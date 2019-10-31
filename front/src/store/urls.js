@@ -28,6 +28,8 @@ const friendsProductsUrl = `${serverUrl}/api/products/friends-products`;
 // Notes
 const addNoteUrl = `${serverUrl}/api/notes`;
 const allNotesUrl = `${serverUrl}/api/notes/`;
+// Categories
+const allCategoriesUrl = `${serverUrl}/api/categories`;
 // Documents
 const addDocumentUrl = `${serverUrl}/api/documents`;
 const allDocumentsUrl = `${serverUrl}/api/documents/`;
@@ -82,6 +84,7 @@ export {
   addProductUrl,
   allProductsUrl,
   myProductsUrl,
-  friendsProductsUrl
+  friendsProductsUrl,
+  allCategoriesUrl
   // profileByHandleUrl
 };

@@ -16,7 +16,7 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Category.find()
-      .sort({ name: -1 })
+      .sort({ name: 1 })
       .then(categories =>
         res.json(categories)
       )

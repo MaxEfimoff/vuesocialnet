@@ -15,16 +15,18 @@
     </div>
 
     <div class="halfpadding">
-      <input
-        type="text"
-        placeholder="Product category"
-        ref="category"
-        :value="formData.category"
-        @change="onChange('category', $event.target.value)"
-      />
-    </div>
-    <div class="error-message">
-      {{this.errors.category}}
+      <select
+        :value="formData.category._id"
+        @change="onChange('category', $event.target.value)">
+        <option value='default'>Select Category</option>
+        <option
+          v-for="category in categories"
+          :key="category._id"
+          :value="category._id"
+        >
+          {{ category.name }}
+        </option>
+      </select>
     </div>
 
     <div class="halfpadding">
@@ -37,7 +39,7 @@
       />
     </div>
     <div class="error-message">
-      {{this.errors.category}}
+      {{this.errors.price}}
     </div>
 
     <div class="halfpadding">
@@ -50,7 +52,7 @@
       />
     </div>
     <div class="error-message">
-      {{this.errors.category}}
+      {{this.errors.discountedPrice}}
     </div>
 
     <div class="halfpadding">
@@ -76,10 +78,13 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'CreateEditProductForm',
+  async mounted() {
+    await this.getCategories();
+  },
   props: {
     formData: {
       type: Object,
@@ -92,15 +97,28 @@ export default {
   },
   computed: {
     ...mapState('errors', ['errors']),
-    ...mapState('profile', [ 'profile']),
+    ...mapState('profile', ['profile']),
+    ...mapState('categories', ['categories']),
   },
   methods: {
+    ...mapActions("categories", [ 'getCategories' ]),
     onChange(prop, newValue) {
+      if(prop === 'category') {
+        return this.emitCategory(newValue)
+      }
+
       const newData = Object.assign({}, this.formData);
-      newData[prop] = prop === 'number' ? Number(newValue) : newValue;
+
+      newData[prop] = prop === ('price' || 'discountedPrice') ? Number(newValue) : newValue;
 
       this.$emit('change', newData);
     },
+    emitCategory(categoryId) {
+      const foundCategory = this.categories.find(c => c._id == categoryId);
+      this.formData.category = foundCategory;
+      const newData = Object.assign({}, this.formData);
+      this.$emit('change', newData);
+    }
   }
 }
 </script>

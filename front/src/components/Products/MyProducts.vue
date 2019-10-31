@@ -1,11 +1,13 @@
 <template>
   <div  class="flex">
-    <div v-for="product in myproducts.slice(0, 10)" :key="product.id">
+    <div v-for="product in myproducts" :key="product.id">
       <ProductCard
-        :name="product.name"
+        :name="product.profile.handle"
         :image="product.image"
         :address="`/products/${product._id}`"
         :text="product.text"
+        :price="product.price"
+        :discountedPrice="product.discountedPrice"
         :date="product.date"/>
     </div>
   </div>
@@ -17,8 +19,8 @@ import ProductCard from '@/components/Product/ProductCard';
 
 export default {
   name: 'MyProducts',
-  created() {
-    this.getMyProducts();
+  async mounted() {
+    await this.getMyProducts();
   },
   computed: {
     ...mapState('profile', ['profile']),

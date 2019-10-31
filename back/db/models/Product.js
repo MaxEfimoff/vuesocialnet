@@ -8,9 +8,9 @@ const ProductSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'profile'
   },
-  // category: { 
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'category' },
+  category: { 
+    type: Schema.Types.ObjectId,
+    ref: 'category' },
   image: {
     type: String,
     required: true
@@ -28,9 +28,6 @@ const ProductSchema = new Schema({
     required: true
   },
   name: {
-    type: String
-  },
-  category: {
     type: String
   },
   status: {

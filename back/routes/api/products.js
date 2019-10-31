@@ -19,6 +19,7 @@ router.get('/test', (req, res) => res.json({msg:'products works'}));
 router.get('/', passport.authenticate("jwt", { session: false }), (req, res) => {
   Product
     .find()
+    .populate('profile -avatar -handle')
     .sort({date: -1})
     .then(products => res.json(products))
     .catch(err => res.status(404).json({noproductsfound: 'No products found'}));
@@ -31,7 +32,8 @@ router.get('/my-products', passport.authenticate("jwt", { session: false }), (re
   Profile.findOne({ user: req.user.id })
   .then(profile => {
     Product
-    .find({name: profile.handle})
+    .find({profile: profile._id})
+    .populate('profile -avatar -handle')
     .sort({date: -1})
     .then(products => res.json(products))
   })
@@ -46,6 +48,7 @@ router.get('/friends-products', passport.authenticate("jwt", { session: false })
     .then(profile => {
       Product
         .find({name: { $in: profile.friends.map(a => a.handle) }})
+        .populate('profile -avatar -handle')
         .sort({date: -1})
         .then(products => res.json(products)
         )
@@ -59,6 +62,8 @@ router.get('/friends-products', passport.authenticate("jwt", { session: false })
 router.get('/:id', passport.authenticate("jwt", { session: false }), (req, res) => {
   Product
     .findById(req.params.id)
+    .populate('profile -avatar -handle')
+    .populate('category')
     .then(product => res.json(product))
     .catch(err => res.status(404).json({noproductfound: 'No product found with that Id'}));
 })

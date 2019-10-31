@@ -20,21 +20,21 @@ export default {
     return {
       formData: {
         text: '',
-        category: null,
+        category: 'default',
         price: null,
         discountedPrice: null,
         image: '',
-        name: this.$store.state.profile.profile.handle,
-        profile: this.$store.state.profile.profile._id,
+        // name: this.$store.state.profile.profile.handle,
+        profile: this.$store.state.profile.profile._id
       },
     };
   },
-  created() {
-    this.exportCurrentProfile();
+  async mounted() {
+    await this.exportCurrentProfile();
   },
   computed: {
     ...mapState('errors', [ 'errors' ]),
-    ...mapState('profile', [ 'profile' ])
+    ...mapState('profile', [ 'profile' ]),
   },
   methods: {
     ...mapActions("profile", [ 'exportCurrentProfile' ]),

@@ -73,6 +73,14 @@ input[type='text'] {
 }
 
 
+select {
+  width: 100%;
+  text-align:right;
+  border: 1px solid var(--primary-color);
+  height: 2rem;
+  background-color: var(--primary-color);
+  border-radius: 0.2rem;
+}
 
 input {
   border: 1px solid var(--primary-color);
