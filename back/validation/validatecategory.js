@@ -1,17 +1,18 @@
 const Validator = require("validator");
 const isEmpty = require("./is-empty.js");
 
-module.exports = function validateCategoryInput(data) {
+module.exports = function validateEventCategoryInput(data) {
   let errors = {};
 
   data.name = !isEmpty(data.name) ? data.name : "";
+  data.image = !isEmpty(data.image) ? data.image : "";
 
   if (!Validator.isLength(data.name, { min: 3, max: 20 })) {
-    errors.name = "Category name must be between 3 and 20 characters";
+    errors.name = "Event category name must be between 3 and 20 characters";
   }
 
   if (Validator.isEmpty(data.name)) {
-    errors.name = "Name field is required";
+    errors.text = "Name field is required";
   }
 
   return {
