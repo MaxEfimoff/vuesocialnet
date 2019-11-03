@@ -2,7 +2,7 @@
   <div class="post-author">
     <div class="groups-photo lefthalfpadding">
       <router-link
-        :to="`/profile/handle/${profile.handle}`">
+        :to="{ name: 'profile', params: { handle: profile.handle } }">
         <img class="groups-img" :src="profile.avatar" alt="">
         <div class="text-center">
           <div><a>{{ profile.handle }}</a></div>

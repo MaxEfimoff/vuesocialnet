@@ -6,7 +6,7 @@
           <PostCard
             :name="post.name"
             :avatar="post.avatar"
-            :address="`/posts/${post._id}`"
+            :address="{ name: 'post', params: { id: post._id } }"
             :text="post.text"
             :date="post.date"/>
         </div>

@@ -4,7 +4,7 @@
       <ProductCard
         :name="product.profile.handle"
         :image="product.image"
-        :address="`/products/${product._id}`"
+        :address="{ name: 'product', params: { id: product._id } }"
         :text="product.text"
         :price="product.price"
         :discountedPrice="product.discountedPrice"

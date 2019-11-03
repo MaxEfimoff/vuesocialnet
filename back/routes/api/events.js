@@ -206,3 +206,5 @@ router.post(
       .catch(err => res.status(404).json({ eventnotfound: "No event found" }));
   }
 );
+
+module.exports = router;

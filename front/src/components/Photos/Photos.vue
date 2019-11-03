@@ -11,7 +11,7 @@
         <div class="photo-small" v-for="photo in photos" :key="photo.id">
           <div>
             <router-link
-              :to="`/photos/${photo._id}`"
+              :to="{ name: 'photo', params: { id: photo._id } }"
             >
               <div class="groups-photo">
                 <img class="display-image" :src=" require(`../../../../back/uploads/${photo.image}`) " alt="">

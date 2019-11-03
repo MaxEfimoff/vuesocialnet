@@ -22,7 +22,7 @@
                 </div>
               </div>
             <router-link
-              :to="`/messages/${message._id}`">
+              :to="{ name: 'message', params: { id: message._id } }">
               <div class="groups-photo">
                 <a class="leftpadding">{{ message.text }}</a>
               </div>

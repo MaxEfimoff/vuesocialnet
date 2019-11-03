@@ -11,7 +11,7 @@
         <div class="post"  v-for="note in notes" :key="note.id">
           <div class="post-author">
             <router-link
-              :to="`/notes/${note._id}`"
+              :to="{ name: 'note', params: { id: note._id } }"
             >
               <div class="groups-photo">
                 <i class="fas fa-sticky-note fa-2x"></i>

@@ -4,7 +4,7 @@
       <div class="post" v-for="group in groups" :key="group.id">
         <div class="post-author">
           <router-link
-            :to="`/groups/${group._id}`"
+            :to="{ name: 'group', params: { id: group._id } }"
             class=" flex-left"
           >
             <div class="text-center"> 

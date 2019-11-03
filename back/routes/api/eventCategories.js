@@ -3,10 +3,10 @@ const router = express.Router();
 const passport = require("passport");
 
 // Category model
-const EventCategory = require('../../db/models/Category');
+const EventCategory = require('../../db/models/EventCategory');
 
 // Validation
-const validateEventCategoryInput = require("../../validation/category");
+const validateEventCategoryInput = require("../../validation/eventcategory");
 
 //@route      GET api/eventcategories
 //@desc       Get event category
@@ -42,7 +42,7 @@ router.post(
       return res.status(400).json(errors);
     }
 
-    EventCategory = new EventCategory({
+    const newEventCategory = new EventCategory({
       name: req.body.name,
       image: req.body.image
     });
