@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
@@ -40,19 +39,11 @@ router.post('/register', (req, res) => {
         // with errors.email property
         return res.status(400).json(errors);
       } else {
-        // Gravatar options
-        const avatar = gravatar.url(req.body.email, {
-          S: '200', // Size
-          r: 'pg',  // Rating
-          s: 'mm' // Default
-        })
 
         // Create new User using mongoose User schema
         const newUser = new User({
           name: req.body.name,
           email: req.body.email,
-          // Avatar would be gravatar for now
-          avatar: avatar,
           password: req.body.password
         });
 
@@ -102,12 +93,10 @@ router.post('/login', (req, res) => {
         .then(isMatch => {
           if(isMatch) {
             // User Matched
-
             // Create JWT payload
             const payload = {
               id: user.id,
               name: user.name,
-              avatar: user.avatar
             }
 
             // Sign the JWT token

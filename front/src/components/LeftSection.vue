@@ -47,13 +47,13 @@
           <div class="count">{{ mygroups.length }}</div>
           <i class="fas fa-users"></i>
         </router-link> 
-        <router-link
+        <!-- <router-link
           class="stat-counter lefthalfpadding"
           :to="{ name: 'documents' }"
         >
           <div class="count">{{ documents.length }}</div>
           <i class="fas fa-file-alt"></i>
-        </router-link> 
+        </router-link>  -->
         <router-link
           class="stat-counter lefthalfpadding"
           :to="{ name: 'notes' }"
@@ -179,7 +179,7 @@ export default {
     this.getNotes();
     this.getMyProducts();
     this.getPhotos();
-    this.getDocuments();
+    // this.getDocuments();
     this.exportCurrentProfile();
   },
   methods: {
@@ -188,7 +188,7 @@ export default {
     ...mapActions("notes",['getNotes']),
     ...mapActions("products",['getMyProducts']),
     ...mapActions("photos",['getPhotos']),
-    ...mapActions("documents",['getDocuments']),
+    // ...mapActions("documents",['getDocuments']),
     ...mapActions("profile",['exportCurrentProfile']),
     toggleVisibility() {
       this.visible =!this.visible;
@@ -200,7 +200,7 @@ export default {
     ...mapState('notes', [ 'notes']),
     ...mapState('products', [ 'myproducts']),
     ...mapState('photos', [ 'photos']),
-    ...mapState('documents', [ 'documents']),
+    // ...mapState('documents', [ 'documents']),
     ...mapState('auth', [ 'user']),
     ...mapState('profile', [ 'profile']),
   },
