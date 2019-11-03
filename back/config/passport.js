@@ -1,4 +1,5 @@
 const JwtStrategy = require('passport-jwt').Strategy;
+const GooglePlusTokenStrategy = require('passport-google-plus-token');
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const mongoose = require('mongoose');
 const User = mongoose.model('users');
@@ -25,4 +26,30 @@ module.exports = passport => {
         .catch(err => console.log(err));
     })
   );
+
+  passport.use('googleToken', new GooglePlusTokenStrategy({
+    clientID: '327558713168-s1j5bapja5fele8h1mjp92cmieo71j1s.apps.googleusercontent.com',
+    clientSecret: 'ICY3FRpBmLY0LufHnN_7ORxG'
+  }, (accessToken, refreshToken, profile, done) => {
+    // console.log('accessToken', accessToken);
+    // console.log('refreshToken', refreshToken);
+    // console.log('profile', profile);
+    User.findOne({ "google.id": profile.id })
+      .then(user => {
+        if (user) {
+          console.log('User already exists in our DB')
+          return done(null, user);
+        }
+        const newUser = new User({
+          method: 'google',
+          google: {
+            id: profile.id,
+            email: profile.emails[0].value
+          }
+        })
+        console.log(newUser)
+        newUser.save()
+      })
+      .catch(err => console.log(err));
+  }))
 };

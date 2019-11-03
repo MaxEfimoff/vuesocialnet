@@ -44,7 +44,7 @@ router.post('/register', (req, res) => {
         const newUser = new User({
           name: req.body.name,
           email: req.body.email,
-          password: req.body.password
+          password: req.body.password,
         });
 
         // Encrypt the password
@@ -62,6 +62,29 @@ router.post('/register', (req, res) => {
       }
     });
 });
+
+// Google OAuth login
+router.post('/oauth/google', passport.authenticate('googleToken', { session: false }),(req, res) => {
+  const existingUser = User.findOne({ "google.id": profile.id });
+    if(existingUser) {
+      errors.email = 'Email already exists';
+      return res.status(400).json(errors);
+    } else {
+      const newUser = new User({
+        method: 'google',
+        google: {
+          id: profile.id,
+          email: profile.emails[0].value
+        }
+      })
+      console.log(newUser)
+      newUser
+        .save()
+        .then(user => res.json(user))
+        .catch(err => console.log(err));
+      
+    }
+})
 
 // @route     GET api/users/login
 // @desc      Login user / Returning JWT Token
@@ -118,6 +141,7 @@ router.post('/login', (req, res) => {
         });
     });
 });
+
 
 // @route     GET api/users/current
 // @desc      Return current user
