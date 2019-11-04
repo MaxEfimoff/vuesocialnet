@@ -31,7 +31,10 @@ const UserSchema = new Schema({
     email: {
       type: String,
       lowercase: true
-    }
+    },
+    name: {
+      type: String
+    },
   },
   facebook: {
     id: {

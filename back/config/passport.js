@@ -42,13 +42,14 @@ module.exports = passport => {
         }
         const newUser = new User({
           method: 'google',
-          google: {
-            id: profile.id,
-            email: profile.emails[0].value
-          }
+          id: profile.id,
+          email: profile.emails[0].value,
+          name: profile.displayName
         })
-        console.log(newUser)
+        // console.log(newUser)
         newUser.save()
+        done(null, newUser);
+        
       })
       .catch(err => console.log(err));
   }))

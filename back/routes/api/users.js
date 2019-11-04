@@ -8,6 +8,7 @@ const passport = require('passport');
 // Load input validation
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
+const UsersController = require('../../controllers/users');
 
 // Load User model
 const User = require('../../db/models/User')
@@ -64,27 +65,7 @@ router.post('/register', (req, res) => {
 });
 
 // Google OAuth login
-router.post('/oauth/google', passport.authenticate('googleToken', { session: false }),(req, res) => {
-  const existingUser = User.findOne({ "google.id": profile.id });
-    if(existingUser) {
-      errors.email = 'Email already exists';
-      return res.status(400).json(errors);
-    } else {
-      const newUser = new User({
-        method: 'google',
-        google: {
-          id: profile.id,
-          email: profile.emails[0].value
-        }
-      })
-      console.log(newUser)
-      newUser
-        .save()
-        .then(user => res.json(user))
-        .catch(err => console.log(err));
-      
-    }
-})
+router.post('/oauth/google', passport.authenticate('googleToken', { session: false }), UsersController.googleOAuth)
 
 // @route     GET api/users/login
 // @desc      Login user / Returning JWT Token
