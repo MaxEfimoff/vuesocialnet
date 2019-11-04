@@ -34,17 +34,22 @@ module.exports = passport => {
     // console.log('accessToken', accessToken);
     // console.log('refreshToken', refreshToken);
     // console.log('profile', profile);
-    User.findOne({ "google.id": profile.id })
+    User.findOne({ "google.id": profile.id})
+    User.findOne({"email": profile.emails[0].value})
       .then(user => {
         if (user) {
-          console.log('User already exists in our DB')
+          console.log('User already exists in our DB');
+          console.log(user)
           return done(null, user);
         }
+        console.log('User does not exist in our DB')
         const newUser = new User({
           method: 'google',
-          id: profile.id,
-          email: profile.emails[0].value,
-          name: profile.displayName
+          google: {
+            id: profile.id,
+            email: profile.emails[0].value,
+            name: profile.displayName
+          }
         })
         // console.log(newUser)
         newUser.save()
