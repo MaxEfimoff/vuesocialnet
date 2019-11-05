@@ -43,7 +43,10 @@ const UserSchema = new Schema({
     email: {
       type: String,
       lowercase: true
-    }
+    },
+    name: {
+      type: String
+    },
   },
   name: {
     type: String,

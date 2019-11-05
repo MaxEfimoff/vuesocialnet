@@ -67,6 +67,9 @@ router.post('/register', (req, res) => {
 // Google OAuth login
 router.post('/oauth/google', passport.authenticate('googleToken', { session: false }), UsersController.googleOAuth)
 
+// Facebook OAuth login
+router.post('/oauth/facebook', passport.authenticate('facebookToken', { session: false }), UsersController.facebookOAuth)
+
 // @route     GET api/users/login
 // @desc      Login user / Returning JWT Token
 // @access    Public
