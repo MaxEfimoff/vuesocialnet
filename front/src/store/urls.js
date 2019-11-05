@@ -11,6 +11,7 @@ const oneGroupUrl = `${serverUrl}/pages/getOneGroup`;
 
 // Auth
 const loginUrl = `${serverUrl}/api/users/login/`;
+const loginViaGoogleUrl = `${serverUrl}/api/users/oauth/google`;
 const registerUrl = `${serverUrl}/api/users/register/`;
 // Profile
 const profileUrl = `${serverUrl}/api/profile/`;
@@ -85,6 +86,7 @@ export {
   allProductsUrl,
   myProductsUrl,
   friendsProductsUrl,
-  allCategoriesUrl
+  allCategoriesUrl,
+  loginViaGoogleUrl
   // profileByHandleUrl
 };

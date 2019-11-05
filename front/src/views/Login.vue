@@ -8,7 +8,7 @@
           <h1>Use Account</h1>
           <div class="social-container">
             <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+            <a href="#" class="social" @click="logingoogle"><i class="fab fa-google-plus-g"></i></a>
             <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
           </div>
           <span>or register with your email</span>
@@ -106,7 +106,7 @@
           <h1>Log in</h1>
           <div class="social-container">
             <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+            <a href="#" class="social" @click="logingoogle"><i class="fab fa-google-plus-g"></i></a>
             <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
           </div>
           <span>or use your account</span>
@@ -172,10 +172,17 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import { mapState } from "vuex";
 import { email, required, minLength, sameAs } from 'vuelidate/lib/validators';
 
 import Header from '@/components/Header.vue';
+
+import GAuth from 'vue-google-oauth2'
+const gauthOption = {
+  clientId: '162155419024-ct4f6h85fa5juklis6ird1eqvqs4e129.apps.googleusercontent.com',
+}
+Vue.use(GAuth, gauthOption)
 
 export default {
   name: 'Login',
@@ -230,6 +237,15 @@ export default {
     ...mapState('errors', ['errors']),
   },
   methods: {
+    logingoogle() {
+      this.$gAuth.signIn()
+        .then(GoogleUser => {
+          this.$store.dispatch('auth/loginViaGoogle', GoogleUser.Zi.access_token)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
     submitRegisterForm() {
         this.$store.dispatch('auth/register', this.formRegisterData)
           .then(this.rightPanelActive = false)

@@ -6,6 +6,7 @@ import {
   loginUrl,
   checkAuthUrl,
   resetPasswordUrl,
+  loginViaGoogleUrl
 } from '../urls';
 
 function register({ commit }, data) {
@@ -58,6 +59,22 @@ function login({ commit }, data) {
   });
 }
 
+function loginViaGoogle({ commit }, data) {
+  console.log(data)
+  return new Promise((resolve, reject) => {
+    axios.post(loginViaGoogleUrl, {
+      access_token: data
+    })
+    .then((response) => {
+      console.log(response)
+      resolve();
+    })
+    .catch((error) => {
+      console.log(error)
+    });
+  });
+}
+
 function logout({ commit }) {
 
   // Remove token from localStorage
@@ -94,4 +111,5 @@ export {
   logout,
   checkUser,
   resetPassword,
+  loginViaGoogle
 };

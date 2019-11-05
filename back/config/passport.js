@@ -1,5 +1,6 @@
 const JwtStrategy = require('passport-jwt').Strategy;
 const GooglePlusTokenStrategy = require('passport-google-plus-token');
+// const GooglePlusTokenStrategy = require('passport-google-oauth').OAuth2Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const mongoose = require('mongoose');
 const User = mongoose.model('users');
@@ -28,12 +29,12 @@ module.exports = passport => {
   );
 
   passport.use('googleToken', new GooglePlusTokenStrategy({
-    clientID: '327558713168-s1j5bapja5fele8h1mjp92cmieo71j1s.apps.googleusercontent.com',
-    clientSecret: 'ICY3FRpBmLY0LufHnN_7ORxG'
+    clientID: '162155419024-ct4f6h85fa5juklis6ird1eqvqs4e129.apps.googleusercontent.com',
+    clientSecret: 'EIxEt4zRNl6FeJoLU--Ef3m4'
   }, (accessToken, refreshToken, profile, done) => {
     // console.log('accessToken', accessToken);
     // console.log('refreshToken', refreshToken);
-    // console.log('profile', profile);
+    console.log('profile', profile);
     User.findOne({ "google.id": profile.id})
     User.findOne({"email": profile.emails[0].value})
       .then(user => {
