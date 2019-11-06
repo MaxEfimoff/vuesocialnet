@@ -7,7 +7,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store/index.js';
 
-Vue.use(VModal);
+Vue.use(VModal, { dialog: true, dynamic: true });
 Vue.use(Vuelidate);
 
 Vue.config.productionTip = false;

@@ -4,6 +4,8 @@ import Router from 'vue-router';
 import Login from '@/views/Login.vue';
 import Register from '@/views/Register.vue';
 import Dashboard from '@/views/Dashboard.vue';
+// Calendar
+import Calendar from '@/views/Calendar.vue';
 // Posts
 import Post from '@/views/Post.vue';
 import Posts from '@/views/Posts.vue';
@@ -77,6 +79,12 @@ export default new Router({
       path: '/dashboard',
       name: 'dashboard',
       component: Dashboard
+    },
+    // Calendar
+    {
+      path: '/calendar',
+      name: 'calendar',
+      component: Calendar
     },
     // Posts
     {

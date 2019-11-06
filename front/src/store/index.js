@@ -6,6 +6,7 @@ import groups from './groups';
 import posts from './posts';
 import products from './products';
 import notes from './notes';
+import events from './events';
 import categories from './categories';
 import photos from './photos';
 import documents from './documents';
@@ -21,6 +22,7 @@ export default function () {
   const Store = new Vuex.Store({
     modules: {
       auth,
+      events,
       profile,
       groups,
       posts,

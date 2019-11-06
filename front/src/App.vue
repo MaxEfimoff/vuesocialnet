@@ -168,6 +168,10 @@ span, li, i {
   text-shadow: 1px 1px 2px #333;
 }
 
+.white-font-no-shadow {
+  color: #fff;
+}
+
 .error-message {
   color: red;
   text-align: center;

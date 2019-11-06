@@ -8,6 +8,11 @@
   },
   "proxy": "http://localhost:5000",
   "dependencies": {
+    "@fullcalendar/daygrid": "^4.3.0",
+    "@fullcalendar/interaction": "^4.3.0",
+    "@fullcalendar/list": "^4.3.0",
+    "@fullcalendar/timegrid": "^4.3.0",
+    "@fullcalendar/vue": "^4.3.1",
     "axios": "^0.19.0",
     "core-js": "^2.6.5",
     "facebook-login-vuejs": "^2.1.3",
