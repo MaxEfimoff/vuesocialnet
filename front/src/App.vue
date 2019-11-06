@@ -136,6 +136,10 @@ span, li, i {
   font-size: 0.8rem;
 }
 
+.relative{
+  position: relative;
+}
+
 .textarea {
   text-align:left;
   border: 1px solid var(--primary-color);
@@ -221,6 +225,10 @@ span, li, i {
 
 .lefthalfpadding {
   padding-left: 0.5rem;
+}
+
+.bottomhalfpadding:not(:last-child) {
+  padding-bottom: 0.5rem;
 }
 
 .text-center {
