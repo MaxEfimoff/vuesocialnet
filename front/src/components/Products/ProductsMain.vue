@@ -25,10 +25,7 @@
             <a href="">Liked</a>
           </li>
         </ul>
-        <!-- <ModalProduct/> -->
-        <router-link :to="{ name: 'productForm' }">
-          <button>Add product</button>
-        </router-link>
+        <ModalCreateProduct/>
         <form action="#" class="search-form leftmargin">
           <input type="text" placeholder="Product search" />
         </form>
@@ -46,7 +43,7 @@
 import Products from'./Products';
 import MyProducts from'./MyProducts';
 import FriendsProducts from'./FriendsProducts';
-// import ModalProduct from './ModalProduct.vue';
+import ModalCreateProduct from './ModalCreateProduct.vue';
 
 import { mapState } from 'vuex';
 
@@ -79,7 +76,7 @@ export default {
     Products,
     MyProducts,
     FriendsProducts,
-    // ModalProduct
+    ModalCreateProduct
   }
 }
 </script>

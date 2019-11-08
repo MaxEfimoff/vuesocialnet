@@ -1,8 +1,8 @@
 <template>
   <div>
     <button href="" @click.prevent="show">Add new product</button>
-    <modal name="ModalProduct">
-      <ProductForm />
+    <modal name="ModalCreateProduct" height="auto">
+      <ProductForm @closeModal="hide"/>
     </modal>
   </div>
 </template>
@@ -12,10 +12,10 @@ import ProductForm from '../Product/ProductForm';
 export default {
   methods: {
     show() {
-      this.$modal.show('ModalProduct');
+      this.$modal.show('ModalCreateProduct');
     },
     hide() {
-      this.$modal.hide('ModalProduct');
+      this.$modal.hide('ModalCreateProduct');
     }
   },
   components: {

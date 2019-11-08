@@ -14,9 +14,12 @@ function SET_PRODUCT (state, product) {
   state.product = product;
 }
 
+function RESET_PRODUCT (state, product) {
+  state.product = {};
+}
+
 function ADD_PRODUCT (state, product) {
-  // Vue.set(state.tasks, product);
-  Object.assign(state.tasks, product);
+  state.products.unshift(product)
 }
 
 export {
@@ -24,5 +27,6 @@ export {
   SET_PRODUCT,
   ADD_PRODUCT,
   SET_MY_PRODUCTS,
-  SET_FRIENDS_PRODUCTS
+  SET_FRIENDS_PRODUCTS,
+  RESET_PRODUCT
 };

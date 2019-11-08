@@ -38,6 +38,7 @@ function getFriendsProducts({ commit }) {
 }
 
 function getProduct({ commit }, index) {
+  commit('RESET_PRODUCT');
   return new Promise((resolve, reject) => {
     axios.get(oneProductUrl, { id: index })
       .then((response) => {
@@ -52,7 +53,7 @@ function addProduct({ commit }, data) {
   return new Promise((resolve, reject) => {
     axios.post(addProductUrl, data)
       .then((response) => {
-        commit('SET_PRODUCT', response.data);
+        commit('ADD_PRODUCT', response.data);
         resolve();
       })
       .catch(error => {
@@ -63,7 +64,7 @@ function addProduct({ commit }, data) {
 }
 
 function updateProduct({ commit, state }) {
-  const product = state.product
+  const product = state.product;
   return new Promise((resolve, reject) => {
     axios.patch(`http://localhost:5000/api/products/${product._id}/update-product`, product)
       .then((response) => {
@@ -78,6 +79,7 @@ function updateProduct({ commit, state }) {
 }
 
 function getProductById({ commit }, id) {
+  commit('RESET_PRODUCT');
   return new Promise((resolve, reject) => {
     axios.get(`http://localhost:5000/api/products/${id}`)
     .then((response) => {

@@ -1,7 +1,9 @@
 <template>
   <section class="section-center">
-    <div class="section posts">
-      <div class="post-wrapper">
+    <div class=" posts">
+      <div class="product-image" :style="{ backgroundImage: 'url(' + `${product.image}` + ')' }">
+      </div>
+      <div class="post-author">
         <router-link
           :to="`/profile/handle/${product.profile.handle}`">
           <div class="padding">
@@ -9,12 +11,7 @@
             <p>{{ product.profile.handle }}</p>
           </div>
         </router-link>
-        <div class="posts">
-          <div class="product-image" :style="{ backgroundImage: 'url(' + `${product.image}` + ')' }">
-        </div>
-        </div>
-        <div class="post-wrapper">
-          <div class="post">
+          <div class="text-left">
             <span>{{ product.category.name }}</span>
             <div class="post-author">
               <div class="groups-photo">
@@ -29,7 +26,7 @@
               {{this.errors.alreadyliked}}
             </div>
           </div>
-        </div>
+      </div>
         <!-- Comments -->
         <div
           class="message"
@@ -65,7 +62,6 @@
           </div>
         </form>
         <!-- Comments form -->
-      </div>
     </div>
   </section>
 </template>
@@ -75,6 +71,12 @@ import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'Product',
+  props: {
+    id: {
+      required: true,
+      type: String
+    },
+  },
   data() {
     return {
       formData: {
@@ -85,7 +87,7 @@ export default {
     };
   },
   created() {
-    this.getProductById(this.$route.params.id);
+    this.getProductById(this.id);
     this.exportCurrentProfile();
   },
   computed: {
@@ -100,12 +102,12 @@ export default {
     ...mapActions("products", ['getProductById']),
     ...mapActions("profile", [ 'exportCurrentProfile' ]),
     addLike() {
-      this.$store.dispatch('products/addLike', this.$route.params.id)
+      this.$store.dispatch('products/addLike', this.id)
       .catch((error) => {console.log(error)})
     },
     submitForm() {
       const payload = {
-        productId: this.$route.params.id,
+        productId: this.id,
         formData: this.formData
       }
       this.$store.dispatch('products/addComment', payload)

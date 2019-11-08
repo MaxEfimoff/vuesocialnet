@@ -215,6 +215,7 @@ router.post(
 
     Product.findById(req.params.id)
       .then(product => {
+        console.log(product)
         const newComment = {
           text: req.body.text,
           name: req.body.name,

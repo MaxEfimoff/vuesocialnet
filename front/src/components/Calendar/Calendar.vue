@@ -1,7 +1,6 @@
 <template>
   <section class="section-center">
     <div class="section posts padding">
-      {{getEvents}}
       <Fullcalendar
         :plugins="calendarPlugins"
         :header="{

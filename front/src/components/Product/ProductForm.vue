@@ -1,13 +1,11 @@
 <template>
   <section class="posts">
-    <div class="section posts">
-      <h2 class="padding">Product Form</h2>
-      <CreateEditProduct
-        :formData="formData"
-        :onSubmit="createProduct"
-        @change="onChange"
-      />
-    </div>
+    <h2 class="padding">Product Form</h2>
+    <CreateEditProduct
+      :formData="formData"
+      :onSubmit="createProduct"
+      @change="onChange"
+    />
   </section>
 </template>
 
@@ -42,6 +40,7 @@ export default {
       .then(() => this.$router.push({ name: 'products' }))
       .catch((error) => {console.log(error)
       })
+      this.$emit('closeModal');
     },
     onChange(newFormData) {
       this.formData = newFormData;

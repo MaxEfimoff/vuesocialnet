@@ -1,13 +1,9 @@
 <template>
   <div class="halfpadding product-card">
-    <router-link
-      :to="address"
-    >
-      <img class="product-card-image" :src="image" alt="">
-      <div>
-        <span>{{ text | shortenText(24) }}</span>
-      </div>
-    </router-link>
+    <img class="product-card-image" :src="image" alt="">
+    <div>
+      <span>{{ text | shortenText(24) }}</span>
+    </div>
     <router-link
       :to="`/profile/handle/${name}`">
       <div class='text-center'>
@@ -27,10 +23,10 @@ export default {
       required: true,
       type: String
     },
-    address: {
-      required: true,
-      type: String
-    },
+    // address: {
+    //   required: true,
+    //   type: String
+    // },
     text: {
       required: true,
       type: String

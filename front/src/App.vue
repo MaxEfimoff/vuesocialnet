@@ -235,6 +235,10 @@ span, li, i {
   text-align: center;
 }
 
+.text-left {
+  text-align: left;
+}
+
 .flex {
   display: flex;
   align-items: center;
@@ -642,11 +646,10 @@ span, li, i {
 
 /* Products */
 .product-image {
-  height: 300px;
-  background-size: auto 300px;
+  height: 400px;
+  background-size: 100% auto;
   background-repeat: no-repeat;
   background-position: center center;
-  border-radius: 0.3rem 0.3rem 0 0;
 }
 .product-card {
   height: 300 px;
