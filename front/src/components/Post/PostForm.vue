@@ -35,9 +35,10 @@ export default {
     ...mapActions("profile", [ 'exportCurrentProfile' ]),
     createPost() {
       this.$store.dispatch('posts/addPost', this.formData)
-      .then(() => this.$router.push({ name: 'posts' }))
       .catch((error) => {console.log(error)
       })
+      
+      this.$emit('closeModal');
     },
     onChange(newFormData) {
       this.formData = newFormData;

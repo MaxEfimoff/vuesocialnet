@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import auth from './auth';
+import calendar from './calendar';
 import profile from './profile';
 import groups from './groups';
 import posts from './posts';
@@ -23,6 +24,7 @@ export default function () {
     modules: {
       auth,
       events,
+      calendar,
       profile,
       groups,
       posts,

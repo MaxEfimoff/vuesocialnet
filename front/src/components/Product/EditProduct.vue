@@ -29,9 +29,9 @@ export default {
   name: 'EditPost',
   computed: {
     ...mapState('errors', ['errors']),
-    ...mapState('profile', [ 'profile']),
-    currentProfile() {
-      return this.profile;
+    ...mapState('product', [ 'product']),
+    currentProduct() {
+      return this.product;
     },
   },
   methods: {
@@ -39,9 +39,13 @@ export default {
       this.$store.commit('products/SET_PRODUCT', newFormData);
     },
     editPage() {
-      const profile = Object.assign({}, this.profile, {
-      });
-      this.$store.dispatch('products/updateProduct', profile)
+      const payload = {
+        id: this.$route.params.id,
+        newFormData: newFormData
+      }
+      // const profile = Object.assign({}, this.profile, {
+      // });
+      this.$store.dispatch('products/updateProduct', payload)
         .then(() => this.$router.push({ name: 'products' }))
         .catch((error) => {
           console.log(error)

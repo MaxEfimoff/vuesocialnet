@@ -24,7 +24,6 @@ export default {
         price: null,
         discountedPrice: null,
         image: '',
-        // name: this.$store.state.profile.profile.handle,
         profile: this.$store.state.profile.profile._id
       },
     };

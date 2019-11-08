@@ -2,7 +2,7 @@
   <div>
     <button href="" @click.prevent="show">Add new post</button>
     <modal name="ModalPost">
-      <PostForm />
+      <PostForm @closeModal="hide"/>
     </modal>
   </div>
 </template>

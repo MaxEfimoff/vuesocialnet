@@ -51,7 +51,7 @@ function createGroup({ commit }, data) {
   return new Promise((resolve, reject) => {
     axios.post(createGroupUrl, data)
       .then((response) => {
-        commit('SET_GROUP', response.data);
+        commit('ADD_GROUP', response.data);
         resolve();
       })
       .catch(error => {

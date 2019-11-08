@@ -14,6 +14,10 @@ function SET_GROUP (state, group) {
   state.group = group;
 }
 
+function ADD_GROUP (state, group) {
+  state.groups.unshift(group)
+}
+
 function SET_GROUP_POST (state, grouppost) {
   state.grouppost = grouppost;
 }
@@ -23,5 +27,6 @@ export {
   SET_GROUP,
   SET_GROUP_POST,
   SET_MANAGE_GROUPS,
-  SET_MY_GROUPS
+  SET_MY_GROUPS,
+  ADD_GROUP
 };

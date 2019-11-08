@@ -119,11 +119,6 @@ router.patch('/:id/update-product', passport.authenticate("jwt", { session: fals
 
   Product.findById(req.params.id)
     .then(product => {
-      // Check if current profile is the product owner
-      if(product.profile.toString() !== req.profile.id) {
-        return res.status(401).json({ notauthorized: 'User not authorized' })
-      }
-      
       product.set(productFields)
       product.save()
       .then(product => 

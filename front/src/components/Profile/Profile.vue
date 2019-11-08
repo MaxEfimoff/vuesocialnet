@@ -38,6 +38,9 @@
             :to="{ name: 'editProfile' }">
               <button>Edit profile</button>
           </router-link>
+          <div class="leftpadding">
+            <button @click="handleClick">Add post</button>
+          </div>
         </div>
       </div>
       <div class="post-wrapper">
@@ -53,15 +56,19 @@
     <section v-else class="register">
       <NoProfileMessage />
     </section>
+    <modals-container />
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
+import modal from 'vue-js-modal';
+
 import ModalProfile from './ModalProfile.vue';
 import PostCard from '@/components/Post/PostCard';
 import NoProfileMessage from '@/components/helpers/NoProfileMessage';
 import ProfileStats from '@/components/Profile/ProfileStats';
+import PostForm from '../Post/PostForm';
 
 export default {
   name: 'Profile',
@@ -82,6 +89,7 @@ export default {
   computed: {
     ...mapState('profile', ['profiles','anotherUserProfile','profile', 'profilePhotos', 'profilePosts', 'profileGroups' ]),
     ...mapState('errors', ['errors']),
+    ...mapGetters('profile', ['setPosts']),
     alreadyFriend() {
       const friends = this.$store.state.profile.profile.friends;
       if (friends.some(e => e.handle === this.$store.state.profile.anotherUserProfile.handle)) {
@@ -103,12 +111,16 @@ export default {
       const handle = this.$store.state.profile.anotherUserProfile.handle;
       this.$store.dispatch('profile/deleteFromFriends', handle)
       .catch((error) => console.log(error))
-    }
+    },
+    handleClick() {
+      this.$modal.show(PostForm)
+    },
   },
   components: {
     ModalProfile,
     PostCard,
-    ProfileStats
+    ProfileStats,
+    PostForm
   },
 }
 </script>

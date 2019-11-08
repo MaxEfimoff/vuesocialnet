@@ -35,7 +35,7 @@ export default {
     },
     address: {
       required: true,
-      type: String
+      type: Object
     },
     text: {
       required: true,

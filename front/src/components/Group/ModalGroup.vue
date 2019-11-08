@@ -2,7 +2,7 @@
   <div>
     <button href="" @click.prevent="show">Create new Group</button>
     <modal name="ModalGroup" height="auto">
-      <GroupForm />
+      <GroupForm @closeModal="hide"/>
     </modal>
   </div>
 </template>

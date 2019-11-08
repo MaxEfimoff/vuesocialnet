@@ -47,6 +47,8 @@ export default {
         .catch((error) => {
           console.log(error)
         });
+        
+      this.$emit('closeModal');
     },
   },
   components: {

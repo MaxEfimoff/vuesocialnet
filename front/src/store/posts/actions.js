@@ -52,7 +52,7 @@ function addPost({ commit }, data) {
   return new Promise((resolve, reject) => {
     axios.post(addPostUrl, data)
       .then((response) => {
-        commit('SET_POST', response.data);
+        commit('ADD_POST', response.data);
         resolve();
       })
       .catch(error => {

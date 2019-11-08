@@ -14,6 +14,9 @@ const loginUrl = `${serverUrl}/api/users/login/`;
 const loginViaGoogleUrl = `${serverUrl}/api/users/oauth/google`;
 const loginViaFacebookUrl = `${serverUrl}/api/users/oauth/facebook`;
 const registerUrl = `${serverUrl}/api/users/register/`;
+// Events
+const addEventUrl = `${serverUrl}/api/events`;
+const allEventsUrl = `${serverUrl}/api/events/`;
 // Profile
 const profileUrl = `${serverUrl}/api/profile/`;
 const allProfilesUrl = `${serverUrl}/api/profile/all`;
@@ -89,6 +92,8 @@ export {
   friendsProductsUrl,
   allCategoriesUrl,
   loginViaGoogleUrl,
-  loginViaFacebookUrl
+  loginViaFacebookUrl,
+  addEventUrl,
+  allEventsUrl
   // profileByHandleUrl
 };

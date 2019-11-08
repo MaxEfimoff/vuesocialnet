@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     updateEvent() {
-      this.$store.commit('events/UPDATE_EVENT', {
+      this.$store.commit('calendar/UPDATE_EVENT', {
         id: this.event.id,
         title: this.title,
         start: this.start,

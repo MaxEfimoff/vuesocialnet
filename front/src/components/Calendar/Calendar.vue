@@ -1,6 +1,7 @@
 <template>
   <section class="section-center">
     <div class="section posts padding">
+      {{getEvents}}
       <Fullcalendar
         :plugins="calendarPlugins"
         :header="{
@@ -52,11 +53,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('events', ['getEvents']),
+    ...mapGetters('calendar', ['getEvents']),
   },
   methods: {
     handleSelect(arg) {
-      this.$store.commit('events/ADD_EVENT', {
+      this.$store.commit('calendar/ADD_EVENT', {
         id: (new Date().getTime()),
         title: "Something",
         start: arg.start,
@@ -71,7 +72,7 @@ export default {
       })
     },
     updateEvent(arg) {
-      this.$store.commit('events/UPDATE_EVENT', arg.event)
+      this.$store.commit('calendar/UPDATE_EVENT', arg.event)
     },
     renderEvent(arg) {
       let span = document.createElement('span')

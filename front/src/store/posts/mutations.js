@@ -15,8 +15,7 @@ function SET_POST (state, post) {
 }
 
 function ADD_POST (state, post) {
-  // Vue.set(state.tasks, post);
-  Object.assign(state.tasks, post);
+  state.posts.unshift(post)
 }
 
 export {
