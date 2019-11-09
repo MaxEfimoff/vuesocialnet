@@ -103,7 +103,7 @@ function createGroupPost({ commit }, payload) {
 
 function updateGroupPost({ commit }, payload) {
   return new Promise((resolve, reject) => {
-    axios.patch(`http://localhost:5000/api/groups/${payload.groupid}/post/${payload.id}`, payload.newFormData)
+    axios.patch(`http://localhost:5000/api/groups/${payload.groupid}/post/${payload.id}`, payload.FormData)
       .then((response) => {
         commit('SET_GROUP_POST', response.data);
         resolve();

@@ -19,9 +19,14 @@
               </div>
             </div>
             <i class="fas fa-thumbs-up" @click="addLike"></i>{{' '}}<span>{{ product.likes.length }}</span>
-            <router-link v-if="this.productAuthor" class="padding" :to="`/products/${product._id}/edit-product`">
-              <span class="halfpadding">Edit product</span>
-            </router-link>
+            <div>
+              <button href="" @click.prevent="show">Edit product</button>
+              <modal name="ModalEditProduct" height="auto">
+                <EditProduct
+                  :id="id"
+                  @closeModal="hide"/>
+              </modal>
+            </div>
             <div class="error-message">
               {{this.errors.alreadyliked}}
             </div>
@@ -72,6 +77,7 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import Spinner from '@/components/helpers/Spinner';
+import EditProduct from '@/components/Product/EditProduct';
 
 export default {
   name: 'Product',
@@ -122,9 +128,17 @@ export default {
       .then(this.formData = {})
       .catch((error) => {console.log(error)})
     },
+    show() {
+      this.$modal.show('ModalEditProduct', this.id);
+    },
+    hide() {
+      this.$modal.hide('ModalEditProduct');
+    }
   },
   components: {
-    Spinner
+    Spinner,
+    EditProduct,
+    
   }
 }
 </script>

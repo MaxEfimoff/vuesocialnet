@@ -43,7 +43,7 @@
 import Products from'./Products';
 import MyProducts from'./MyProducts';
 import FriendsProducts from'./FriendsProducts';
-import ModalCreateProduct from './ModalCreateProduct.vue';
+import ModalCreateProduct from '@/components/Product/ModalCreateProduct.vue';
 
 import { mapState } from 'vuex';
 

@@ -7,7 +7,8 @@
         :text="product.text"
         :price="product.price"
         :discountedPrice="product.discountedPrice"
-        :date="product.date"/>
+        :date="product.date"
+        @closeModal="hide"/>
     </div>
     <modal name="ModalProduct" height="auto">
       <Product :id="productId" />

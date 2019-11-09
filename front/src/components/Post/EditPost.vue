@@ -43,7 +43,6 @@ export default {
         id: this.$route.params.id,
         newFormData: newFormData
       }
-      console.log(newFormData)
       this.$store.dispatch('posts/updatePost', payload)
         .then(() => this.$router.push({ name: 'posts' }))
         .catch((error) => {

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import ProductForm from '../Product/ProductForm';
+import ProductForm from '@/components/Product/ProductForm';
 export default {
   methods: {
     show() {
