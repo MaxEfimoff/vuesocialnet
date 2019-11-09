@@ -1,6 +1,6 @@
 <template>
   <div class="flex">
-    <div v-for="product in friendsproducts.slice(0, 10)" :key="product.id">
+    <div v-for="product in friendsproducts" :key="product.id">
       <ProductCard 
         :name="product.name"
         :avatar="product.avatar"

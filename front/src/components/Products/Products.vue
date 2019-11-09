@@ -1,6 +1,9 @@
 <template>
   <div class="flex">
-    <div @click.prevent="show(product._id)" v-for="product in products" :key="product.id">
+    <div
+      @click.prevent="show(product._id)"
+      v-for="product in products"
+      :key="product.id">
       <ProductCard
         :name="product.profile.handle"
         :image="product.image"
@@ -30,6 +33,7 @@ export default {
   name: 'Products',
   async mounted() {
     await this.getProducts();
+    await this.hide();
   },
   computed: {
     ...mapState('profile', ['profile']),

@@ -14,8 +14,16 @@ function SET_PRODUCT (state, product) {
   state.product = product;
 }
 
-function RESET_PRODUCT (state, product) {
+function RESET_PRODUCT (state) {
   state.product = {};
+}
+
+function RESET_PRODUCTS (state) {
+  state.products = [];
+}
+
+function RESET_MY_PRODUCTS (state) {
+  state.myproducts = [];
 }
 
 function ADD_PRODUCT (state, product) {
@@ -28,5 +36,7 @@ export {
   ADD_PRODUCT,
   SET_MY_PRODUCTS,
   SET_FRIENDS_PRODUCTS,
-  RESET_PRODUCT
+  RESET_PRODUCT,
+  RESET_PRODUCTS,
+  RESET_MY_PRODUCTS
 };
