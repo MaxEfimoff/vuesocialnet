@@ -1,6 +1,6 @@
 <template>
   <section class="section-center">
-    <div class=" posts">
+    <div v-if="isDataLoaded" class="posts">
       <div class="product-image" :style="{ backgroundImage: 'url(' + `${product.image}` + ')' }">
       </div>
       <div class="post-author">
@@ -63,11 +63,15 @@
         </form>
         <!-- Comments form -->
     </div>
+    <div v-else>
+      <Spinner />
+    </div>
   </section>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import Spinner from '@/components/helpers/Spinner';
 
 export default {
   name: 'Product',
@@ -79,6 +83,7 @@ export default {
   },
   data() {
     return {
+      isDataLoaded: false,
       formData: {
         text: '',
         name: this.$store.state.profile.profile.handle,
@@ -87,7 +92,10 @@ export default {
     };
   },
   created() {
-    this.getProductById(this.id);
+    this.getProductById(this.id)
+      .then(() => {
+        this.isDataLoaded = true;
+      })
     this.exportCurrentProfile();
   },
   computed: {
@@ -115,6 +123,9 @@ export default {
       .catch((error) => {console.log(error)})
     },
   },
+  components: {
+    Spinner
+  }
 }
 </script>
 

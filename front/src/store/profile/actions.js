@@ -38,7 +38,6 @@ function editProfile({ commit }, data) {
     axios.put(profileUrl, data)
     .then((response) => {
         commit('getProfile', response.data);
-        console.log(response.data);
         resolve();
       })
       .catch((error) => {
@@ -88,7 +87,6 @@ function addToFriends({ commit }, payload) {
     axios.post(addToFriendsUrl, payload)
     .then((response) => {
         commit('getProfile', response.data);
-        console.log(respose.data);
         resolve();
       })
       .catch((error) => {
@@ -103,7 +101,6 @@ function deleteFromFriends({ commit }, handle) {
     axios.delete(`http://localhost:5000/api/profile/friends/${handle}`)
     .then((response) => {
         commit('getProfile', response.data);
-        console.log(respose.data);
         resolve();
       })
       .catch((error) => {
@@ -128,7 +125,6 @@ function getProfileGroups({ commit }, handle) {
   return new Promise((resolve, reject) => {
     axios.get(`http://localhost:5000/api/groups/handle/${handle}`)
     .then((response) => {
-      console.log(response)
       commit('SET_PROFILE_GROUPS', response.data);
       resolve();
     })

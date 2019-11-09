@@ -32,8 +32,14 @@
                 <p>{{ grouppost.text }}</p>
               </div>
             </div>
-            <i class="fas fa-thumbs-up" @click="addLike"></i>{{' '}}<span>{{ grouppost.likes.length }}</span>
-            <router-link  v-if="this.postAuthor" class="padding" :to="`${grouppost._id}/edit-post`">
+            <i class="fas fa-thumbs-up" @click="addLike"></i>{{' '}}<span>{{ grouppost.likes ? grouppost.likes.length : '0' }}</span>
+            <router-link
+              v-if="this.postAuthor"
+              class="padding" 
+              :to="`${grouppost._id}/edit-post`"
+              
+            >
+              <!-- :to="{ name: 'editGroupPost', params: { id: grouppost._id, groupid:  } }" -->
               <span class="halfpadding">Edit post</span>
             </router-link>
             <div class="error-message">

@@ -23,7 +23,7 @@
                 <p>{{ post.text }}</p>
               </div>
             </div>
-            <i class="fas fa-thumbs-up" @click="addLike"></i>{{' '}}<span>{{ post.likes.length }}</span>
+            <i class="fas fa-thumbs-up" @click="addLike"></i>{{' '}}<span>{{ post.likes ? post.likes.length : '0' }}</span>
             <router-link class="padding" :to="`/posts/${post._id}/edit-post`">
               <span v-if="this.postAuthor" class="halfpadding">Edit post</span>
             </router-link>

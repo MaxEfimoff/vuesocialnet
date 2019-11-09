@@ -45,7 +45,7 @@
         </div>
           <!-- Posts -->
           <div class="post-wrapper">
-            <div class="post" v-for="post in group.posts.slice(0, 10)" :key="post._id">
+            <div class="post" v-for="post in group.posts" :key="post._id">
               <PostCard
                 :name="post.name"
                 :avatar="post.avatar"
@@ -114,7 +114,7 @@ export default {
     ...mapState('errors', ['errors']),
     alreadySubscribed() {
       const subscribers = this.$store.state.groups.group.subscribes;
-      if (subscribers.some(e => e.handle === this.$store.state.profile.profile.handle)) {
+      if (subscribers && subscribers.some(e => e.handle === this.$store.state.profile.profile.handle)) {
         return true;
       }
     },

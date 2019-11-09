@@ -16,7 +16,7 @@
 
     <div class="halfpadding">
       <select
-        :value="formData.category._id"
+        :value="formData.category ? formData.category._id : null"
         @change="onChange('category', $event.target.value)">
         <option value='default'>Select Category</option>
         <option

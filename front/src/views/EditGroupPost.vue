@@ -26,7 +26,7 @@ import LeftSection from '@/components/LeftSection.vue';
 import CreateEditPost from'@/components/helpers/CreateEditPost.vue'
 
 export default {
-  name: 'EditPost',
+  name: 'EditGroupPost',
   mounted() {
     this.getGroupPost(this.$route.params.id);
   },
@@ -45,7 +45,12 @@ export default {
     editPost() {
       const post = Object.assign({}, this.post, {
       });
-      this.$store.dispatch('groups/updateGroupPost', post)
+      const payload = {
+        id: this.$route.params.id,
+        groupid: this.$route.params.groupid,
+        newFormData: newFormData
+      }
+      this.$store.dispatch('groups/updateGroupPost', payload)
         .then(() => this.$router.push({ name: 'groups' }))
         .catch((error) => {
           console.log(error)

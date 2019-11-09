@@ -10,6 +10,15 @@ function SET_MY_GROUPS (state, mygroups) {
   state.mygroups = mygroups;
 }
 
+function ADD_TO_MY_GROUPS (state, group) {
+  state.mygroups.unshift(group);
+}
+
+function REMOVE_FROM_MY_GROUPS (state, id) {
+  const removeGroupIndex = state.mygroups.findIndex(x => x._id === id);
+  state.mygroups.splice(removeGroupIndex, 1);
+}
+
 function SET_GROUP (state, group) {
   state.group = group;
 }
@@ -28,5 +37,7 @@ export {
   SET_GROUP_POST,
   SET_MANAGE_GROUPS,
   SET_MY_GROUPS,
-  ADD_GROUP
+  ADD_GROUP,
+  ADD_TO_MY_GROUPS,
+  REMOVE_FROM_MY_GROUPS
 };

@@ -25,7 +25,7 @@
             <a href="">Liked</a>
           </li>
         </ul>
-        <ModalPost/>
+        <ModalCreatePost/>
         <form action="#" class="search-form leftmargin">
           <input type="text" placeholder="Post search" />
         </form>
@@ -43,7 +43,7 @@
 import Posts from'./Posts';
 import MyPosts from'./MyPosts';
 import FriendsPosts from'./FriendsPosts';
-import ModalPost from './ModalPost.vue';
+import ModalCreatePost from './ModalCreatePost.vue';
 
 import { mapState } from 'vuex';
 
@@ -76,7 +76,7 @@ export default {
     Posts,
     MyPosts,
     FriendsPosts,
-    ModalPost
+    ModalCreatePost
   }
 }
 </script>

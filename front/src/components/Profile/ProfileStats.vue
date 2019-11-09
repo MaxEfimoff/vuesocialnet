@@ -4,7 +4,7 @@
       class="stat-counter"
       :to="`${anotherUserProfile.handle}/friends/`">
       <div class="count">
-        <div v-if="anotherUserProfile.friends.length" class="white-font">{{ anotherUserProfile.friends.length }}</div>
+        <div v-if="anotherUserProfile.friends && anotherUserProfile.friends.length" class="white-font">{{ anotherUserProfile.friends ? anotherUserProfile.friends.length: '0' }}</div>
         <div v-else class="white-font">0</div>
       </div>
       <i class="fas fa-user white-font"></i>
@@ -13,8 +13,8 @@
       class="stat-counter lefthalfpadding"
       :to="`${anotherUserProfile.handle}/photos/`">
       <div class="count">
-        <div v-if="profilePhotos.length" class="white-font">
-          {{ profilePhotos.length }}
+        <div v-if="profilePhotos && profilePhotos.length" class="white-font">
+          {{ profilePhotos ? profilePhotos.length : '0'}}
         </div>
         <div v-else class="white-font">
           0
@@ -26,8 +26,8 @@
       class="stat-counter lefthalfpadding"
       :to="`${anotherUserProfile.handle}/groups/`">
       <div class="count">
-        <div v-if="profileGroups.length" class="white-font">
-          {{ profileGroups.length }}
+        <div v-if="profileGroups && profileGroups.length" class="white-font">
+          {{ profileGroups ? profileGroups.length : '0'}}
         </div>
         <div v-else class="white-font">
           0

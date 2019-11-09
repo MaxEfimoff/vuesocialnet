@@ -23,28 +23,28 @@
           class="stat-counter"
           :to="{ name: 'friends' }"
         >
-          <div class="count">{{ profile.friends.length }}</div>
+          <div class="count">{{ profile.friends ? profile.friends.length: '0' }}</div>
           <i class="fas fa-user"></i>
         </router-link> 
         <router-link
           class="stat-counter lefthalfpadding"
           :to="{ name: 'messages' }"
         >
-          <div class="count">{{ messages.length }}</div>
+          <div class="count">{{ messages ? messages.length : '0' }}</div>
           <i class="fas fa-envelope"></i>
         </router-link> 
         <router-link
           class="stat-counter lefthalfpadding"
           :to="{ name: 'photos' }"
         >
-          <div class="count">{{ photos.length }}</div>
+          <div class="count">{{ photos ? photos.length  : '0'}}</div>
           <i class="fas fa-camera"></i>
         </router-link> 
         <router-link
           class="stat-counter lefthalfpadding"
           :to="{ name: 'groups' }"
         >
-          <div class="count">{{ mygroups.length }}</div>
+          <div class="count">{{ mygroups ? mygroups.length : '0' }}</div>
           <i class="fas fa-users"></i>
         </router-link> 
         <!-- <router-link
@@ -58,14 +58,14 @@
           class="stat-counter lefthalfpadding"
           :to="{ name: 'notes' }"
         >
-          <div class="count">{{ notes.length }}</div>
+          <div class="count">{{ notes ? notes.length : '0' }}</div>
           <i class="fas fa-sticky-note"></i>
         </router-link>
         <router-link
           class="stat-counter lefthalfpadding"
           :to="{ name: 'products' }"
         >
-          <div class="count">{{ myproducts.length }}</div>
+          <div class="count">{{ myproducts ? myproducts.length : '0' }}</div>
           <i class="fas fa-shopping-cart"></i>
         </router-link> 
         <router-link
@@ -126,7 +126,7 @@
       </router-link> 
       <div>
         <router-link
-          v-for="profile in profile.friends.slice(0, 6)"
+          v-for="profile in profile.friends"
           :key="profile.id"
           :to="`/profile/handle/${profile.handle}`"
         >
@@ -146,7 +146,7 @@
       >
         <span>Groups</span>
       </router-link>
-      <div class="groups-wrapper" v-for="group in mygroups.slice(0, 4)" :key="group.id">
+      <div class="groups-wrapper" v-for="group in mygroups" :key="group.id">
         <router-link :to="`/groups/${group._id}`">
           <div class="groups-photo">
             <img class="groups-img" :src="group.avatar"  alt="">
@@ -162,7 +162,7 @@
       >
         <span>Photos</span>
       </router-link>
-      <div class="photos-wrapper" v-for="photo in photos.slice(0, 2)" :key="photo.id">
+      <div class="photos-wrapper" v-for="photo in photos" :key="photo.id">
         <router-link
           :to="`/photos/${photo._id}`"
         >

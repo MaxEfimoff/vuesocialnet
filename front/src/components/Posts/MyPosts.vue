@@ -2,7 +2,7 @@
   <div>
     <section class="section-center" v-if="this.profile.handle">
       <div class="post-wrapper">
-        <div class="post" v-for="post in myposts.slice(0, 10)" :key="post.id">
+        <div class="post" v-for="post in myposts" :key="post.id">
           <PostCard
             :name="post.name"
             :avatar="post.avatar"

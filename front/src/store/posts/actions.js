@@ -63,7 +63,6 @@ function addPost({ commit }, data) {
 }
 
 function updatePost({ commit}, payload) {
-  console.log(payload)
   return new Promise((resolve, reject) => {
     axios.patch(`http://localhost:5000/api/posts/${payload.id}/update-post`, payload.newFormData)
       .then((response) => {
@@ -90,7 +89,6 @@ function getPostById({ commit }, id) {
 
 function addComment({ commit }, payload) {
   return new Promise((resolve, reject) => {
-    console.log(payload.formData)
     axios.post(`http://localhost:5000/api/posts/comment/${payload.postId}`, payload.formData)
       .then((response) => {
         commit('SET_POST', response.data);

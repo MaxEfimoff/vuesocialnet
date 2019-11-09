@@ -11,7 +11,7 @@
           <span class="white-font">{{ anotherUserProfile.status }}</span>
         </div>  
         <ProfileStats/>
-        <div class="flex" v-if="this.$store.state.profile.anotherUserProfile.user._id != this.$store.state.auth.user.id">
+        <div class="flex" v-if="this.$store.state.profile.anotherUserProfile.user && this.$store.state.profile.anotherUserProfile.user._id != this.$store.state.auth.user.id">
           <div class="padding" v-if="!this.alreadyFriend">
             <button 
               type="submit"
@@ -44,12 +44,13 @@
         </div>
       </div>
       <div class="post-wrapper">
-        <div class="post" v-for="post in profilePosts.slice(0, 10)" :key="post.id">
+        <div class="post" v-for="post in profilePosts" :key="post.id">
           <PostCard 
             :name="post.name"
             :avatar="post.avatar"
-            :address="`/posts/${post._id}`"
-            :text="post.text"/>
+            :address="{ name: 'post', params: { id: post._id } }"
+            :text="post.text"
+            :date="post.date"/>
         </div>
       </div>
     </div>
@@ -74,7 +75,8 @@ export default {
   name: 'Profile',
   watch: {
     '$route.params.handle'(newHandle, oldHandle) {
-      this.getProfileByHandle(newHandle)
+      this.getProfileByHandle(newHandle);
+      this.getProfilePosts(newHandle);
     }
   },
   async mounted() {
@@ -82,14 +84,12 @@ export default {
     await this.getProfilePosts(this.$route.params.handle);
     await this.getProfileByHandle(this.$route.params.handle);
     await this.getProfileGroups(this.$route.params.handle);
-    await this.getMessages();
     await this.exportCurrentProfile();
   },
   
   computed: {
     ...mapState('profile', ['profiles','anotherUserProfile','profile', 'profilePhotos', 'profilePosts', 'profileGroups' ]),
     ...mapState('errors', ['errors']),
-    ...mapGetters('profile', ['setPosts']),
     alreadyFriend() {
       const friends = this.$store.state.profile.profile.friends;
       if (friends.some(e => e.handle === this.$store.state.profile.anotherUserProfile.handle)) {
@@ -120,7 +120,8 @@ export default {
     ModalProfile,
     PostCard,
     ProfileStats,
-    PostForm
+    PostForm,
+    NoProfileMessage
   },
 }
 </script>

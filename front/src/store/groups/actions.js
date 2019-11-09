@@ -101,11 +101,9 @@ function createGroupPost({ commit }, payload) {
   });
 }
 
-function updateGroupPost({ commit, state }) {
-  const grouppost = state.grouppost
-  const group = state.group
+function updateGroupPost({ commit }, payload) {
   return new Promise((resolve, reject) => {
-    axios.patch(`http://localhost:5000/api/groups/${group._id}/post/${grouppost._id}`,grouppost)
+    axios.patch(`http://localhost:5000/api/groups/${payload.groupid}/post/${payload.id}`, payload.newFormData)
       .then((response) => {
         commit('SET_GROUP_POST', response.data);
         resolve();
@@ -121,6 +119,7 @@ function subscribe({ commit }, id) {
   return new Promise((resolve, reject) => {
     axios.post(`http://localhost:5000/api/groups/subscribe/${id}`, id)
       .then((response) => {
+        commit('ADD_TO_MY_GROUPS', response.data);
         commit('SET_GROUP', response.data);
         resolve();
       })
@@ -135,6 +134,7 @@ function unsubscribe({ commit }, id) {
   return new Promise((resolve, reject) => {
     axios.post(`http://localhost:5000/api/groups/unsubscribe/${id}`, id)
       .then((response) => {
+        commit('REMOVE_FROM_MY_GROUPS', response.data._id);
         commit('SET_GROUP', response.data);
         resolve();
       })
