@@ -9,6 +9,7 @@ import products from './products';
 import notes from './notes';
 import events from './events';
 import categories from './categories';
+import eventcategories from './eventcategories';
 import photos from './photos';
 import documents from './documents';
 import messages from './messages';
@@ -35,7 +36,8 @@ export default function () {
       friends,
       documents,
       photos,
-      categories
+      categories,
+      eventcategories
     },
     strict: process.env.DEV
   })

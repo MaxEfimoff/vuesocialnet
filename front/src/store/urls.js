@@ -17,6 +17,8 @@ const registerUrl = `${serverUrl}/api/users/register/`;
 // Events
 const addEventUrl = `${serverUrl}/api/events`;
 const allEventsUrl = `${serverUrl}/api/events/`;
+// EventCategories
+const allEventCategoriesUrl = `${serverUrl}/api/eventcategories`;
 // Profile
 const profileUrl = `${serverUrl}/api/profile/`;
 const allProfilesUrl = `${serverUrl}/api/profile/all`;
@@ -94,6 +96,7 @@ export {
   loginViaGoogleUrl,
   loginViaFacebookUrl,
   addEventUrl,
-  allEventsUrl
+  allEventsUrl,
+  allEventCategoriesUrl
   // profileByHandleUrl
 };

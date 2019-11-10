@@ -19,7 +19,7 @@
               </div>
             </div>
             <i class="fas fa-thumbs-up" @click="addLike"></i>{{' '}}<span>{{ product.likes.length }}</span>
-            <div>
+            <div v-if="productAuthor">
               <button href="" @click.prevent="show">Edit product</button>
               <modal name="ModalEditProduct" height="auto">
                 <EditProduct
@@ -109,7 +109,7 @@ export default {
     ...mapState('errors', ['errors']),
     ...mapState('profile', [ 'profile' ]),
     productAuthor() {
-      return this.$store.state.products.product.profile.handle === this.$store.state.profile.profile.handle;
+      return this.$store.state.products.product.profile._id === this.$store.state.profile.profile._id;
     }
   },
   methods: {

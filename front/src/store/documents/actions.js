@@ -8,6 +8,7 @@ function getDocuments({ commit }) {
     axios.get(allDocumentsUrl)  
       .then((response) => {
         commit('SET_DOCUMENTS', response.data);
+        resolve();
       })
       .catch(error => console.log(error));
   });

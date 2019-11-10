@@ -6,6 +6,9 @@ import Register from '@/views/Register.vue';
 import Dashboard from '@/views/Dashboard.vue';
 // Calendar
 import Calendar from '@/views/Calendar.vue';
+// Events
+import EventForm from '@/views/EventForm.vue';
+import Events from '@/views/Events.vue';
 // Posts
 import Post from '@/views/Post.vue';
 import Posts from '@/views/Posts.vue';
@@ -85,6 +88,17 @@ export default new Router({
       path: '/calendar',
       name: 'calendar',
       component: Calendar
+    },
+    // Events
+    {
+      path: '/event-form',
+      name: 'eventForm',
+      component: EventForm
+    },
+    {
+      path: '/events',
+      name: 'events',
+      component: Events
     },
     // Posts
     {

@@ -75,7 +75,15 @@
           <!-- <div class="count">{{ calendar.length }}</div> -->
           <div class="count">9</div>
           <i class="fas fa-calendar"></i>
-        </router-link> 
+        </router-link>
+        <router-link
+          class="stat-counter lefthalfpadding"
+          :to="{ name: 'events' }"
+        >
+          <!-- <div class="count">{{ calendar.length }}</div> -->
+          <div class="count">7</div>
+          <i class="fas fa-globe-americas"></i>
+        </router-link>
       </div>
       <!-- Stats -->
       <div class="edit-profile halfpadding">

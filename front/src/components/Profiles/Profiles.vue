@@ -17,7 +17,7 @@
       <div class="post-wrapper">
         <div
           class="post"
-          v-for="profile in profiles.slice(0, 10)"
+          v-for="profile in profiles"
           :key="profile.id"
         >
         <div class="post-author">
