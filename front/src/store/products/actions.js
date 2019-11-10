@@ -8,7 +8,7 @@ import {
 } from '../urls';
 
 function getProducts({ commit }) {
-  commit('RESET_PRODUCTS');
+  // commit('RESET_PRODUCTS');
   return new Promise((resolve, reject) => {
     axios.get(allProductsUrl)  
       .then((response) => {
@@ -19,7 +19,7 @@ function getProducts({ commit }) {
 }
 
 function getMyProducts({ commit }) {
-  commit('RESET_MY_PRODUCTS');
+  // commit('RESET_MY_PRODUCTS');
   return new Promise((resolve, reject) => {
     axios.get(myProductsUrl)  
       .then((response) => {

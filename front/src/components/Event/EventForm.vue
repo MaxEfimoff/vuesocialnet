@@ -2,19 +2,13 @@
   <section class="posts section">
     <div class="post-new-form">
       <h2 class="padding">Event Form</h2>
-      <div>{{ currentStep }} of {{ allStepsCount }}</div>
+      <div>{{ currentStep }} of {{ formSteps.length }}</div>
       <keep-alive>
-        <EventLocation
-          v-if="currentStep === 1"
-          @stepUpdated="mergeStepData"/>
-        <EventDetail
-          v-if="currentStep === 2"
-          @stepUpdated="mergeStepData"/>
-        <EventDescription
-          v-if="currentStep === 3"
-          @stepUpdated="mergeStepData"/>
-        <EventConfirmation
-          v-if="currentStep === 4"
+        <!-- We are rendering child components dinamically-->
+        <component
+          :is="currentComponent"
+          @stepUpdated="mergeStepData"
+          ref="currentComponent"
           :eventToCreate="formData"/>
       </keep-alive>
       <progress
@@ -25,7 +19,8 @@
           v-if="currentStep !== 1"
           @click="moveToPreviousStep">Back</button>
         <button
-          v-if="currentStep !== allStepsCount"
+          :disabled="!canProceed"
+          v-if="currentStep !== formSteps.length"
           class="leftmargin"
           @click="moveToNextStep">Next</button>
         <button
@@ -54,7 +49,13 @@
     data () {
       return {
         currentStep: 1,
-        allStepsCount: 4,
+        canProceed: false,
+        formSteps: [
+          'EventLocation',
+          'EventDetail',
+          'EventDescription',
+          'EventConfirmation'
+        ],
         formData: {
           location: null,
           title: null,
@@ -70,18 +71,30 @@
     },
     computed: {
       currentProgress() {
-        return (100 / this.allStepsCount * this.currentStep);
+        return (100 / this.formSteps.length * this.currentStep);
+      },
+      // Define component we want to render
+      currentComponent() {
+        return this.formSteps[this.currentStep - 1];
       }
     },
     methods: {
       moveToNextStep() {
         this.currentStep++;
+        // Defer the callback to be executed after the next DOM update cycle
+        this.$nextTick(() => {
+          // We are checking if the child component is invalid
+          // And then assigning value (true or false) to canProceed
+          this.canProceed = !this.$refs['currentComponent'].$v.$invalid;
+        })
       },
       moveToPreviousStep() {
         this.currentStep--;
+        this.canProceed = true;
       },
-      mergeStepData(stepData) {
-        this.formData = {...this.formData, ...stepData}
+      mergeStepData(step) {
+        this.formData = {...this.formData, ...step.data}
+        this.canProceed = step.isValid
       }
     }
   }
