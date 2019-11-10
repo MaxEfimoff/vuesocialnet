@@ -14,14 +14,12 @@
       </div>
     </div>
     <div class="field">
-      <label class="title m-b-sm">Starts At</label>
-      <input
-        @input="emitFormData"
-        @blur="$v.formData.startDate.$touch()"
-        v-model="formData.startDate"
-        class="input"
-        type="text"
-        placeholder="Starts At">
+      <label class="title m-b-sm">Start Date</label>
+      <datepicker
+        @input="setDate"
+        :disabledDates="disabledDates"
+        :value="formData.startDate">
+      </datepicker>
       <div v-if="$v.formData.startDate.$error">
         <span v-if="!$v.formData.startDate.required" class="error-message">Starts at is required</span>
       </div>
@@ -70,14 +68,24 @@
 
 <script>
   import { required } from 'vuelidate/lib/validators';
+  import Datepicker from 'vuejs-datepicker';
+  import moment from 'moment';
+
   import { mapState, mapActions } from 'vuex';
 
   export default {
     data () {
       return {
+        disabledDates: {
+          customPredictor: function(date) {
+            const today = new Date();
+            const yesterday = today.setDate(today.getDate() - 1);
+            return date < yesterday;
+          }
+        },
         formData: {
           title: null,
-          startDate: null,
+          startDate: new Date(),
           timeTo: null,
           timeFrom: null,
           category: null
@@ -86,6 +94,7 @@
     },
     async mounted() {
       await this.getEventCategories();
+      await this.emitFormData();
     },
     validations: {
       formData: {
@@ -102,8 +111,15 @@
     methods: {
       ...mapActions("eventcategories", [ 'getEventCategories' ]),
       emitFormData() {
-        this.$emit('stepUpdated', { data: this.formData, isValid: !this.$v.$invalid })
+        this.$emit('stepUpdated', { data: this.formData, isValid: !this.$v.$invalid });
+      },
+      setDate(date) {
+        this.formData.startDate = moment(date).format();
+        this.emitFormData();
       }
+    },
+    components: {
+      Datepicker
     }
   }
 </script>

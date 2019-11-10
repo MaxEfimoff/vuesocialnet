@@ -28,7 +28,7 @@
           class="leftmargin">Confirm</button>
       </div>
       <!-- Just To See Data in the Form -->
-      <!-- <pre><code>{{ formData }}</code></pre> -->
+      <pre><code>{{ formData }}</code></pre>
     </div>
   </section>
 </template>
