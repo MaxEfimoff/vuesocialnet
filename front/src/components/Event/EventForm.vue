@@ -64,8 +64,8 @@
           image: null,
           shortInfo: null,
           description: null,
+          timeFrom: null,
           timeTo: null,
-          timeFrom: null
         }
       }
     },

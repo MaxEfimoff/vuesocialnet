@@ -26,23 +26,15 @@
     </div>
     <div class="field">
       <label class="title m-b-sm">From</label>
-      <input
-        @input="emitFormData"
-        @blur="$v.formData.timeFrom.$touch()"
-        v-model="formData.timeFrom"
-        class="input"
-        type="text"
-        placeholder="Time From">
+      <vue-timepicker
+        @change="changeTime($event, 'timeFrom')"
+        :minute-interval="10"></vue-timepicker>
     </div>
     <div class="field">
       <label class="title m-b-sm">To</label>
-      <input
-        @input="emitFormData"
-        @blur="$v.formData.timeTo.$touch()"
-        v-model="formData.timeTo"
-        class="input"
-        type="text"
-        placeholder="Time to">
+      <vue-timepicker
+        @change="changeTime($event, 'timeTo')"
+        :minute-interval="10"></vue-timepicker>
     </div>
     <div class="field">
       <label class="title m-b-sm">Please Choose the Category.</label>
@@ -69,6 +61,8 @@
 <script>
   import { required } from 'vuelidate/lib/validators';
   import Datepicker from 'vuejs-datepicker';
+  import VueTimepicker from 'vue2-timepicker';
+  import 'vue2-timepicker/dist/VueTimepicker.css'
   import moment from 'moment';
 
   import { mapState, mapActions } from 'vuex';
@@ -116,10 +110,17 @@
       setDate(date) {
         this.formData.startDate = moment(date).format();
         this.emitFormData();
+      },
+      changeTime (event, field) {
+        const hours = event.data.HH || '00';
+        const minutes = event.data.mm || '00';
+        this.formData[field] = hours + ':' + minutes;
+        this.emitFormData();
       }
     },
     components: {
-      Datepicker
+      Datepicker,
+      VueTimepicker
     }
   }
 </script>
