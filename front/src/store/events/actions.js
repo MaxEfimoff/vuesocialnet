@@ -32,7 +32,6 @@ function addEvent({ commit }, data) {
         resolve();
       })
       .catch(error => {
-        commit('errors/setErrors', error.response.data, { root: true });
         console.log(error)
       });
   });

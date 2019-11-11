@@ -1,5 +1,5 @@
 <template>
-  <section class="posts section">
+  <section class="posts">
     <div class="post-new-form">
       <h2 class="padding">Event Form</h2>
       <div>{{ currentStep }} of {{ formSteps.length }}</div>
@@ -25,10 +25,9 @@
           @click="moveToNextStep">Next</button>
         <button
           v-else
+          @click="createEvent"
           class="leftmargin">Confirm</button>
       </div>
-      <!-- Just To See Data in the Form -->
-      <pre><code>{{ formData }}</code></pre>
     </div>
   </section>
 </template>
@@ -57,6 +56,7 @@
           'EventConfirmation'
         ],
         formData: {
+          profile: this.$store.state.profile.profile._id,
           location: null,
           title: null,
           startDate: null,
@@ -95,6 +95,12 @@
       mergeStepData(step) {
         this.formData = {...this.formData, ...step.data}
         this.canProceed = step.isValid
+      },
+      createEvent() {
+        this.$store.dispatch('events/addEvent', this.formData)
+          .then(() => this.$router.push({ name: 'events' }))
+          .catch((error) => {console.log(error)})
+        this.$emit('closeModal');
       }
     }
   }

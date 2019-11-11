@@ -1,12 +1,12 @@
 <template>
   <section class="posts section">
     <h3>events</h3>
-    <router-link :to="{ name: 'eventForm' }">
+    <!-- <router-link :to="{ name: 'eventForm' }">
       <button>
         New Event
       </button>
-    </router-link>
-    <!-- <ModalEvent/> -->
+    </router-link> -->
+    <ModalEvent/>
   </section>
 </template>
 

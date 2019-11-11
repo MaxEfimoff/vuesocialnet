@@ -93,7 +93,7 @@ router.post('/', passport.authenticate("jwt", { session: false }), (req, res) =>
   }
 
   const newEvent = new Event({
-    eventCreator: req.body.profile,
+    profile: req.body.profile,
     eventCategory: req.body.category,
     location: req.body.location,
     processedLocation: req.body.processedLocation,
@@ -104,7 +104,7 @@ router.post('/', passport.authenticate("jwt", { session: false }), (req, res) =>
     startDate: req.body.startDate,
     timeFrom: req.body.timeFrom,
     timeTo: req.body.timeTo,
-    status: req.body.status,
+    status: 'active',
   });
 
   newEvent.save()

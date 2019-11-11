@@ -2,7 +2,7 @@
   <div>
     <button href="" @click.prevent="show">Add new event</button>
     <modal name="ModalEvent" height="auto">
-      <EventForm />
+      <EventForm @closeModal="hide"/>
     </modal>
   </div>
 </template>

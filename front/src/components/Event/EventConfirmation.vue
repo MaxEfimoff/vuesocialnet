@@ -19,7 +19,7 @@
         <span class="result-title">
         Start Date
         </span>
-        <p>{{ eventToCreate.startDate }}</p>
+        <p>{{ eventToCreate.startDate | formatDate }}</p>
       </div>
       <div>
         <span class="result-title">
@@ -75,10 +75,10 @@
 
 <style scoped>
   .result-title {
-    font-size: 19px;
+    font-size: 16px;
     font-weight: bold;
   }
   .result-title + p {
-    font-size: 16px;
+    font-size: 14px;
   }
 </style>
