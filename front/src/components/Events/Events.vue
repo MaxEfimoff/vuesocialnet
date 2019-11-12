@@ -1,32 +1,56 @@
 <template>
-  <section class="posts section">
-    <h3>events</h3>
-    <!-- <router-link :to="{ name: 'eventForm' }">
-      <button>
-        New Event
-      </button>
-    </router-link> -->
-    <ModalEvent/>
-  </section>
+  <div class="flex">
+    <div
+      @click.prevent="show(event._id)"
+      v-for="event in events"
+      :key="event.id">
+      <EventCard
+        :name="event.profile.handle"
+        :id="event._id"
+        :image="event.image"
+        :title="event.title"
+        :startDate="event.startDate"
+        @closeModal="hide"/>
+    </div>
+    <modal name="ModalEvent" height="auto">
+      <Event :id="eventId" />
+    </modal>
+  </div>
 </template>
 
 <script>
-import ModalEvent from './ModalEvent.vue';
+import { mapState, mapActions } from 'vuex';
+import EventCard from '@/components/Event/EventCard';
+import Event from '@/components/Event/Event';
 
 export default {
+  data() {
+    return {
+      eventId: ''
+    }
+  },
   name: 'Events',
-  // created() {
-  //   this.getEvents();
-  // },
-  // computed: {
-  //   ...mapState('events', ['events']),
-  // },
-  // methods: {
-  //   ...mapActions("events", ['getEvents']),
-    
-  // },
+  async mounted() {
+    await this.getEvents();
+    await this.hide();
+  },
+  computed: {
+    ...mapState('profile', ['profile']),
+    ...mapState('events', ['events']),
+  },
+  methods: {
+    ...mapActions("events", ['getEvents']),
+    show(arg) {
+      this.$modal.show('ModalEvent', {id: arg});
+      this.eventId = arg;
+    },
+    hide() {
+      this.$modal.hide('ModalEvent');
+    }
+  },
   components: {
-    ModalEvent
+    EventCard,
+    Event
   }
 }
 </script>

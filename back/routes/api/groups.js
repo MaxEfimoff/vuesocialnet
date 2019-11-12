@@ -199,6 +199,7 @@ router.post(
             });
           }
           // Add user ID to subscribers array
+          console.log(profile)
           group.subscribes.unshift({ 
             // profile: profile._id
             handle: profile.handle,

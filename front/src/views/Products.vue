@@ -4,7 +4,7 @@
     <div class="main">
       <div class="container container-main">
         <LeftSection />
-        <Products />
+        <ProductsMain />
       </div>
     </div>
   </div> 
@@ -13,13 +13,13 @@
 <script>
 import Header from '@/components/Header.vue';
 import LeftSection from '@/components/LeftSection.vue';
-import Products from '@/components/Products/ProductsMain.vue';
+import ProductsMain from '@/components/Products/ProductsMain.vue';
 
 export default {
   components: {
     Header,
     LeftSection,
-    Products
+    ProductsMain
   }
 }
 </script>

@@ -1,3 +1,5 @@
+import Vue from 'vue';
+
 function getProfile(state, profile) {
   state.profile = profile;
 }
@@ -34,6 +36,10 @@ function SET_PROFILE_POSTS (state, posts) {
   state.profilePosts = posts;
 }
 
+function SET_EVENTS_TO_PROFILE (state, events) {
+  return Vue.set(state.profile, 'joinedEvents', events)
+}
+
 export {
   getProfile,
   resetProfile,
@@ -43,5 +49,6 @@ export {
   SET_PROFILE_PHOTOS,
   SET_PROFILE_POSTS,
   SET_PROFILE_GROUPS,
-  CLEAR_ANOTHER_USER_PROFILE
+  CLEAR_ANOTHER_USER_PROFILE,
+  SET_EVENTS_TO_PROFILE
 };

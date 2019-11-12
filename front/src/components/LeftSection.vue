@@ -81,7 +81,7 @@
           :to="{ name: 'events' }"
         >
           <!-- <div class="count">{{ calendar.length }}</div> -->
-          <div class="count">7</div>
+          <div class="count">{{ profile.joinedEvents ? profile.joinedEvents.length : '0' }}</div>
           <i class="fas fa-globe-americas"></i>
         </router-link>
       </div>

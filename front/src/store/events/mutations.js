@@ -1,3 +1,5 @@
+import Vue from 'vue';
+
 function SET_EVENTS (state, events) {
   state.events = events;
 }
@@ -7,8 +9,6 @@ function SET_EVENT (state, event) {
 }
 
 function ADD_EVENT(state, event) {
-  // Vue.set(state.events, event);
-  // Object.assign(state.events, event);
   state.events.push(event)
 }
 
@@ -24,10 +24,15 @@ function DELETE_EVENT(state, id) {
   Vue.delete(state.events, id);
 }
 
+function ADD_PROFILE_TO_EVENT (state, joinedPeople) {
+  Vue.set(state.event, 'joinedPeople', joinedPeople);
+}
+
 export {
   SET_EVENTS,
   SET_EVENT,
   ADD_EVENT,
   UPDATE_EVENT,
-  DELETE_EVENT
+  DELETE_EVENT,
+  ADD_PROFILE_TO_EVENT
 };

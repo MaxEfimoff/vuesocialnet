@@ -16,7 +16,8 @@ const loginViaFacebookUrl = `${serverUrl}/api/users/oauth/facebook`;
 const registerUrl = `${serverUrl}/api/users/register/`;
 // Events
 const addEventUrl = `${serverUrl}/api/events`;
-const allEventsUrl = `${serverUrl}/api/events/`;
+const allEventsUrl = `${serverUrl}/api/events`;
+// const joinEventUrl = `${serverUrl}/api/events/join/${id}`;
 // EventCategories
 const allEventCategoriesUrl = `${serverUrl}/api/eventcategories`;
 // Profile
@@ -97,6 +98,7 @@ export {
   loginViaFacebookUrl,
   addEventUrl,
   allEventsUrl,
-  allEventCategoriesUrl
+  allEventCategoriesUrl,
+  // joinEventUrl
   // profileByHandleUrl
 };

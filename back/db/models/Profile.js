@@ -11,6 +11,24 @@ const ProfileSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'users'
   },
+  joinedEvents: [{
+    type: Schema.Types.ObjectId,
+    ref: 'event'
+  }],
+  // TODO Friends is an array of user profiles
+  friends: [
+    {
+      // type: Schema.Types.ObjectId,
+      // ref: 'profile',
+      handle: {
+        type: String,
+        required: true
+      },
+      avatar: {
+        type: String,
+      }
+    }
+  ],
   handle: {
     type: String,
     required: true,
@@ -120,22 +138,6 @@ const ProfileSchema = new Schema({
       type: String
     }
   },
-
-  // Friends is an array of user handles
-  friends: [
-    {
-      handle: {
-        // type: Schema.Types.ObjectId,
-        // ref: 'users',
-        type: String,
-        required: true
-      },
-      avatar: {
-        type: String,
-      }
-    }
-  ],
-
   date: {
     type: Date,
     default: Date.now

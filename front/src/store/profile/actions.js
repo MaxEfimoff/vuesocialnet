@@ -143,6 +143,17 @@ function getProfilePosts({ commit }, handle) {
   })
 };
 
+function addEventToProfile({ commit, state }, id) {
+  const joinedEvents = [...state.profile['joinedEvents'], id];
+  commit('SET_EVENTS_TO_PROFILE', joinedEvents)
+}
+
+function removeEventFromProfile({ commit, state }, id) {
+  const removeindex = state.profile.joinedEvents.indexOf(id);
+  const Events = state.profile['joinedEvents'].splice(removeindex, 1);
+  commit('SET_EVENTS_TO_PROFILE', Events)
+}
+
 export {
   exportCurrentProfile,
   createProfile,
@@ -154,5 +165,7 @@ export {
   getProfilePhotos,
   getProfilePosts,
   getProfileById,
-  getProfileGroups
+  getProfileGroups,
+  addEventToProfile,
+  removeEventFromProfile
 };

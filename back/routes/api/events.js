@@ -157,7 +157,7 @@ router.patch('/:id/update-event', passport.authenticate("jwt", { session: false 
 //@desc       Delete event by id
 //@access     Private
 router.delete('/:id', passport.authenticate("jwt", { session: false }), (req, res) => {
-  Profile.findOne({ profile: req.profile.id })
+  Profile.findOne({ user: req.user.id })
     .then(profile => {
       Event.findById(req.params.id)
         .then(event => {
@@ -172,6 +172,54 @@ router.delete('/:id', passport.authenticate("jwt", { session: false }), (req, re
    })
 });
 
+//@route      POST api/events/join
+//@desc       Join event
+//@access     Private
+router.post('/join/:id', passport.authenticate("jwt", { session: false }), (req, res) => {
+  Profile.findOne({ user: req.user.id })
+    .then(profile => {
+      Event.findById(req.params.id)
+        .then(event => {
+          // if(event.joinedPeople.filter(person => person.profile === req.profile.id).length > 0) {
+          //   return res.status(400).json({ alreadyjoined: 'You have already joined this event' })
+          // }
+
+          event.joinedPeople.push(profile);
+          event.joinedPeopleCount++;
+
+          return Promise.all([
+            Profile.updateOne({ _id: profile.id }, { $push: { joinedEvents: event }}),
+            event.save()
+          ])
+          .then(event => 
+            res.json(event));
+          })
+          .catch(err => res.status(404).json({ eventnotfound: 'Event not found' }));
+        })
+});
+
+//@route      POST api/events/join
+//@desc       Join event
+//@access     Private
+router.post('/leave/:id', passport.authenticate("jwt", { session: false }), (req, res) => {
+  Profile.findOne({ user: req.user.id })
+    .then(profile => {
+      Event.findById(req.params.id)
+        .then(event => {
+          // if(event.joinedPeople.filter(person => person.profile === req.profile).length == 0) {
+          //   return res.status(400).json({ notjoined: 'You have not joined this event yet' })
+          // }
+
+          return Promise.all([
+            Profile.updateOne({ _id: profile.id }, { $pull: { joinedEvents: event.id }}),
+            Event.updateOne({ _id: event.id }, { $pull: { joinedPeople: profile.id }, $inc: {joinedPeopleCount: -1}})
+          ])
+          // .then(event => res.json(event));
+          .then(result => res.json(req.params.id))
+          })
+          .catch(err => res.status(404).json({ eventnotfound: 'Event not found' }));
+        })
+});
 
 //@route      POST api/events/comment/:id
 //@desc       Add a comment event

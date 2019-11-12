@@ -4,7 +4,7 @@
     <div class="main">
       <div class="container container-main">
         <LeftSection />
-        <Events />
+        <EventsMain />
       </div>
     </div>
   </div> 
@@ -13,13 +13,13 @@
 <script>
 import Header from '@/components/Header.vue';
 import LeftSection from '@/components/LeftSection.vue';
-import Events from '@/components/Events/Events.vue';
+import EventsMain from '@/components/Events/EventsMain.vue';
 
 export default {
   components: {
     Header,
     LeftSection,
-    Events
+    EventsMain
   }
 }
 </script>

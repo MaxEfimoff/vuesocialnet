@@ -7,27 +7,27 @@
             <a 
               @click.prevent="navigateTo(1)"
               :class="activeComponentClass(1)"
-            >All Products</a>
+            >All Events</a>
           </li>
           <li>
             <a 
               @click.prevent="navigateTo(2)"
               :class="activeComponentClass(2)"
-            >My Products</a>
+            >My Events</a>
           </li>
           <li>
             <a 
               @click.prevent="navigateTo(3)"
               :class="activeComponentClass(3)"
-            >Friends Products</a>
+            >Friends Events</a>
           </li>
           <li>
             <a href="">Liked</a>
           </li>
         </ul>
-        <ModalCreateProduct/>
+        <ModalEvent/>
         <form action="#" class="search-form leftmargin">
-          <input type="text" placeholder="Product search" />
+          <input type="text" placeholder="Event search" />
         </form>
       </div>
       <keep-alive>
@@ -40,15 +40,15 @@
 </template>
 
 <script>
-import Products from'./Products';
-import MyProducts from'./MyProducts';
-import FriendsProducts from'./FriendsProducts';
-import ModalCreateProduct from '@/components/Product/ModalCreateProduct.vue';
+import Events from'./Events';
+import MyEvents from'./MyEvents';
+import FriendsEvents from'./FriendsEvents';
+import ModalEvent from '@/components/Events/ModalEvent.vue';
 
 import { mapState } from 'vuex';
 
 export default {
-  name: 'ProductsMain',
+  name: 'EventsMain',
   methods: {
     navigateTo(step) {
       this.activeStep = step;
@@ -67,17 +67,17 @@ export default {
     return {
       activeStep: 1,
       steps: [
-        Products,
-        MyProducts,
-        FriendsProducts,
+        Events,
+        MyEvents,
+        FriendsEvents,
       ]
     }
   },
   components: {
-    Products,
-    MyProducts,
-    FriendsProducts,
-    ModalCreateProduct
+    Events,
+    MyEvents,
+    FriendsEvents,
+    ModalEvent
   }
 }
 </script>

@@ -111,12 +111,12 @@
         this.formData.startDate = moment(date).format();
         this.emitFormData();
       },
-      changeTime (event, field) {
+      changeTime(event, field) {
         const hours = event.data.HH || '00';
         const minutes = event.data.mm || '00';
         this.formData[field] = hours + ':' + minutes;
         this.emitFormData();
-      }
+      },
     },
     components: {
       Datepicker,

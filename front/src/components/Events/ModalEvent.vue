@@ -1,7 +1,7 @@
 <template>
   <div>
     <button href="" @click.prevent="show">Add new event</button>
-    <modal name="ModalEvent" height="auto">
+    <modal name="ModalCreateEvent" height="auto">
       <EventForm @closeModal="hide"/>
     </modal>
   </div>
@@ -12,10 +12,10 @@ import EventForm from '@/components/Event/EventForm.vue';
 export default {
   methods: {
     show() {
-      this.$modal.show('ModalEvent');
+      this.$modal.show('ModalCreateEvent');
     },
     hide() {
-      this.$modal.hide('ModalEvent');
+      this.$modal.hide('ModalCreateEvent');
     }
   },
   components: {
