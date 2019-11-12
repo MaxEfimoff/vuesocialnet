@@ -3,37 +3,38 @@
     <div v-if="isDataLoaded" class="posts">
       <div class="product-image" :style="{ backgroundImage: 'url(' + `${event.image}` + ')' }">
       </div>
-      <div class="post-author">
-        <router-link
+      <router-link
           :to="`/profile/handle/${event.profile.handle}`">
-          <div class="padding">
-            <img class="product-photo" :src="event.profile.avatar" alt="">
-            <p>{{ event.profile.handle }}</p>
-          </div>
-        </router-link>
-          <div class="text-left">
-            <span>{{ event.eventCategory.name }}</span>
-            <div class="post-author">
-              <div class="groups-photo">
-                <p>{{ event.text }}</p>
-              </div>
-            </div>
-            <!-- <i class="fas fa-thumbs-up" @click="addLike"></i>{{' '}}<span>{{ event.likes.length }}</span> -->
-            <div v-if="eventAuthor">
-              <button href="" @click.prevent="show">Edit event</button>
-              <modal name="ModalEditEvent" height="auto">
-                <EditEvent
-                  :id="id"
-                  @closeModal="hide"/>
-              </modal>
-            </div>
-            <div class="error-message">
-              {{this.errors.alreadyliked}}
-            </div>
-          </div>
+        <div class="avatar">
+          <img :src="event.profile.avatar" alt="">
+        </div>
+      </router-link>
+      <span>{{ event.eventCategory.name }}</span>
+      <div v-if="eventAuthor">
+        <span href="" @click.prevent="show">Edit event</span>
+        <modal name="ModalEditEvent" height="auto">
+          <EditEvent
+            :id="id"
+            @closeModal="hide"/>
+        </modal>
       </div>
-      <button v-if="isEventMember" @click="leaveEvent">Leave event</button>
-      <button v-if="canJoin" @click="joinEvent">Join event</button>
+      <div class="post-author">
+        <div class="leftpadding">
+          <p>{{ event.description }}</p>
+        </div>
+        <!-- <i class="fas fa-thumbs-up" @click="addLike"></i>{{' '}}<span>{{ event.likes.length }}</span> 
+        
+        <div class="error-message">
+          {{this.errors.alreadyliked}}
+        </div>-->
+      </div>
+      <div class="halfpadding">
+        <button
+          v-if="isEventMember"
+          @click="leaveEvent"
+          >Leave event</button>
+        <button v-if="canJoin" @click="joinEvent">Join event</button>
+      </div>
       <div v-if="eventMembers.length > 0">
         <router-link
           v-for="profile in eventMembers"
