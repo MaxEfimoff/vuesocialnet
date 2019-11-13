@@ -10,7 +10,7 @@
         </div>
       </router-link>
       <span>{{ event.eventCategory.name }}</span>
-      <div v-if="eventAuthor">
+      <div v-if="isEventAuthor">
         <span href="" @click.prevent="show">Edit event</span>
         <modal name="ModalEditEvent" height="auto">
           <EditEvent
@@ -48,6 +48,13 @@
             :title='profile.handle'
           >
         </router-link>
+      </div>
+      <div v-if="isEventMember || isEventAuthor" class="padding">
+        <textarea
+          class="textarea"
+          placeholder="Start a new thread"
+          v-model="formData.title"/>
+        <button @click="createThread">Create Thread</button>
       </div>
         <!-- Comments -->
         <!-- <div
@@ -108,9 +115,7 @@ export default {
     return {
       isDataLoaded: false,
       formData: {
-        text: '',
-        name: this.$store.state.profile.profile.handle,
-        avatar: this.$store.state.profile.profile.avatar
+        title: null,
       },
     };
   },
@@ -119,13 +124,14 @@ export default {
       .then(() => {
         this.isDataLoaded = true;
       })
+    this.getEventThreadsByEventId(this.id);
     this.exportCurrentProfile();
   },
   computed: {
     ...mapState('events', ['event']),
     ...mapState('errors', ['errors']),
     ...mapState('profile', [ 'profile' ]),
-    eventAuthor() {
+    isEventAuthor() {
       return this.$store.state.events.event.profile._id === this.$store.state.profile.profile._id;
     },
     isEventMember() {
@@ -135,7 +141,7 @@ export default {
       }
     },
     canJoin() {
-      return !this.eventAuthor && !this.isEventMember;
+      return !this.isEventAuthor && !this.isEventMember;
     },
     eventMembers() {
       return this.$store.state.events.event.joinedPeople;
@@ -143,6 +149,7 @@ export default {
   },
   methods: {
     ...mapActions("events", ['getEventById']),
+    ...mapActions("eventthreads", ['getEventThreadsByEventId']),
     ...mapActions("profile", [ 'exportCurrentProfile' ]),
     // addLike() {
     //   this.$store.dispatch('events/addLike', this.id)
@@ -172,6 +179,20 @@ export default {
       const id = this.id;
       this.$store.dispatch('events/leaveEvent', id)
       .catch((error) => {console.log(error)})
+    },
+    createThread() {
+      const payload = {
+        event: this.id,
+        formData: this.formData,
+        profile: this.$store.state.profile.profile
+      }
+      this.$store.dispatch('eventthreads/addEventThread', payload)
+      .then(this.formData = {})
+      .catch((error) => {console.log(error)})
+      // .then(this.formData = {})
+      // .catch((error) => {
+      //   console.log(error)
+      // })
     }
   },
   components: {

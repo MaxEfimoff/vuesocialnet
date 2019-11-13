@@ -10,6 +10,7 @@ import notes from './notes';
 import events from './events';
 import categories from './categories';
 import eventcategories from './eventcategories';
+import eventthreads from './eventthreads';
 import photos from './photos';
 import documents from './documents';
 import messages from './messages';
@@ -37,7 +38,8 @@ export default function () {
       documents,
       photos,
       categories,
-      eventcategories
+      eventcategories,
+      eventthreads
     },
     strict: process.env.DEV
   })

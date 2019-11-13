@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuelidate from 'vuelidate';
 import VModal from 'vue-js-modal';
+import vuelidate from 'vuelidate';
 import filters from './filters';
 import io from 'socket.io-client';
 
