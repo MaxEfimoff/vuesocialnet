@@ -94,7 +94,6 @@ router.post('/login', (req, res) => {
         errors.userNotFound = 'User not found';
         return res.status(404).json(errors)
       }
-
       // Compare plain text password (password) from the form with the hash (user.password) in db
       bcrypt.compare(password, user.password)
         .then(isMatch => {

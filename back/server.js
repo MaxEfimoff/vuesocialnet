@@ -24,12 +24,15 @@ const messages = require('./routes/api/messages');
 const groups = require('./routes/api/groups');
 
 const app = express();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server, {pingTimeout: 60000});
+
+require('./socket')(io)
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));
-
 
 // DB config
 const db = require("./config/keys").mongoURI;
@@ -63,6 +66,6 @@ app.use('/api/groups', groups);
 // Heroku settings
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+server.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 
 module.exports = app;
