@@ -4,7 +4,7 @@
       <textarea 
         v-auto-expand
         v-model="text"
-        class=""
+        class="textarea"
         placeholder="Write a post"
         rows="2"></textarea>
       <button 
@@ -33,18 +33,15 @@ export default {
     }
   },
   computed: {
-    ...mapState('profile', [ 'profile']),
     event () {
       return this.$store.state.events.event
     }
   },
   methods: {
-    ...mapActions("profile",['exportCurrentProfile']),
     sendEventPost () {
       const payload = {
         text: this.text,
         eventThreadId: this.eventThreadId,
-        profile: this.profile._id
       }
       this.$store.dispatch('eventthreads/sendEventPost', payload)
       .then((createdPost) => {
@@ -56,9 +53,6 @@ export default {
       })
     }
   },
-  mounted() {
-    this.exportCurrentProfile();
-  }
 }
 </script>
 

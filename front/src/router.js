@@ -9,6 +9,7 @@ import Calendar from '@/views/Calendar.vue';
 // Events
 import EventForm from '@/views/EventForm.vue';
 import Events from '@/views/Events.vue';
+import Event from '@/views/Event.vue';
 // Posts
 import Post from '@/views/Post.vue';
 import Posts from '@/views/Posts.vue';
@@ -99,6 +100,12 @@ export default new Router({
       path: '/events',
       name: 'events',
       component: Events
+    },
+    {
+      path: '/events/:id',
+      name: 'event',
+      props: true,
+      component: Event
     },
     // Posts
     {

@@ -49,6 +49,9 @@
           >
         </router-link>
       </div>
+      <EventThreadList 
+        :threads="eventthreads.eventthreads"
+        :canMakePost="canMakePost"/>
       <div v-if="isEventMember || isEventAuthor" class="padding">
         <textarea
           class="textarea"
@@ -56,44 +59,6 @@
           v-model="formData.title"/>
         <button @click="createThread">Create Thread</button>
       </div>
-      <EventThreadList 
-        :threads="eventthreads.eventthreads"
-        :canMakePost="canMakePost"/>
-        <!-- Comments -->
-        <!-- <div
-          class="message"
-          v-for="comment in product.comments"
-          :key="comment.id"
-        >
-          <div class="flex-left-nowrap">
-             <div>
-              <router-link
-                :to="`/profile/handle/${comment.name}`">
-                <img class="groups-img" :src="comment.avatar" alt="">
-                <div class='text-center'>
-                  <span>{{ comment.name }}</span>
-                </div>
-              </router-link>
-            </div>
-            <div class="groups-photo">
-              <a class="leftpadding">{{ comment.text }}</a>
-            </div>
-          </div>
-        </div> -->
-        <!-- Comments form -->
-        <!-- <form ref="text" @submit.prevent="submitForm" class="post-new-form">
-          <div class="halfpadding">
-            <textarea
-              class="textarea"
-              placeholder="Coment"
-              v-model="formData.text"
-            />
-          </div>
-          <div class="padding">
-            <button type="submit">Submit</button>
-          </div>
-        </form> -->
-        <!-- Comments form -->
     </div>
     <div v-else>
       <Spinner />
@@ -135,7 +100,7 @@ export default {
     ...mapState('events', ['event']),
     ...mapState('errors', ['errors']),
     ...mapState('profile', [ 'profile' ]),
-    ...mapState('eventthreads', [ 'eventthreads' ]),
+    ...mapState('eventthreads', [ 'eventthreads', 'eventthread' ]),
     isEventAuthor() {
       return this.$store.state.events.event.profile._id === this.$store.state.profile.profile._id;
     },

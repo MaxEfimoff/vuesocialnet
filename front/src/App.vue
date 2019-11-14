@@ -143,7 +143,7 @@ span, li, i {
 .textarea {
   text-align:left;
   border: 1px solid var(--primary-color);
-  height: 7rem;
+  height: 2.5rem;
   width: 100%;
   min-width: 10rem;
   padding: 0.5rem;

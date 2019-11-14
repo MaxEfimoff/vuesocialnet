@@ -1,30 +1,45 @@
 <template>
   <div>
-    <h4>Event Threads</h4>
-    <div v-for="thread in threads" :key="thread._id" class="">
-      <h4 id="const" class="">{{thread.title}}</h4>
-      <EventPostCreate
-        v-if="canMakePost" 
-        :eventThreadId="thread._id"/>
-      <!--  <article v-for="post in thread.posts" :key="post._id" class="">
-        <figure class="">
-          <p class="">
-            <img class="" :src="post.profile.avatar">
-          </p>
-        </figure>
-        <div class="">
-          <div class="">
-            <div class="">
-              <strong class="">{{post.profile.name}}</strong>
-              {{' '}}
-              <small class="">{{post.updatedAt | fromNow}}</small>
-              <br>
-              <p class="">{{post.text}}</p>
+    <div v-for="thread in threads" :key="thread._id">
+      <div class="flex-left">
+        <router-link
+          :to="`/profile/handle/${thread.profile.handle}`">
+          <div class="leftmargin">
+            <img class="groups-img" :src="thread.profile.avatar">
+            <div class='text-center'>
+              <span>{{ thread.profile.handle }}</span>
             </div>
           </div>
+        </router-link>
+        <div class="leftmargin text-left">
+          <div><p>{{ thread.title }}</p></div>
+          <span>{{thread.updatedAt | fromNow}}</span>
         </div>
-      </article> -->
-      <!-- Posts END -->
+      </div>
+      <div
+        v-for="post in thread.eventThreadPosts"
+        :key="post._id"
+        class="leftmargin">
+        <div class="flex-left leftmargin">
+          <router-link
+            :to="`/profile/handle/${post.profile.handle}`">
+            <div>
+              <img class="groups-img" :src="post.profile.avatar">
+              <div class='text-center'>
+                <span>{{ post.profile.handle }}</span>
+              </div>
+            </div>
+          </router-link>
+          <div class="leftmargin text-left">
+            <div><p>{{ post.text }}</p></div>
+            <span>{{post.updatedAt | fromNow}}</span>
+          </div>
+        </div>
+      </div>
+      <EventPostCreate
+        class="padding"
+        v-if="canMakePost" 
+        :eventThreadId="thread._id"/>
     </div>
   </div>
 </template>

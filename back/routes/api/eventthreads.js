@@ -54,9 +54,10 @@ router.get("/",
           .skip(skips)
           .limit(pageSize + 1)
           .sort({'createdAt': -1})
+          .populate('profile -avatar -handle')
           .populate({
-            path: 'posts',
-            options: { limit: 5, sort: {'createdAt': -1}},
+            path: 'eventThreadPosts',
+            options: { limit: 5, sort: {'createdAt': 1}},
             populate: {path: 'profile'}
           })
           .exec((errors, eventthreads) => {
@@ -82,6 +83,8 @@ router.post(
   "/eventpost",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    Profile.findOne({ user: req.user.id })
+    .then(profile => {
     // const { errors, isValid } = validateEventThreadInput(req.body);
 
     // // Check validation
@@ -90,16 +93,21 @@ router.post(
     //   return res.status(400).json(errors);
     // }
     
-    const postData = req.body;
-    const post = new EventThreadPost(postData);
 
-    post.save((errors, post) => {
-      if (errors) {
-        return res.status(422).send({errors});
-      }
-      EventThread.update({ _id: post.eventThread }, { $push: { eventThreadPosts: post }}, () => {})
-      return res.json(post)
-    });
+      const post = new EventThreadPost({
+        text: req.body.text,
+        eventThread: req.body.eventThread
+      });
+      post.profile = profile;
+
+      post.save((errors, post) => {
+        if (errors) {
+          return res.status(422).send({errors});
+        }
+        EventThread.update({ _id: post.eventThread }, { $push: { eventThreadPosts: post }}, () => {})
+        return res.json(post)
+      });
+    })
   }
 )
 

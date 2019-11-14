@@ -12,7 +12,10 @@
         :startDate="event.startDate"
         @closeModal="hide"/>
     </div>
-    <modal name="ModalEvent" height="auto">
+    <modal
+      :scrollable="true"
+      name="ModalEvent"
+      height="auto">
       <Event :id="eventId" />
     </modal>
   </div>
