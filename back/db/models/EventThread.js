@@ -11,8 +11,8 @@ const EventThreadSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'profile'
   },
-  eventMessage: [{
-    type: Schema.Types.ObjectId, ref: 'eventMessage'
+  eventThreadPosts: [{
+    type: Schema.Types.ObjectId, ref: 'eventThreadPost'
   }],
   title: { 
     type: String,

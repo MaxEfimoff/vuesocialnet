@@ -17,12 +17,11 @@ const registerUrl = `${serverUrl}/api/users/register/`;
 // Events
 const addEventUrl = `${serverUrl}/api/events`;
 const allEventsUrl = `${serverUrl}/api/events`;
-// const joinEventUrl = `${serverUrl}/api/events/join/${id}`;
 // EventCategories
 const allEventCategoriesUrl = `${serverUrl}/api/eventcategories`;
 // EventThreads
-// const allEventThreadsUrl = `${serverUrl}/api/eventthreads?eventId=${eventId}`;
 const addEventThreadUrl = `${serverUrl}/api/eventthreads`;
+const addPostToEventThreadUrl = `${serverUrl}/api/eventthreads/eventpost`;
 // Profile
 const profileUrl = `${serverUrl}/api/profile/`;
 const allProfilesUrl = `${serverUrl}/api/profile/all`;
@@ -102,8 +101,6 @@ export {
   addEventUrl,
   allEventsUrl,
   allEventCategoriesUrl,
-  // allEventThreadsUrl,
-  addEventThreadUrl
-  // joinEventUrl
-  // profileByHandleUrl
+  addEventThreadUrl,
+  addPostToEventThreadUrl
 };

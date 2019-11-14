@@ -3,7 +3,7 @@
     <div v-if="isDataLoaded" class="posts">
       <div class="product-image" :style="{ backgroundImage: 'url(' + `${event.image}` + ')' }">
       </div>
-      <router-link
+      <!-- <router-link
           :to="`/profile/handle/${event.profile.handle}`">
         <div class="avatar">
           <img :src="event.profile.avatar" alt="">
@@ -17,7 +17,7 @@
             :id="id"
             @closeModal="hide"/>
         </modal>
-      </div>
+      </div> -->
       <div class="post-author">
         <div class="leftpadding">
           <p>{{ event.description }}</p>
@@ -56,6 +56,9 @@
           v-model="formData.title"/>
         <button @click="createThread">Create Thread</button>
       </div>
+      <EventThreadList 
+        :threads="eventthreads.eventthreads"
+        :canMakePost="canMakePost"/>
         <!-- Comments -->
         <!-- <div
           class="message"
@@ -101,6 +104,7 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 import Spinner from '@/components/helpers/Spinner';
+import EventThreadList from '@/components/Event/EventThreadList';
 // import EditEvent from '@/components/Event/EditEvent';
 
 export default {
@@ -131,6 +135,7 @@ export default {
     ...mapState('events', ['event']),
     ...mapState('errors', ['errors']),
     ...mapState('profile', [ 'profile' ]),
+    ...mapState('eventthreads', [ 'eventthreads' ]),
     isEventAuthor() {
       return this.$store.state.events.event.profile._id === this.$store.state.profile.profile._id;
     },
@@ -145,6 +150,9 @@ export default {
     },
     eventMembers() {
       return this.$store.state.events.event.joinedPeople;
+    },
+    canMakePost() {
+      return this.isEventAuthor || this.isEventMember;
     }
   },
   methods: {
@@ -189,14 +197,11 @@ export default {
       this.$store.dispatch('eventthreads/addEventThread', payload)
       .then(this.formData = {})
       .catch((error) => {console.log(error)})
-      // .then(this.formData = {})
-      // .catch((error) => {
-      //   console.log(error)
-      // })
     }
   },
   components: {
     Spinner,
+    EventThreadList
     // EditEvent,
     
   }
