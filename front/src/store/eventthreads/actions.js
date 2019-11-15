@@ -56,7 +56,7 @@ function addPostToEventThread ({commit, state}, {eventPost, eventThreadId}) {
   const eventThreadIndex = state.eventthreads.eventthreads.findIndex(eventThread => eventThread._id === eventThreadId);
   if (eventThreadIndex > -1) {
     const eventThreadPosts = state.eventthreads.eventthreads[eventThreadIndex].eventThreadPosts;
-    eventThreadPosts.unshift(eventPost)
+    eventThreadPosts.push(eventPost)
     commit('SAVE_EVENT_POST_TO_EVENT_THREAD', {eventThreadPosts, index: eventThreadIndex})
   }
 }

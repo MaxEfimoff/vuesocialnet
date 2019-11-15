@@ -18,21 +18,27 @@ router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { errors, isValid } = validateEventThreadInput(req.body);
+    Profile.findOne({ user: req.user.id })
+    .then(profile => {
+      const { errors, isValid } = validateEventThreadInput(req.body);
 
-    // Check validation
-    if (!isValid) {
-      // If any errors, send 400 with errors object
-      return res.status(400).json(errors);
-    }
-    
-    const newEventThread = new EventThread({
-      profile: req.body.profile._id,
-      title: req.body.title,
-      event: req.body.event,
-    });
-    console.log(newEventThread)
-    newEventThread.save().then(eventThread => res.json(eventThread));
+      // Check validation
+      if (!isValid) {
+        // If any errors, send 400 with errors object
+        return res.status(400).json(errors);
+      }
+      
+      const newEventThread = new EventThread({
+        title: req.body.title,
+        event: req.body.event,
+      });
+      newEventThread.profile = profile;
+
+      newEventThread
+        .populate('profile -avatar -handle')
+        .save()
+        .then(eventThread => res.json(eventThread));
+    })
   }
 );
 

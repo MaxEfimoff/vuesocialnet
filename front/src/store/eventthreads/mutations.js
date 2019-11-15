@@ -5,7 +5,7 @@ function SET_EVENT_THREADS(state, eventthreads) {
 }
 
 function ADD_EVENT_THREAD (state, eventthread) {
-  state.eventthreads.unshift(eventthread);
+  state.eventthreads.eventthreads.unshift(eventthread);
 }
 
 function SAVE_EVENT_POST_TO_EVENT_THREAD (state, {eventPosts, index}) {
