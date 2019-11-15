@@ -8,8 +8,8 @@ function ADD_EVENT_THREAD (state, eventthread) {
   state.eventthreads.eventthreads.unshift(eventthread);
 }
 
-function SAVE_EVENT_POST_TO_EVENT_THREAD (state, {eventPosts, index}) {
-  Vue.set(state.eventthreads[index], 'posts', eventPosts);
+function SAVE_EVENT_POST_TO_EVENT_THREAD (state, {eventThreadPosts, index}) {
+  Vue.set(state.eventthreads.eventthreads[index], 'eventThreadPosts', eventThreadPosts);
 }
 
 export {

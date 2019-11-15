@@ -95,12 +95,29 @@ export default {
       })
     this.getEventThreadsByEventId(this.id);
     this.exportCurrentProfile();
+
+    // this.$socket.on('event/postPublished', function(createdEventPost) {
+    //   
+    //   console.log(createdEventPost)
+    // })
+    // if(this.canMakePost) {
+      this.$socket.emit('event/subscribe', this.id);
+      this.$socket.on('event/postPublished', function (createdEventPost) {
+        alert({createdEventPost, eventThreadId: createdEventPost.eventThread});
+        console.log('createdEventPost', {createdEventPost, eventThreadId: createdEventPost.eventThread})
+        this.addPostToEventThread({createdEventPost, eventThreadId: createdEventPost.eventThread})
+        });
+    // }
+  },
+  destroyed() {
+    this.$socket.removeListener('event/postPublished', this.addPostToEventThread);
+    this.$socket.emit('event/unsubscribe');
   },
   computed: {
     ...mapState('events', ['event']),
     ...mapState('errors', ['errors']),
     ...mapState('profile', [ 'profile' ]),
-    ...mapState('eventthreads', [ 'eventthreads', 'eventthread' ]),
+    ...mapState('eventthreads', [ 'eventthreads', 'eventthread', 'addPostToEventThread' ]),
     isEventAuthor() {
       return this.$store.state.events.event.profile._id === this.$store.state.profile.profile._id;
     },

@@ -44,13 +44,11 @@ export default {
         eventThreadId: this.eventThreadId,
       }
       this.$store.dispatch('eventthreads/sendEventPost', payload)
-      .then(() => {
-        this.text = '';
-        this.$socket.emit('meetup/postSaved',
-          {...createdPost, meetup: this.meetup._id }
-        )
+        .then((createdEventPost) => {
+          this.$socket.emit('event/postSave', {...createdEventPost, event: this.event._id});
 
-      })
+          this.text = '';
+        })
     }
   },
 }

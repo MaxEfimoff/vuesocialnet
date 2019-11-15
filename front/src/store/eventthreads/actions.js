@@ -33,31 +33,34 @@ function addEventThread({ commit }, data) {
   });
 }
 
-function sendEventPost({ dispatch }, payload) {
-  const post = {};
-    post.text = payload.text;
-    post.eventThread = payload.eventThreadId;
-    post.profile = payload.profile;
-    return new Promise((resolve, reject) => {
-      axios.post(addPostToEventThreadUrl, post)
-        .then((response) => {
-          const createdEventPost = response.data;
-          dispatch('addPostToEventThread', {eventPost: createdEventPost, eventThreadId: post.eventThread});
-          resolve();
-        })
-        .catch(error => {
-          // commit('errors/setErrors', error.response.data, { root: true });
-          console.log(error)
-        });
-    });
+function sendEventPost({ dispatch }, {text, eventThreadId}) {
+  const post = {text, eventThread: eventThreadId}
+    return axios.post(addPostToEventThreadUrl, post)
+      .then((response) => {
+        const createdEventPost = response.data;
+        // TODO Разобраться с мьютэйшеном
+        // const eventThreadIndex = state.eventthreads.eventthreads.findIndex(eventThread => eventThread._id === post.eventThread);
+        // if (eventThreadIndex > -1) {
+        //   const eventThreadPosts = state.eventthreads.eventthreads[eventThreadIndex].eventThreadPosts;
+        //   eventThreadPosts.push(createdEventPost);
+        //   commit('SAVE_EVENT_POST_TO_EVENT_THREAD', {eventThreadPosts, index: eventThreadIndex});
+        // }
+        dispatch('addPostToEventThread', {post: createdEventPost, eventThreadId})
+        return createdEventPost;
+      })
+      .catch(error => {
+        // commit('errors/setErrors', error.response.data, { root: true });
+        console.log(error)
+      });
 }
 
-function addPostToEventThread ({commit, state}, {eventPost, eventThreadId}) {
-  const eventThreadIndex = state.eventthreads.eventthreads.findIndex(eventThread => eventThread._id === eventThreadId);
+function addPostToEventThread ({commit, state}, {post, eventThreadId}) {
+  const eventThreadIndex = state.eventthreads.eventthreads.findIndex(eventThread => eventThread._id === eventThreadId)
+
   if (eventThreadIndex > -1) {
     const eventThreadPosts = state.eventthreads.eventthreads[eventThreadIndex].eventThreadPosts;
-    eventThreadPosts.push(eventPost)
-    commit('SAVE_EVENT_POST_TO_EVENT_THREAD', {eventThreadPosts, index: eventThreadIndex})
+    eventThreadPosts.push(post);
+    commit('SAVE_EVENT_POST_TO_EVENT_THREAD', {eventThreadPosts, index: eventThreadIndex});
   }
 }
 
