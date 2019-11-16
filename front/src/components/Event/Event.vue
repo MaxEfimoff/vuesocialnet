@@ -96,28 +96,27 @@ export default {
     this.getEventThreadsByEventId(this.id);
     this.exportCurrentProfile();
 
-    // this.$socket.on('event/postPublished', function(createdEventPost) {
-    //   
-    //   console.log(createdEventPost)
-    // })
-    // if(this.canMakePost) {
+    // New thead posts will be visible through sockets only for
+    // event author and event members
+    if(this.canMakePost) {
+      // We are emitting 'event/subscribe' event to our socket and sending this.id
       this.$socket.emit('event/subscribe', this.id);
-      this.$socket.on('event/postPublished', function (createdEventPost) {
-        alert({createdEventPost, eventThreadId: createdEventPost.eventThread});
-        console.log('createdEventPost', {createdEventPost, eventThreadId: createdEventPost.eventThread})
-        this.addPostToEventThread({createdEventPost, eventThreadId: createdEventPost.eventThread})
-        });
-    // }
+      // We are catching 'event/postPublished' event we sent from
+      // `event-${createdEventPost.event}` socket and executing 
+      // this.addPostToEventThreadHandler function
+      this.$socket.on('event/postPublished', this.addPostToEventThreadHandler);
+    }
   },
   destroyed() {
-    this.$socket.removeListener('event/postPublished', this.addPostToEventThread);
-    this.$socket.emit('event/unsubscribe');
+    this.$socket.removeListener('event/postPublished', this.addPostToEventThreadHandler);
+    // We are unsibscribing from our socket
+    this.$socket.emit('event/unsubscribe', this.id);
   },
   computed: {
     ...mapState('events', ['event']),
     ...mapState('errors', ['errors']),
     ...mapState('profile', [ 'profile' ]),
-    ...mapState('eventthreads', [ 'eventthreads', 'eventthread', 'addPostToEventThread' ]),
+    ...mapState('eventthreads', [ 'eventthreads', 'eventthread']),
     isEventAuthor() {
       return this.$store.state.events.event.profile._id === this.$store.state.profile.profile._id;
     },
@@ -139,19 +138,10 @@ export default {
   },
   methods: {
     ...mapActions("events", ['getEventById']),
-    ...mapActions("eventthreads", ['getEventThreadsByEventId']),
+    ...mapActions("eventthreads", ['getEventThreadsByEventId', 'addPostToEventThread']),
     ...mapActions("profile", [ 'exportCurrentProfile' ]),
     // addLike() {
     //   this.$store.dispatch('events/addLike', this.id)
-    //   .catch((error) => {console.log(error)})
-    // },
-    // submitForm() {
-    //   const payload = {
-    //     eventId: this.id,
-    //     formData: this.formData
-    //   }
-    //   this.$store.dispatch('events/addComment', payload)
-    //   .then(this.formData = {})
     //   .catch((error) => {console.log(error)})
     // },
     show() {
@@ -179,7 +169,10 @@ export default {
       this.$store.dispatch('eventthreads/addEventThread', payload)
       .then(this.formData = {})
       .catch((error) => {console.log(error)})
-    }
+    },
+    addPostToEventThreadHandler (post) {
+        this.addPostToEventThread({post, eventThreadId: post.eventThread})
+      },
   },
   components: {
     Spinner,

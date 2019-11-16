@@ -45,6 +45,8 @@ export default {
       }
       this.$store.dispatch('eventthreads/sendEventPost', payload)
         .then((createdEventPost) => {
+          // When new eventpost is created we are emitting to socket 'event/postSave' an event
+          // And we are sending createdEventPost (post we created) and event to which we sent the eventpost
           this.$socket.emit('event/postSave', {...createdEventPost, event: this.event._id});
 
           this.text = '';
