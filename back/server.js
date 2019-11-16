@@ -7,10 +7,9 @@ const fs = require('fs');
 const path = require('path');
 const methodOverride = require('method-override');
 
-
-
 // Routes
 const users = require('./routes/api/users');
+const api = require('./routes/api/api');
 const profile = require('./routes/api/profile');
 const posts = require('./routes/api/posts');
 const products = require('./routes/api/products');
@@ -52,6 +51,7 @@ require('./config/passport')(passport);
 
 // Use routes
 app.use('/api/users', users);
+app.use('/api/api', api);
 app.use('/api/profile', profile);
 app.use('/api/posts', posts);
 app.use('/api/products', products);

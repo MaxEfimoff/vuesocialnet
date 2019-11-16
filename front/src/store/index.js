@@ -7,6 +7,7 @@ import groups from './groups';
 import posts from './posts';
 import products from './products';
 import notes from './notes';
+import meta from './meta';
 import events from './events';
 import categories from './categories';
 import eventcategories from './eventcategories';
@@ -32,6 +33,7 @@ export default function () {
       posts,
       products,
       notes,
+      meta,
       messages,
       errors,
       friends,

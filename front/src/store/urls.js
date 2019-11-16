@@ -14,6 +14,8 @@ const loginUrl = `${serverUrl}/api/users/login/`;
 const loginViaGoogleUrl = `${serverUrl}/api/users/oauth/google`;
 const loginViaFacebookUrl = `${serverUrl}/api/users/oauth/facebook`;
 const registerUrl = `${serverUrl}/api/users/register/`;
+// Metadata
+const myMetaDataUrl = `${serverUrl}/api/api`;
 // Events
 const addEventUrl = `${serverUrl}/api/events`;
 const allEventsUrl = `${serverUrl}/api/events`;
@@ -102,5 +104,6 @@ export {
   allEventsUrl,
   allEventCategoriesUrl,
   addEventThreadUrl,
-  addPostToEventThreadUrl
+  addPostToEventThreadUrl,
+  myMetaDataUrl
 };

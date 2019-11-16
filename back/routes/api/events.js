@@ -17,14 +17,29 @@ router.get('/test', (req, res) => res.json({msg:'events works'}));
 //@desc       Get events
 //@access     Private
 router.get('/', passport.authenticate("jwt", { session: false }), (req, res) => {
-  Event
+  const {category} = req.query || {};
+  const {location} = req.query || {};
+  const findQuery = location ? Event.find({ processedLocation: { $regex: '.*' + location + '.*' } }) : Event.find({})
+  findQuery
     .find()
     .populate('profile -avatar -handle')
     .populate('eventCategory')
     .populate('joinedPeople')
+    .limit(5)
     .sort({date: -1})
-    .then(events => res.json(events))
-    .catch(err => res.status(404).json({noeventsfound: 'No events found'}));
+    .exec((errors, events) => {
+      if (errors) {
+        return res.status(422).send({errors});
+      }
+  
+      if (category) {
+        events = events.filter(event => {
+          return event.category.name === category
+        })
+      }
+  
+      return res.json(events);
+    });
 })
 
 //@route      GET api/my-events/
