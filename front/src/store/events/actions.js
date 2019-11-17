@@ -1,14 +1,19 @@
 import axios from 'axios';
+import { applyFilters } from '@/helpers';
 import {
   allEventsUrl,
   addEventUrl,
 } from '../urls';
 
-function getEvents({ commit }) {
+function getEvents({ commit }, options = {}) {
+  // New Url with search filters applied
+  const url = applyFilters(allEventsUrl, options.filter);
+
   return new Promise((resolve, reject) => {
-    axios.get(allEventsUrl)  
+    axios.get(url)  
       .then((response) => {
         commit('SET_EVENTS', response.data);
+        resolve();
       })
       .catch(error => console.log(error));
   });
@@ -27,6 +32,7 @@ function getEventById({ commit }, id) {
 
 function addEvent({ commit }, data) {
   return new Promise((resolve, reject) => {
+    data.location = data.location.toLowerCase().replace(/[\s,]+/g,'').trim();
     axios.post(addEventUrl, data)
       .then((response) => {
         commit('SET_EVENT', response.data);

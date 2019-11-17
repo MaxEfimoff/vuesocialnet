@@ -313,7 +313,7 @@ span, li, i {
 
 .search-form {
   max-width: 15rem;
-  display: inline-block;
+  display: flex;
   position: relative;
   line-height: 0;
   margin-left: auto;

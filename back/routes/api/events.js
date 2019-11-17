@@ -19,7 +19,8 @@ router.get('/test', (req, res) => res.json({msg:'events works'}));
 router.get('/', passport.authenticate("jwt", { session: false }), (req, res) => {
   const {category} = req.query || {};
   const {location} = req.query || {};
-  const findQuery = location ? Event.find({ processedLocation: { $regex: '.*' + location + '.*' } }) : Event.find({})
+  // const findQuery = location ? Event.find({ processedLocation: { $regex: '.*' + location + '.*' } }) : Event.find({})
+  const findQuery = location ? Event.find({ location }) : Event.find({})
   findQuery
     .find()
     .populate('profile -avatar -handle')

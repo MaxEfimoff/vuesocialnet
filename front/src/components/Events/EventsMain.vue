@@ -22,13 +22,19 @@
             >Friends Events</a>
           </li>
           <li>
+            <a 
+              @click.prevent="navigateTo(4)"
+              :class="activeComponentClass(4)"
+            >Search Events</a>
+          </li>
+          <li>
             <a href="">Liked</a>
           </li>
         </ul>
         <ModalEvent/>
-        <form action="#" class="search-form leftmargin">
+        <!-- <form action="#" class="search-form leftmargin">
           <input v-model="searchedLocation" type="text" placeholder="Event search" />
-        </form>
+        </form> -->
       </div>
       <keep-alive>
         <component
@@ -43,13 +49,29 @@
 import Events from'./Events';
 import MyEvents from'./MyEvents';
 import FriendsEvents from'./FriendsEvents';
+import SearchEvents from'./SearchEvents';
 import ModalEvent from '@/components/Events/ModalEvent.vue';
 
 import { mapState } from 'vuex';
+import SearchEventsVue from './SearchEvents.vue';
 
 export default {
   name: 'EventsMain',
+    data() {
+      return {
+        activeStep: 1,
+        steps: [
+          Events,
+          MyEvents,
+          FriendsEvents,
+          SearchEvents
+        ]
+      }
+    },
   methods: {
+    getEvents() {
+
+    },
     navigateTo(step) {
       this.activeStep = step;
     },
@@ -63,22 +85,12 @@ export default {
       return this.steps[this.activeStep - 1]
     }
   },
-  data() {
-    return {
-      searchedLocation: this.$store.getters['meta/setLocation'],
-      activeStep: 1,
-      steps: [
-        Events,
-        MyEvents,
-        FriendsEvents,
-      ]
-    }
-  },
   components: {
     Events,
     MyEvents,
     FriendsEvents,
-    ModalEvent
+    ModalEvent,
+    SearchEvents
   }
 }
 </script>
