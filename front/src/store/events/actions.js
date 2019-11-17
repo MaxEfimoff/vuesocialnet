@@ -5,14 +5,26 @@ import {
   addEventUrl,
 } from '../urls';
 
-function getEvents({ commit }, options = {}) {
+function getEvents({ commit }) {
+  return new Promise((resolve, reject) => {
+    axios.get(allEventsUrl)  
+      .then((response) => {
+        commit('SET_EVENTS', response.data);
+        resolve();
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+function getFoundEvents({ commit }, options = {}) {
+  commit('SET_FOUND_EVENTS', {});
   // New Url with search filters applied
   const url = applyFilters(allEventsUrl, options.filter);
 
   return new Promise((resolve, reject) => {
     axios.get(url)  
       .then((response) => {
-        commit('SET_EVENTS', response.data);
+        commit('SET_FOUND_EVENTS', response.data);
         resolve();
       })
       .catch(error => console.log(error));
@@ -100,5 +112,6 @@ export {
   addEvent,
   getEventById,
   joinEvent,
-  leaveEvent
+  leaveEvent,
+  getFoundEvents
 };

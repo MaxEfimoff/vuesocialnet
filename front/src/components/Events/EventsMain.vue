@@ -69,9 +69,6 @@ export default {
       }
     },
   methods: {
-    getEvents() {
-
-    },
     navigateTo(step) {
       this.activeStep = step;
     },

@@ -1,5 +1,6 @@
 export default {
   events:[],
-  event: {}
+  event: {},
+  foundEvents:[]
 };
 

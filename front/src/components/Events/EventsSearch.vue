@@ -53,7 +53,7 @@ export default {
   },
   computed: {
     events() {
-      return this.$store.state.events.events;
+      return this.$store.state.events.foundEvents;
     }
   },
   methods: {
@@ -66,8 +66,7 @@ export default {
       if(this.eventcategory) {
         this.filter['eventcategory'] = this.eventcategory;
       }
-      this.$store.dispatch('events/getEvents', {filter: this.filter});
-      console.log(this.filter)
+      this.$store.dispatch('events/getFoundEvents', {filter: this.filter});
     },
     show(arg) {
       this.$modal.show('ModalEvent', {id: arg});
@@ -81,7 +80,7 @@ export default {
     }
   },
   mounted() {
-    this.getEvents();
+    this.getFoundEvents();
     this.hide();
   },
   components: {

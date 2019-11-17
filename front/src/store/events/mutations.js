@@ -8,6 +8,10 @@ function SET_EVENT (state, event) {
   state.event = event;
 }
 
+function SET_FOUND_EVENTS (state, foundEvents) {
+  state.foundEvents = foundEvents;
+}
+
 function ADD_EVENT(state, event) {
   state.events.push(event)
 }
@@ -34,5 +38,6 @@ export {
   ADD_EVENT,
   UPDATE_EVENT,
   DELETE_EVENT,
-  ADD_PROFILE_TO_EVENT
+  ADD_PROFILE_TO_EVENT,
+  SET_FOUND_EVENTS
 };

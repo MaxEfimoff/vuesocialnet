@@ -38,12 +38,12 @@ import EventCategoryCard from '@/components/Event/EventCategoryCard';
 import Event from '@/components/Event/Event';
 
 export default {
+  name: 'Events',
   data() {
     return {
       eventId: '',
     }
   },
-  name: 'Events',
   async mounted() {
     await this.getEvents();
     await this.getEventCategories()
