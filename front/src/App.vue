@@ -7,7 +7,7 @@
         crossorigin="anonymous">
     <div id="nav">
     </div>
-    <router-view/>
+    <router-view :key="$route.path"/>
   </div>
 </template>
 

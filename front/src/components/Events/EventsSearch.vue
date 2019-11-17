@@ -8,8 +8,13 @@
         </div>
     </form>
     <div v-if="searchedLocation && events && events.length > 0">
-      <span>Events in {{events[0].location | capitalize}}</span>
-      <div  class="flex"
+      <div class="flex">
+        <span>Events in {{events[0].location | capitalize}}</span>
+        <div v-if="eventcategory" class="leftpadding">
+          <button @click="cancelCategory" class="danger">{{eventcategory | capitalize}} X</button>
+        </div>
+      </div>
+      <div class="flex"
       @click.prevent="show(event._id)"
       v-for="event in events"
       :key="event.id">
@@ -46,12 +51,6 @@ export default {
       eventId: '',
     }
   },
-  // props: {
-  //   eventcategory: {
-  //     required: false,
-  //     type: String
-  //   }
-  // },
   computed: {
     events() {
       return this.$store.state.events.events;
@@ -59,15 +58,16 @@ export default {
   },
   methods: {
     getEvents() {
+      
+      if(this.searchedLocation) {
+        this.filter['location'] = this.searchedLocation.toLowerCase().replace(/[\s,]+/g,'').trim();
+      }
+
       if(this.eventcategory) {
         this.filter['eventcategory'] = this.eventcategory;
       }
-
-      // if(this.searchedLocation) {
-      //   this.filter['location'] = this.searchedLocation.toLowerCase().replace(/[\s,]+/g,'').trim();
-      // }
-
       this.$store.dispatch('events/getEvents', {filter: this.filter});
+      console.log(this.filter)
     },
     show(arg) {
       this.$modal.show('ModalEvent', {id: arg});
@@ -75,6 +75,9 @@ export default {
     },
     hide() {
       this.$modal.hide('ModalEvent');
+    },
+    cancelCategory() {
+      this.$router.push({name: 'eventsSearch'});
     }
   },
   mounted() {
@@ -95,6 +98,12 @@ form {
   display: flex;
   margin: auto;
   padding: 1rem;
+}
+
+.danger {
+  background-color: palevioletred;
+  border-radius: 8px;
+  color: white;
 }
 
 </style>
