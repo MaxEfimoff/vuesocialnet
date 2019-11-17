@@ -40,11 +40,18 @@ export default {
   name: 'EventsSearch',
   data() {
     return {
+      eventcategory: this.$route.params.eventcategory,
       filter: {},
       searchedLocation: this.$store.getters['meta/setLocation'],
       eventId: '',
     }
   },
+  // props: {
+  //   eventcategory: {
+  //     required: false,
+  //     type: String
+  //   }
+  // },
   computed: {
     events() {
       return this.$store.state.events.events;
@@ -52,9 +59,14 @@ export default {
   },
   methods: {
     getEvents() {
-      if(this.searchedLocation) {
-        this.filter['location'] = this.searchedLocation.toLowerCase().replace(/[\s,]+/g,'').trim();
+      if(this.eventcategory) {
+        this.filter['eventcategory'] = this.eventcategory;
       }
+
+      // if(this.searchedLocation) {
+      //   this.filter['location'] = this.searchedLocation.toLowerCase().replace(/[\s,]+/g,'').trim();
+      // }
+
       this.$store.dispatch('events/getEvents', {filter: this.filter});
     },
     show(arg) {

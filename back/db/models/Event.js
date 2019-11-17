@@ -8,9 +8,9 @@ const EventSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'profile'
   },
-  eventCategory: {
+  eventcategory: {
     type: Schema.Types.ObjectId,
-    ref: 'eventCategory'
+    ref: 'eventcategory'
   },
   joinedPeople: [{
     type: Schema.Types.ObjectId,

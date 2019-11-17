@@ -12,4 +12,4 @@ const EventCategorySchema = new Schema({
   image: String
 });
 
-module.exports = EventCategory =mongoose.model('eventCategory', EventCategorySchema);
+module.exports = EventCategory = mongoose.model('eventcategory', EventCategorySchema);

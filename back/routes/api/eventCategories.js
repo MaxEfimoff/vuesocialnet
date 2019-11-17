@@ -17,8 +17,8 @@ router.get(
   (req, res) => {
     EventCategory.find()
       .sort({ name: 1 })
-      .then(eventCategories =>
-        res.json(eventCategories)
+      .then(eventcategories =>
+        res.json(eventcategories)
       )
       .catch(err =>
         res.status(404).json({ noeventcategoriesfound: "No categories found" })
@@ -46,7 +46,7 @@ router.post(
       name: req.body.name,
       image: req.body.image
     });
-    newEventCategory.save().then(eventCategory => res.json(eventCategory));
+    newEventCategory.save().then(eventcategory => res.json(eventcategory));
   }
 );
 
@@ -59,12 +59,12 @@ router.delete(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     EventCategory.findById(req.params.id)
-      .then(eventCategory => {
+      .then(eventcategory => {
         // Delete
-        eventCategory.remove()
+        eventcategory.remove()
           .then(() => res.json({ success: true }));
       })
-      .catch(err => res.status(404).json({ eventCategorynotfound: "No event category found" }));
+      .catch(err => res.status(404).json({ eventcategorynotfound: "No event category found" }));
   }
 );
 

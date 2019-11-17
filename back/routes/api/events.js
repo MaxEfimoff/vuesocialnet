@@ -17,14 +17,14 @@ router.get('/test', (req, res) => res.json({msg:'events works'}));
 //@desc       Get events
 //@access     Private
 router.get('/', passport.authenticate("jwt", { session: false }), (req, res) => {
-  const {category} = req.query || {};
+  const {eventcategory} = req.query || {};
   const {location} = req.query || {};
   // const findQuery = location ? Event.find({ processedLocation: { $regex: '.*' + location + '.*' } }) : Event.find({})
   const findQuery = location ? Event.find({ location }) : Event.find({})
   findQuery
     .find()
     .populate('profile -avatar -handle')
-    .populate('eventCategory')
+    .populate('eventcategory')
     .populate('joinedPeople')
     .limit(5)
     .sort({date: -1})
@@ -33,9 +33,9 @@ router.get('/', passport.authenticate("jwt", { session: false }), (req, res) => 
         return res.status(422).send({errors});
       }
   
-      if (category) {
+      if (eventcategory) {
         events = events.filter(event => {
-          return event.category.name === category
+          return event.eventcategory.name === eventcategory
         })
       }
   
@@ -52,7 +52,7 @@ router.get('/my-events', passport.authenticate("jwt", { session: false }), (req,
     Event
     .find({profile: profile._id})
     .populate('profile -avatar -handle')
-    .populate('eventCategory')
+    .populate('eventcategory')
     .populate('joinedPeople')
     .sort({date: -1})
     .then(events => res.json(events))
@@ -69,7 +69,7 @@ router.get('/friends-events', passport.authenticate("jwt", { session: false }), 
       Event
         .find({name: { $in: profile.friends.map(a => a.handle) }})
         .populate('profile -avatar -handle')
-        .populate('eventCategory')
+        .populate('eventcategory')
         .populate('joinedPeople')
         .sort({date: -1})
         .then(events => res.json(events))
@@ -84,7 +84,7 @@ router.get('/:id', passport.authenticate("jwt", { session: false }), (req, res) 
   Event
     .findById(req.params.id)
     .populate('profile -avatar -handle')
-    .populate('eventCategory')
+    .populate('eventcategory')
     .populate({
       path: 'joinedPeople',
       options: {
@@ -110,7 +110,7 @@ router.post('/', passport.authenticate("jwt", { session: false }), (req, res) =>
 
   const newEvent = new Event({
     profile: req.body.profile,
-    eventCategory: req.body.category,
+    eventcategory: req.body.category,
     location: req.body.location,
     processedLocation: req.body.processedLocation,
     title: req.body.title,
@@ -142,7 +142,7 @@ router.patch('/:id/update-event', passport.authenticate("jwt", { session: false 
   // Get fields
   const eventFields = {};
   if (req.body.profile) eventFields.eventCreator = req.body.profile;
-  if (req.body.category) eventFields.eventCategory = req.body.category;
+  if (req.body.category) eventFields.eventcategory = req.body.category;
   if (req.body.location) eventFields.location = req.body.location;
   if (req.body.processedLocation) eventFields.processedLocation = req.body.processedLocation;
   if (req.body.title) eventFields.title = req.body.title;

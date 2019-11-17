@@ -49,11 +49,11 @@
 import Events from'./Events';
 import MyEvents from'./MyEvents';
 import FriendsEvents from'./FriendsEvents';
-import SearchEvents from'./SearchEvents';
+import EventsSearch from'./EventsSearch';
 import ModalEvent from '@/components/Events/ModalEvent.vue';
 
 import { mapState } from 'vuex';
-import SearchEventsVue from './SearchEvents.vue';
+import EventsSearchVue from './EventsSearch.vue';
 
 export default {
   name: 'EventsMain',
@@ -64,7 +64,7 @@ export default {
           Events,
           MyEvents,
           FriendsEvents,
-          SearchEvents
+          EventsSearch
         ]
       }
     },
@@ -90,7 +90,7 @@ export default {
     MyEvents,
     FriendsEvents,
     ModalEvent,
-    SearchEvents
+    EventsSearch
   }
 }
 </script>

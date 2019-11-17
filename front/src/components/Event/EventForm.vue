@@ -28,6 +28,7 @@
           @click="createEvent"
           class="leftmargin">Confirm</button>
       </div>
+      <pre><code>{{formData}}</code></pre>
     </div>
   </section>
 </template>
