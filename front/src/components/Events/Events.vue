@@ -29,7 +29,7 @@ import Event from '@/components/Event/Event';
 export default {
   data() {
     return {
-      eventId: ''
+      eventId: '',
     }
   },
   name: 'Events',

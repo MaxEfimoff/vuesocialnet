@@ -27,7 +27,7 @@
         </ul>
         <ModalEvent/>
         <form action="#" class="search-form leftmargin">
-          <input type="text" placeholder="Event search" />
+          <input v-model="searchedLocation" type="text" placeholder="Event search" />
         </form>
       </div>
       <keep-alive>
@@ -65,6 +65,7 @@ export default {
   },
   data() {
     return {
+      searchedLocation: this.$store.getters['meta/setLocation'],
       activeStep: 1,
       steps: [
         Events,

@@ -8,9 +8,13 @@ function getMetaData({ commit }) {
     axios.get(myMetaDataUrl)  
       .then((response) => {
         commit('SET_METADATA', response.data);
+        commit('RESOLVE_LOCATION', true);
         console.log(response.data)
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        commit('RESOLVE_LOCATION', true);
+        console.log(error)
+      });
   });
 }
 

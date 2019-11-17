@@ -1,5 +1,6 @@
 <template>
-  <div id="app">
+<!-- We render the app only after we've got our address from our ip -->
+  <div v-if="isLocationResolved" id="app">
     <link rel="stylesheet" 
         href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
         integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" 
@@ -39,6 +40,11 @@ export default {
         // Redirect to login
         window.location.href = "/login";
       }
+    }
+  },
+  computed: {
+    isLocationResolved() {
+      return this.$store.state.meta.isLocationResolved;
     }
   }
 }
