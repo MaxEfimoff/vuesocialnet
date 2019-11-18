@@ -50,8 +50,9 @@
         </router-link>
       </div>
       <EventThreadList 
-        :threads="eventthreads.eventthreads"
+        :threads="eventthreads"
         :canMakePost="canMakePost"/>
+      <button v-if="!isAllThreadsLoaded" @click="getEventThreadsHandler">Load more comments</button>
       <div v-if="isEventMember || isEventAuthor" class="padding">
         <textarea
           class="textarea"
@@ -82,6 +83,8 @@ export default {
   },
   data() {
     return {
+      threadPageNumber: 0,
+      threadPageSize: 5,
       isDataLoaded: false,
       formData: {
         title: null,
@@ -89,12 +92,14 @@ export default {
     };
   },
   created() {
-    this.getEventById(this.id)
-      .then(() => {
-        this.isDataLoaded = true;
-      })
-    this.getEventThreadsByEventId(this.id);
+    // this.getEventThreadsByEventId(this.id);
     this.exportCurrentProfile();
+    this.getEventById(this.id)
+        .then(() => {
+          this.isDataLoaded = true;
+          this.threadPageNumber++;
+        })
+    this.getEventThreadsHandler({init: true});
 
     // New thead posts will be visible through sockets only for
     // event author and event members
@@ -116,7 +121,7 @@ export default {
     ...mapState('events', ['event']),
     ...mapState('errors', ['errors']),
     ...mapState('profile', [ 'profile' ]),
-    ...mapState('eventthreads', [ 'eventthreads', 'eventthread']),
+    ...mapState('eventthreads', [ 'eventthreads', 'eventthread', 'isAllDataLoaded']),
     isEventAuthor() {
       return this.$store.state.events.event.profile._id === this.$store.state.profile.profile._id;
     },
@@ -134,6 +139,9 @@ export default {
     },
     canMakePost() {
       return this.isEventAuthor || this.isEventMember;
+    },
+    isAllThreadsLoaded() {
+      return this.isAllDataLoaded;
     }
   },
   methods: {
@@ -149,6 +157,20 @@ export default {
     },
     hide() {
       this.$modal.hide('ModalEditEvent');
+    },
+    getEventThreadsHandler({init}) {
+      const filter = {
+        pageNum: this.threadPageNumber,
+        pageSize: this.threadPageSize
+      }
+      
+      const eventId = this.id;
+
+      this.getEventThreadsByEventId({eventId: eventId || this.$store.state.events.event._id, filter, init})
+        .then(() => {
+          this.isDataLoaded = true;
+          this.threadPageNumber++;
+        })
     },
     joinEvent() {
       const id = this.id;

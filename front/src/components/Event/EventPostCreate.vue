@@ -1,6 +1,6 @@
 <template>
-  <form class="post-create">
-    <div class="field">
+  <div>
+    <form v-if="isVisible" class="post-create margin">
       <textarea 
         v-auto-expand
         v-model="text"
@@ -11,8 +11,9 @@
         :disabled="!text"
         @click.prevent="sendEventPost"
         class="button is-primary m-t-sm">Send</button>
-    </div>
-  </form>
+    </form>
+    <span v-else @click="toggleVisibility">Write a comment</span>
+  </div>
 </template>
 
 <script>
@@ -29,6 +30,7 @@ export default {
   },
   data () {
     return {
+      isVisible: false,
       text: null
     }
   },
@@ -51,6 +53,9 @@ export default {
 
           this.text = '';
         })
+    },
+    toggleVisibility() {
+      this.isVisible = !this.isVisible;
     }
   },
 }

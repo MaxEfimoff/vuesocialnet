@@ -1,5 +1,6 @@
 export default {
   eventthreads:[],
-  eventthread:{}
+  eventthread:{},
+  isAllDataLoaded: false
 };
 
