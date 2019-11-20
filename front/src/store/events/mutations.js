@@ -16,11 +16,8 @@ function ADD_EVENT(state, event) {
   state.events.push(event)
 }
 
-function UPDATE_EVENT (state, event) {
-  let index = state.events.findIndex(_event => _event.id == event.id)
-  state.events[index].title = event.title;
-  state.events[index].start = event.start;
-  state.events[index].end = event.end;
+function MERGE_EVENT(state, updatedEvent) {
+  state.event = {...state.event, ...updatedEvent}
 }
 
 function DELETE_EVENT(state, id) {
@@ -36,7 +33,7 @@ export {
   SET_EVENTS,
   SET_EVENT,
   ADD_EVENT,
-  UPDATE_EVENT,
+  MERGE_EVENT,
   DELETE_EVENT,
   ADD_PROFILE_TO_EVENT,
   SET_FOUND_EVENTS

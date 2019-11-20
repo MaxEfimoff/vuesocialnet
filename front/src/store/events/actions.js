@@ -56,17 +56,20 @@ function addEvent({ commit }, data) {
   });
 }
 
-// function joinEvent({ commit, dispatch }, id) {
-//   return new Promise((resolve, reject) => {
-//     axios.post(`http://localhost:5000/api/events/join/${id}`, id)
-//     .then((response) => {
-//       commit('SET_EVENT', response.data[1]);
-//       dispatch('profile/addEventToProfile', id, {root: true})
-//       resolve();
-//     })
-//     .catch(error => console.log(error));
-//   })
-// };
+function updateEvent({ commit }, event) {
+  return new Promise((resolve, reject) => {
+    event.location = event.location.toLowerCase().replace(/[\s,]+/g,'').trim();
+    axios.patch(`http://localhost:5000/api/events/${event._id}/update-event`, event)
+      .then((response) => {
+        const updatedEvent = response.data;
+        commit('MERGE_EVENT', updatedEvent);
+        resolve();
+      })
+      .catch(error => {
+        console.log(error)
+      });
+  });
+}
 
 function joinEvent({ commit, state, rootState, dispatch }, id) {
   const profile = rootState.profile.profile;
@@ -98,20 +101,12 @@ function leaveEvent({ commit, state, rootState, dispatch }, id) {
   })
 };
 
-// function deleteNote({ commit }, id) {
-//   axios.delete(`http://localhost:5000/api/notes/${id}`)
-//     .then((response) => {
-//       commit('DELETE_NOTE', id);
-//     })
-//     .catch(error => console.log(error)
-//     );
-// };
-
 export {
   getEvents,
   addEvent,
   getEventById,
   joinEvent,
   leaveEvent,
-  getFoundEvents
+  getFoundEvents,
+  updateEvent
 };

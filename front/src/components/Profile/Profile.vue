@@ -73,12 +73,12 @@ import PostForm from '../Post/PostForm';
 
 export default {
   name: 'Profile',
-  watch: {
-    '$route.params.handle'(newHandle, oldHandle) {
-      this.getProfileByHandle(newHandle);
-      this.getProfilePosts(newHandle);
-    }
-  },
+  // watch: {
+  //   '$route.params.handle'(newHandle, oldHandle) {
+  //     this.getProfileByHandle(newHandle);
+  //     this.getProfilePosts(newHandle);
+  //   }
+  // },
   async mounted() {
     await this.getProfilePhotos(this.$route.params.handle);
     await this.getProfilePosts(this.$route.params.handle);

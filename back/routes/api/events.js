@@ -141,7 +141,7 @@ router.patch('/:id/update-event', passport.authenticate("jwt", { session: false 
 
   // Get fields
   const eventFields = {};
-  if (req.body.profile) eventFields.eventCreator = req.body.profile;
+  if (req.body.profile) eventFields.profile = req.body.profile;
   if (req.body.category) eventFields.eventcategory = req.body.category;
   if (req.body.location) eventFields.location = req.body.location;
   if (req.body.processedLocation) eventFields.processedLocation = req.body.processedLocation;
@@ -156,11 +156,6 @@ router.patch('/:id/update-event', passport.authenticate("jwt", { session: false 
 
   Event.findById(req.params.id)
     .then(event => {
-      // Check if current profile is the event owner
-      if(eventCreator.profile.toString() !== req.profile.id) {
-        return res.status(401).json({ notauthorized: 'User not authorized' })
-      }
-
       event.set(eventFields)
       event.save()
       .then(event => 

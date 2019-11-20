@@ -21,6 +21,9 @@
       <div class="post-author">
         <div class="leftpadding">
           <p>{{ event.description }}</p>
+          <router-link class="padding" :to="`/events/${event._id}/edit-event`">
+            <button v-if="isEventAuthor">Edit event</button>
+          </router-link>
         </div>
         <!-- <i class="fas fa-thumbs-up" @click="addLike"></i>{{' '}}<span>{{ event.likes.length }}</span> 
         

@@ -101,11 +101,6 @@ import PostCard from '@/components/Post/PostCard';
 
 export default {
   name: "Group",
-  watch: {
-    '$route.params.id'(newId, oldId) {
-      this.getGroup(newId)
-    }
-  },
   async mounted() {
     await this.getGroup(this.$route.params.id);
   },

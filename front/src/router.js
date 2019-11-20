@@ -8,6 +8,7 @@ import Dashboard from '@/views/Dashboard.vue';
 import Calendar from '@/views/Calendar.vue';
 // Events
 import EventForm from '@/views/EventForm.vue';
+import EventEdit from '@/views/EventEdit.vue';
 import Events from '@/views/Events.vue';
 import EventsSearch from '@/views/EventsSearch.vue';
 import Event from '@/views/Event.vue';
@@ -96,6 +97,12 @@ export default new Router({
       path: '/event-form',
       name: 'eventForm',
       component: EventForm
+    },
+    {
+      path: '/events/:id/edit-event',
+      name: 'eventEdit',
+      component: EventEdit,
+      props: true,
     },
     {
       path: '/events',
