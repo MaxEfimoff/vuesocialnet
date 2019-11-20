@@ -177,9 +177,9 @@ router.delete('/:id', passport.authenticate("jwt", { session: false }), (req, re
       Event.findById(req.params.id)
         .then(event => {
           // Check if current profile is the event owner
-          if(eventCreator.profile.toString() !== req.profile.id) {
-            return res.status(401).json({ notauthorized: 'User not authorized' })
-          }
+          // if(eventCreator.profile.toString() !== req.profile.id) {
+          //   return res.status(401).json({ notauthorized: 'User not authorized' })
+          // }
 
           // Delete event
           event.remove().then(() => res.json({ success: true }));

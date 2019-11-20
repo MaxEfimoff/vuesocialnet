@@ -11,6 +11,7 @@
       <span>{{ event.eventcategory.name }}</span>
       <div v-if="isEventAuthor">
         <button @click.prevent="show()">Edit event</button>
+        <button @click.prevent="deleteEventHandler()">Delete event</button>
         <modal name="ModalEventEdit" height="auto" >
           <EventEdit
             @closeModal="hide"
@@ -30,9 +31,9 @@
       <div class="halfpadding">
         <button
           v-if="isEventMember"
-          @click="leaveEvent"
+          @click="leaveEventHandler"
           >Leave event</button>
-        <button v-if="canJoin" @click="joinEvent">Join event</button>
+        <button v-if="canJoin" @click="joinEventHandler">Join event</button>
       </div>
       <div v-if="eventMembers.length > 0">
         <router-link
@@ -144,8 +145,8 @@ export default {
     }
   },
   methods: {
-    ...mapActions("events", ['getEventById']),
-    ...mapActions("eventthreads", ['getEventThreadsByEventId', 'addPostToEventThread']),
+    ...mapActions("events", ['getEventById', 'joinEvent', 'leaveEvent', 'deleteEvent']),
+    ...mapActions("eventthreads", ['getEventThreadsByEventId', 'addPostToEventThread', 'addEventThread']),
     ...mapActions("profile", [ 'exportCurrentProfile' ]),
     // addLike() {
     //   this.$store.dispatch('events/addLike', this.id)
@@ -171,14 +172,14 @@ export default {
           this.threadPageNumber++;
         })
     },
-    joinEvent() {
+    joinEventHandler() {
       const id = this.id;
-      this.$store.dispatch('events/joinEvent', id)
+      this.joinEvent(id)
       .catch((error) => {console.log(error)})
     },
-    leaveEvent() {
+    leaveEventHandler() {
       const id = this.id;
-      this.$store.dispatch('events/leaveEvent', id)
+      this.leaveEvent(id)
       .catch((error) => {console.log(error)})
     },
     createThread() {
@@ -187,13 +188,21 @@ export default {
         formData: this.formData,
         profile: this.$store.state.profile.profile
       }
-      this.$store.dispatch('eventthreads/addEventThread', payload)
+      this.addEventThread(payload)
       .then(this.formData = {})
       .catch((error) => {console.log(error)})
     },
     addPostToEventThreadHandler (post) {
-        this.addPostToEventThread({post, eventThreadId: post.eventThread})
-      },
+      this.addPostToEventThread({post, eventThreadId: post.eventThread})
+    },
+    deleteEventHandler() {
+      const id = this.id;
+      this.deleteEvent(id)
+        .then(() => this.$router.push({ name: 'events' }))
+        .catch((error) => {
+          console.log(error)
+        });
+    }
   },
   components: {
     Spinner,

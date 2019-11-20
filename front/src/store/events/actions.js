@@ -42,6 +42,17 @@ function getEventById({ commit }, id) {
   })
 };
 
+function deleteEvent({ commit }, id) {
+  return new Promise((resolve, reject) => {
+    axios.delete(`http://localhost:5000/api/events/${id}`)
+    .then(() => {
+      commit('SET_EVENT', {});
+      resolve();
+    })
+    .catch(error => console.log(error));
+  })
+};
+
 function addEvent({ commit }, data) {
   return new Promise((resolve, reject) => {
     data.location = data.location.toLowerCase().replace(/[\s,]+/g,'').trim();
@@ -108,5 +119,6 @@ export {
   joinEvent,
   leaveEvent,
   getFoundEvents,
-  updateEvent
+  updateEvent,
+  deleteEvent
 };
