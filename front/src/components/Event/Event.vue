@@ -1,29 +1,25 @@
 <template>
   <section class="section-center">
     <div v-if="isDataLoaded" class="posts">
-      <div class="product-image" :style="{ backgroundImage: 'url(' + `${event.image}` + ')' }">
-      </div>
-      <!-- <router-link
+      <div class="product-image" :style="{ backgroundImage: 'url(' + `${event.image}` + ')' }"></div>
+      <router-link
           :to="`/profile/handle/${event.profile.handle}`">
         <div class="avatar">
           <img :src="event.profile.avatar" alt="">
         </div>
       </router-link>
-      <span>{{ event.eventCategory.name }}</span>
+      <span>{{ event.eventcategory.name }}</span>
       <div v-if="isEventAuthor">
-        <span href="" @click.prevent="show">Edit event</span>
-        <modal name="ModalEditEvent" height="auto">
-          <EditEvent
-            :id="id"
-            @closeModal="hide"/>
+        <button @click.prevent="show()">Edit event</button>
+        <modal name="ModalEventEdit" height="auto" >
+          <EventEdit
+            @closeModal="hide"
+            :id="id"/>
         </modal>
-      </div> -->
+      </div>
       <div class="post-author">
         <div class="leftpadding">
           <p>{{ event.description }}</p>
-          <router-link class="padding" :to="`/events/${event._id}/edit-event`">
-            <button v-if="isEventAuthor">Edit event</button>
-          </router-link>
         </div>
         <!-- <i class="fas fa-thumbs-up" @click="addLike"></i>{{' '}}<span>{{ event.likes.length }}</span> 
         
@@ -74,7 +70,7 @@
 import { mapState, mapActions } from 'vuex';
 import Spinner from '@/components/helpers/Spinner';
 import EventThreadList from '@/components/Event/EventThreadList';
-// import EditEvent from '@/components/Event/EditEvent';
+import EventEdit from '@/components/Event/EventEdit';
 
 export default {
   name: 'Event',
@@ -156,10 +152,10 @@ export default {
     //   .catch((error) => {console.log(error)})
     // },
     show() {
-      this.$modal.show('ModalEditEvent', this.id);
+      this.$modal.show('ModalEventEdit', this.id);
     },
     hide() {
-      this.$modal.hide('ModalEditEvent');
+      this.$modal.hide('ModalEventEdit');
     },
     getEventThreadsHandler({init}) {
       const filter = {
@@ -201,8 +197,8 @@ export default {
   },
   components: {
     Spinner,
-    EventThreadList
-    // EditEvent,
+    EventThreadList,
+    EventEdit
     
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <section class="section">
+  <section class="">
     <div class="posts">
     <h2>
       {{event.startDate | formatDate}}
@@ -7,15 +7,11 @@
     <p>
       Created by <strong>{{eventCreator.name}}</strong>
     </p>
-    <div class="avatar">
-      <img :src="eventCreator.avatar">
-    </div>
     <div class="margin">
       <input
         v-model="event.title"
         type="text">
     </div>
-    <!-- TIMES START -->
     <p><b>Time</b></p>
     <div class="margin">
       <datepicker
@@ -83,6 +79,12 @@ import moment from 'moment';
 import { mapState, mapActions } from 'vuex';
 
 export default {
+  props: {
+    id: {
+      required: true,
+      type: String
+    },
+  },
   data() {
     return {
       disabledDates: {
@@ -94,8 +96,8 @@ export default {
       },
     }
   },
-  mounted() {
-    this.getEventById(this.$route.params.id);
+  created() {
+    this.getEventById(this.id);
     this.getEventCategories();
   },
   computed: {
@@ -104,11 +106,10 @@ export default {
     ...mapState('eventcategories', ['eventcategories']),
     currentEvent () {
       const event = this.event;
-        const timeTo = this.parseTime(event.timeTo);
-        const timeFrom = this.parseTime(event.timeFrom);
+      const timeTo = this.parseTime(event.timeTo);
+      const timeFrom = this.parseTime(event.timeFrom);
 
-        return {...event, timeFrom, timeTo}
-
+      return {...event, timeFrom, timeTo}
     },
     eventCreator () {
       return this.event.profile || {}
@@ -135,7 +136,7 @@ export default {
     },
     updateEventHandler() {
       this.updateEvent(this.event)
-      .then(() => this.$router.push({ name: 'events' }))
+      .then(() => this.$emit('closeModal'))
       .catch(err => console.log(err))
     }
   },

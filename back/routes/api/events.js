@@ -153,8 +153,12 @@ router.patch('/:id/update-event', passport.authenticate("jwt", { session: false 
   if (req.body.timeFrom) eventFields.timeFrom = req.body.timeFrom;
   if (req.body.timeTo) eventFields.timeTo = req.body.timeTo;
   if (req.body.status) eventFields.status = req.body.status;
+  eventFields.updatedAt = new Date();
 
-  Event.findById(req.params.id)
+  Event
+    .findById(req.params.id)
+    .populate('profile -avatar -handle')
+    .populate('eventcategory')
     .then(event => {
       event.set(eventFields)
       event.save()
@@ -231,39 +235,5 @@ router.post('/leave/:id', passport.authenticate("jwt", { session: false }), (req
           .catch(err => res.status(404).json({ eventnotfound: 'Event not found' }));
         })
 });
-
-//@route      POST api/events/comment/:id
-//@desc       Add a comment event
-//@access     Private
-router.post(
-  "/comment/:id",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    const { errors, isValid } = validateEventInput(req.body);
-
-    // Check validation
-    if (!isValid) {
-      // If any errors, send 400 with errors object
-      return res.status(400).json(errors);
-    }
-
-    Event.findById(req.params.id)
-      .then(event => {
-        const newComment = {
-          text: req.body.text,
-          name: req.body.name,
-          profile: req.body.profile,
-          avatar: req.body.avatar
-        };
-
-        // Add to comments array
-        event.comments.push(newComment);
-
-        // Save
-        event.save().then(event => res.json(event));
-      })
-      .catch(err => res.status(404).json({ eventnotfound: "No event found" }));
-  }
-);
 
 module.exports = router;
