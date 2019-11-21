@@ -3,7 +3,7 @@
     <div class="flex">
       <div
         @click.prevent="show(event._id)"
-        v-for="event in myEvents"
+        v-for="event in myJoinedEvents"
         :key="event.id">
         <EventCard
           :name="event.profile.handle"
@@ -44,17 +44,17 @@ export default {
       eventId: '',
     }
   },
-  async mounted() {
-    await this.getMyEvents();
-    await this.getEventCategories()
-    await this.hide();
+  created() {
+    this.getMyJoinedEvents();
+    this.getEventCategories()
+    this.hide();
   },
   computed: {
-    ...mapState('events', ['myEvents']),
+    ...mapState('events', ['myJoinedEvents']),
     ...mapState('eventcategories', ['eventcategories']),
   },
   methods: {
-    ...mapActions("events", ['getMyEvents']),
+    ...mapActions("events", ['getMyJoinedEvents']),
     ...mapActions("eventcategories", ['getEventCategories']),
     show(arg) {
       this.$modal.show('ModalEvent', {id: arg});

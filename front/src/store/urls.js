@@ -19,6 +19,8 @@ const myMetaDataUrl = `${serverUrl}/api/api`;
 // Events
 const addEventUrl = `${serverUrl}/api/events`;
 const allEventsUrl = `${serverUrl}/api/events`;
+const myEventsUrl = `${serverUrl}/api/events/my-events`;
+const myJoinedEventsUrl = `${serverUrl}/api/events/my-joined-events`;
 // EventCategories
 const allEventCategoriesUrl = `${serverUrl}/api/eventcategories`;
 // EventThreads
@@ -105,5 +107,7 @@ export {
   allEventCategoriesUrl,
   addEventThreadUrl,
   addPostToEventThreadUrl,
-  myMetaDataUrl
+  myMetaDataUrl,
+  myEventsUrl,
+  myJoinedEventsUrl
 };

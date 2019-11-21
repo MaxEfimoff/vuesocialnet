@@ -1,6 +1,8 @@
 export default {
   events:[],
   event: {},
-  foundEvents:[]
+  myEvents:[],
+  foundEvents:[],
+  myJoinedEvents:[]
 };
 

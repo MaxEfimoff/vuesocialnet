@@ -3,6 +3,8 @@ import { applyFilters } from '@/helpers';
 import {
   allEventsUrl,
   addEventUrl,
+  myEventsUrl,
+  myJoinedEventsUrl
 } from '../urls';
 
 function getEvents({ commit }) {
@@ -10,6 +12,28 @@ function getEvents({ commit }) {
     axios.get(allEventsUrl)  
       .then((response) => {
         commit('SET_EVENTS', response.data);
+        resolve();
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+function getMyEvents({ commit }) {
+  return new Promise((resolve, reject) => {
+    axios.get(myEventsUrl)  
+      .then((response) => {
+        commit('SET_MY_EVENTS', response.data);
+        resolve();
+      })
+      .catch(error => console.log(error));
+  });
+}
+
+function getMyJoinedEvents({ commit }) {
+  return new Promise((resolve, reject) => {
+    axios.get(myJoinedEventsUrl)  
+      .then((response) => {
+        commit('SET_MY_JOINED_EVENTS', response.data);
         resolve();
       })
       .catch(error => console.log(error));
@@ -88,6 +112,7 @@ function joinEvent({ commit, state, rootState, dispatch }, id) {
     axios.post(`http://localhost:5000/api/events/join/${id}`, id)
     .then(() => {
       const joinedPeople = state.event.joinedPeople;
+      commit('SET_MY_JOINED_EVENTS', state.event);
       commit('ADD_PROFILE_TO_EVENT',  [...joinedPeople, profile]);
       dispatch('profile/addEventToProfile', id, {root: true})
       resolve();
@@ -101,7 +126,7 @@ function leaveEvent({ commit, state, rootState, dispatch }, id) {
   return new Promise((resolve, reject) => {
     axios.post(`http://localhost:5000/api/events/leave/${id}`, id)
     .then(() => {
-      const joinedPeople = state.event.joinedPeople;
+      const joinedPeople = state.event.joinedPeople || null;
       const index = joinedPeople.findIndex(jUser => jUser._id === profile._id);
       joinedPeople.splice(index, 1)
       commit('ADD_PROFILE_TO_EVENT', joinedPeople);
@@ -114,11 +139,13 @@ function leaveEvent({ commit, state, rootState, dispatch }, id) {
 
 export {
   getEvents,
+  getMyEvents,
   addEvent,
   getEventById,
   joinEvent,
   leaveEvent,
   getFoundEvents,
   updateEvent,
-  deleteEvent
+  deleteEvent,
+  getMyJoinedEvents
 };

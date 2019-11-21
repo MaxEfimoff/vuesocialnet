@@ -19,7 +19,7 @@
             <a 
               @click.prevent="navigateTo(3)"
               :class="activeComponentClass(3)"
-            >Friends Events</a>
+            >My Joined Events</a>
           </li>
           <li>
             <a 
@@ -27,14 +27,8 @@
               :class="activeComponentClass(4)"
             >Search Events</a>
           </li>
-          <li>
-            <a href="">Liked</a>
-          </li>
         </ul>
         <ModalEvent/>
-        <!-- <form action="#" class="search-form leftmargin">
-          <input v-model="searchedLocation" type="text" placeholder="Event search" />
-        </form> -->
       </div>
       <keep-alive>
         <component
@@ -48,7 +42,7 @@
 <script>
 import Events from'./Events';
 import MyEvents from'./MyEvents';
-import FriendsEvents from'./FriendsEvents';
+import MyJoinedEvents from'./MyJoinedEvents';
 import EventsSearch from'./EventsSearch';
 import ModalEvent from '@/components/Events/ModalEvent.vue';
 
@@ -63,8 +57,8 @@ export default {
         steps: [
           Events,
           MyEvents,
-          FriendsEvents,
-          EventsSearch
+          MyJoinedEvents,
+          EventsSearch,
         ]
       }
     },
@@ -85,9 +79,9 @@ export default {
   components: {
     Events,
     MyEvents,
-    FriendsEvents,
     ModalEvent,
-    EventsSearch
+    EventsSearch,
+    MyJoinedEvents
   }
 }
 </script>

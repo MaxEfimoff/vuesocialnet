@@ -50,7 +50,7 @@ router.get('/my-events', passport.authenticate("jwt", { session: false }), (req,
   Profile.findOne({ user: req.user.id })
   .then(profile => {
     Event
-    .find({profile: profile._id})
+    .find({profile: profile})
     .populate('profile -avatar -handle')
     .populate('eventcategory')
     .populate('joinedPeople')
@@ -68,6 +68,23 @@ router.get('/friends-events', passport.authenticate("jwt", { session: false }), 
     .then(profile => {
       Event
         .find({name: { $in: profile.friends.map(a => a.handle) }})
+        .populate('profile -avatar -handle')
+        .populate('eventcategory')
+        .populate('joinedPeople')
+        .sort({date: -1})
+        .then(events => res.json(events))
+        .catch(err => res.status(404).json({noeventsfound: 'No events found'}));
+    })
+})
+
+//@route      GET api/joined-events/
+//@desc       Get joined events
+//@access     Private
+router.get('/my-joined-events', passport.authenticate("jwt", { session: false }), (req, res) => {
+  Profile.findOne({ user: req.user.id })
+    .then(profile => {
+      Event
+        .find({joinedPeople: [profile]})
         .populate('profile -avatar -handle')
         .populate('eventcategory')
         .populate('joinedPeople')
