@@ -11,7 +11,8 @@ const validateLoginInput = require('../../validation/login');
 const UsersController = require('../../controllers/users');
 
 // Load User model
-const User = require('../../db/models/User')
+const User = require('../../db/models/User');
+const ConfirmationHash = require('../../db/models/ConfirmationHash');
 
 // Shortened for /api/users/test
 router.get('/test', (req, res) => res.json({msg:'users work'}));
@@ -56,8 +57,15 @@ router.post('/register', (req, res) => {
             newUser.password = hash;
             newUser
               .save()
-              .then(user => res.json(user))
-              .catch(err => console.log(err))
+              .then(user => {
+                const hash = new ConfirmationHash({ user: user});
+
+                hash.save((err, createdHash) => {
+                  if(err) throw err;
+                  res.json(user);
+                })
+              })
+              .catch(err => console.log(err));
           });
         });
       }
@@ -92,6 +100,11 @@ router.post('/login', (req, res) => {
       // Check if user exists
       if(!user) {
         errors.userNotFound = 'User not found';
+        return res.status(404).json(errors)
+      }
+
+      if(user.active === false) {
+        errors.hashNotActive = 'Please check your email in order to activete your account';
         return res.status(404).json(errors)
       }
       // Compare plain text password (password) from the form with the hash (user.password) in db

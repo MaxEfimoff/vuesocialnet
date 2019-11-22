@@ -149,6 +149,9 @@
           <div class="error-message">
             {{this.errors.password}}
           </div>
+          <div class="error-message">
+            {{this.errors.hashNotActive}}
+          </div>
           <a href="#">Forgot your password?</a>
           <button
             type="submit"
