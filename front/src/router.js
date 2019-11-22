@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 // Auth
 import Login from '@/views/Login.vue';
+import ActivateUser from '@/views/ActivateUser.vue';
 import Register from '@/views/Register.vue';
 import Dashboard from '@/views/Dashboard.vue';
 // Calendar
@@ -85,6 +86,11 @@ export default new Router({
       path: '/dashboard',
       name: 'dashboard',
       component: Dashboard
+    },
+    {
+      path: '/users/:hash/activate',
+      name: 'activate-user',
+      component: ActivateUser
     },
     // Calendar
     {

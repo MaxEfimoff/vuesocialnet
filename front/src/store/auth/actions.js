@@ -25,6 +25,22 @@ function register({ commit }, data) {
   });
 }
 
+function activateUser({}, hash) {
+  console.log('sending request for hash', hash)
+  // return new Promise((resolve, reject) => {
+  //   axios.post(registerUrl, data)
+  //   .then((response) => {
+  //       commit('setUser', response.data);
+  //       console.log(response.data);
+  //       resolve();
+  //     })
+  //     .catch((error) => {
+  //       commit('errors/setErrors', error.response.data, { root: true });
+  //       console.log(error.response.data)
+  //     });
+  // });
+}
+
 function resetPassword({ commit }, data) {
   return new Promise((resolve, reject) => {
     axios.post(resetPasswordUrl, data)
@@ -129,5 +145,6 @@ export {
   checkUser,
   resetPassword,
   loginViaGoogle,
-  loginViaFacebook
+  loginViaFacebook,
+  activateUser
 };
