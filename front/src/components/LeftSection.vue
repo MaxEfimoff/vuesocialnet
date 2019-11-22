@@ -1,5 +1,5 @@
 <template>
-  <section class="section-left">
+  <section v-if="profile.handle" class="section-left">
     <!-- Avatar -->
     <div class="section">
       <div class="avatar-font" :style="{ backgroundImage: 'url(' + `${profile.background}` + ')' }">

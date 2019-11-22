@@ -4,6 +4,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
+const nodemailer = require('nodemailer');
+const config = require('../../config/keys_dev');
 
 // Load input validation
 const validateRegisterInput = require('../../validation/register');
@@ -13,6 +15,35 @@ const UsersController = require('../../controllers/users');
 // Load User model
 const User = require('../../db/models/User');
 const ConfirmationHash = require('../../db/models/ConfirmationHash');
+
+function sendConfirmationEmail({ toUser, hash }, callback) {
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: config.google_user,
+      pass: config.google_password
+    }
+  })
+
+  const message = {
+    from: config.google_user,
+    to: 'emv3@ya.ru',
+    subject: 'Vuesocialnet - activate account',
+    html: `
+    <h3>Hello ${toUser.name}</h3>
+    <p>Thank you for registering into Vuesocialnet!</p>
+    <p>To activate your account please follow this link: <a target="_" href="${config.domain}/users/${hash}/activate">${config.domain}/activate </a></p>
+    `
+  }
+
+  transporter.sendMail(message, function(error, info) {
+    if(error) {
+      callback(error, null)
+    } else {
+      callback(null, info)
+    }
+  }) 
+}
 
 // Shortened for /api/users/test
 router.get('/test', (req, res) => res.json({msg:'users work'}));
@@ -62,7 +93,12 @@ router.post('/register', (req, res) => {
 
                 hash.save((err, createdHash) => {
                   if(err) throw err;
-                  res.json(user);
+
+                  sendConfirmationEmail({ toUser: user, hash: hash.id }, (err, info) => {
+                    if(err) throw err;
+
+                    return res.json(user);
+                  })
                 })
               })
               .catch(err => console.log(err));
