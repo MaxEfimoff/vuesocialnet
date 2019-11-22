@@ -38,7 +38,7 @@ app.use(methodOverride('_method'));
 const db = require("./config/keys").mongoURI;
 
 // Connect to Mongodb
-mongoose.connect(db);
+mongoose.connect(db, { useFindAndModify: false });
 
 // Passport middleware
 app.use(passport.initialize());

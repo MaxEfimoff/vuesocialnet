@@ -27,7 +27,7 @@ function sendConfirmationEmail({ toUser, hash }, callback) {
 
   const message = {
     from: config.google_user,
-    to: 'emv3@ya.ru',
+    to: toUser.email,
     subject: 'Vuesocialnet - activate account',
     html: `
     <h3>Hello ${toUser.name}</h3>
@@ -107,6 +107,34 @@ router.post('/register', (req, res) => {
       }
     });
 });
+
+// @route     GET api/users//:hash/activete
+// @desc      Actevate user
+// @access    Public
+router.patch('/:hash/activate', (req, res) =>{
+  const hash = req.params.hash;
+
+  ConfirmationHash
+    .findById(hash)
+    .populate('user')
+    .exec((errors, foundHash) => {
+      if(errors) {
+        errors.notValidHash = 'Hash is not valid';
+        return res.status(404).json(errors);
+      }
+
+      User
+        .findByIdAndUpdate(foundHash.user.id, { $set: { active: true } }, { new: true }, (errors, updatedUser) => {
+          if(errors) {
+            // errors.notValidHash = 'Hash is not valid';
+            return res.status(404).json(errors);
+          }
+
+          foundHash.remove(() => {});
+          return res.json(updatedUser);
+        })
+    })
+})
 
 // Google OAuth login
 router.post('/oauth/google', passport.authenticate('googleToken', { session: false }), UsersController.googleOAuth)

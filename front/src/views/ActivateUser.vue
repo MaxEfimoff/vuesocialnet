@@ -20,7 +20,9 @@ export default {
     activateUser() {
       const hash = this.$route.params.hash;
 
-      this.$store.dispatch('auth/activateUser', hash);
+      this.$store.dispatch('auth/activateUser', hash)
+        .then(_ => this.$router.push({ name: 'login' }))
+        .catch(error => console.log(error))
     }
   },
   components: {
